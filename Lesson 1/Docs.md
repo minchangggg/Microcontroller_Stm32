@@ -8,7 +8,44 @@
 > - Head First C-David Griffiths
 > - C Programming, A Modern Approach -K. N. King
   
-## I. Các thư viện cần học trong C
+## I. SƠ LƯỢC VỀ CHƯƠNG TRÌNH CC
+
+**A, Quá trình biên dịch một chương trình C/C++**
+> https://tapit.vn/qua-trinh-bien-dich-mot-chuong-trinh-cc/?fbclid=IwAR30Vb0QtPRumEMEmWeFqYsndk2tRrhgGLDh16K8cHTBoPU1J-A_XpFGl9o
+1. ĐỊNH NGHĨA: quá trình chuyển đổi từ ngôn ngữ bậc cao (C/C++, Pascal, Java, C#…) sang ngôn ngữ ngôn ngữ máy-> máy tính có thể hiểu và thực thi.
+Ngôn ngữ C là một ngôn ngữ dạng biên dịch. Chương trình được viết bằng C muốn chạy được trên máy tính phải trải qua một quá trình biên dịch để chuyển đổi từ dạng mã nguồn sang chương trình dạng mã thực thi. Quá trình được chia ra làm 4 giai đoạn chính:
+
++ Giai đoàn tiền xử lý (Pre-processor)
++ Giai đoạn dịch NNBC sang Asembly (Compiler)
++ Giai đoạn dịch asembly sang ngôn ngữ máy (Asember)
++ Giai đoạn liên kết (Linker)
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/bc85d275-e61e-4deb-a55a-7ab20df96215)
+
+2. HOẠT ĐỘNG
+a. Giai đoạn tiền xử lý – Preprocessor
+Giai đoạn này sẽ thực hiện:
+Nhận mã nguồn
+Xóa bỏ tất cả chú thích, comments của chương trình
+Chỉ thị tiền xử lý (bắt đầu bằng #) cũng được xử lý
+Ví dụ: chỉ thị #include cho phép ghép thêm mã chương trình của một tệp tiêu để vào mã nguồn cần dịch. Các hằng số được định nghĩa bằng #define sẽ được thay thế bằng giá trị cụ thể tại mỗi nơi sử dụng trong chương trình.
+
+b. Cộng đoạn dịch Ngôn Ngữ Bậc Cao sang Assembly
+Phân tích cú pháp (syntax) của mã nguồn NNBC
+Chuyển chúng sang dạng mã Assembly là một ngôn ngữ bậc thấp (hợp ngữ) gần với tập lệnh của bộ vi xử lý.
+
+c. Công đoạn dịch Assembly
+Dich chương trình => Sang mã máy 0 và 1
+Một tệp mã máy (.obj) sinh ra trong hệ thống sau đó.
+
+d. Giai đoạn Linker
+Trong giai đoạn này mã máy của một chương trình dịch từ nhiều nguồn (file .c hoặc file thư viện .lib) được liên kết lại với nhau để tạo thành chương trình đích duy nhất
+Mã máy của các hàm thư viện gọi trong chương trình cũng được đưa vào chương trình cuối trong giai đoạn này.
+Chính vì vậy mà các lỗi liên quan đến việc gọi hàm hay sử dụng biến tổng thể mà không tồn tại sẽ bị phát hiện. Kể cả lỗi viết chương trình chính không có hàm main() cũng được phát hiện trong liên kết.
+Kết thúc quá trình tất cả các đối tượng được liên kết lại với nhau thành một chương trình có thể thực thi được (executable hay .exe) thống nhất.
+
+**B. Các thư viện cần học trong C**
+
 ### C Library - <time.h>
 The time.h header defines: four variable types + two macro + various functions -> for manipulating date and time.
 
@@ -53,42 +90,16 @@ The **struct tm** has the following definition
 |  8  | ```size_t strftime(char *str, size_t maxsize, const char *format, const struct tm *timeptr)```  |  *Formats the time represented in the structure timeptr according to the formatting rules defined in format and stored into str*  |
 |  9  | ```time_t time(time_t *timer)``` |  *Calculates the current calender time and encodes it into time_t format*  | 
 
-## II. Cấu trúc của một chương trình C cho vi điều khiển
-**A, Quá trình biên dịch một chương trình C/C++**
-> https://tapit.vn/qua-trinh-bien-dich-mot-chuong-trinh-cc/?fbclid=IwAR30Vb0QtPRumEMEmWeFqYsndk2tRrhgGLDh16K8cHTBoPU1J-A_XpFGl9o
-1. ĐỊNH NGHĨA: quá trình chuyển đổi từ ngôn ngữ bậc cao (C/C++, Pascal, Java, C#…) sang ngôn ngữ ngôn ngữ máy-> máy tính có thể hiểu và thực thi.
-Ngôn ngữ C là một ngôn ngữ dạng biên dịch. Chương trình được viết bằng C muốn chạy được trên máy tính phải trải qua một quá trình biên dịch để chuyển đổi từ dạng mã nguồn sang chương trình dạng mã thực thi. Quá trình được chia ra làm 4 giai đoạn chính:
+## II. CẤU TRÚC CỦA MỘT CHƯƠNG TRÌNH C CHO VI ĐIỀU KHIỂN 
++) Chỉ thị tiền xử lý (C directive)
++) Khai báo, định nghĩa 
++) Hàm main
++) Vòng lặp vô hạn (infinite loop) for(;;), while(1)
++) Trình xử lý ngắt (Interrupt Service Routine)
 
-+) Giai đoàn tiền xử lý (Pre-processor)
-+) Giai đoạn dịch NNBC sang Asembly (Compiler)
-+) Giai đoạn dịch asembly sang ngôn ngữ máy (Asember)
-+) Giai đoạn liên kết (Linker)
+<img width="607" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/18b5990f-0c9f-4a68-b69c-a62e4189deb4">
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/bc85d275-e61e-4deb-a55a-7ab20df96215)
-
-2. HOẠT ĐỘNG
-a. Giai đoạn tiền xử lý – Preprocessor
-Giai đoạn này sẽ thực hiện:
-Nhận mã nguồn
-Xóa bỏ tất cả chú thích, comments của chương trình
-Chỉ thị tiền xử lý (bắt đầu bằng #) cũng được xử lý
-Ví dụ: chỉ thị #include cho phép ghép thêm mã chương trình của một tệp tiêu để vào mã nguồn cần dịch. Các hằng số được định nghĩa bằng #define sẽ được thay thế bằng giá trị cụ thể tại mỗi nơi sử dụng trong chương trình.
-
-b. Cộng đoạn dịch Ngôn Ngữ Bậc Cao sang Assembly
-Phân tích cú pháp (syntax) của mã nguồn NNBC
-Chuyển chúng sang dạng mã Assembly là một ngôn ngữ bậc thấp (hợp ngữ) gần với tập lệnh của bộ vi xử lý.
-
-c. Công đoạn dịch Assembly
-Dich chương trình => Sang mã máy 0 và 1
-Một tệp mã máy (.obj) sinh ra trong hệ thống sau đó.
-
-d. Giai đoạn Linker
-Trong giai đoạn này mã máy của một chương trình dịch từ nhiều nguồn (file .c hoặc file thư viện .lib) được liên kết lại với nhau để tạo thành chương trình đích duy nhất
-Mã máy của các hàm thư viện gọi trong chương trình cũng được đưa vào chương trình cuối trong giai đoạn này.
-Chính vì vậy mà các lỗi liên quan đến việc gọi hàm hay sử dụng biến tổng thể mà không tồn tại sẽ bị phát hiện. Kể cả lỗi viết chương trình chính không có hàm main() cũng được phát hiện trong liên kết.
-Kết thúc quá trình tất cả các đối tượng được liên kết lại với nhau thành một chương trình có thể thực thi được (executable hay .exe) thống nhất.
-
-**B, Quá trình thực hiện ngắt của vi điều khiển – MCU Interrupt processing**
+**Quá trình thực hiện ngắt của vi điều khiển – MCU Interrupt processing**
 > https://tapit.vn/qua-trinh-thuc-hien-ngat-cua-vi-dieu-khien-mcu-interrupt-processing/?fbclid=IwAR2PXlKLeeP945BvFNK_58rtfPEntMePA2Nz42NHYgTHVPACBNR3fAmJtDA
 
 Bình thường, vi điều khiển sẽ thực thi các lệnh do người dùng viết một cách tuần tự từ trên xuống. 
@@ -118,9 +129,20 @@ Một số ngắt phổ biến trên vi điều khiển phổ biến mà chúng 
 > Xem thêm: Tổng hợp các bài hướng dẫn Lập trình vi điều khiển STM32 
 > https://tapit.vn/tong-hop-cac-bai-huong-dan-lap-trinh-vi-dieu-khien-stm32/
 
-## III. Tổ chức bộ nhớ của vi điều khiển, chương trình và dữ liệu trong bộ nhớ
+## III. TỔ CHỨC BỘ NHỚ CỦA VI ĐIỀU KHIỂN, CHƯƠNG TRÌNH VÀ DỮ LIỆU TRONG BỘ NHỚ 
+**Tổ chức bộ nhớ**
 
-## IV. Các phép toán trong C
++ Bộ nhớ chương trình - FLASH (ROM)
++ Bộ nhớ dữ liệu - SRAM
++ Các ngoại vi - Register
+
+<img width="467" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/acc0f60b-38e8-45d5-badc-9a3b5f6620b6">
+
+<img width="179" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/4e67c60b-b7b8-4a35-ac71-2fcee694ceaf">
+
+
+
+## IV. CÁC PHÉP TOÁN TRONG C
 ép kiểu + phép toán logic + phép toán bit
 
 
