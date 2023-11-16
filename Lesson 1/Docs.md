@@ -148,7 +148,7 @@ Một số ngắt phổ biến trên vi điều khiển phổ biến mà chúng 
 + Phép toán số học;
 + Phép toán quan hệ;
 + **Phép toán logic;**
-+ **Phép toán BIT, **
++ **Phép toán BIT,** https://byjus.com/gate/bitwise-operators-in-c/ https://docs.google.com/presentation/d/1KfwNh_fN8Vz5bGIyepeN-2M-xpQWaD-g/edit?fbclid=IwAR1J8oPW3D5gVe2nP-abG-FlBqgeGh0chaNUwuUYsFaCuXEGLtlGYRInHKY#slide=id.p35
 + Phép gán;
 + Phép toán điền kiện.
 
