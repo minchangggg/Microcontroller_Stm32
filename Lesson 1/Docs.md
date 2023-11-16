@@ -143,6 +143,14 @@ Một số ngắt phổ biến trên vi điều khiển phổ biến mà chúng 
 
 
 ## IV. CÁC PHÉP TOÁN TRONG C
-ép kiểu + phép toán logic + phép toán bit
++ **Ép kiểu**
++ Phép tăng giảm giá trị;
++ Phép toán số học;
++ Phép toán quan hệ;
++ **Phép toán logic;**
++ **Phép toán BIT, **
++ Phép gán;
++ Phép toán điền kiện.
+
 
 
