@@ -1,6 +1,8 @@
-/* Thực hiện chương trình để in lên màn hình chuỗi "LED ON" và "LED OFF" xen kẽ nhau mỗi giây một lần.
+/* 
+Bài tập 2: Thực hiện chương trình để in lên màn hình chuỗi "LED ON" và "LED OFF" xen kẽ nhau mỗi giây một lần.
 Nếu như ở thời điểm hiện tại dòng "LED ON" đã được hiển thị thì một giây sau, màn hình sẽ hiển thị dòng "LED OFF" và ngược lại, quá trình trên sẽ được lặp lại liên tục. 
-Lưu ý chuỗi "LED ON" và "LED OFF" nên được hiển thị ở các dòng riêng biệt. */
+Lưu ý chuỗi "LED ON" và "LED OFF" nên được hiển thị ở các dòng riêng biệt. 
+*/
 
 #include <stdio.h> 
 #include <time.h> 
