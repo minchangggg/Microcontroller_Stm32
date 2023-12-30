@@ -1,5 +1,5 @@
-## TÓM TẮT
-- Trong buổi học tối qua chúng ta đã phân tích cấu trúc vi điều khiển, vi xử lý, bộ nhớ, ngoại vi, hệ thống bus dựa vào sơ đồ Block Diagram dựa vào tài liệu Datasheet của vi điều khiển. So sánh tương đương với máy tính laptop để dễ hiểu.
+### TÓM TẮT
+- Phân tích cấu trúc vi điều khiển, vi xử lý, bộ nhớ, ngoại vi, hệ thống bus dựa vào sơ đồ Block Diagram dựa vào tài liệu Datasheet của vi điều khiển. So sánh tương đương với máy tính laptop để dễ hiểu.
 - Vi điều khiển lõi ARM là vi điều khiển có vi xử lý ARM (loại ARM Cortex M), các hãng vi điều khiển sẽ mua thiết kế của vi xử lý ARM và thiết kế thêm bộ nhớ, ngoại vi..vv.. để tạo thành các dòng vi điều khiển của họ với rất nhiều tùy chọn như ít chân, nhiều chân, ít ngoại vi, nhiều ngoại vi, ít hay nhiều bộ nhớ,...vv..
 - Một số từ khóa đã được nhắc đến: datasheet, block diagram, MCU, CPU/Processor.
 - Giới thiệu các bước thực hiện, giao diện trên phần mềm STM32CubeIDE:
@@ -13,13 +13,13 @@
 - Hướng dẫn kiểm tra driver, là trung gian đển phần mềm STM32CubeIDE có thể làm việc được với phần cứng thông qua kết nối cổng USB, kiểm tra tại trình Device Manager.
 - Lớp thực hành tạo chương trình đầu tiên, cấu hình, nạp chương trình thử nghiệm điều khiển LED ON, LED OFF, nhấp nháy LED.
 
-## TÀI LIỆU
+### TÀI LIỆU
 - Video ghi lại: https://youtu.be/4ry1n5DR4yI
 - Slide: (Đã gửi ở M1S1)
 - Trang thông tin kit STM32F103 BluePill: https://stm32-base.org/boards/STM32F103C8T6-Blue-Pill.html
 - Datasheet STM32F103C8T6: https://www.st.com/resource/en/datasheet/stm32f103c8.pdf
 
-## BÀI TẬP
+### BÀI TẬP
 1, Vi điều khiển của bạn có tổng cộng bao nhiêu Pin?
 
 2, Có bao nhiêu I/O Pin?
