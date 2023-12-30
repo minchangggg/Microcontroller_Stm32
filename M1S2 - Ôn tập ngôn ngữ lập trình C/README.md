@@ -1,4 +1,3 @@
-## M1S2: Ôn tập ngôn ngữ lập trình C
 ### TÓM TẮT
 1. Cấu trúc của một chương trình C cho vi điều khiển
 
@@ -18,15 +17,9 @@
 
 5. Hàm trong C: Khai báo, định nghĩa, sử dụng, tham số, trả về
 
-> Website:
+> Website: https://vietjack.com/lap_trinh_c/ + https://www.tutorialspoint.com/cprogramming/index.htm
 > 
-> https://vietjack.com/lap_trinh_c/
->
-> https://www.tutorialspoint.com/cprogramming/index.htm
-
-> Ebook:
-> 
-> Head First C-David Griffiths + C Programming, A Modern Approach -K. N. King
+> Ebook: Head First C-David Griffiths + C Programming, A Modern Approach -K. N. King
 ### TÀI LIỆU
 Video ghi lại buổi học: https://youtu.be/BJ5H9sI60bA
 
