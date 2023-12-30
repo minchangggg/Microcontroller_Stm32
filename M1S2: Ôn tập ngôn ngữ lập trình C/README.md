@@ -1,12 +1,41 @@
-> Tài liệu C
-> 
+## M1S2: Ôn tập ngôn ngữ lập trình C
+1. Cấu trúc của một chương trình C cho vi điều khiển
+
+> Đọc thêm: https://tapit.vn/qua-trinh-bien-dich-mot-chuong-trinh-cc/
+>
+> Đọc thêm: https://tapit.vn/qua-trinh-thuc-hien-ngat-cua-vi-dieu-khien-mcu-interrupt-processing/
+
+2. Tổ chức bộ nhớ của vi điều khiển, chương trình và dữ liệu trong bộ nhớ
+
+> Đọc thêm: https://tapit.vn/chuc-nang-chuc-va-ban-khong-gian-nho-cua-vi-xu-ly-arm-cortex-m/
+
+3. Kiểu dữ liệu trong C, trong đó có kiểu số nguyên theo thư viện stdint.h (rõ ràng về kích cỡ và dấu, mình cũng có nhắc đến một kiểu dữ liệu người dùng tự định nghĩa được sử dụng nhiều là struct.
+
+> Đọc thêm: https://tapit.vn/kieu-du-lieu-su-dung-thu-vien-stdint-trong-c/
+
+4. Các phép toán trong C, lưu ý với vấn đề ép kiểu, phép toán logic và phép toán bit.
+
+5. Hàm trong C: Khai báo, định nghĩa, sử dụng, tham số, trả về
+
 > Website:
-> - https://vietjack.com/lap_trinh_c/
-> - https://www.tutorialspoint.com/cprogramming/index.htm
->   
+> 
+> https://vietjack.com/lap_trinh_c/
+>
+> https://www.tutorialspoint.com/cprogramming/index.htm
+
 > Ebook:
-> - Head First C-David Griffiths
-> - C Programming, A Modern Approach -K. N. King
+> 
+> Head First C-David Griffiths + C Programming, A Modern Approach -K. N. King
+--------------------------------
+Video ghi lại buổi học: https://youtu.be/BJ5H9sI60bA
+
+Slide buổi học: https://docs.google.com/presentation/d/1KfwNh_fN8Vz5bGIyepeN-2M-xpQWaD-g/edit?usp=sharing&ouid=109030928772764985009&rtpof=true&sd=true
+
+Bài tập luyện tập.
+
+- Hoàn thành bài tập 1 trong slide. Chụp hình mã code và kết quả thực thi gửi lên phần bình luận trước 19h00 buổi học tối thứ 6.
+- Cài đặt phần mềm, chụp ảnh màn hình tại giao diện cấu hình cubeMX (Có hình con vi điều khiển) sau khi bạn cài đặt xong phần mềm STM32CubeIDE và tạo project với vi điều khiển mà bạn đang có. Gửi hình lên phần bình luận trước buổi học tối thứ 6. Lưu ý lo làm sớm vì quá trình cài đặt cần tải về và nhiều bước tốn thời gian.
+--------------------------------
   
 ## I. SƠ LƯỢC VỀ CHƯƠNG TRÌNH CC
 
