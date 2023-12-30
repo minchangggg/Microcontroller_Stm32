@@ -1,4 +1,5 @@
 ## M1S2: Ôn tập ngôn ngữ lập trình C
+### TÓM TẮT
 1. Cấu trúc của một chương trình C cho vi điều khiển
 
 > Đọc thêm: https://tapit.vn/qua-trinh-bien-dich-mot-chuong-trinh-cc/
@@ -26,15 +27,15 @@
 > Ebook:
 > 
 > Head First C-David Griffiths + C Programming, A Modern Approach -K. N. King
---------------------------------
+### TÀI LIỆU
 Video ghi lại buổi học: https://youtu.be/BJ5H9sI60bA
 
 Slide buổi học: https://docs.google.com/presentation/d/1KfwNh_fN8Vz5bGIyepeN-2M-xpQWaD-g/edit?usp=sharing&ouid=109030928772764985009&rtpof=true&sd=true
+### LUYỆN TẬP
+Ex1: Hoàn thành bài tập 1 trong slide. Chụp hình mã code và kết quả thực thi gửi lên phần bình luận trước 19h00 buổi học tối thứ 6
 
-Bài tập luyện tập.
+Ex2: Cài đặt phần mềm, chụp ảnh màn hình tại giao diện cấu hình cubeMX (Có hình con vi điều khiển) sau khi bạn cài đặt xong phần mềm STM32CubeIDE và tạo project với vi điều khiển mà bạn đang có.
 
-- Hoàn thành bài tập 1 trong slide. Chụp hình mã code và kết quả thực thi gửi lên phần bình luận trước 19h00 buổi học tối thứ 6.
-- Cài đặt phần mềm, chụp ảnh màn hình tại giao diện cấu hình cubeMX (Có hình con vi điều khiển) sau khi bạn cài đặt xong phần mềm STM32CubeIDE và tạo project với vi điều khiển mà bạn đang có. Gửi hình lên phần bình luận trước buổi học tối thứ 6. Lưu ý lo làm sớm vì quá trình cài đặt cần tải về và nhiều bước tốn thời gian.
 --------------------------------
   
 ## I. SƠ LƯỢC VỀ CHƯƠNG TRÌNH CC
