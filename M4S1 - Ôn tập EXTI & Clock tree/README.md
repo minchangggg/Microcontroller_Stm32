@@ -1,3 +1,5 @@
+> https://www.facebook.com/groups/1012900173187521/permalink/1056511752159696/
+
 ### TÓM TẮT
 1. Nhắc lại, bổ sung thêm nội dung và ôn tập EXTI 
 2. Clock
