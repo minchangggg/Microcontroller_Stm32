@@ -48,32 +48,4 @@
 
 13, Dòng điện tối đa vào vi điều khiển là bao nhiêu?
 
-### NỘI DUNG 
-#### I, Một số khái niệm cơ bản 
-- User manual board: Tổng quan và hướng dẫn sử dụng board mạch thực hành, các thành phần trên board mạch. (F103 BluePill: website)
-- Schematic: Sơ đồ nguyên lý mạch của board mạch thực hành, linh kiện nào, chân nào nối với chân nào. 
-- Datasheet: Tổng quan về thiết bị và thông suất kỹ thuật
-- Reference manual: Hướng dẫn sửa dụng thiết bị, các tính năng, bước thực hiện và thanh ghi. 
-- Application note: Ghi chú, hướng dẫn sử dụng một tính năng ngoại vi nào đấy
-- Ý nghĩa của vi xử lý 8 bits, 16 bits, 32 bits
-  + Độ rộng thanh ghi của vi xử: Thực hiện 1 số chức năng nhất định, chứa hoặc tính toán các dữ liệu. VD: MCU 8 bits thì thanh ghi 8 bit, MCU 16 bits thì thanh ghi 16 bits....
-  + Độ rộng đường bus dữ liệu ( khả năng vận chuyển của nó, bao nhiêu bits trong 1 lần vận chuyển dữ ). VD: có 1 biến dữ liệu 32 bits (dữ liệu đc lưu trong bộ nhớ) -> để tính toán những dữ liệu này thì chính Vi Xử Lý là nơi tính toán -> Cần chuyển dữ liệu 32 bits từ bộ nhớ lên Vi Xử Lý => đối với MCU 32 bits, chỉ cần load 1 lượt; đối với MCU 8 bits cần lấy 4 lượt. => Số bits càng lớn thì khả năng làm việc càng nhanh càng tối ưu (lấy dữ liệu và tính toán nhanh hơn). 
-
-**1, Cấu trúc của 1 con vi điều khiển và 1 số khái niệm**
-
-          + Vi xử lý - CPU
-          + Bộ nhớ 
-          + Ngoại vi 
-          + Hệ thống bus 
-          
-a, Phân tích 1 vài MCU quen thuộc 
-
-> https://www.keil.com/dd/docs/datashts/atmel/at89c51_ds.pdf
-> https://ww1.microchip.com/downloads/en/devicedoc/41291d.pdf
-> https://www.ti.com/lit/ds/symlink/msp430g2553.pdf
-
-![Bản sao của Blue-Pink Cute Class Schedule](https://github.com/minchangggg/Stm32/assets/125820144/ae9b56c5-d8be-490b-8f74-87465986bfbe)
-
-![Bản sao của Blue-Pink Cute Class Schedule (2)](https://github.com/minchangggg/Stm32/assets/125820144/35a032e7-b732-46dc-b936-d6bf8743bcdb)
-
 
