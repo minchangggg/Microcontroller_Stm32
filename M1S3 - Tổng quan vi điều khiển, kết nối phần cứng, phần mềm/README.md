@@ -1,4 +1,4 @@
-> https://www.facebook.com/groups/1012900173187521/permalink/1031848514626020/
+> https://www.facebook.com/groups/1012900173187521/permalink/1033816171095921/
 
 ### TÓM TẮT
 - Phân tích cấu trúc vi điều khiển, vi xử lý, bộ nhớ, ngoại vi, hệ thống bus dựa vào sơ đồ Block Diagram dựa vào tài liệu Datasheet của vi điều khiển. So sánh tương đương với máy tính laptop để dễ hiểu.
