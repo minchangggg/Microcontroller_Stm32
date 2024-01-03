@@ -1,3 +1,5 @@
+> https://www.facebook.com/groups/1012900173187521/permalink/1038758333935038/
+
 ### TÓM TẮT
 - Thảo luận bài tập về nhà, phân tích hàm TogglePin và hoạt động của vi điều khiển khi tác động vào BSRR và ODR.
 - Chi tiết về GPIO Input với Input floating, Input pullup, Input pulldown, các đặc điểm và trường hợp sử dụng. Vai trò trở kéo, các trường hợp trở kéo, trở kéo nội, trở kéo bên ngoài.
