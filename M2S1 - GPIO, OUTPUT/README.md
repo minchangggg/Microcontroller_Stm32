@@ -1,3 +1,5 @@
+> https://www.facebook.com/groups/1012900173187521/permalink/1037287814082090/
+
 ### TÓM TẮT
 - Đầu buổi học, mình đã giải đáp bài tập về nhà - dựa vào tài liệu datasheet (vẫn còn)
 - Cung cấp 1 số kiến thức lý thuyết về GPIO, GPIO OUTPUT. Phân tích hoạt động dựa vào sơ đồ khối.
