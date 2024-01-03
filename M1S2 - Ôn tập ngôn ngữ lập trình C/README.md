@@ -1,3 +1,5 @@
+> https://www.facebook.com/groups/1012900173187521/permalink/1031848514626020/
+
 ### TÓM TẮT
 1. Cấu trúc của một chương trình C cho vi điều khiển
 
