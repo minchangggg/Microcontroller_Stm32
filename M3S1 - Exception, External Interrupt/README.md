@@ -3,8 +3,14 @@
 ### TÓM TẮT
 **Exception**
 
-+ Là một điều kiện làm thay đổi thứ tự thực hiện bình thường của một chương trình - Gồm 2 loại: System Exceptions (đến từ bên trong vi xử lý) và Interrupts (từ bên ngoài các ngoại vi vi điều khiển gửi đến vi xử lý)
-Interrupt:
+- Là một điều kiện làm thay đổi thứ tự thực hiện bình thường của một chương trình
+- Gồm 2 loại:
+  
+    + System Exceptions (đến từ bên trong vi xử lý)
+    + Interrupts (từ bên ngoài các ngoại vi vi điều khiển gửi đến vi xử lý)
+
+**Interrupt**
+
 + Các tín hiệu Interrupt được tạo ra bởi các ngoại vi của vi điều khiển và được gửi đến vi xử lý. Các tín hiệu này được gọi là Interrupt Request (IRQ)
 + Khi nhận 1 yêu cầu ngắt, Vi xử lý tạm ngưng thực thi chương trình bình thường để thực thi một đoạn chương trình đặc biệt là Interrupt Service Routine (ISR) – Interrupt Handler
 + Các tín hiệu yêu cầu Interrupt (IRQ) được gửi vào khối NVIC của vi xử lý.
@@ -34,4 +40,6 @@ Chúng ta đã thực hành để hiểu về hoạt động của External Inte
          https://tapit.vn/tim-hieu-system-timer-ngat-systick-va-su-dung-hal_delay-trong-trinh-phuc-vu-ngat-vdk-stm32/
 
 ### LUYỆN TẬP
-Tạo dự án mới và viết chương trình để đảo trạng thái LED mỗi khi nhấn nút (sử dụng ngắt), ban đầu LED tắt. Gửi hình ảnh các cấu hình và hình ảnh mã code tại hàm callback vào phần bình luận trước 19h00 buổi học thứ 6 tuần này.
+Tạo dự án mới và viết chương trình để đảo trạng thái LED mỗi khi nhấn nút (sử dụng ngắt), ban đầu LED tắt. 
+
+Gửi hình ảnh các cấu hình và hình ảnh mã code tại hàm callback vào phần bình luận trước 19h00 buổi học thứ 6 tuần này.
