@@ -183,4 +183,24 @@ c, Chân BOOT
 
 <img width="950" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/8a722b81-6da8-49d2-a417-72c06f088c46">
 
+## M2S2
+### I, Input
+**1, Mức điện áp ngõ vào**
+
++ Mức logic 0 của 1 chân Input là từ -0.3V đến 1.164V
++ Mức logic 1 của 1 chân Input là từ 1.833V đến 4V
+
+**2, Các chế độ Input**
+
+a, Input floating
+
+*1 chân Input ở chế độ Floating nếu ngõ vào hở mạch hoặc trở kháng cao thì giá trị logic của bit tương ứng trên thanh ghi ODR thay đổi ngẫu nhiên*
+Khi nào nên nên sử dụng Input floating khi mạch bên ngoài nối với chân vi điều khiển luôn xác định với 2 mức logic cả 0 và 1 (vd như cảm biến đọc dữ liệu) chứ khong thuộc TH hở mạch hoặc trở kháng cao.
+
+b, Input pull-up
+
+c, Input pull-down
+
+
+
 
