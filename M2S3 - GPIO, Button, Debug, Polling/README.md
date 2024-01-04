@@ -21,9 +21,11 @@
 
 ### LUYỆN TẬP
 Bài tập thực hành:
-LED có 3 chế độ.
-mode1: LED nhấp nháy 500ms
-mode2: LED nhấp nháy 1000ms
-mode3: LED sáng
+LED có 3 chế độ:
+
+      mode1: LED nhấp nháy 500ms
+      mode2: LED nhấp nháy 1000ms
+      mode3: LED sáng
+      
 Tạo project mới để thực hiện chương trình, ban đầu LED ở mode1, mỗi khi nhấn nút LED sẽ chuyển chế độ, 1 ->2, 2->3, 3->1,..
 Chụp hình mã code và quay video <= 7s gửi vào phần bình luận trước 19h00 tối thứ 2.
