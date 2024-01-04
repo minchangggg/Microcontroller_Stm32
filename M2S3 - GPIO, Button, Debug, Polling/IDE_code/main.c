@@ -106,8 +106,13 @@ int main(void)
 		preTime = HAL_GetTick();
 
 		// Chống nhiễu
-		HAL_Delay(30); // Chờ để ổn định, trôi wa rung phím lúc mới nhắn
-		while ((HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_12)==0)){;}
+		HAL_Delay(30); // Chờ để ổn định, trôi wa rung phím lúc mới nhấn
+		uint32_t btPreTime = HAL_GetTick();
+		while ((HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_12)==0)){
+			// Kĩ thuật time out: khi quá thời gian cho phép thì cho phép thoát ra, bỏ qua khối lệnh này
+			if (HAL_GetTick()-btPreTime>=5000) break; // dùng cho TH nút nhấn bị hỏng, ở mãi trong vòng lặp 
+			// Có thể cho thêm biến error -> báo lỗi -> có cách fix phù hợp
+		}
 		HAL_Delay(30); // Chờ để ổn định, trôi wa rung phím lúc thả
 	}
 	if (LedMode == 1) {
