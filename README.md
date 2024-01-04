@@ -190,17 +190,23 @@ c, Chân BOOT
 + Mức logic 0 của 1 chân Input là từ -0.3V đến 1.164V
 + Mức logic 1 của 1 chân Input là từ 1.833V đến 4V
 
-**2, Các chế độ Input**
+**2, Sơ đồ nguyên lý**
+
+![Bản sao của Blue-Pink Cute Class Schedule (6)](https://github.com/minchangggg/Stm32/assets/125820144/58abc013-0e26-454c-a12c-e2398f612f30)
+
+
+**, Phân tích các chế độ Input**
 
 a, Input floating
 
-*1 chân Input ở chế độ Floating nếu ngõ vào hở mạch hoặc trở kháng cao thì giá trị logic của bit tương ứng trên thanh ghi ODR thay đổi ngẫu nhiên*
-Khi nào nên nên sử dụng Input floating khi mạch bên ngoài nối với chân vi điều khiển luôn xác định với 2 mức logic cả 0 và 1 (vd như cảm biến đọc dữ liệu) chứ khong thuộc TH hở mạch hoặc trở kháng cao.
++ 1 chân Input ở chế độ Floating nếu ngõ vào hở mạch hoặc trở kháng cao thì giá trị logic của bit tương ứng trên thanh ghi ODR thay đổi ngẫu nhiên
++ Khi nào nên nên sử dụng Input floating khi mạch bên ngoài nối với chân vi điều khiển luôn xác định với 2 mức logic cả 0 và 1 (vd như cảm biến đọc dữ liệu) chứ khong thuộc TH hở mạch hoặc trở kháng cao.
 
 b, Input pull-up
 
 c, Input pull-down
 
+## M2S3 - GPIO, Button, Debug, Polling
 
 
 
