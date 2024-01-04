@@ -128,30 +128,49 @@ Bước 5: Nạp chương trình/ debug
 
 ## M2S1
 
-### I, Tìm hiểu chức năng của tất cả các chân trong STM32F103C8T6
+### I, TÌM HIỂU CHUNG CHỨC NĂNG CỦA CÁC CHÂN  STM32F103C8T6
 ![Bản sao của Blue-Pink Cute Class Schedule (4)](https://github.com/minchangggg/Stm32/assets/125820144/ec67b5bb-7804-4734-b973-d52d16a4908e)
 
 **1, Các chân không phải GPIO**
 
-a, Những nguồn cung cấp cho mạch gồm (Note: Những chân VDD (như VCC) và VSS (như GND) là những chân dùng để cấp nguồn)
+a, Những nguồn cung cấp cho mạch gồm 
+> Note: Những chân VDD (như VCC) và VSS (như GND) là những chân dùng để cấp nguồn
 + 3 cặp chân nguồn (VDD1, VSS1), (VDD2, VSS2), (VDD3, VSS3) là 3 cặp chân cấp nguồn cho phần mạch có tính năng digital.
 + 1 cặp chân nguồn (VDDA, VSSA) là cặp chân cấp nguồn cho phần mạch có tính năng analog, được thiết kế rời. Với mạch nguồn tạo ra điện áp phải là 1 mạch nguồn có chất lượng cao (có độ gợn Vr rất nhỏ) để phần analog hoạt động chính.
-	Lưu ý:  + Thông thường chúng ta không quan tâm nhiều đến tính năng analog, chỉ làm việc với digital => Người ta nối chung VDDA với VDD và VSSA với VSS.
-		+ Khi mà layout mạch, chú ý sơ đồ nguyên lý phải cấp nguồn hết tất cả 3 cặp chân nguồn digital (VDD1, VSS1), (VDD2, VSS2), (VDD3, VSS3) và cặp chân nguồn analog (VDDA, VSSA).
+> Thông thường chúng ta không quan tâm nhiều đến tính năng analog, chỉ làm việc với digital => Người ta nối chung VDDA với VDD và VSSA với VSS.
+>
+>  Khi mà layout mạch, chú ý sơ đồ nguyên lý phải cấp nguồn hết tất cả 3 cặp chân nguồn digital (VDD1, VSS1), (VDD2, VSS2), (VDD3, VSS3) và cặp chân 			nguồn analog (VDDA, VSSA).
 + 1 Chân nguồn VBAT (Volt battery) dành riêng cho Real-time clock hoạt động (đếm giờ, phút, giây)
-b, Chân NRST là chân Reset (RST)
+  
+b, Chân NRST
++ là chân Reset (RST)
 + NRST là Tích cực mức 0 (tích cực thấp).
 + Khi chân Reset tích cực thấp, nghĩa là nó sẽ thực hiện chức năng Reset khi cấp mức logic 0.
-+ Note: Tìm hiểu về POR (power on reset)
+> Note: Tìm hiểu về POR (power on reset)
+
+c, Chân BOOT
++ là chân chọn vùng nhớ khởi động, chạy các chương trình khác nhau trong vi điều khiển (nên để mặc định, không tác động đến nó)
 
 **2, Các chân GPIO**
 
 - GPIO (GENERAL PURPOSE INPUT OUPUT) pin là các chân Input/ Ouput của vi điều khiển có thể được sử dụng với nhiều mục đích khác nhau -> Giúp vi điều khiển có thể giao tiếp với thế giới bên ngoài.
+- Mỗi GPIO port có:
+  + 32-bit configuration registers (Thanh ghi cấu hình): GPIOx_MODER, GPIOx_OTYPER, GPIOx_OSPEEDR, GPIOx_PUPDR
+  + 32-bit data registers (Thanh ghi chứa dữ ): GPIOx_IDR, GPIOx_ODR
+  + 32-bit set/reset register (Thanh ghi điều khiển): GPIOx_BSRR 
+  + 32-bit locking register:GPIOx_LCKR 
+  + 32-bit alternate function selection registers (Thanh ghi cài đặt các chức năng khác dùng để thay thế): GPIOx_AFRH and GPIOx_AFRL
 
+=> Các nhóm thanh ghi của một ngoại vi gồm:
 
+	+ Thanh ghi cấu hình (VXL tác động đến các thanh ghi cấu hình của các ngoại vi -> cài đặt để nó thực hiện chức năng chúng ta mong muốn)
+	+ Thanh ghi dữ liệu (Sau khi cấu hình, thì chúng ta sử dụng nó -> tác động vào dữ liệu của nó) 
+	+ Thanh ghi trạng thái (Trạng thái của nó như thế nào, có sẵn sàng làm việc hay không)
+=> Bản chất của lập trình các ngoại vi của vi điều khiển là làm việc với các thanh ghi:
 
+	+ Đọc thanh ghi (r)
+	+ Ghi thanh ghi (w)
+### II, Output 
+![Bản sao của Blue-Pink Cute Class Schedule (5)](https://github.com/minchangggg/Stm32/assets/125820144/b60a78f2-01f1-4c66-ab08-3ac52e267a0a)
 
-
-
-
-﻿
+    
