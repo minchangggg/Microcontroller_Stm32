@@ -103,7 +103,7 @@ int main(void)
 		else LedMode = 1;
 
 		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-		preTime = nowTime;
+		preTime = HAL_GetTick();
 
 		// Chống nhiễu
 		HAL_Delay(30); // Chờ để ổn định, trôi wa rung phím lúc mới nhắn
