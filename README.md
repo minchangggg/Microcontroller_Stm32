@@ -171,6 +171,16 @@ c, Chân BOOT
 	+ Đọc thanh ghi (r)
 	+ Ghi thanh ghi (w)
 ### II, Output 
+**1, Sơ đồ nguyên lý**
+
 ![Bản sao của Blue-Pink Cute Class Schedule (5)](https://github.com/minchangggg/Stm32/assets/125820144/b60a78f2-01f1-4c66-ab08-3ac52e267a0a)
 
-    
+**2, Cấu hình thanh ghi dữ liệu của các Port**
+
+<img width="650" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/6aa28a55-c481-4085-83ab-a26225dbd6ad">
+
+**3, Phân tích cách hoạt động hàm HAL_GPIO_WritePin()**
+
+<img width="950" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/8a722b81-6da8-49d2-a417-72c06f088c46">
+
+
