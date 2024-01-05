@@ -208,5 +208,84 @@ c, Input pull-down
 
 ## M2S3 - GPIO, Button, Debug, Polling
 
+### Kiến trúc cơ bản của Vi điều khiển
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/7370bc6c-e0a4-4253-9663-6ff45b38a659">
 
+### Hoạt động của cơ chế Polling
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/2d6a9de1-c36e-4216-87e2-6c916e53eec9">
+
+### Lưu đồ thuật toán phương pháp Polling
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/c15c579a-5cf9-497c-8081-d6531999cb1f">
+
+## M3S1 - Exception, External Interrupt
+### I, Exception
+- Là một điều kiện làm thay đổi thứ tự thực hiện bình thường của một chương trình.
+- Gồm 2 loại:
+  
+    + System Exceptions (hầu như là lỗi, không mong muốn, đến từ bên trong vi xử lý)
+    + Interrupts (là tính năng, chức năng mong muốn, từ bên ngoài các ngoại vi vi điều khiển gửi đến vi xử lý)
+      
+### II, Interrupt
+**1. Tổng quan về Interrupt**
+
+<img width="454" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/75ab877c-5deb-43c3-8934-134487fa1d0f">
+
+	+ Các tín hiệu Interrupt được tạo ra bởi các ngoại vi của vi điều khiển (INPUT, ADC, TIMER, UART..) và được gửi đến vi xử lý. Các tín hiệu này được gọi là Interrupt Request (IRQ).
+	+ Vi xử lý tạm ngưng thực thi chương trình bình thường để thực thi một đoạn chương trình đặc biệt là Interrupt Service Routine (ISR) – Interrupt Handler - Callback function (STM32).
+
+- **Các tín hiệu yêu cầu Interrupt (IRQ) được gửi vào khối NVIC của vi xử lý**
+  
+a, Cơ chế hoạt động của cơ chế Interrupt
+
+<img width="407" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/d53cd2bc-ddf4-4cee-8d45-dd9d48fc473d">
+
+b, Lưu đồ thuật toán Interrupt
+
+<img width="379" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/530f410c-b0b0-424e-ab9e-85ce5cdcf3b8">
+
+c, NVIC (Nested VIC) – Bộ xử lý ngắt lồng nhau
+
+	+ Là một ngoại vi của lõi vi xử lý ARM-Cortex M
+	+ Cấu hình enable/disable các ngắt
+	+ Cấu hình độ ưu tiên (priority) các ngắt
+
+**2. Phân tích về quá trình stacking và unstacking khi vào và thoát ngắt**
+
+![Bản sao của Blue-Pink Cute Class Schedule (7)](https://github.com/minchangggg/Stm32/assets/125820144/13c6847b-301d-4b08-8964-60bb0292b32c)
+
++ Các thanh ghi từ R0 đến R12 (13 thanh ghi) là những thanh ghi được sử dụng với nhiều mục đích chung như lưu trữ dữ liệu của các phép tính toán, lưu trữ địa chỉ… Tất cả những thanh ghi này đều có độ rộng 32bit.
++ Thanh ghi R13 được gọi là StackPointer (SP). Thanh ghi này được sử dụng để theo dõi bộ nhớ stack. Và bên cạnh thanh ghi R13, có 2 thêm 2 thanh ghi nữa được chỉ ra trên hình là PSP (Processor Stack Pointer) và MSP (Main Stack pointer), những thanh ghi này được gọi là Banked version of SP.
++ Thanh ghi R14 được gọi là Link Register (LR). Nó lưu thông tin của subroutines, function call và exceptions.
++ Thanh ghi R15 là thanh ghi Program Counter(PC). Thanh ghi này chứa địa chỉ câu lệnh sẽ được thực thi. Khi reset, vi xử lý sẽ nạp thanh ghi PC với giá trị reset là 0x00000004.
++ Ngoài các thanh ghi được sử dụng với nhiều mục đích chung (R0-R12), SP, LR, PC thì vi xử lý ARM Cortex-M4 còn có 5 thanh ghi đặc biệt. Trong đó, thanh ghi Program status (PSR) bao gồm các thanh ghi cung cấp thông tin trạng thái của chương trình Application với các cờ N,Z,C,V,Q, chương trình Interrupt và các thanh ghi liên quan đến stack của vi xử lý. Những thanh ghi còn lại, các bạn tìm đọc trong tài liệu đã được đề cập đến ở phần trên.
+
+**3. Phân tích về các trường hợp độ ưu tiên và trạng thái của các ngắt.**
+ 
+ <img width="" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/cb915b9a-0e6b-45ad-b358-bbe1cbd53a79">
+
+ <img width="500" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/a4190936-289a-44d9-97c1-085d83b3bf43">
+
+- Trong thực tế, có những trường hợp sau: 
+
++ Chỉ 1 ngắt yêu cầu => chắc chắn đc phục vụ. 
++ 1 ngắt đang thực thi thì xuất hiện 1 yêu cầu ngắt khác (Ngắt EXTI đang được thực thi thì có yêu cầu ngắt từ System Timer).
+  
+		+ Yêu cầu ngắt mới có độ ưu tiên thấp hơn ngắt đang thực thi => Phải chờ (ở trạng thái Pending) 
+		+ Yêu cầu ngắt mới có độ ưu tiên bằng ngắt đang thực thi => Phải chờ (ở trạng thái Pending)
+		+ Yêu cầu ngắt mới có độ ưu tiên cao hơn ngắt đang thực thi => Chiếm dụng ngắt (thực thi ngắt mới,trạng thái active, ngắt cũ sẽ ở trạng thái inactive )
+> Các trạng thái:
+> 
+> pending: Chưa được chấp nhận xử lý, đang chờ
+> 
+> active: Đang được phục vụ, ISR đang được thực thi
+> 
+> inactive: Đã được chấp nhận xử lý rồi, đã thực thi rồi nhưng bị giành quyền bởi 1 ngắt khác có độ ưu tiên cao hơn. 
+
+### II, External Interrupt
++ Cấu hình chân EXTI
++ Cấu hình sườn kích hoạt ngắt
++ Cấu hình trở kéo nếu cần
++ Cấu hình cho phép ngắt tại NVIC
++ Hàm phục vụ ngắt callback
++ Debug đặt breakpoint để kiểm tra đã vào được hàm xử lý ngắt.
 
