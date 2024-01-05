@@ -4,9 +4,7 @@ Led báo trạng thái của thiết bị:
       Mode 2: nháy 200ms
       Mode 3: nháy 500ms
 
-+ Nút nhấn
-+ Ban đầu Led ở Mode 1
-+ Mỗi khi nhấn nút chuyển mode: 1->2->3->1->2->...
-+ Yêu cầu ngắt ngoài
++ Ban đầu Led ở Mode 1. Mỗi khi nhấn nút chuyển mode: 1->2->3->1->2->...
++ Yêu cầu sử dụng ngắt ngoài với nút nhấn
 + Yêu cầu dùng timer với Timebase = 100ms
 
