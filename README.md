@@ -289,3 +289,4 @@ c, NVIC (Nested VIC) – Bộ xử lý ngắt lồng nhau
 + Hàm phục vụ ngắt callback
 + Debug đặt breakpoint để kiểm tra đã vào được hàm xử lý ngắt.
 
+![image](https://github.com/minchangggg/Stm32/assets/125820144/deed445c-0f8b-40ee-a668-7be31b788bd6)
