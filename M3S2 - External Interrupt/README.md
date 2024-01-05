@@ -9,4 +9,5 @@ Phân tích và thực hành với External Interrupt:
 
 ### Tài liệu
 Video ghi lại buổi học: https://youtu.be/c-5QbGTxMrI
+
 Slide buổi học: Đã gửi trước. 
