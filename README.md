@@ -120,11 +120,11 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 
 **Các bước tạo ra một project**
 
-Bước 1: Chọn Workspace (thư mục)
-Bước 2: Chọn vi điều khiển
-Bước 3: Cấu hình -> Sinh mã code
-Bước 4: Viết mã code, biên dịch
-Bước 5: Nạp chương trình/ debug
+	+ Bước 1: Chọn Workspace (thư mục)
+	+ Bước 2: Chọn vi điều khiển
+	+ Bước 3: Cấu hình -> Sinh mã code
+	+ Bước 4: Viết mã code, biên dịch
+	+ Bước 5: Nạp chương trình/ debug
 
 ## M2S1
 
