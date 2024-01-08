@@ -165,8 +165,6 @@ Một số ngắt phổ biến trên vi điều khiển phổ biến mà chúng 
 
 <img width="179" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/4e67c60b-b7b8-4a35-ac71-2fcee694ceaf">
 
-
-
 ## IV. CÁC PHÉP TOÁN TRONG C
 + **Ép kiểu**
 + Phép tăng giảm giá trị;
