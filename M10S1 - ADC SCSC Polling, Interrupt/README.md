@@ -1,3 +1,5 @@
+> https://www.facebook.com/groups/1012900173187521/permalink/1061311591679712/
+
 ### TÓM TẮT ADC
 + Chia sẻ về mô hình ngoại vi ADC hoạt động, tổng quan về các loại cảm biến theo ngõ ra digital, analog.
 + Các thông tin về kênh ngõ vào, chế độ kênh ngõ vào, chế độ ADC.
