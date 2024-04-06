@@ -14,4 +14,5 @@ Lưu ý ở video hướng dẫn tạo project, tại phút 3:40, các bạn nh�
 
 ### BÀI TẬP
 Viết chương trình c/c++ tính toán và in ra tổng các số lẻ từ 0 đến 10 sử dụng công cụ onlinegdb.com .
-Chụp hình kết quả và trả lời dưới phần bình luận.
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/33115e27-2583-4470-9068-36e020bad3b1)
