@@ -170,10 +170,108 @@ The **struct tm** has the following definition
 
 **5.  Phép toán logic**
 
-**6. Phép toán BIT** 
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/eff30b5e-02dc-4156-9a70-80dda4810576">
 
+VD1: Giả sử biến A giữ giá trị 1 và biến B giữ giá trị 0, thì khi đó:
+
+		(A && B) là false.
+		(A || B) là true.
+		!(A && B) là true.
+VD2:
+
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/9125fdc2-78b1-47df-85fd-4e3425e81a87">
+
+**6. Phép toán Bitwise** 
+
+> https://viblo.asia/p/toan-tu-bitwise-naQZR9qGKvx
 > https://byjus.com/gate/bitwise-operators-in-c/
-> https://docs.google.com/presentation/d/1KfwNh_fN8Vz5bGIyepeN-2M-xpQWaD-g/edit?fbclid=IwAR1J8oPW3D5gVe2nP-abG-FlBqgeGh0chaNUwuUYsFaCuXEGLtlGYRInHKY#slide=id.p35
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/a7f26a16-ef26-4f01-8c6e-ee4ca44da596)
+
+**a. Bitwise AND operator &**
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/5dc94ebc-b26c-4bfe-9e3b-48fde1b749ae)
+
++ Khi một bitwise AND được thực hiện trên một cặp bit, nó trả về 1 nếu cả 2 bit là 1, ngược lại trả về 0.
++ Hãy xem xét biểu thức 0b0101 & 0b0110. Sắp xếp từng bit lên và áp dụng thao tác AND cho từng cột bit:
+
+		0 1 0 1 AND
+		0 1 1 0
+		--------
+		0 1 0 0
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/2a6b1b49-2fea-4141-84c0-971f993bf4da)
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/9b842310-35c5-4c70-8f54-4a56ce11b3d5)
+
+**b. Bitwise OR operator |**
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/da679256-fbf5-4692-9003-22b65a009474)
+
++ Khi một bitwise OR được thực hiện trên một cặp bit, nó trả về 1 nếu một trong các bit là 1, ngược lại trả về 0.
+
+		0 1 0 1 OR
+		0 1 1 0
+		-----------
+		0 1 1 1
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/05135ab0-dc5e-4be7-bbef-b1f609a3a910)
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/fef4f79d-1b04-40d8-a0c3-8fed15ab23ac)
+
+**c. Bitwise XOR (exclusive OR) operator ^**
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/ad2bf164-7b5f-4ee7-b7df-9e425a4255c7)
+
++ Khi một bitwise XOR được thực hiện trên một cặp bit, nó trả về 1 nếu các bit khác nhau, ngược lại (cả 2 đều đúng hoặc không đúng) trả về 0.
++ Hãy xem xét biểu thức 0b0110 ^ 0b0011:
+  
+		0 1 1 0 XOR
+		0 0 1 1
+		-------
+		0 1 0 1
+
++ Ta cũng có thể đánh giá kiểu cột biểu thức XOR ghép, chẳng hạn như 0b0001 ^ 0b0011 ^ 0b0111. Nếu có số chẵn bit 1 trong một cột, kết quả là 0. Nếu có một số lẻ bit 1 trong một cột, kết quả là 1:
+
+		0 0 0 1 XOR
+		0 0 1 1 XOR
+		0 1 1 1
+		--------
+		0 1 0 1
+
+		hay dễ hiểu hơn là: (0 0 0 1 XOR 0 0 1 1) XOR 0 1 1 1 = 0 0 1 0 ^ 0 1 1 1 = 0 1 0 1
+		
+**d. Bitwise NOT operator ~**
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/dc51c6ec-5a16-45dd-9454-aed19e11d105)
+
++ Khi một Bitwise NOT được sử dụng nó sẽ đảo ngược tất cả các bit. 1 thành 0, và 0 thành 1
++ Lưu ý rằng kết quả của NOT phụ thuộc vào kích thước loại dữ liệu của bạn:
+  
+		+ Lật 4 bits: ~0100 = 1011
+		+ lật 8 bits: ~0000 0100 = ~0100u = 1111 1011
+  
+![image](https://github.com/minchangggg/Stm32/assets/125820144/ccda5143-6449-442b-8fc1-5a6374c1f1d2)
+
+
+**e. Toán tử dịch bit trái (<<) và toán tử dịch bit phải (>>)**
+
++ Trong phép dịch trái, toán hạng bên trái là biểu thức để dịch chuyển các bit, còn toán hạng bên phải là con số bit cần dịch chuyển. vì vậy, khi chúng ta viết x<<1, nghĩa là chúng ta dịch chuyển x sang trái 1 bit. các bit mới được dịch chuyển bên phải sẽ là 0.
++ VD:
+  
+	0011 << 1 == 0110
+	0011 << 2 == 1100
+	0011 << 3 == 1000
+  
+	1100 >> 1 là 0110
+	1100 >> 2 là 0011
+	1100 >> 3 là 0001
+
+**f. Phép gán toán tử bitwise**
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/993470f6-5de5-4fe3-8e97-b23024d39c64)
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/469aaf64-078f-473b-8ba2-b9085803b6ff)
 
 **7.  Phép gán**
 
