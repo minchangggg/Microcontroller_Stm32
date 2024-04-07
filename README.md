@@ -507,7 +507,7 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/283fa967-2ecc-48a5-99fc-f5a714e8b285">
+<img width="350" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/283fa967-2ecc-48a5-99fc-f5a714e8b285">
 
 ## I, TÌM HIỂU CHUNG CHỨC NĂNG CỦA CÁC CHÂN STM32F103C8T6
 ![Bản sao của Blue-Pink Cute Class Schedule (4)](https://github.com/minchangggg/Stm32/assets/125820144/ec67b5bb-7804-4734-b973-d52d16a4908e)
