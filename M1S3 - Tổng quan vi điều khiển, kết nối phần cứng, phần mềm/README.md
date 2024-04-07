@@ -22,30 +22,19 @@
 - Datasheet STM32F103C8T6: https://www.st.com/resource/en/datasheet/stm32f103c8.pdf
 
 ### BÀI TẬP
-1, Vi điều khiển của bạn có tổng cộng bao nhiêu Pin?
+1. Vi điều khiển của bạn có tổng cộng bao nhiêu Pin?
+2. Có bao nhiêu I/O Pin?
+3. Được chia làm bao nhiêu Port?
+4. Mỗi Port có bao nhiêu Pin?
+5. Liệt kê những Pin còn lại không phải GPIO?
+6. Điện áp nguồn hoạt động của vi điều khiển là bao nhiêu?
+7. Bộ nhớ Flash, SRAM bao nhiêu?
+8. Tốc độ tối đa của vi xử lý là bao nhiêu?
+9. Với 1 chân Input thì điện áp mức 0 (LOW) là bao nhiêu vol? Mức 1 (HIGH) là bao nhiêu vol?
+10. Với 1 chân Output thì điện áp mức 0 (LOW) là bao nhiêu vol? Mức 1 (HIGH) là bao nhiêu vol?
+11. Dòng điện tối đa vào /ra 1 chân GPIO là bao nhiêu mA?
+12. Dòng điện tối đa vào 1 chân nguồn là bao nhiêu?
+13. Dòng điện tối đa vào vi điều khiển là bao nhiêu?
 
-2, Có bao nhiêu I/O Pin?
-
-3, Được chia làm bao nhiêu Port?
-
-4, Mỗi Port có bao nhiêu Pin?
-
-5, Liệt kê những Pin còn lại không phải GPIO?
-
-6, Điện áp nguồn hoạt động của vi điều khiển là bao nhiêu?
-
-7, Bộ nhớ Flash, SRAM bao nhiêu?
-
-8, Tốc độ tối đa của vi xử lý là bao nhiêu?
-
-9, Với 1 chân Input thì điện áp mức 0 (LOW) là bao nhiêu vol? Mức 1 (HIGH) là bao nhiêu vol?
-
-10, Với 1 chân Output thì điện áp mức 0 (LOW) là bao nhiêu vol? Mức 1 (HIGH) là bao nhiêu vol?
-
-11, Dòng điện tối đa vào /ra 1 chân GPIO là bao nhiêu mA?
-
-12, Dòng điện tối đa vào 1 chân nguồn là bao nhiêu?
-
-13, Dòng điện tối đa vào vi điều khiển là bao nhiêu?
-
-
+![image](https://github.com/minchangggg/Stm32/assets/125820144/af10d69e-3504-4f49-85b0-276dbaf8bc1f)
+![image](https://github.com/minchangggg/Stm32/assets/125820144/4f6aa7d1-ffa6-4367-8b17-0d53815102f3)
