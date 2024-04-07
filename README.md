@@ -128,9 +128,9 @@ The **struct tm** has the following definition
 <img width="179" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/4e67c60b-b7b8-4a35-ac71-2fcee694ceaf">
 
 ## IV. CÁC PHÉP TOÁN TRONG C
-**1. Ép kiểu**
+### 1. Ép kiểu
 
-**2. Phép tăng giảm giá trị;**
+### 2. Phép tăng giảm giá trị
 
 `a. ++ là toán tử tăng`
 
@@ -154,9 +154,9 @@ The **struct tm** has the following definition
 		Xem ví dụ sau: x = 10; y = x++;// y = 10 và x = 11.
 		Nếu dùng toán tử tăng ++ sau biến x thì giá trị của biến x sẽ được gán cho biến y, rồi sau đó biến x mới tăng lên 1.
 
-**3. Phép toán số học**
+### 3. Phép toán số học
 
-**4.  Phép toán quan hệ**
+### 4.  Phép toán quan hệ
 
 <img width="230" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/1cbfd42a-4b43-4f16-bcb0-cb8aeab336d9">
 
@@ -168,7 +168,11 @@ The **struct tm** has the following definition
 
 <img width="500" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/ed37a163-3ee3-48a6-a3b1-97c79465e08a">
 
-**5.  Phép toán logic**
+### 5.  Phép gán
+
+### 6.  Phép toán điền kiện
+
+### 7.  Phép toán logic
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/eff30b5e-02dc-4156-9a70-80dda4810576">
 
@@ -181,14 +185,14 @@ VD2:
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/9125fdc2-78b1-47df-85fd-4e3425e81a87">
 
-**6. Phép toán Bitwise** 
+### 8. Phép toán Bitwise
 
 > https://viblo.asia/p/toan-tu-bitwise-naQZR9qGKvx
 > https://byjus.com/gate/bitwise-operators-in-c/
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/a7f26a16-ef26-4f01-8c6e-ee4ca44da596)
 
-**a. Bitwise AND operator &**
+#### a. Bitwise AND operator &
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/5dc94ebc-b26c-4bfe-9e3b-48fde1b749ae)
 
@@ -204,7 +208,7 @@ VD2:
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/9b842310-35c5-4c70-8f54-4a56ce11b3d5)
 
-**b. Bitwise OR operator |**
+#### b. Bitwise OR operator |
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/da679256-fbf5-4692-9003-22b65a009474)
 
@@ -219,7 +223,7 @@ VD2:
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/fef4f79d-1b04-40d8-a0c3-8fed15ab23ac)
 
-**c. Bitwise XOR (exclusive OR) operator ^**
+#### c. Bitwise XOR (exclusive OR) operator ^
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/ad2bf164-7b5f-4ee7-b7df-9e425a4255c7)
 
@@ -241,7 +245,7 @@ VD2:
 
 		hay dễ hiểu hơn là: (0 0 0 1 XOR 0 0 1 1) XOR 0 1 1 1 = 0 0 1 0 ^ 0 1 1 1 = 0 1 0 1
 		
-**d. Bitwise NOT operator ~**
+#### d. Bitwise NOT operator ~
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/dc51c6ec-5a16-45dd-9454-aed19e11d105)
 
@@ -254,7 +258,7 @@ VD2:
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/ccda5143-6449-442b-8fc1-5a6374c1f1d2)
 
 
-**e. Toán tử dịch bit trái (<<) và toán tử dịch bit phải (>>)**
+#### e. Toán tử dịch bit trái (<<) và toán tử dịch bit phải (>>)
 
 + Trong phép dịch trái, toán hạng bên trái là biểu thức để dịch chuyển các bit, còn toán hạng bên phải là con số bit cần dịch chuyển. vì vậy, khi chúng ta viết x<<1, nghĩa là chúng ta dịch chuyển x sang trái 1 bit. các bit mới được dịch chuyển bên phải sẽ là 0.
 + VD:
@@ -267,15 +271,108 @@ VD2:
 	1100 >> 2 là 0011
 	1100 >> 3 là 0001
 
-**f. Phép gán toán tử bitwise**
+![image](https://github.com/minchangggg/Stm32/assets/125820144/c2ab7160-6a45-45b9-becf-417f44f9ab7d)
+
+#### f. Phép gán toán tử bitwise
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/993470f6-5de5-4fe3-8e97-b23024d39c64)
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/469aaf64-078f-473b-8ba2-b9085803b6ff)
 
-**7.  Phép gán**
+## V. Kỹ thuật mặt nạ bit - Bit Mask
+> https://www.laptrinhdientu.com/2021/08/bitwise-operator.html
+### 1. Giới thiệu
++ Bitwise là toán tử xử lý với các bit trong một số, nó là một toán tử rất quan trọng trong C, đặc biệt là C nhúng. Các toán tử bitwise cho phép xử lý với từng bit riêng lẻ trên một số nguyên, một thanh ghi. 
 
-**8.  Phép toán điền kiện**
+    ➤ Người dùng có thể set, clear, toggle, read a bit, ... mà không làm ảnh hưởng đến các thành phần khác của thanh ghi bằng toán tử bitwise. 
+
+    ➤ Ví dụ vi điều khiển 8051 cho phép tác động tới từng bit của thanh ghi port, muốn tác động đến chân P1.0 thì ta dùng bit P1_0.
+
+    Một số dòng vi điều khiển, hoặc IDE khác lại không cho phép điều này (chúng ta chỉ có thể tác động đến cả thanh ghi).
+
+    ➤ Trường hợp khác là muốn tác động lên nhiều bit trong thanh ghi (khoảng 3 4 bit chẳng hạn), mà chỉ dùng 1 lệnh 😃
+
++ Đây, **xử lý với cả byte thì đơn giản** rồi:
+
+		Muốn đảo cả byte: P2 = ~P2; (trong khi muốn đảo bit thì ta sử dụng P2_1 = !P2_1;
+		Muốn thay đổi giá trị cả byte: P2 = 0x5A; // P2 = 0b0101.1010
+  
++ Xử lý với **bit (1 hoặc 1 vài bit) xem chừng khó khăn hơn**:
+
+🧐🧐 Nếu MCU chỉ cho phép tác động đến byte, ta nên sử dụng kỹ thuật mặt nạ: "Mask" - Đó là cách sử dụng các phép AND (&), OR (|), EXOR (^) các thanh ghi với các số đặc biệt để chỉ tác động tới các bit cần thiết.`
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/d2b51ee7-194f-4543-8079-b289ece6a474)
+
+### 2. Ứng dụng
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/e2520455-45e5-4e11-ad75-09b67b44011a)
+
+#### a. SET BITS 
+`Set 1 (1 vài) bit lên mức 1 => dùng OR`
+
++ Ví dụ: set chân P1.4 lên mức 1
+
+	Cách thông thường: P1_4 = 1;
+	
+	Cách sử dụng phép OR: P1 |= 0x10;
+	
+	Cách sử dụng Bit - Mask: P1 |= (1 << 4);
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/03de2689-fa61-4306-9037-6a246cdca656)
+
+#### b. CLEAR BITS
+`Clear 1 (1 vài) bit = 0 => dùng AND + NOT`
+
++ Ví dụ: Clear chân P1.4 về mức 0
+
+	Cách thông thường: P1_4 = 0;
+
+	Cách sử dụng phép AND: P1 &= ~0x10;
+
+	Cách sử dụng Bit - Mask: P1 &= ~(1 << 4);
+
+	Clear 2 bit (hoặc nhiều hơn) - Clear P1.4 và P1.5: P1 &= ~(0x03 << 4);
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/a8713f3e-9fdd-4d77-9127-a40c2a29d1e4)
+
+#### c. TOGGLE BITS
+`Đảo logic 1 (1 vài) bit => dùng EXOR`
+
++ Ví dụ: Đảo logic chân P1.4
+
+	Cách thông thường: if (P1_4 == 0) P1_4 = 1;
+			   else P1_4 = 0;
+	
+	Cách sử dụng phép EXOR: P1 ^= 0x10;
+	
+	Cách sử dụng Bit - Mask: P1 ^= (1 << 4);
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/b3e1dad0-e7f2-40b4-8fee-688a63666deb)
+
+#### d. CHECKING BITS
+`Kiểm tra giá trị 1 bit => dùng AND`
+
++ Ví dụ: Kiểm tra nút bấm tại chân P1.4
+
+        Cách thông thường: if (P1_4 == 0) hoặc if (!P1_4)
+
+        Cách sử dụng phép AND: if ((P1 & 0x10) == 0) hoặc if (!(P1 & 0x10))
+
+        Cách sử dụng Bit - Mask: if ((P1 & (1 << 4)) == 0) hoặc if (!(P1 & (1 << 4)))
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/b5214141-e849-44ba-bcdf-26a88e30ec2c)
+
+#### Nhận xét
+![image](https://github.com/minchangggg/Stm32/assets/125820144/ade19e86-4226-4ae5-af47-5857b50e276d)
+
+Nhận xét 3 trường hợp trên:
+
++ Cách 1 (Cách thông thường): **không áp dụng cho MCU, chỉ cho phép tác động theo byte, trường hợp đảo bit phải dùng if** -> dài dòng.
++ Cách 2: **phải nhớ mã hexa tương ứng với từng bit muốn tác động**, **khó thay đổi chương trình khi muốn thay đổi bit khác**. **Trường hợp đọc nút nhấn còn gây thay đổi các bit khác.**
++ Cách 3, bitmask -> Oke nhất 😁😁😁
+  
+#### Kết luận 
+![image](https://github.com/minchangggg/Stm32/assets/125820144/dae45f23-07f4-4f07-a599-b9d088677b9d)
 
 ## M1S3
 ### I, Một số khái niệm cơ bản và Cấu trúc của 1 con vi điều khiển
