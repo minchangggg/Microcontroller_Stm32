@@ -1,6 +1,9 @@
-# M1S1: TỔNG QUAN CHƯƠNG TRÌNH HỌC
+<img width="450" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/fae6fe05-a314-4c64-9143-c84573a10ebc">
+
 --------------------------------------------------------------------------------------------------------------------------------
-# M1S2: ÔN TẬP NGÔN NGỮ LẬP TRÌNH C
+
+<img width="450" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/a42e5da1-1f29-4edd-9c67-6f6c9432a246">
+
 ## I. SƠ LƯỢC VỀ CHƯƠNG TRÌNH CC
 ### A, Quá trình biên dịch một chương trình C/C++
 > https://tapit.vn/qua-trinh-bien-dich-mot-chuong-trinh-cc/?fbclid=IwAR30Vb0QtPRumEMEmWeFqYsndk2tRrhgGLDh16K8cHTBoPU1J-A_XpFGl9o
@@ -374,8 +377,11 @@ Nhận xét 3 trường hợp trên:
 #### Kết luận 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/dae45f23-07f4-4f07-a599-b9d088677b9d)
 
-## M1S3
-### I, Một số khái niệm cơ bản và Cấu trúc của 1 con vi điều khiển
+--------------------------------------------------------------------------------------------------------------------------------
+
+<img width="470" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/9e23c9de-7c47-4198-ba04-a8b30ed0a9e9">
+
+## I, Một số khái niệm cơ bản và Cấu trúc của 1 vi điều khiển
 
 **1. Một số khái niệm cơ bản**
 
@@ -502,15 +508,17 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 	+ Bước 4: Viết mã code, biên dịch
 	+ Bước 5: Nạp chương trình/ debug
 
-## M2S1
+--------------------------------------------------------------------------------------------------------------------------------
 
-### I, TÌM HIỂU CHUNG CHỨC NĂNG CỦA CÁC CHÂN  STM32F103C8T6
+<img width="450" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/283fa967-2ecc-48a5-99fc-f5a714e8b285">
+
+## I, TÌM HIỂU CHUNG CHỨC NĂNG CỦA CÁC CHÂN STM32F103C8T6
 ![Bản sao của Blue-Pink Cute Class Schedule (4)](https://github.com/minchangggg/Stm32/assets/125820144/ec67b5bb-7804-4734-b973-d52d16a4908e)
 
-**1, Các chân không phải GPIO**
-
-a, Những nguồn cung cấp cho mạch gồm 
+### 1, Các chân không phải GPIO
+#### a, Những nguồn cung cấp cho mạch gồm 
 > Note: Những chân VDD (như VCC) và VSS (như GND) là những chân dùng để cấp nguồn
+
 + 3 cặp chân nguồn (VDD1, VSS1), (VDD2, VSS2), (VDD3, VSS3) là 3 cặp chân cấp nguồn cho phần mạch có tính năng digital.
 + 1 cặp chân nguồn (VDDA, VSSA) là cặp chân cấp nguồn cho phần mạch có tính năng analog, được thiết kế rời. Với mạch nguồn tạo ra điện áp phải là 1 mạch nguồn có chất lượng cao (có độ gợn Vr rất nhỏ) để phần analog hoạt động chính.
 > Thông thường chúng ta không quan tâm nhiều đến tính năng analog, chỉ làm việc với digital => Người ta nối chung VDDA với VDD và VSSA với VSS.
@@ -518,17 +526,16 @@ a, Những nguồn cung cấp cho mạch gồm
 >  Khi mà layout mạch, chú ý sơ đồ nguyên lý phải cấp nguồn hết tất cả 3 cặp chân nguồn digital (VDD1, VSS1), (VDD2, VSS2), (VDD3, VSS3) và cặp chân 			nguồn analog (VDDA, VSSA).
 + 1 Chân nguồn VBAT (Volt battery) dành riêng cho Real-time clock hoạt động (đếm giờ, phút, giây)
   
-b, Chân NRST
+#### b, Chân NRST
 + là chân Reset (RST)
 + NRST là Tích cực mức 0 (tích cực thấp).
 + Khi chân Reset tích cực thấp, nghĩa là nó sẽ thực hiện chức năng Reset khi cấp mức logic 0.
 > Note: Tìm hiểu về POR (power on reset)
 
-c, Chân BOOT
+#### c, Chân BOOT
 + là chân chọn vùng nhớ khởi động, chạy các chương trình khác nhau trong vi điều khiển (nên để mặc định, không tác động đến nó)
 
-**2, Các chân GPIO**
-
+### 2, Các chân GPIO
 - GPIO (GENERAL PURPOSE INPUT OUPUT) pin là các chân Input/ Ouput của vi điều khiển có thể được sử dụng với nhiều mục đích khác nhau -> Giúp vi điều khiển có thể giao tiếp với thế giới bên ngoài.
 - Mỗi GPIO port có:
   + 32-bit configuration registers (Thanh ghi cấu hình): GPIOx_MODER, GPIOx_OTYPER, GPIOx_OSPEEDR, GPIOx_PUPDR
@@ -542,45 +549,43 @@ c, Chân BOOT
 	+ Thanh ghi cấu hình (VXL tác động đến các thanh ghi cấu hình của các ngoại vi -> cài đặt để nó thực hiện chức năng chúng ta mong muốn)
 	+ Thanh ghi dữ liệu (Sau khi cấu hình, thì chúng ta sử dụng nó -> tác động vào dữ liệu của nó) 
 	+ Thanh ghi trạng thái (Trạng thái của nó như thế nào, có sẵn sàng làm việc hay không)
-=> Bản chất của lập trình các ngoại vi của vi điều khiển là làm việc với các thanh ghi:
+=> `Bản chất của lập trình các ngoại vi của vi điều khiển` là `làm việc với các thanh ghi`:
 
 	+ Đọc thanh ghi (r)
 	+ Ghi thanh ghi (w)
-### II, Output 
-**1, Sơ đồ nguyên lý**
-
+ 
+## II, Output 
+### 1, Sơ đồ nguyên lý
 ![Bản sao của Blue-Pink Cute Class Schedule (5)](https://github.com/minchangggg/Stm32/assets/125820144/b60a78f2-01f1-4c66-ab08-3ac52e267a0a)
 
-**2, Cấu hình thanh ghi dữ liệu của các Port**
+### 2, Cấu hình thanh ghi dữ liệu của các Port
 
 <img width="650" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/6aa28a55-c481-4085-83ab-a26225dbd6ad">
 
-**3, Phân tích cách hoạt động hàm HAL_GPIO_WritePin()**
+### 3, Phân tích cách hoạt động hàm HAL_GPIO_WritePin()
 
 <img width="950" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/8a722b81-6da8-49d2-a417-72c06f088c46">
 
-## M2S2
-### I, Input
-**1, Mức điện áp ngõ vào**
+--------------------------------------------------------------------------------------------------------------------------------
+
+<img width="450" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/816a62e2-cbc3-4178-ae2a-320140f0a67e">
+
+## I, Input
+### 1, Mức điện áp ngõ vào
 
 + Mức logic 0 của 1 chân Input là từ -0.3V đến 1.164V
 + Mức logic 1 của 1 chân Input là từ 1.833V đến 4V
 
-**2, Sơ đồ nguyên lý**
+### 2, Sơ đồ nguyên lý
 
 ![Bản sao của Blue-Pink Cute Class Schedule (6)](https://github.com/minchangggg/Stm32/assets/125820144/58abc013-0e26-454c-a12c-e2398f612f30)
 
-
-**, Phân tích các chế độ Input**
-
-a, Input floating
-
+### 3, Phân tích các chế độ Input
+#### a, Input floating
 + 1 chân Input ở chế độ Floating nếu ngõ vào hở mạch hoặc trở kháng cao thì giá trị logic của bit tương ứng trên thanh ghi ODR thay đổi ngẫu nhiên
 + Khi nào nên nên sử dụng Input floating khi mạch bên ngoài nối với chân vi điều khiển luôn xác định với 2 mức logic cả 0 và 1 (vd như cảm biến đọc dữ liệu) chứ khong thuộc TH hở mạch hoặc trở kháng cao.
-
-b, Input pull-up
-
-c, Input pull-down
+#### b, Input pull-up
+#### c, Input pull-down
 
 ## M2S3 - GPIO, Button, Debug, Polling
 
