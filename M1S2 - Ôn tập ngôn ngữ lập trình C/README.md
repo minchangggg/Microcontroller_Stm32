@@ -29,4 +29,8 @@ Slide buổi học: https://docs.google.com/presentation/d/1KfwNh_fN8Vz5bGIyepeN
 ### LUYỆN TẬP
 Ex1: Hoàn thành bài tập 1 trong slide. Chụp hình mã code và kết quả thực thi gửi lên phần bình luận trước 19h00 buổi học tối thứ 6
 
+![image](https://github.com/minchangggg/Stm32/assets/125820144/66d5d1d5-544b-48cb-9640-bd592a63d4c0)
+
 Ex2: Cài đặt phần mềm, chụp ảnh màn hình tại giao diện cấu hình cubeMX (Có hình con vi điều khiển) sau khi bạn cài đặt xong phần mềm STM32CubeIDE và tạo project với vi điều khiển mà bạn đang có.
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/655105f7-c4c0-4579-b700-ecf797344384)
