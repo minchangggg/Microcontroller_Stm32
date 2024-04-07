@@ -163,13 +163,13 @@ The **struct tm** has the following definition
 
 <img width="230" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/1cbfd42a-4b43-4f16-bcb0-cb8aeab336d9">
 
-`*Note 1: Đừng quên dấu "=" trong phép so sánh Bằng nhé, nếu không nó sẽ trở thành phép gán. Đây là một lỗi sai rất cơ bản.*`
+`Note 1: Đừng quên dấu "=" trong phép so sánh Bằng nhé, nếu không nó sẽ trở thành phép gán. Đây là một lỗi sai rất cơ bản.`
 
-<img width="800" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/83dd4693-ef94-4b34-a602-0915dcbedab9">
+<img width="750" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/83dd4693-ef94-4b34-a602-0915dcbedab9">
 
-`*Note 2: Không bao giờ so sánh hai giá trị dấu chấm động bằng nhau hay không. Hầu như luôn luôn có sự khác biệt nhỏ giữa hai số chấm động. Cách phổ biến để so sánh 2 số chấm động là tính khoảng cách giữa 2 số đó, nếu khoảng cách đó là rất nhỏ thì ta cho là bằng nhau. Giá trị dùng để so sánh với khoảng cách đó thường được gọi là epsilon.*
+`Note 2: Không bao giờ so sánh hai giá trị dấu chấm động bằng nhau hay không. Hầu như luôn luôn có sự khác biệt nhỏ giữa hai số chấm động. Cách phổ biến để so sánh 2 số chấm động là tính khoảng cách giữa 2 số đó, nếu khoảng cách đó là rất nhỏ thì ta cho là bằng nhau. Giá trị dùng để so sánh với khoảng cách đó thường được gọi là epsilon.`
 
-<img width="500" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/ed37a163-3ee3-48a6-a3b1-97c79465e08a">
+<img width="450" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/ed37a163-3ee3-48a6-a3b1-97c79465e08a">
 
 ### 5.  Phép gán
 
@@ -186,18 +186,19 @@ VD1: Giả sử biến A giữ giá trị 1 và biến B giữ giá trị 0, th�
 		!(A && B) là true.
 VD2:
 
-<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/9125fdc2-78b1-47df-85fd-4e3425e81a87">
+<img width="550" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/9125fdc2-78b1-47df-85fd-4e3425e81a87">
 
 ### 8. Phép toán Bitwise
 
 > https://viblo.asia/p/toan-tu-bitwise-naQZR9qGKvx
+> https://openplanning.net/12281/cac-toan-tu-bitwise
 > https://byjus.com/gate/bitwise-operators-in-c/
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/a7f26a16-ef26-4f01-8c6e-ee4ca44da596)
+<img width="700" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/a7f26a16-ef26-4f01-8c6e-ee4ca44da596">
 
-#### a. Bitwise AND operator &
+#### a. Bitwise AND operator & 
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/5dc94ebc-b26c-4bfe-9e3b-48fde1b749ae)
+<img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/52bbce36-cae4-44d5-b864-d6c64254cd6e">
 
 + Khi một bitwise AND được thực hiện trên một cặp bit, nó trả về 1 nếu cả 2 bit là 1, ngược lại trả về 0.
 + Hãy xem xét biểu thức 0b0101 & 0b0110. Sắp xếp từng bit lên và áp dụng thao tác AND cho từng cột bit:
@@ -207,13 +208,13 @@ VD2:
 		--------
 		0 1 0 0
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/2a6b1b49-2fea-4141-84c0-971f993bf4da)
+<img width="450" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/2a6b1b49-2fea-4141-84c0-971f993bf4da">
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/9b842310-35c5-4c70-8f54-4a56ce11b3d5)
+<img width="530" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/9b842310-35c5-4c70-8f54-4a56ce11b3d5">
 
 #### b. Bitwise OR operator |
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/da679256-fbf5-4692-9003-22b65a009474)
+<img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/8a8646c4-8238-4164-bc47-72d0836a5649">
 
 + Khi một bitwise OR được thực hiện trên một cặp bit, nó trả về 1 nếu một trong các bit là 1, ngược lại trả về 0.
 
@@ -222,13 +223,13 @@ VD2:
 		-----------
 		0 1 1 1
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/05135ab0-dc5e-4be7-bbef-b1f609a3a910)
+<img width="455" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/05135ab0-dc5e-4be7-bbef-b1f609a3a910">
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/fef4f79d-1b04-40d8-a0c3-8fed15ab23ac)
+<img width="550" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/fef4f79d-1b04-40d8-a0c3-8fed15ab23ac">
 
 #### c. Bitwise XOR (exclusive OR) operator ^
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/ad2bf164-7b5f-4ee7-b7df-9e425a4255c7)
+<img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/edb7c512-c685-4396-a4f1-e57b5e4eb342">
 
 + Khi một bitwise XOR được thực hiện trên một cặp bit, nó trả về 1 nếu các bit khác nhau, ngược lại (cả 2 đều đúng hoặc không đúng) trả về 0.
 + Hãy xem xét biểu thức 0b0110 ^ 0b0011:
@@ -250,7 +251,7 @@ VD2:
 		
 #### d. Bitwise NOT operator ~
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/dc51c6ec-5a16-45dd-9454-aed19e11d105)
+<img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/d8a580e8-c843-4b76-a649-1f92f4436e6b">
 
 + Khi một Bitwise NOT được sử dụng nó sẽ đảo ngược tất cả các bit. 1 thành 0, và 0 thành 1
 + Lưu ý rằng kết quả của NOT phụ thuộc vào kích thước loại dữ liệu của bạn:
@@ -258,8 +259,7 @@ VD2:
 		+ Lật 4 bits: ~0100 = 1011
 		+ lật 8 bits: ~0000 0100 = ~0100u = 1111 1011
   
-![image](https://github.com/minchangggg/Stm32/assets/125820144/ccda5143-6449-442b-8fc1-5a6374c1f1d2)
-
+<img width="500" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/ccda5143-6449-442b-8fc1-5a6374c1f1d2">
 
 #### e. Toán tử dịch bit trái (<<) và toán tử dịch bit phải (>>)
 
@@ -277,10 +277,11 @@ VD2:
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/c2ab7160-6a45-45b9-becf-417f44f9ab7d)
 
 #### f. Phép gán toán tử bitwise
+<img width="650" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/993470f6-5de5-4fe3-8e97-b23024d39c64">
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/993470f6-5de5-4fe3-8e97-b23024d39c64)
+VD:
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/469aaf64-078f-473b-8ba2-b9085803b6ff)
+<img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/469aaf64-078f-473b-8ba2-b9085803b6ff">
 
 ## V. Kỹ thuật mặt nạ bit - Bit Mask
 > https://www.laptrinhdientu.com/2021/08/bitwise-operator.html
@@ -304,11 +305,9 @@ VD2:
 
 🧐🧐 Nếu MCU chỉ cho phép tác động đến byte, ta nên sử dụng kỹ thuật mặt nạ: "Mask" - Đó là cách sử dụng các phép AND (&), OR (|), EXOR (^) các thanh ghi với các số đặc biệt để chỉ tác động tới các bit cần thiết.`
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/d2b51ee7-194f-4543-8079-b289ece6a474)
-
 ### 2. Ứng dụng
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/e2520455-45e5-4e11-ad75-09b67b44011a)
+<img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/e2520455-45e5-4e11-ad75-09b67b44011a">
 
 #### a. SET BITS 
 `Set 1 (1 vài) bit lên mức 1 => dùng OR`
@@ -321,7 +320,7 @@ VD2:
 	
 	Cách sử dụng Bit - Mask: P1 |= (1 << 4);
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/03de2689-fa61-4306-9037-6a246cdca656)
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/03de2689-fa61-4306-9037-6a246cdca656">
 
 #### b. CLEAR BITS
 `Clear 1 (1 vài) bit = 0 => dùng AND + NOT`
@@ -336,7 +335,7 @@ VD2:
 
 	Clear 2 bit (hoặc nhiều hơn) - Clear P1.4 và P1.5: P1 &= ~(0x03 << 4);
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/a8713f3e-9fdd-4d77-9127-a40c2a29d1e4)
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/a8713f3e-9fdd-4d77-9127-a40c2a29d1e4">
 
 #### c. TOGGLE BITS
 `Đảo logic 1 (1 vài) bit => dùng EXOR`
@@ -350,7 +349,7 @@ VD2:
 	
 	Cách sử dụng Bit - Mask: P1 ^= (1 << 4);
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/b3e1dad0-e7f2-40b4-8fee-688a63666deb)
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/b3e1dad0-e7f2-40b4-8fee-688a63666deb">
 
 #### d. CHECKING BITS
 `Kiểm tra giá trị 1 bit => dùng AND`
@@ -363,23 +362,21 @@ VD2:
 
         Cách sử dụng Bit - Mask: if ((P1 & (1 << 4)) == 0) hoặc if (!(P1 & (1 << 4)))
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/b5214141-e849-44ba-bcdf-26a88e30ec2c)
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/b5214141-e849-44ba-bcdf-26a88e30ec2c">
 
 #### Nhận xét
-![image](https://github.com/minchangggg/Stm32/assets/125820144/ade19e86-4226-4ae5-af47-5857b50e276d)
-
 Nhận xét 3 trường hợp trên:
 
 + Cách 1 (Cách thông thường): **không áp dụng cho MCU, chỉ cho phép tác động theo byte, trường hợp đảo bit phải dùng if** -> dài dòng.
 + Cách 2: **phải nhớ mã hexa tương ứng với từng bit muốn tác động**, **khó thay đổi chương trình khi muốn thay đổi bit khác**. **Trường hợp đọc nút nhấn còn gây thay đổi các bit khác.**
 + Cách 3, bitmask -> Oke nhất 😁😁😁
-  
 #### Kết luận 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/dae45f23-07f4-4f07-a599-b9d088677b9d)
+
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/dae45f23-07f4-4f07-a599-b9d088677b9d">
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-<img width="470" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/9e23c9de-7c47-4198-ba04-a8b30ed0a9e9">
+<img width="550" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/9e23c9de-7c47-4198-ba04-a8b30ed0a9e9">
 
 ## I, Một số khái niệm cơ bản và Cấu trúc của 1 vi điều khiển
 
