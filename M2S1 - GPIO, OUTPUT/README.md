@@ -15,6 +15,10 @@
 - Slide: https://docs.google.com/presentation/d/1P8UUquJpUTTtWzrDHYJy826J-8TkS85S/edit?usp=sharing&ouid=109030928772764985009&rtpof=true&sd=true
 ### BÀI TẬP
 - Phân tích hàm HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13). Kết quả thanh ghi BSRR, ODR là bao nhiêu, biết ban đầu ODR có giá trị 0x2000
+![image](https://github.com/minchangggg/Stm32/assets/125820144/64892dc3-e9a0-4f23-8466-dcc9d5cf9e52)
+
 - Tìm hiểu, suy nghĩ và giải thích vì sao thư viện lại chọn tác động vào thanh ghi BSRR thay vì thanh ghi ODR để điều khiển giá trị logic của 1 chân OUTPUT.
+![image](https://github.com/minchangggg/Stm32/assets/125820144/5909ce35-1a51-4830-82e2-03267e3f472a)
+
 - Video Debug cần xem qua và thực hành theo hướng dẫn: https://youtu.be/50cc5TmiF78
 Lưu ý với phiên bản mới của phần mềm thì cần phải đặt breakpoint để dừng chương trình thì giá trị thanh ghi và giá trị biến mới hiển thị trên giao diện debug.
