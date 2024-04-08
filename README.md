@@ -650,9 +650,32 @@ VD:
 + Cần điện trở pull-up hỗ trợ tạo ra logic mức 0
 + VD:
   
-![Uploading image.png…]()
+![image](https://github.com/minchangggg/Stm32/assets/125820144/a54d6bff-3ecd-473b-b52c-57a9be1a5526)
 
-## M2S3 - GPIO, Button, Debug, Polling
+--------------------------------------------------------------------------------------------------------------------------------
+
+<img width="450" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/1048789d-b0f8-4d24-8631-0d09395df7e3">
+
+## I. Đặt vấn đề
+### 1. Bài toán
+- Cấu hình và viết chương trình thực hiện: Ban đầu LED sáng, khi "nhấn thả" nút, LED đảo trạng thái. Ta thực hiện như sau:
+
+<img width="450" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/bd7116f9-17da-4c72-93cf-f396cb01bae">
+
+Nhận xét: giá trị của LEDSTATUS không ổn định -> có vấn đề ở phần mềm/ phần cứng 
+
+### 2. Giải thích vấn đề
++ Với nút nhấn lý tưởng, nhấn nút lập tức về 0, thả ra lập tức về lại 1.
++ Tuy nhiên trong thực tế sẽ không như vậy, muốn ở mức logic 0 về mức logic 1, t sẽ mất 1 khoảng thời gian T-Low (khoảng thời gian nút nhấn giữ mức logic 0) với T-low bé nhất ở đơn vị mili giây.
+  
+![image](https://github.com/minchangggg/Stm32/assets/125820144/bce405dd-85b2-4b0f-adbc-ad2e5c91423c)
+
++ Tốc độ vi xử lý là 8MHz hay 1s sẽ thực hiện được 8 triệu lệnh (ở dạng mã máy). Giả sử 3 câu lệnh C trong vòng lặp phía trên tương đương 8 câu lệnh mã máy -> Trong 1s vòng lặp được thực hiện 1 triệu lần -> Trong 1ms vòng lặp được thực hiện 1 ngàn lần.
++ Vậy bản thân GPIO đã đảo hàng nghìn lần trong 1s (vì cứ ktra điều kiện, cứ mức logic nút nhấn bằng 0 thì đảo led) -> nếu may mắn, thì số lần đảo là số lẻ -> đúng yêu cầu bài toán.
+
+### 3. Cách giải quyết vấn đề
+
+
 
 ### Kiến trúc cơ bản của Vi điều khiển
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/7370bc6c-e0a4-4253-9663-6ff45b38a659">
