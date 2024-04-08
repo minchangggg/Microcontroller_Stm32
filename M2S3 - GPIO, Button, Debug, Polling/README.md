@@ -14,8 +14,10 @@
 ### TÀI LIỆU
 - Video ghi lại: https://youtu.be/hqZpD1Lt88k
 - Đọc thêm:
+  
       - Tìm hiểu System timer, ngắt SysTick và sử dụng HAL_Delay trong trình phục vụ ngắt VĐK STM32.
       https://tapit.vn/tim-hieu-system-timer-ngat-systick-va-su-dung-hal_delay-trong-trinh-phuc-vu-ngat-vdk-stm32/
+  
       - Ngắt ngoài trên STM32F103C8T6
       https://tapit.vn/ngat-ngoai-tren-stm32f103c8t6/
 
