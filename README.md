@@ -536,7 +536,7 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 - GPIO (GENERAL PURPOSE INPUT OUPUT) pin là các chân Input/ Ouput của vi điều khiển có thể được sử dụng với nhiều mục đích khác nhau -> Giúp vi điều khiển có thể giao tiếp với thế giới bên ngoài.
 - Mỗi GPIO port có:
   + 32-bit configuration registers (Thanh ghi cấu hình): GPIOx_MODER, GPIOx_OTYPER, GPIOx_OSPEEDR, GPIOx_PUPDR
-  + 32-bit data registers (Thanh ghi chứa dữ ): GPIOx_IDR, GPIOx_ODR
+  + 32-bit data registers (Thanh ghi chứa dữ liệu ): GPIOx_IDR, GPIOx_ODR
   + 32-bit set/reset register (Thanh ghi điều khiển): GPIOx_BSRR 
   + 32-bit locking register:GPIOx_LCKR 
   + 32-bit alternate function selection registers (Thanh ghi cài đặt các chức năng khác dùng để thay thế): GPIOx_AFRH and GPIOx_AFRL
@@ -567,6 +567,31 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/816a62e2-cbc3-4178-ae2a-320140f0a67e">
 
+### 4, Tính tối ưu của thanh ghi BSRR của vi xử lý 32 bit 
+#### Muốn điều chỉnh trạng thái của 1 chân bất kì (VD PC13) t sẽ có 2 cách: tác động lên ODR và tác động lên BSRR
+#### Cách 1: Tác động trực tiếp lên ODR (thanh ghi dữ liệu) mà không thông qua BSRR
+VD: ODR ban đầu = 0x0000 -> muốn ODR 13 bằng 1 thì làm cách nào?
+
+Cách giải: T sẽ dùng pp set bit (trong bitmask đã học để thực hiện): ODR = ODR | 0x 0010 0000 0000 0000
+
+	Thực chất để sử dụng phương pháp này, mày phải thực hiện tuần tự 3 bước sau:
+	+ Bước 1: READ -> vi xử lý phải đọc các giá trị của ODR lên vi xử lý (lưu trên thanh ghi của vi xử lý)
+	+ Bước 2: MODIFY -> vi xử lý thực hiện toán tử bit OR của thanh ghi chứa giá trị ODR và 0x 0010 0000 0000 0000
+	+ Bước 3: WRITE -> vi xử lý ghi lại giá trị đã được hiệu chỉnh về lại thanh ghi ODR
+
+Lưu ý: 
+
++ Vi xử lý thường phải xử lý nhiều việc, có thể xảy ra 1 luồng ngắt interrupt -> làm gián đoạn 3 bước trên và làm thay đổi giá trị ODR -> xảy ra lỗi không mong muốn
++ T giả sử sau khi thực hiện B1, có 1 luồng ngắt đc gởi đến, giá trị ODR lúc này thực chất đã trở thành ob 1111 1111 1111 1111, tuy nhiên lúc này giá trị được lưu trữ trên vi xử lý vẫn là 0x 0000 0000 0000 0000.
++ Sau khi ngắt, vi xử lý tiếp tục làm việc với bước 2, rồi đến bước 3. Tuy nhiên lúc này giá trị đã xảy ra sai sót (nó làm việc vs bản sao ODR trước đó mà ko làm việc với giá trị mới nhất -> hệ thống ghi ngược lại kết quả làm việc với bản sao cũ đó -> chương trình chạy sai)
+
+#### Cách 2: Tác động gián tiếp lên thanh ghi ODR thông qua thanh qua thanh ghi BSRR
+VD:
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/441cb9c1-1ed2-4a0f-9ec1-e09c312dec83)
+
++ Ở đây t chỉ đơn giản thực hiện phép gán -> chỉ cần 1 bước gán là xong, không bị mắc sai lầm như TH trên 
+  
 ## I, Input
 ### 1, Mức điện áp ngõ vào
 
@@ -579,10 +604,53 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 
 ### 3, Phân tích các chế độ Input
 #### a, Input floating
-+ 1 chân Input ở chế độ Floating nếu ngõ vào hở mạch hoặc trở kháng cao thì giá trị logic của bit tương ứng trên thanh ghi ODR thay đổi ngẫu nhiên
-+ Khi nào nên nên sử dụng Input floating khi mạch bên ngoài nối với chân vi điều khiển luôn xác định với 2 mức logic cả 0 và 1 (vd như cảm biến đọc dữ liệu) chứ khong thuộc TH hở mạch hoặc trở kháng cao.
+![image](https://github.com/minchangggg/Stm32/assets/125820144/b7a8c900-a564-4d7a-8a57-725af9e9b923)
+
+> 1 chân Input ở chế độ Floating nếu **ngõ vào hở mạch** hoặc **trở kháng cao** => điện áp không xác định => giá trị logic của bit tương ứng trên thanh ghi ODR thay đổi ngẫu nhiên, không xác định, bị trôi nổi.
+
+**Khi nào nên nên sử dụng Input floating?**
+
++ Khi **mạch bên ngoài nối với chân vi điều khiển luôn xác định với 2 mức logic cả 0 và 1** (vd như cảm biến đọc dữ liệu)
++ Không thuộc TH hở mạch hoặc trở kháng cao.
++ Không sử dụng 2 điện trở bên trong, giá trị Input phụ thuộc hoàn toàn vào mạch bên ngoài, mạch bên ngoài bằng 1 thì giá trị input bằng 1, mạch bên ngoài bằng 0 thì giá trị input bằng 0.
+  
+![image](https://github.com/minchangggg/Stm32/assets/125820144/91730a57-94f8-41ba-b96b-15629f2070a8)
+
++ VD1: (Nhấn nút thì xuống VSS -> mức 0) và (Không nhấn thì có trở kéo lên, lên nguồn -> mức 1)
+  
+![image](https://github.com/minchangggg/Stm32/assets/125820144/3765d798-9819-4b03-b6a8-0c58bd7e5105)
+  
++ VD2: (Nhấn nút thì lên nguồn -> mức 1) và (Không nhấn nút, trở kéo xuống -> mức 0)
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/fe278d7f-4a9d-4f9b-a897-8e3e0995e824)
+
 #### b, Input pull-up
+![image](https://github.com/minchangggg/Stm32/assets/125820144/5c92976c-d47f-40a4-adfa-1241a92393c4)
+
+> Là chế độ sử dụng điện trở nội kéo lên (INTERNAL PULL UP RESISTOR)
+> Điện trở kéo lên giúp chân Input có giá trị logic bằng 1 khi chân I/O hở mạch hoặc có trở kháng lớn
+
+**Khi nào nên nên sử dụng Input pull-up?**
+
++ Khi mạch bên ngoài hoạt động thì tạo ra giá trị logic mức 0, còn lại thì không xác định
++ Cần điện trở pull-up hỗ trợ tạo ra logic mức 1
++ VD:
+  
+![image](https://github.com/minchangggg/Stm32/assets/125820144/791daa1c-be53-41b5-8e90-9bf4f433c756)
+
 #### c, Input pull-down
+![image](https://github.com/minchangggg/Stm32/assets/125820144/614d086b-cd45-4244-a483-fd07ea8eb5d1)
+
+> Là chế độ sử dụng điện trở nội kéo xuống (INTERNAL PULL DOWN RESISTOR)
+> Điện trở kéo lên giúp chân Input có giá trị logic bằng 0 khi chân I/O hở mạch hoặc có trở kháng lớn
+
+**Khi nào nên nên sử dụng Input pull-down?**
+
++ Khi mạch bên ngoài hoạt động thì tạo ra giá trị logic mức 1, còn lại thì không xác định
++ Cần điện trở pull-up hỗ trợ tạo ra logic mức 0
++ VD:
+  
+![image](https://github.com/minchangggg/Stm32/assets/125820144/3359f94a-be89-4d75-a92d-b99883b7680a)
 
 ## M2S3 - GPIO, Button, Debug, Polling
 
