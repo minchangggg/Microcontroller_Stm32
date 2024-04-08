@@ -675,6 +675,7 @@ Nhận xét: giá trị của LEDSTATUS không ổn định -> có vấn đề �
 
 ### 3. Cách giải quyết vấn đề
 
+![image](https://github.com/minchangggg/Stm32/assets/125820144/c5e33e14-12a5-4eaf-8031-ed0fe8e2e951)
 
 
 ### Kiến trúc cơ bản của Vi điều khiển
