@@ -650,7 +650,7 @@ VD:
 + Cần điện trở pull-up hỗ trợ tạo ra logic mức 0
 + VD:
   
-![image](https://github.com/minchangggg/Stm32/assets/125820144/3359f94a-be89-4d75-a92d-b99883b7680a)
+![Uploading image.png…]()
 
 ## M2S3 - GPIO, Button, Debug, Polling
 
