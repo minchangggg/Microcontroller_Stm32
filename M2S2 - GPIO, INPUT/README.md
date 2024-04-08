@@ -14,5 +14,9 @@
 Bài 1: Cấu hình và viết chương trình thực hiện: Ban đầu LED tắt, Khi "nhấn giữ" nút, LED sáng, khi thả nút, LED tắt.
 
 Bài 2: Cấu hình và viết chương trình thực hiện: Ban đầu LED sáng, khi "nhấn thả" nút, LED đảo trạng thái.
-(Cố gắng áp dụng debug để hiểu thêm hoạt động của vi điều khiển)
-Gửi kết quả thực hiện gồm: Hình ảnh cấu hình, hình ảnh mã code, video ngắn <5s chạy kết quả mỗi bài trước buổi học tối thứ 6 tuần này. Các bạn làm được bài nào, phần nào cứ gửi lên phần đấy nha.
+
+> Cố gắng áp dụng debug để hiểu thêm hoạt động của vi điều khiển
+> 
+> Gửi kết quả thực hiện gồm: Hình ảnh cấu hình, hình ảnh mã code, video ngắn <5s chạy kết quả mỗi bài trước buổi học tối thứ 6 tuần này.
+> 
+> Các bạn làm được bài nào, phần nào cứ gửi lên phần đấy nha.
