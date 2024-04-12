@@ -849,10 +849,18 @@ Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương
 
 > https://www.laptrinhdientu.com/2021/09/STM2.html
 
-## I. TÍN HIỆU CLOCK. 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/93e5f755-d9f3-4559-ba67-0d5ae82b6c5c)
+## I. Clock Signal (Tín hiệu Clock hay Xung Clock)
+### Xung clock là gì? Xung clock dùng để làm gì?
+![image](https://github.com/minchangggg/Stm32/assets/125820144/427bfc18-512f-4d1b-a840-ab8f255db57d)
+
+- Trong vấn đề logic, chỉ có 2 khái niệm đúng (true) hoặc sai (false). Cũng như vậy, trong kỹ thuật logic, tín hiệu có dạng mức "cao" (H) và mức "thấp" (L) hay còn gọi là mức "1" & mức "0". Để có tín hiệu như vậy, linh kiện phải có trạng thái "dẫn" hoặc "không dẫn" -> cần có một tín hiệu để điều khiển. Trong kỹ thuât logic, người ta sử dụng tín hiệu dạng xung (có mức cao và mức thấp) để làm việc điều khiển đó. Tín hiệu này được gọi là clock (xung nhịp).- Như vậy có thể thấy, clock có ảnh hưởng đến việc truyền dẫn tín hiệu. Cụ thể là tần số clock càng cao, thì lượng dữ liệu (tín hiệu) được truyền tải càng nhanh.
+- Đối với những hệ thống thiết kế hướng đồng bộ -> sử dụng chung 1 xung nhịp (Global clock) -> cho tất cả các thành phần trên đó giao tiếp trao đổi dữ liệu, thu các dữ liệu chính xác và được điều khiển đồng bộ với nhau.
+- Như vậy có thể thấy, clock có ảnh hưởng đến việc truyền dẫn tín hiệu. **Tần số clock càng cao, thì lượng dữ liệu (tín hiệu) được truyền tải càng nhanh**.
+  
 ## II. Clock Tree là gì ?
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/284412b2-9108-4bae-9192-77f508257d97)
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/93e5f755-d9f3-4559-ba67-0d5ae82b6c5c)
 
 - Trong các nguồn dao động cung cấp cho STM32 hoạt động bao gồm có :  
 High Speed Internal (HSI : Xung nội tốc độ cao) 
