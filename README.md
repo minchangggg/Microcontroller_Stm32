@@ -656,8 +656,8 @@ VD:
 
 <img width="450" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/1048789d-b0f8-4d24-8631-0d09395df7e3">
 
-## I. Đặt vấn đề
-### 1. Bài toán
+## I. Vấn đề 1
+### 1. Bài toán đặt ra
 - Cấu hình và viết chương trình thực hiện: Ban đầu LED sáng, khi "nhấn thả" nút, LED đảo trạng thái. Ta thực hiện như sau:
 
 <img width="450" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/bd7116f9-17da-4c72-93cf-f396cb01bae">
@@ -677,17 +677,28 @@ Nhận xét: giá trị của LEDSTATUS không ổn định -> có vấn đề �
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/c5e33e14-12a5-4eaf-8031-ed0fe8e2e951)
 
+## II. Vấn đề 2 và phương pháp Polling
+### 1. Bài toán đặt ra
+- Cấu hình và viết chương trình thực hiện: Ban đầu LED sáng, khi "nhấn thả" nút, LED đảo mode: Từ 1->2, từ 2->1.
+- Trong đó:
+  
+	mode1: LED nhấp nháy 500ms
+
+	mode2: LED nhấp nháy 1000ms
+
+### 2. Hoạt động của cơ chế Polling
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/2d6a9de1-c36e-4216-87e2-6c916e53eec9">
+
+### 3. Lưu đồ thuật toán phương pháp Polling
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/c15c579a-5cf9-497c-8081-d6531999cb1f">
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/eda3912d-28fb-42ac-a412-7a1b2ba58c9f">
 
 ### Kiến trúc cơ bản của Vi điều khiển
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/7370bc6c-e0a4-4253-9663-6ff45b38a659">
 
-### Hoạt động của cơ chế Polling
-<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/2d6a9de1-c36e-4216-87e2-6c916e53eec9">
-
-### Lưu đồ thuật toán phương pháp Polling
-<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/c15c579a-5cf9-497c-8081-d6531999cb1f">
-
-## M3S1 - Exception, External Interrupt
 ### I, Exception
 - Là một điều kiện làm thay đổi thứ tự thực hiện bình thường của một chương trình.
 - Gồm 2 loại:
