@@ -42,9 +42,9 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-uint8_t LedStatus = 0; // 0 off, 1 on
 uint32_t BTCounter = 0;
 uint8_t LedMode = 1;
+
 uint32_t preTime = 0;
 uint32_t nowTime = 0;
 /* USER CODE END PV */
@@ -90,7 +90,6 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-  LedStatus = 1;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -102,7 +101,9 @@ int main(void)
 		if (LedMode == 1) LedMode = 2;
 		else LedMode = 1;
 
-		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+		// HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+		BTCounter++;
+
 		preTime = HAL_GetTick();
 
 		// Chống nhiễu
@@ -110,7 +111,7 @@ int main(void)
 		uint32_t btPreTime = HAL_GetTick();
 		while ((HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_12)==0)){
 			// Kĩ thuật time out: khi quá thời gian cho phép thì cho phép thoát ra, bỏ qua khối lệnh này
-			if (HAL_GetTick()-btPreTime>=5000) break; // dùng cho TH nút nhấn bị hỏng, ở mãi trong vòng lặp 
+			if (HAL_GetTick()-btPreTime>=5000) break; // dùng cho TH nút nhấn bị hỏng, ở mãi trong vòng lặp
 			// Có thể cho thêm biến error -> báo lỗi -> có cách fix phù hợp
 		}
 		HAL_Delay(30); // Chờ để ổn định, trôi wa rung phím lúc thả
