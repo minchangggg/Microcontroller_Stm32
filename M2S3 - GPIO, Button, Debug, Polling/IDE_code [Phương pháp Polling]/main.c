@@ -101,7 +101,7 @@ int main(void)
 		if (LedMode == 1) LedMode = 2;
 		else LedMode = 1;
 
-		// HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 		BTCounter++;
 
 		preTime = HAL_GetTick();
