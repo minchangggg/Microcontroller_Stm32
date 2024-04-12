@@ -699,15 +699,15 @@ Nhận xét: giá trị của LEDSTATUS không ổn định -> có vấn đề �
 ### Kiến trúc cơ bản của Vi điều khiển
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/7370bc6c-e0a4-4253-9663-6ff45b38a659">
 
-### I, Exception
+## I, Exception
 - Là một điều kiện làm thay đổi thứ tự thực hiện bình thường của một chương trình.
 - Gồm 2 loại:
   
     + System Exceptions (hầu như là lỗi, không mong muốn, đến từ bên trong vi xử lý)
     + Interrupts (là tính năng, chức năng mong muốn, từ bên ngoài các ngoại vi vi điều khiển gửi đến vi xử lý)
       
-### II, Interrupt
-**1. Tổng quan về Interrupt**
+## II, Interrupt
+### 1. Tổng quan về Interrupt
 
 <img width="454" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/75ab877c-5deb-43c3-8934-134487fa1d0f">
 
@@ -732,7 +732,7 @@ c. NVIC (Nested Vector Interrupt Controller) – Bộ xử lý ngắt lồng nha
 	+ Cấu hình enable/disable các ngắt
 	+ Cấu hình độ ưu tiên (priority) các ngắt
 
-**2. Phân tích về quá trình stacking và unstacking khi vào và thoát ngắt**
+### 2. Phân tích về quá trình stacking và unstacking khi vào và thoát ngắt
 
 ![Bản sao của Blue-Pink Cute Class Schedule (7)](https://github.com/minchangggg/Stm32/assets/125820144/13c6847b-301d-4b08-8964-60bb0292b32c)
 
@@ -742,7 +742,7 @@ c. NVIC (Nested Vector Interrupt Controller) – Bộ xử lý ngắt lồng nha
 + Thanh ghi R15 là thanh ghi Program Counter(PC). Thanh ghi này chứa địa chỉ câu lệnh sẽ được thực thi. Khi reset, vi xử lý sẽ nạp thanh ghi PC với giá trị reset là 0x00000004.
 + Ngoài các thanh ghi được sử dụng với nhiều mục đích chung (R0-R12), SP, LR, PC thì vi xử lý ARM Cortex-M4 còn có 5 thanh ghi đặc biệt. Trong đó, thanh ghi Program status (PSR) bao gồm các thanh ghi cung cấp thông tin trạng thái của chương trình Application với các cờ N,Z,C,V,Q, chương trình Interrupt và các thanh ghi liên quan đến stack của vi xử lý. Những thanh ghi còn lại, các bạn tìm đọc trong tài liệu đã được đề cập đến ở phần trên.
 
-**3. Phân tích về các trường hợp độ ưu tiên và trạng thái của các ngắt.**
+### 3. Phân tích về các trường hợp độ ưu tiên và trạng thái của các ngắt.
  
  <img width="" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/cb915b9a-0e6b-45ad-b358-bbe1cbd53a79">
 
@@ -764,7 +764,7 @@ c. NVIC (Nested Vector Interrupt Controller) – Bộ xử lý ngắt lồng nha
 > 
 > inactive: Đã được chấp nhận xử lý rồi, đã thực thi rồi nhưng bị giành quyền bởi 1 ngắt khác có độ ưu tiên cao hơn. 
 
-### II, External Interrupt
+## II, External Interrupt
 + Cấu hình chân EXTI
 + Cấu hình sườn kích hoạt ngắt
 + Cấu hình trở kéo nếu cần
@@ -773,3 +773,50 @@ c. NVIC (Nested Vector Interrupt Controller) – Bộ xử lý ngắt lồng nha
 + Debug đặt breakpoint để kiểm tra đã vào được hàm xử lý ngắt.
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/deed445c-0f8b-40ee-a668-7be31b788bd6)
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/8b19da2d-0974-4e4f-95ab-86522b101a41)
+
+> https://tapit.vn/hieu-va-lap-trinh-ngat-ngoai-stm32f411/
+
+EXTI (External Interupts) tạm dịch là ngắt ngoài hay ngắt sự kiện bên ngoài. Ngắt EXTI được kích hoạt khi có sự kiện từ bên ngoài tác động vào chân EXTI đó, tùy theo sự kiện đó có phù hợp với điều kiện ngắt không thì ngắt ngoài mới sảy ra.
+
+## I, Các chức năng chính của khối External Interrupt
+![image](https://github.com/minchangggg/Stm32/assets/125820144/850adfec-310e-47ff-940f-a6c62141bead)
+
++ Khối External Interrupt bao gồm 23 bộ phát hiện sườn để tạo ra yêu cầu ngắt, người sử dụng có thể cấu hình lựa chọn sườn ngắt (sườn lên, sườn xuống hoặc cả 2) để kích hoạt ngắt.
++ Mỗi line ngắt đều có thể cấu hình cho phép tạo yêu cầu ngắt hoặc không một cách độc lập. Khi có yêu cầu ngắt thì người sử dụng có thể giám sát được trạng thái của line ngắt.
+
+## II> Hiểu về Line Interrupt
+> Mạch mux (mạch chọn kênh) là gì ?
+
++ Vi điều khiển STM32F411VET6 trên board STM32F411DISCOVERY có 81 chân GPIO được chia thành 16 line ngắt ngoài theo sơ đồ bên dưới.
++ Mỗi line ngắt là tập hợp các chân có cùng thứ tự trên các Port khác nhau.
++ Ví dụ line 0 (EXTI0) là tập hợp các chân PA0, PB0, PC0, PD0, PE0 và PH0.
+  
+## III> Đặt vấn đề
+### 1. Bài toán
+Viết chương trình đảo led dùng ngắt ngoài
+### 2. Bài giải
+### 3. Tại sao không dùng hàm HAL_Delay mà lại dùng `for(int i = 0; i < 100000; i++);`
+#### a. Tại sao sử dụng HAL_Delay ở chương trình phục vụ ngắt thì vi điều khiển bị treo?
+> https://tapit.vn/tim-hieu-system-timer-ngat-systick-va-su-dung-hal_delay-trong-trinh-phuc-vu-ngat-vdk-stm32/
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/b4101ba3-faf5-4900-9840-6cd48b349a6a)
+
+– Để trả lời cho câu hỏi trên, chúng ta cùng phân tích hình ảnh minh họa luồng thực thi của vi điều khiển ở trên. Giả sử vi xử lý sẽ xử lý 2 tín hiệu yêu cầu ngắt: một đến từ system timer và một đến từ ngoại vi bất kỳ, 2 tín hiệu này có cùng độ ưu tiên hoặc độ ưu tiên của tín hiệu yêu cầu ngắt Systick (đến từ hàm HAL_Delay) nhỏ hơn độ ưu tiên của tín hiệu yêu cầu ngắt (đến từ hàm HAL_GPIO_EXTI_Callback) còn lại. 
+– Cứ mỗi 1 mili giây thì vi xử lý sẽ thực hiện hàm SysTick_Handler một lần và giá trị uwTick sẽ được tăng thêm một đơn vị. Giả sử có một tín hiệu yêu cầu ngắt đến từ một ngoại vi bên ngoài và chương trình phục vụ ngắt của ngoại vi này (Peripheral_Handler) có gọi hàm HAL_Delay, lúc này vi xử lý thực hiện các câu lệnh trong Peripheral_Handler cho đến khi gặp câu lệnh HAL_Delay(x); //delay x mili giay. Vì tín hiệu yêu cầu ngắt của ngoại vi này đang được xử lý nên tín hiệu yêu cầu ngắt Systick đến sau sẽ được đưa vào trạng thái chờ (pending), hàm SysTick_Handler chưa được thực hiện dẫn đến giá trị uwTick không đổi, vi xử lý sẽ thực hiện lặp vô tận trong câu lệnh while của hàm HAL_Delay, điều này dẫn đến chương trình bị treo tại vòng lặp while này. 
+– Xem ví dụ dưới đây để hiểu vì sao vi xử lý thực hiện lặp vô tận trong câu lệnh while:
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/3661ce60-16de-427c-a373-924374598d3e)
+
+	+ Đầu tiên, biến tickstart chứa giá trị uwTick hiện tại được trả về từ hàm HAL_GetTick.
+	+ Vì SysTick_Handler chưa được thực hiện dẫn đến giá trị uwTick không đổi, giá trị trả về của HAL_GetTick trong điều kiện while bằng giá trị của tickstart ban đầu, dẫn đến kết quả của HAL_GetTick() – tickstart luôn bé hơn wait, dẫn đến vi điều khiển thực hiện lặp vô hạn trong vòng lặp while này.
+
+#### b. Vậy làm thế nào để có thể sử dụng HAL_Delay trong các chương trình phục ngắt?
+Các bạn phải thực hiện điều chỉnh độ ưu tiên của ngắt SysTick cao hơn so với các ngắt ngoại vi đó. Ví dụ:
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/1f7781e4-7a83-41bb-a9e1-953f22ec614c)
+
+Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương trình phục vụ ngắt vào các trường hợp cần thiết vì các chương trình phục vụ ngắt nên được xử lý tức thời và càng ngắn gọn càng tốt, tránh ảnh hưởng đến các ngắt đến sau, không đáp ứng được tính realtime của hệ thống dẫn đến bỏ lỡ sự kiện hoặc mất dữ liệu. 
