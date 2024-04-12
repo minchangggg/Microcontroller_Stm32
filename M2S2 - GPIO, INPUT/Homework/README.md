@@ -1,4 +1,4 @@
 ## Configuration Ex1 & Ex2
-![image](https://github.com/minchangggg/Stm32/assets/125820144/ee903273-5c04-41d8-ba21-044062fba395)
+<img width="600" alt="image" src="![Screenshot 2024-04-12 152102](https://github.com/minchangggg/Stm32/assets/125820144/ebd03f35-2bb7-417c-aeca-e70e8f9f1cae)">
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/18f2207c-ae7e-4400-a87c-1a2c84b75113)
+<img width="600" alt="image" src="![image](https://github.com/minchangggg/Stm32/assets/125820144/38b934a3-999b-48fb-8826-8f2767423ff1)">
