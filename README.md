@@ -44,7 +44,7 @@ Ngôn ngữ C là một ngôn ngữ dạng biên dịch. Chương trình đượ
 + Mã máy của các hàm thư viện gọi trong chương trình cũng được đưa vào chương trình cuối trong giai đoạn này. -> Chính vì vậy mà các lỗi liên quan đến việc gọi hàm hay sử dụng biến tổng thể mà không tồn tại sẽ bị phát hiện. Kể cả lỗi viết chương trình chính không có hàm main() cũng được phát hiện trong liên kết.
 + Kết thúc quá trình tất cả các đối tượng được liên kết lại với nhau thành một chương trình có thể thực thi được (executable hay .exe) thống nhất.
 
-### B. Các thư viện cần học trong C**
+### B. Các thư viện cần học trong C
 
 ### C Library - <time.h>
 *The time.h header defines: four variable types + two macro + various functions -> for manipulating date and time.*
@@ -379,9 +379,7 @@ Nhận xét 3 trường hợp trên:
 <img width="650" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/9e23c9de-7c47-4198-ba04-a8b30ed0a9e9">
 
 ## I, Một số khái niệm cơ bản và Cấu trúc của 1 vi điều khiển
-
-**1. Một số khái niệm cơ bản**
-
+### 1. Một số khái niệm cơ bản
 - User manual board: Tổng quan và hướng dẫn sử dụng board mạch thực hành, các thành phần trên board mạch. (F103 BluePill: website)
 - Schematic: Sơ đồ nguyên lý mạch của board mạch thực hành, linh kiện nào, chân nào nối với chân nào. 
 - Datasheet: Tổng quan về thiết bị và thông suất kỹ thuật.
@@ -393,7 +391,7 @@ Nhận xét 3 trường hợp trên:
   + Độ rộng thanh ghi của vi xử: Thực hiện 1 số chức năng nhất định, chứa hoặc tính toán các dữ liệu. VD: MCU 8 bits thì thanh ghi 8 bit, MCU 16 bits thì thanh ghi 16 bits....
   + Độ rộng đường bus dữ liệu ( khả năng vận chuyển của nó, bao nhiêu bits trong 1 lần vận chuyển dữ ). VD: có 1 biến dữ liệu 32 bits (dữ liệu đc lưu trong bộ nhớ) -> để tính toán những dữ liệu này thì chính Vi Xử Lý là nơi tính toán -> Cần chuyển dữ liệu 32 bits từ bộ nhớ lên Vi Xử Lý => đối với MCU 32 bits, chỉ cần load 1 lượt; đối với MCU 8 bits cần lấy 4 lượt. => Số bits càng lớn thì khả năng làm việc càng nhanh càng tối ưu (lấy dữ liệu và tính toán nhanh hơn). 
 
-**2. Cấu trúc của vi điều khiển**
+### 2. Cấu trúc của vi điều khiển
 
           + Vi xử lý - CPU
           + Bộ nhớ 
@@ -409,13 +407,13 @@ Nhận xét 3 trường hợp trên:
 <img width="800" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/35a032e7-b732-46dc-b936-d6bf8743bcdb">
 <img width="800" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/737d574d-a87e-41a1-96fd-f3d0b7447af4">
 
-### II, PHẦN CỨNG THỰC HÀNH
+## II, PHẦN CỨNG THỰC HÀNH
 
 <img width="700" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/83ad9192-6abb-446d-ab46-129fde9f087e">
 
 > 	https://stm32-base.org/boards/STM32F103C8T6-Blue-Pill.html
 
-**1. Giới thiệu vi điều khiển STM32F103C8T6**
+### 1. Giới thiệu vi điều khiển STM32F103C8T6
 
 - STM32F103C8T6 là vi điều khiển **32bit**, thuộc họ F1 của dòng chip STM32 hãng ST.
 
@@ -479,7 +477,7 @@ Nhận xét 3 trường hợp trên:
 
  - Kiểm tra lỗi CRC và 96-bit ID.
 
-**2. Giới thiệu kit BluePill sử dụng STM32F103C8T6**
+### 2. Giới thiệu kit BluePill sử dụng STM32F103C8T6
 
 Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử dụng để nghiên cứu về ARM nhiều nhất hiện nay. 
 
