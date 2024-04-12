@@ -786,9 +786,10 @@ c. NVIC (Nested Vector Interrupt Controller) – Bộ xử lý ngắt lồng nha
 > void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin):
 >
 > Khi có sự kiện ngắt nút nhấn EXTI thì hàm này sẽ được gọi. Hàm HAL_GPIO_EXTI_Callback được tạo sẵn khi sử dụng EXTI. GPIO_Pin đối số chính là biến để kiểm tra xem chân nào đang được ngắt.
+
 --------------------------------------------------------------------------------------------------------------------------------
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/8b19da2d-0974-4e4f-95ab-86522b101a41)
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/8b19da2d-0974-4e4f-95ab-86522b101a41">
 
 > https://tapit.vn/hieu-va-lap-trinh-ngat-ngoai-stm32f411/
 
@@ -843,3 +844,29 @@ Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương
 + Trong thực tế, ta sẽ gặp trường hợp rung phím, t sẽ gặp nhiều hơn 1 sườn xuống
 + Ở lần nhấn nút đầu tiên, sinh ra yêu cầu ngắt và bit pending lúc này = 1 -> vi xử lý thực hiện xử lý yêu cầu ngắt, thực hiện các hàm của thư viện, trong đó có việc xóa cờ ngắt hay bit pending = 0.
 + Tuy nhiên trong quá trình thực hiện việc delay, vẫn tiếp tục có sườn xuống, mạch vẫn phát hiện sườn -> đưa bit pending lên lại = 1, tạo ra thêm yêu cầu ngắt ở sườn số 2 này với độ ưu tiên ngang bằng với yêu cầu ngắt ở sườn thứ nhất -> ngắt ở sườn thứ 2 sẽ phải chờ, đợi đến hết delay ở sườn thứ nhất.
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+<img width="500" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/a93753b7-626e-4048-bbb2-dc8db8957e98">
+
+> https://www.laptrinhdientu.com/2021/09/STM2.html
+
+## I. TÍN HIỆU CLOCK. 
+![image](https://github.com/minchangggg/Stm32/assets/125820144/93e5f755-d9f3-4559-ba67-0d5ae82b6c5c)
+## II. Clock Tree là gì ?
+![image](https://github.com/minchangggg/Stm32/assets/125820144/284412b2-9108-4bae-9192-77f508257d97)
+
+- Trong các nguồn dao động cung cấp cho STM32 hoạt động bao gồm có :  
+High Speed Internal (HSI : Xung nội tốc độ cao) 
+High Speed External (HSE : Xung ngoại tốc độ cao).
+- Có nhiều lý do ta sẽ sử dung xung ngoại thay cho xung nội như khi thạch anh ngoài có thể cung cấp dao động cao hơn nguồn xung nội, giúp thu được số lieu chính xác hơn khi giao tiếp với ngoại vi đo nhiệt độ cao hơn rất nhiều so với 25 độ C.
+- Hay như trong một vài trường hợp phải giao tiếp với ngoại vi chỉ có thể hoạt động ở một tần số xác định.
+- Bên cạnh nguồn xung tốc độ cao ta còn có Low Speed External (LSE : xung ngoại tốc độ thấp) và Low Speed Internal (LSI : xung nội tốc độ thấp) để điều khiển ngoại vi Real Time Clock (RTC) và Independent Watchdog (IWDT).
+
+- **Một mạng lưới phức tạp chịu trách nhiệm truyền tín hiệu dao động bên trong STM32 được gọi là Clock Tree**. Clock tree sử dung nhiều bộ Phase-Locked Loops (PLL) và Prescalers để tăng / giảm tần số nguồn khi cần thiết.
+- Lý do chúng ta cần nhiều bộ chia tần số nguồn là để đảm bảo khả năng hoạt động cũng như giảm thiểu năng lượng tiêu thụ ở những chắc năng không cần thiết.
+- Cấu hình ClockTree sẽ được thực hiện qua một thiết bị ngoại vi có tên là Reset and Clock Control (RCC),  và nó sẽ đựợc thực hiện qua 3 bước :
+1. Chọn sử dung HSI hay HSE.
+2. Nếu nguồn cung cấp dao động không đủ so với nhu cầu tốc độ dao động của hệ thống, ta sẽ điều chỉnh thông số của PLL chính để khởi tạo xung PLL (PLLCLK).  Nếu không có thể bỏ qua bước này.
+3. Cấu hình System Clock Switch (SW) với nguồn dao động ca
+
