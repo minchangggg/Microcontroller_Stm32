@@ -1,3 +1,5 @@
+> https://www.facebook.com/groups/1012900173187521/permalink/1058577281953143/
+
 ### TÓM TẮT:
 Tìm hiểu về chức năng time base của khối timer gồm các vấn đề:
 
