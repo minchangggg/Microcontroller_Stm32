@@ -716,15 +716,17 @@ Nhận xét: giá trị của LEDSTATUS không ổn định -> có vấn đề �
 
 - **Các tín hiệu yêu cầu Interrupt (IRQ) được gửi vào khối NVIC của vi xử lý**
   
-a, Cơ chế hoạt động của cơ chế Interrupt
+a. Cơ chế hoạt động của cơ chế Interrupt
 
 <img width="407" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/d53cd2bc-ddf4-4cee-8d45-dd9d48fc473d">
 
-b, Lưu đồ thuật toán Interrupt
+b. Lưu đồ thuật toán Interrupt
 
 <img width="379" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/530f410c-b0b0-424e-ab9e-85ce5cdcf3b8">
 
-c, NVIC (Nested VIC) – Bộ xử lý ngắt lồng nhau
+c. NVIC (Nested Vector Interrupt Controller) – Bộ xử lý ngắt lồng nhau
+
+> https://www.laptrinhdientu.com/2021/09/Core8.html
 
 	+ Là một ngoại vi của lõi vi xử lý ARM-Cortex M
 	+ Cấu hình enable/disable các ngắt
