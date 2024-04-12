@@ -743,6 +743,7 @@ c. NVIC (Nested Vector Interrupt Controller) – Bộ xử lý ngắt lồng nha
 + Ngoài các thanh ghi được sử dụng với nhiều mục đích chung (R0-R12), SP, LR, PC thì vi xử lý ARM Cortex-M4 còn có 5 thanh ghi đặc biệt. Trong đó, thanh ghi Program status (PSR) bao gồm các thanh ghi cung cấp thông tin trạng thái của chương trình Application với các cờ N,Z,C,V,Q, chương trình Interrupt và các thanh ghi liên quan đến stack của vi xử lý. Những thanh ghi còn lại, các bạn tìm đọc trong tài liệu đã được đề cập đến ở phần trên.
 
 ### 3. Phân tích về các trường hợp độ ưu tiên và trạng thái của các ngắt.
+> https://tapit.vn/cau-hinh-uu-tien-ngat-vi-dieu-khien-stm32-tren-cubemx/
  
  <img width="" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/cb915b9a-0e6b-45ad-b358-bbe1cbd53a79">
 
@@ -750,8 +751,8 @@ c. NVIC (Nested Vector Interrupt Controller) – Bộ xử lý ngắt lồng nha
 
 - Trong thực tế, có những trường hợp sau: 
 
-+ Chỉ 1 ngắt yêu cầu => chắc chắn đc phục vụ. 
-+ 1 ngắt đang thực thi thì xuất hiện 1 yêu cầu ngắt khác (Ngắt EXTI đang được thực thi thì có yêu cầu ngắt từ System Timer).
+	- Chỉ 1 ngắt yêu cầu => chắc chắn đc phục vụ. 
+	- 1 ngắt đang thực thi thì xuất hiện 1 yêu cầu ngắt khác (Ngắt EXTI đang được thực thi thì có yêu cầu ngắt từ System Timer).
   
 		+ Yêu cầu ngắt mới có độ ưu tiên thấp hơn ngắt đang thực thi => Phải chờ (ở trạng thái Pending) 
 		+ Yêu cầu ngắt mới có độ ưu tiên bằng ngắt đang thực thi => Phải chờ (ở trạng thái Pending)
@@ -764,6 +765,14 @@ c. NVIC (Nested Vector Interrupt Controller) – Bộ xử lý ngắt lồng nha
 > 
 > inactive: Đã được chấp nhận xử lý rồi, đã thực thi rồi nhưng bị giành quyền bởi 1 ngắt khác có độ ưu tiên cao hơn. 
 
+![image](https://github.com/minchangggg/Stm32/assets/125820144/5a031478-7c14-4647-ab06-6e983d114584)
+
+- Trên MCU STM32F103C8T6 có hai loại ưu tiên ngắt khác nhau đó là Preemption Priorities và Sub Priorities:
+
+		+ Mặc định thì ngắt nào có Preemtion Priority cao hơn thì sẽ được thực hiện trước.
+		+ Khi nào 2 ngắt có cùng một mức Preemption Priority thì ngắt nào có Sub Priority cao hơn thì ngắt đó được thực hiện trước.
+		+ Còn trường hợp 2 ngắt có cùng mức Preemption và Sub Priority luôn thì ngắt nào đến trước được thực hiện trước
+
 ## II, External Interrupt
 + Cấu hình chân EXTI
 + Cấu hình sườn kích hoạt ngắt
@@ -774,6 +783,9 @@ c. NVIC (Nested Vector Interrupt Controller) – Bộ xử lý ngắt lồng nha
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/deed445c-0f8b-40ee-a668-7be31b788bd6)
 
+> void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin):
+>
+> Khi có sự kiện ngắt nút nhấn EXTI thì hàm này sẽ được gọi. Hàm HAL_GPIO_EXTI_Callback được tạo sẵn khi sử dụng EXTI. GPIO_Pin đối số chính là biến để kiểm tra xem chân nào đang được ngắt.
 --------------------------------------------------------------------------------------------------------------------------------
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/8b19da2d-0974-4e4f-95ab-86522b101a41)
@@ -799,6 +811,8 @@ EXTI (External Interupts) tạm dịch là ngắt ngoài hay ngắt sự kiện 
 ### 1. Bài toán
 Viết chương trình đảo led dùng ngắt ngoài
 ### 2. Bài giải
+![image](https://github.com/minchangggg/Stm32/assets/125820144/9bb25c38-1107-4613-bb4e-173237cc3d23)
+
 ### 3. Tại sao không dùng hàm HAL_Delay mà lại dùng `for(int i = 0; i < 100000; i++);`
 #### a. Tại sao sử dụng HAL_Delay ở chương trình phục vụ ngắt thì vi điều khiển bị treo?
 > https://tapit.vn/tim-hieu-system-timer-ngat-systick-va-su-dung-hal_delay-trong-trinh-phuc-vu-ngat-vdk-stm32/
@@ -820,3 +834,12 @@ Các bạn phải thực hiện điều chỉnh độ ưu tiên của ngắt Sys
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/1f7781e4-7a83-41bb-a9e1-953f22ec614c)
 
 Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương trình phục vụ ngắt vào các trường hợp cần thiết vì các chương trình phục vụ ngắt nên được xử lý tức thời và càng ngắn gọn càng tốt, tránh ảnh hưởng đến các ngắt đến sau, không đáp ứng được tính realtime của hệ thống dẫn đến bỏ lỡ sự kiện hoặc mất dữ liệu. 
+
+### 4. Tại sao cần phải dùng `EXTI->PR |= GPIO_PIN_0;` để xóa pending ngắt
+**Để tránh tình trạng nhảy vào hàm ngắt nhiều lần khi nhấn nút.**
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/821ae480-11e7-4c26-a973-26f5e1a25aa0)
+
++ Trong thực tế, ta sẽ gặp trường hợp rung phím, t sẽ gặp nhiều hơn 1 sườn xuống
++ Ở lần nhấn nút đầu tiên, sinh ra yêu cầu ngắt và bit pending lúc này = 1 -> vi xử lý thực hiện xử lý yêu cầu ngắt, thực hiện các hàm của thư viện, trong đó có việc xóa cờ ngắt hay bit pending = 0.
++ Tuy nhiên trong quá trình thực hiện việc delay, vẫn tiếp tục có sườn xuống, mạch vẫn phát hiện sườn -> đưa bit pending lên lại = 1, tạo ra thêm yêu cầu ngắt ở sườn số 2 này với độ ưu tiên ngang bằng với yêu cầu ngắt ở sườn thứ nhất -> ngắt ở sườn thứ 2 sẽ phải chờ, đợi đến hết delay ở sườn thứ nhất.
