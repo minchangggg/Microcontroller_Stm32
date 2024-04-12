@@ -42,7 +42,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-uint32_t btCounter=0;
+uint8_t btCount = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -54,18 +54,19 @@ static void MX_GPIO_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
-	if (GPIO_Pin==GPIO_PIN_12){
-		HAL_GPIO_TogglePin (GPIOC, GPIO_PIN_13);
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+	if (GPIO_Pin == GPIO_PIN_12) {
+		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 
 		uint32_t preTime = HAL_GetTick();
-		HAL_Delay(30);
-		while(HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_12)==0) {
-			if ((HAL_GetTick()-preTime)>=5000) break;
+		HAL_Delay(30); // Luu y thay doi do uu tien
+		while (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_12) == GPIO_PIN_RESET) {
+			if (HAL_GetTick() - preTime >= 5000) break;
 		}
 		HAL_Delay(30);
-		btCounter++;
-		__HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_12); // xóa cờ ngắt
+		btCount++;
+
+		__HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_12); // EXTI->PR |= GPIO_PIN_0;
 	}
 }
 /* USER CODE END 0 */
@@ -76,6 +77,7 @@ HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
   */
 int main(void)
 {
+
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
@@ -99,7 +101,6 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
