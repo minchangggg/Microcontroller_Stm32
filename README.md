@@ -849,30 +849,60 @@ Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương
 
 > https://www.laptrinhdientu.com/2021/09/STM2.html
 
-## I. Clock Signal (Tín hiệu Clock hay Xung Clock)
-### Xung clock là gì? Xung clock dùng để làm gì?
+## 1. Khái niệm Xung clock là gì? Xung clock dùng để làm gì?
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/427bfc18-512f-4d1b-a840-ab8f255db57d)
 
-- Trong vấn đề logic, chỉ có 2 khái niệm đúng (true) hoặc sai (false). Cũng như vậy, trong kỹ thuật logic, tín hiệu có dạng mức "cao" (H) và mức "thấp" (L) hay còn gọi là mức "1" & mức "0". Để có tín hiệu như vậy, linh kiện phải có trạng thái "dẫn" hoặc "không dẫn" -> cần có một tín hiệu để điều khiển. Trong kỹ thuât logic, người ta sử dụng tín hiệu dạng xung (có mức cao và mức thấp) để làm việc điều khiển đó. Tín hiệu này được gọi là clock (xung nhịp).- Như vậy có thể thấy, clock có ảnh hưởng đến việc truyền dẫn tín hiệu. Cụ thể là tần số clock càng cao, thì lượng dữ liệu (tín hiệu) được truyền tải càng nhanh.
-- Đối với những hệ thống thiết kế hướng đồng bộ -> sử dụng chung 1 xung nhịp (Global clock) -> cho tất cả các thành phần trên đó giao tiếp trao đổi dữ liệu, thu các dữ liệu chính xác và được điều khiển đồng bộ với nhau.
+- Trong vấn đề logic, chỉ có 2 khái niệm đúng (true) hoặc sai (false). Cũng như vậy, trong kỹ thuật logic, tín hiệu có dạng mức "cao" (H) và mức "thấp" (L) hay còn gọi là mức "1" & mức "0". Để có tín hiệu như vậy, linh kiện phải có trạng thái "dẫn" hoặc "không dẫn" -> cần có một tín hiệu để điều khiển. Trong kỹ thuât logic, người ta sử dụng tín hiệu dạng xung (có mức cao và mức thấp) để làm việc điều khiển đó. Tín hiệu này được gọi là clock (xung nhịp).
+- Mặt khác, tất cả các thiết bị IC số đều cần một cách để đồng bộ hoạt động của các mạch điện bên trong IC hoặc để đồng bộ IC với các mạch khác ở bên ngoài khi giao tiếp với nhau. Và tín hiệu clock đã được sử dụng cho mục đích này. Tín hiệu clock là một tín hiệu dao động định kỳ, với thông số quan trọng nhất mà chúng ta thường biết đến là tần số, được thể hiện bằng đơn vị Hertz. Người ta thường ví tín hiệu clock giống như nhịp tim của thiết bị điện tử.
 - Như vậy có thể thấy, clock có ảnh hưởng đến việc truyền dẫn tín hiệu. **Tần số clock càng cao, thì lượng dữ liệu (tín hiệu) được truyền tải càng nhanh**.
+## 2. Thiết kế clock của mcu 
+> Clock secure: https://tapit.vn/tim-hieu-clock-secuity-system-css-vi-dieu-khien-stm32-qua-vi-du-thuc-te/
+
+- Tần số clock bên trong vi điều khiển liên quan trực tiếp đến **hiệu năng** và **mức độ tiêu thụ năng lượng** bên trong vi điều khiển (hiệu năng cao -> mức độ tiêu thụ năng lương cao, và ngược lại).
+- Điều này đòi hỏi clock phải được thiết kế để có thể lựa chọn các nguồn cung cấp clock khác nhau.
+- Clock phải được tổ chức theo một cấu trúc phân cấp
+- Phải được thiết kế để có thể thực hiện được việc bật/tắt
+- Cấu hình tốc độ riêng biệt cho các khối khác nhau bên trong vi điều khiển.
+
+*Công suất tiêu thụ của một MCU phụ thuộc vào các yếu tố*
+
+> Năng lượng tiêu thụ: https://tapit.vn/co-cong-suat-va-nang-luong-tieu-thu-tren-mcu/
+
+		+ Kích cỡ của MCU: Công nghệ sử dụng, số lượng transistor, các ngoại vi được tích hợp bên trong vi điều khiển càng nhiều thì càng xuất hiện nhiều CMOS.
+		+ Điện áp cung cấp cho MCU (VDD): Công suất sử dụng của các CMOS tỉ lệ thuật với bình phương điện áp VDD, cho nên có thể giảm được điện năng tiêu thụ bằng cách hạ thấp điện áp VDD.
+		+ Tần số clock: Công suất tiêu thụ có thể được giảm đi bằng cách giảm tần số hoạt động của vi điều khiển (sử dụng tần số phù hợp với yêu cầu của ứng dụng).
+		+ Chế độ hoạt động: Vi điều khiển cung cấp nhiều chế độ hoạt động tương ứng với nhiều mức tiêu hao năng lượng khác nhau bằng cách điều khiển khối nguồn hoặc bộ giao động đến CPU hay các ngoại vi
   
-## II. Clock Tree là gì ?
-![image](https://github.com/minchangggg/Stm32/assets/125820144/284412b2-9108-4bae-9192-77f508257d97)
+## 3. Nguồn cung cấp clock 
+![image](https://github.com/minchangggg/Stm32/assets/125820144/73d77dc0-db3a-4864-87bb-37423a645f58)
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/93e5f755-d9f3-4559-ba67-0d5ae82b6c5c)
+### a. Gồm 2 nhánh lớn là: High Speed (MHz) và Low Speed (KHz)
+#### High Speed - HS (MHz) : Nguồn cung cấp chính cho mcu
++ Bộ dao động nội RC -> **HSI** (High Speed Internal)
++ Bộ dao động thạch anh bên ngoài -> **HSE** (High Speed External)
+#### Low Speed - LS (KHz) : Sử dụng cho RTC (real-time clock) và IWDG (Independent Watchdog Timer)
++ Bộ dao động nội RC TỐC ĐỘ THẤP chuyên dụng -> **LSI** (Low Speed Internal)
++ Bộ dao động thạch anh bên ngoài TỐC ĐỘ THẤP -> **LSE** (Low Speed External)
 
-- Trong các nguồn dao động cung cấp cho STM32 hoạt động bao gồm có :  
-High Speed Internal (HSI : Xung nội tốc độ cao) 
-High Speed External (HSE : Xung ngoại tốc độ cao).
+### b. Sử dung Bộ dao động ngoại thạch anh hay Bộ dao động nội RC 
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/e2bc48b3-658f-4302-92b6-2a4158d1c340)
+
 - Có nhiều lý do ta sẽ sử dung xung ngoại thay cho xung nội như khi thạch anh ngoài có thể cung cấp dao động cao hơn nguồn xung nội, giúp thu được số lieu chính xác hơn khi giao tiếp với ngoại vi đo nhiệt độ cao hơn rất nhiều so với 25 độ C.
 - Hay như trong một vài trường hợp phải giao tiếp với ngoại vi chỉ có thể hoạt động ở một tần số xác định.
-- Bên cạnh nguồn xung tốc độ cao ta còn có Low Speed External (LSE : xung ngoại tốc độ thấp) và Low Speed Internal (LSI : xung nội tốc độ thấp) để điều khiển ngoại vi Real Time Clock (RTC) và Independent Watchdog (IWDT).
 
-- **Một mạng lưới phức tạp chịu trách nhiệm truyền tín hiệu dao động bên trong STM32 được gọi là Clock Tree**. Clock tree sử dung nhiều bộ Phase-Locked Loops (PLL) và Prescalers để tăng / giảm tần số nguồn khi cần thiết.
+### 4. Clock Tree là gì ?
+![image](https://github.com/minchangggg/Stm32/assets/125820144/284412b2-9108-4bae-9192-77f508257d97)
+
+- **Một mạng lưới phức tạp chịu trách nhiệm truyền tín hiệu dao động bên trong STM32 được gọi là Clock Tree**.
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/dee89e18-373b-4eab-9fd5-a41eb6cb9030)
+
+- Clock tree sử dung nhiều bộ Phase-Locked Loops (PLL) và Prescalers để tăng / giảm tần số nguồn khi cần thiết.
 - Lý do chúng ta cần nhiều bộ chia tần số nguồn là để đảm bảo khả năng hoạt động cũng như giảm thiểu năng lượng tiêu thụ ở những chắc năng không cần thiết.
 - Cấu hình ClockTree sẽ được thực hiện qua một thiết bị ngoại vi có tên là Reset and Clock Control (RCC),  và nó sẽ đựợc thực hiện qua 3 bước :
-1. Chọn sử dung HSI hay HSE.
-2. Nếu nguồn cung cấp dao động không đủ so với nhu cầu tốc độ dao động của hệ thống, ta sẽ điều chỉnh thông số của PLL chính để khởi tạo xung PLL (PLLCLK).  Nếu không có thể bỏ qua bước này.
-3. Cấu hình System Clock Switch (SW) với nguồn dao động ca
+  
+		1. Chọn sử dung HSI hay HSE.
+		2. Nếu nguồn cung cấp dao động không đủ so với nhu cầu tốc độ dao động của hệ thống, ta sẽ điều chỉnh thông số của PLL chính để khởi tạo xung PLL (PLLCLK).  Nếu không có thể bỏ qua bước này.
+		3. Cấu hình System Clock Switch (SW) với nguồn dao động ca
 
