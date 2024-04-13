@@ -906,3 +906,39 @@ Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương
 		2. Nếu nguồn cung cấp dao động không đủ so với nhu cầu tốc độ dao động của hệ thống, ta sẽ điều chỉnh thông số của PLL chính để khởi tạo xung PLL (PLLCLK).  Nếu không có thể bỏ qua bước này.
 		3. Cấu hình System Clock Switch (SW) với nguồn dao động ca
 
+--------------------------------------------------------------------------------------------------------------------------------
+
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/23cc1482-2554-4368-9f8e-fc14f1d0d9b0">
+
+> https://fr.scribd.com/upload-document?archive_doc=236018793
+> 
+> file:///C:/Users/tnmtr/Downloads/533355187-16-Timer-C%C6%A1-B%E1%BA%A3n-Va-Cac-Ch%E1%BA%BF-%C4%90%E1%BB%99-C%E1%BB%A7a-Timer.pdf
+> 
+> Timer là một loại ngoại vi được tích hợp ở hầu hết các vi điều khiển, cung cấp cho người dùng nhiều ứng dụng như xác định chính xác một khoảng thời gian, đo – đếm xung đầu vào, điều khiển dạng sóng đầu ra, băm xung….
+
+## 1. Các loại của timer
+Dòng vi điều khiển STM32 có ba loại Timer:
+
++ Basic Timer: là loại Timer đơn giản và dễ sử dụng nhất, chỉ có chức năng đếm và thường được dùng để tạo cơ sở thời gian.
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/09020758-8fbb-4e69-8538-1588784c84fe)
+
++ General Purpose Timer: là loại Timer nhiều tính năng hơn Basic Timer, có đầy đủ các tính năng của một bộ định thời như đếm thời gian, tạo xung PWM, xử lí tín hiệu vào, so sánh đầu ra, …
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/216e8c0c-d86d-4396-ac89-d0ad40033c65)
+
++ Advanced Timer: đây là loại Timer nâng cao, mang đầy đủ đặc điểm của General Purpose Timer, ngoài ra còn có nhiều tính năng khác và độ chính xác cao hơn. Thường được sử dụng để làm bộ đếm thời gian cho hệ thống.
+  
+![image](https://github.com/minchangggg/Stm32/assets/125820144/b6e0c65c-d2a2-4754-a408-efb4a2d79cbd)
+
+## 2. General Purpose Timer
+![image](https://github.com/minchangggg/Stm32/assets/125820144/ec4765bb-cfe2-4398-ac73-a9f4cbfebaf1)
+
+// Bộ chia tần PSC, thanh ghi đếm CNT, thanh ghi tự động nạp lại ARR, yêu cầu ngắt mỗi khi cập nhật lại CNT (sự kiện tràn).
+// Ứng dụng của khối Time base giống như tên của nó, tạo ra 1 khoản thời gian cơ sở định kì để làm 1 việc gì đó mà không cần sử dụng delay - cpu vẫn có thể làm việc khác.
+// Thực hành tính năng timebase với việc cấu hình và viết code đảo trạng thái LED.
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/9e313071-0fdb-4773-969f-11797069fa66">
+
