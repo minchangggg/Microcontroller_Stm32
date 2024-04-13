@@ -910,6 +910,8 @@ Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/23cc1482-2554-4368-9f8e-fc14f1d0d9b0">
 
+> https://www.st.com/resource/en/reference_manual/cd00171190-stm32f101xx-stm32f102xx-stm32f103xx-stm32f105xx-and-stm32f107xx-advanced-arm-based-32-bit-mcus-stmicroelectronics.pdf
+>
 > https://fr.scribd.com/upload-document?archive_doc=236018793
 > 
 > file:///C:/Users/tnmtr/Downloads/533355187-16-Timer-C%C6%A1-B%E1%BA%A3n-Va-Cac-Ch%E1%BA%BF-%C4%90%E1%BB%99-C%E1%BB%A7a-Timer.pdf
@@ -933,6 +935,8 @@ Dòng vi điều khiển STM32 có ba loại Timer:
 
 ## 2. General Purpose Timer
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/ec4765bb-cfe2-4398-ac73-a9f4cbfebaf1)
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/cab45c30-5566-4814-b93f-7a18a6cd09a5)
 
 // Bộ chia tần PSC, thanh ghi đếm CNT, thanh ghi tự động nạp lại ARR, yêu cầu ngắt mỗi khi cập nhật lại CNT (sự kiện tràn).
 // Ứng dụng của khối Time base giống như tên của nó, tạo ra 1 khoản thời gian cơ sở định kì để làm 1 việc gì đó mà không cần sử dụng delay - cpu vẫn có thể làm việc khác.
