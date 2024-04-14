@@ -952,6 +952,8 @@ Ngoại trừ các Basic Timer chỉ có hoạt động cơ bản là đếm, c�
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/6450db12-112c-4984-89d5-1f40932ecf58)
 
+![image](https://github.com/minchangggg/Stm32/assets/125820144/47531b71-fba6-4dc2-96a0-e1936dc060d4)
+
 ### 1. Cấu trúc cơ bản của một bộ Timer
 • Bộ đếm (Giá trị được lưu ở thanh ghi Counter Register)
 • Giá trị Auto Reload (Giá trị được lưu ở thanh ghi Auto Reload)
