@@ -1,4 +1,3 @@
-## Ex1: 
 ### Đề bài: 
 Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit. 
 ### Configuration
@@ -19,16 +18,3 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 ### Test
 
 https://github.com/minchangggg/Stm32/assets/125820144/c18d0177-5a58-4c30-bc3d-e0d753293f3b
-
-## Ex2: 
-### Đề bài
-Led báo trạng thái của thiết bị:
-
-      Mode 1: nháy 1000ms
-      Mode 2: nháy 200ms
-      Mode 3: nháy 500ms
-
-+ Ban đầu Led ở Mode 1. Mỗi khi nhấn nút chuyển mode: 1->2->3->1->2->...
-+ Yêu cầu sử dụng ngắt ngoài với nút nhấn
-+ Yêu cầu dùng timer với Timebase = 100ms
-
