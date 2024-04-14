@@ -31,7 +31,9 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define ledBlink_1000ms 1
+#define ledBlink_200ms 2
+#define ledBlink_500ms 3
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -43,8 +45,9 @@
 TIM_HandleTypeDef htim2;
 
 /* USER CODE BEGIN PV */
-uint8_t ledMode = 1;
+uint8_t ledMode = ledBlink_1000ms;
 uint8_t btCount = 0;
+uint8_t timeCount = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -60,10 +63,12 @@ static void MX_TIM2_Init(void);
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 	if (GPIO_Pin == GPIO_PIN_12) {
-		if (ledMode == 1 || ledMode == 2) ledMode++;
-		else ledMode = 1;
+		if (ledMode == ledBlink_1000ms) ledMode = ledBlink_200ms;
+		else if (ledMode == ledBlink_200ms) ledMode = ledBlink_500ms;
+		else ledMode = ledBlink_1000ms;
 
-		btCount = 0;
+		btCount++;
+		timeCount = 0;
 
 		HAL_Delay(30);
 		uint32_t preTime = HAL_GetTick();
@@ -78,19 +83,19 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	btCount++;
+	timeCount++;
 
-	if ((btCount==10) && (ledMode==1)){
+	if ((timeCount==10) && (ledMode==ledBlink_1000ms)){
 		HAL_GPIO_TogglePin (GPIOC, GPIO_PIN_13);
-		btCount = 0;
+		timeCount = 0;
 	}
-	else if ((btCount==2) && (ledMode==2)){
+	else if ((timeCount==2) && (ledMode==ledBlink_200ms)){
 		HAL_GPIO_TogglePin (GPIOC, GPIO_PIN_13);
-		btCount = 0;
+		timeCount = 0;
 	}
-	if ((btCount==5) && (ledMode==3)){
+	if ((timeCount==5) && (ledMode==ledBlink_500ms)){
 		HAL_GPIO_TogglePin (GPIOC, GPIO_PIN_13);
-		btCount = 0;
+		timeCount = 0;
 	}
 }
 /* USER CODE END 0 */
