@@ -1037,7 +1037,7 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 
 > https://mecsu.vn/ho-tro-ky-thuat/moi-2022-pwm-la-gi-nguyen-ly-hoat-dong-pwm.rP0
 
-## Khái niệm PWM
+## I. Khái niệm PWM
 - PWM viết tắt của Pulse Width Modulation, có nghĩa là phương pháp điều chỉnh điện áp tải, hay hiểu đơn giản hơn đây là phương pháp điều chỉnh, thay đổi điện áp tải ra bằng việc thay đổi độ rộng của chuỗi xung vuông, từ đó có sự thay đổi điện áp.
 - Tại sao nên dùng PWM? Dùng PWM để điều chỉnh cường độ dòng điện sẽ hiệu quả hơn và cũng tiết kiệm hơn. Các phương pháp điều chỉnh dòng điện khác rất tốn kém và phức tạp.
 
@@ -1052,7 +1052,7 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 + Mode1: Nếu sử dụng chế độ đếm lên thì ngõ ra sẽ ở mức logic 1 khi CNT <CCR và ngược lại, ở mức 0 nếu CNT>CCR.  Nếu sử dụng chế độ đếm xuống, đầu ra sẽ ở mức 0 khi CNT > CCR và ngược lại, ở mức 1 khi CNT < CCR. 
 + Mode2: Nếu sử dụng chế độ đếm lên thì ngõ ra sẽ ở mức logic 0 khi CNT <CCR và ngược lại, ở mức 1 nếu CNT>CCR.  Nếu sử dụng chế độ đếm xuống, đầu ra sẽ ở mức 1 khi CNT > CCR và ngược lại, ở mức 0 khi CNT<CCR.
   
-## Tính toán thông số cơ bản 
+## II. Tính toán thông số cơ bản 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/7f6e6685-e098-4233-9a90-1eeade71060c)
 
 ### 1.
@@ -1078,11 +1078,53 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 + Chọn PSC = 15 -> F_CNT = F_APB_TIMER2 / (PSC+1) = 16MHz/16 = 1MHz -> T_CNT = 1/F_CNT = 10^-6 
 + 200 * 10^-6 = 10^-6  * (ARR+1) -> ARR = 199
 + CRR/(ARR+1) * 100% = 30% -> CRR = 60
+  
+--------------------------------------------------------------------------------------------------------------------------------
 
-#1 Tại sao nên dùng PWM?
-Dùng PWM để điều chỉnh cường độ dòng điện sẽ hiệu quả hơn và cũng tiết kiệm hơn. Các phương pháp điều chỉnh dòng điện khác rất tốn kém và phức tạp.
 
-#2 Nguyên lý hoạt động PWM
-PWM hoạt động theo nguyên tắc đóng ngắt có chu kỳ của nguồn của tải.  Khi van G mở, toàn bộ điện áp được dùng cho tải. Khi van đóng, tải bị cắt nguồn điện áp.
 
-Vì vậy, trong suốt chu kỳ đóng mở van G này, tải sẽ có lúc nhận được toàn bộ nguồn điện áp, có lúc nhận được một phần và cũng có lúc hoàn toàn không nhận được gì.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/949972d7-a29b-4992-8cc3-070222dfb177">
+
+> https://tapit.vn/chuc-nang-adc-su-dung-vi-dieu-khien-stm32f103c8t6/
+>
+> Trong các ứng dụng vi điều khiển – hệ thống nhúng, bộ chuyển đổi tương tự-số (ADC) là 1 thành phần rất quan trọng để có thể chuyển đổi các dữ liệu dạng analog từ môi trường (nhiệt độ, độ ẩm, độ sáng,…) sang dạng digital để vi điều khiển có thể xử lý được.
+> STM32F103C8 có tích hợp sẵn các bộ chuyển đổi ADC với độ phân giải 12bit. Có 12 kênh cho phép đo tín hiệu từ 10 nguồn bên ngoài và 2 nguồn nội bên trong.
+
+## I. Tổng quan về cảm biến 
+Gồm có 2 loại cảm biến chính:
+- Cảm biến có ngõ ra tương tự Analog. Trong đó lại chia làm 2 loại là:
+	+ Điện áp (0V - 3.3V ; 0V - 5V ; 0V - 10V). VD: cảm biến nhiệt độ 
+ 	+ Dòng điện (0/4 - 20/24 mA)
+- Cảm biến có ngõ ra số Digital
+	+ Logic high, logic low (mạch so sánh)
+ 	+ Các chuẩn giao tiếp UART / I2C / SPI
+	+ Xung (Pulse)
+
+## II. 
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/e47dace1-c142-42cc-936f-5019d0fd8aac">
+
+
