@@ -915,10 +915,12 @@ Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương
 > https://fr.scribd.com/upload-document?archive_doc=236018793
 > 
 > file:///C:/Users/tnmtr/Downloads/533355187-16-Timer-C%C6%A1-B%E1%BA%A3n-Va-Cac-Ch%E1%BA%BF-%C4%90%E1%BB%99-C%E1%BB%A7a-Timer.pdf
+>
+> https://tapit.vn/tim-hieu-va-su-dung-timer-tren-stm32f411/
 > 
 > Timer là một loại ngoại vi được tích hợp ở hầu hết các vi điều khiển, cung cấp cho người dùng nhiều ứng dụng như xác định chính xác một khoảng thời gian, đo – đếm xung đầu vào, điều khiển dạng sóng đầu ra, băm xung….
 
-## 1. Các loại của timer
+## I. Các loại của timer
 Dòng vi điều khiển STM32 có ba loại Timer:
 
 + Basic Timer: là loại Timer đơn giản và dễ sử dụng nhất, chỉ có chức năng đếm và thường được dùng để tạo cơ sở thời gian.
@@ -933,10 +935,30 @@ Dòng vi điều khiển STM32 có ba loại Timer:
   
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/b6e0c65c-d2a2-4754-a408-efb4a2d79cbd)
 
-## 2. General Purpose Timer
+## II. General Purpose Timer
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/ec4765bb-cfe2-4398-ac73-a9f4cbfebaf1)
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/cab45c30-5566-4814-b93f-7a18a6cd09a5)
+![image](https://github.com/minchangggg/Stm32/assets/125820144/6450db12-112c-4984-89d5-1f40932ecf58)
+
+### 1. Time-base unit (Khối cơ sở của bộ Timer):  
+- Thành phần chính của timer chính là bộ đếm – counter (CNT), với các ngưỡng trên được thiết lập bởi thanh ghi Auto Reload (ARR). Counter có thể đếm lên lên hoặc đếm xuống. Clock đưa vào bộ đếm có thể được chia bởi một bộ chia tần – Prescaler.
+Người dùng có thể thực hiện các lệnh đọc, ghi vào các thanh ghi CNT, ARR và PSC để cấu hình cho khối cơ sở của mỗi bộ Timer.
+– Counter Register (TIMx_CNT): Khi hoạt động, thanh ghi này tăng hoặc giảm giá trị theo mỗi xung clock đầu vào. Tùy vào bộ timer mà counter này có thể là 16bit hoặc 32bit.
+– Prescaler Register (TIMx_PSC): Giá trị của thanh ghi bộ chia tần (16bit) cho phép người dùng cấu hình chia tần số đầu vào (CK_PSC) cho bất kì giá trị nào từ [1- 65536]. Sử dụng kết hợp bộ chia tần của timer và của RCC giúp chúng ta có thể thay đổi được thời gian của mỗi lần CNT thực hiện đếm, giúp tạo ra được những khoảng thời gian, điều chế được độ rộng xung phù hợp với nhu cầu.
+– Auto-Reload Register (TIMx_ARR): Giá trị của ARR được người dùng xác định sẵn khi cài đặt bộ timer, làm cơ sở cho CNT thực hiện nạp lại giá trị đếm mỗi khi tràn (overflow khi đếm lên – CNT vượt giá trị ARR, underflow khi đếm xuống – CNT bé hơn 0).Tùy vào bộ timer mà counter này có thể là 16bit hoặc 32bit.
+### 2. Các chế độ hoạt động:
+– Các chế độ đếm: Mỗi bộ timer đều hỗ trợ 3 chế chế độ đếm sau: 
++ Upcounting mode (chế độ đếm lên): Ở chế độ này, CNT đếm lên từ 0 (hoặc một giá trị nào đó được người dùng ghi vào CNT trước) đến giá trị của thanh ghi ARR, sau đó CNT bắt đầu lại từ 0. Lúc này có sự kiện tràn counter – overflow, sự kiện này có thể tạo yêu cầu ngắt nếu người dùng cấu hình cho phép ngắt. Một ví dụ với ARR = 36:
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/f1d95e3e-4158-4003-8a82-86e1dbb2d8a1)
+
++ Downcouting mode (chế độ đếm xuống): Ở chế độ này, CNT đếm xuống từ giá trị thanh ghi ARR (hoặc 1 giá trị nào đó do người dùng ghi trực tiếp vào CNT trước) đến 0, sau đó CNT bắt đầu lại từ giá trị ARR, lúc này có sự kiện tràn counter – underflow, sự kiện này có thể tạo yêu cầu ngắt nếu người dùng cấu hình cho phép ngắt. Một ví dụ với ARR = 36:
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/b8122242-a3d3-468c-b991-49e23bd15eb3)
+
++ Center-Aligned mode (chế độ đếm lên và xuống): Ở chế độ này, counter sẽ đếm lên từ 0 (hoặc một giá trị nào đó được người dùng ghi vào CNT trước) đến giá trị thanh ghi ARR – 1, lúc này xuất hiện sự kiện tràn counter – overflow, tiếp theo CNT  sẽ đếm xuống từ ARR tới 1, lúc này có sự kiện tràn counter – underflow, sau đó CNT sẽ về giá trị 0 và bắt đầu lại quá trình đếm lên. Một ví dụ với ARR = 06:
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/bc6f821c-97f8-48c4-9471-1b5251ddb4b7)
 
 // Bộ chia tần PSC, thanh ghi đếm CNT, thanh ghi tự động nạp lại ARR, yêu cầu ngắt mỗi khi cập nhật lại CNT (sự kiện tràn).
 // Ứng dụng của khối Time base giống như tên của nó, tạo ra 1 khoản thời gian cơ sở định kì để làm 1 việc gì đó mà không cần sử dụng delay - cpu vẫn có thể làm việc khác.
