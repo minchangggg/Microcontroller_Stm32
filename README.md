@@ -920,7 +920,8 @@ Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương
 > 
 > Timer là một loại ngoại vi được tích hợp ở hầu hết các vi điều khiển, cung cấp cho người dùng nhiều ứng dụng như xác định chính xác một khoảng thời gian, đo – đếm xung đầu vào, điều khiển dạng sóng đầu ra, băm xung….
 
-## I. Các loại của timer
+## I. Giới thiệu chung về timer
+### 1. Các loại của timer
 Dòng vi điều khiển STM32 có ba loại Timer:
 
 + Basic Timer: là loại Timer đơn giản và dễ sử dụng nhất, chỉ có chức năng đếm và thường được dùng để tạo cơ sở thời gian.
@@ -935,19 +936,36 @@ Dòng vi điều khiển STM32 có ba loại Timer:
   
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/b6e0c65c-d2a2-4754-a408-efb4a2d79cbd)
 
-## II. General Purpose Timer
+### 2. Một vài chức năng thường xuyên được sử dụng của Timer:
+Ngoại trừ các Basic Timer chỉ có hoạt động cơ bản là đếm, các Timers còn lại của vi điều khiển còn có nhiều chức năng khác, điển hình như:
+
+• PWM Generation: Tính năng điều chế độ rộng xung (băm xung).
+• One Pulse Mode: Tạo ra một xung duy nhất với độ rộng có thể cấu hình được, CNT sẽ tự động dừng khi có sự kiện tràn.
+• Input Capture: Chế độ này phát hiện và lưu lại sự xuất hiện sự thay đổi mức logic (sườn lên/ sườn xuống) của tín hiệu. Từ đó, ta có thể biết được khoảng thời gian giữa hai lần có sườn lên/ sườn xuống.
+• Output Compare: Đây là chế độ giúp tạo ra các sự kiện(ví dụ như ngắt) khi CNT đạt đến giá trị được lưu trong các thanh ghi TIMx_CCMRx (capture/compare mode register). Ứng dụng phổ biến nhất của Output Compare là tạo ra nhiều xung PWM với các tần số khác nhau trên cùng một Timer.
+
+### 3. Sơ đồ khối General Purpose Timer
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/ec4765bb-cfe2-4398-ac73-a9f4cbfebaf1)
 
+## II. Time-base unit (Khối cơ sở của bộ Timer)
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/6450db12-112c-4984-89d5-1f40932ecf58)
 
-### 1. Time-base unit (Khối cơ sở của bộ Timer):  
-- Thành phần chính của timer chính là bộ đếm – counter (CNT), với các ngưỡng trên được thiết lập bởi thanh ghi Auto Reload (ARR). Counter có thể đếm lên lên hoặc đếm xuống. Clock đưa vào bộ đếm có thể được chia bởi một bộ chia tần – Prescaler.
+### 1. Cấu trúc cơ bản của một bộ Timer
+• Bộ đếm (Giá trị được lưu ở thanh ghi Counter Register)
+• Giá trị Auto Reload (Giá trị được lưu ở thanh ghi Auto Reload)
+• Bộ chia tần (Giá trị được lưu ở thanh ghi Prescaler)
+
+-> Thành phần chính của timer chính là bộ đếm – counter (CNT), với các ngưỡng trên được thiết lập bởi thanh ghi Auto Reload (ARR). Counter có thể đếm lên lên hoặc đếm xuống. Clock đưa vào bộ đếm có thể được chia bởi một bộ chia tần – Prescaler.
+
+### 2. Các thanh ghi quan trọng:
 Người dùng có thể thực hiện các lệnh đọc, ghi vào các thanh ghi CNT, ARR và PSC để cấu hình cho khối cơ sở của mỗi bộ Timer.
-– Counter Register (TIMx_CNT): Khi hoạt động, thanh ghi này tăng hoặc giảm giá trị theo mỗi xung clock đầu vào. Tùy vào bộ timer mà counter này có thể là 16bit hoặc 32bit.
-– Prescaler Register (TIMx_PSC): Giá trị của thanh ghi bộ chia tần (16bit) cho phép người dùng cấu hình chia tần số đầu vào (CK_PSC) cho bất kì giá trị nào từ [1- 65536]. Sử dụng kết hợp bộ chia tần của timer và của RCC giúp chúng ta có thể thay đổi được thời gian của mỗi lần CNT thực hiện đếm, giúp tạo ra được những khoảng thời gian, điều chế được độ rộng xung phù hợp với nhu cầu.
-– Auto-Reload Register (TIMx_ARR): Giá trị của ARR được người dùng xác định sẵn khi cài đặt bộ timer, làm cơ sở cho CNT thực hiện nạp lại giá trị đếm mỗi khi tràn (overflow khi đếm lên – CNT vượt giá trị ARR, underflow khi đếm xuống – CNT bé hơn 0).Tùy vào bộ timer mà counter này có thể là 16bit hoặc 32bit.
-### 2. Các chế độ hoạt động:
+• Auto Reload(TIMx_ARR): Giá trị của ARR được người dùng xác định sẵn khi cài đặt bộ timer, làm cơ sở cho CNT thực hiện nạp lại giá trị đếm mỗi khi tràn (overflow khi đếm lên – CNT vượt giá trị ARR, underflow khi đếm xuống – CNT bé hơn 0).Tùy vào bộ timer mà counter này có thể là 16bit hoặc 32bit.
+• Counter Register(TIMx_CNT): Lưu giá trị đếm Counter (CNT), tăng hoặc giảm mỗi nhịp xung clock của Timer. Giá trị của Counter luôn nằm trong khoảng [0; ARR]. Nếu ngoài khoảng đó, Timer sẽ thực hiện nạp lại giá trị CNT như ban đầu và tiếp tục hoạt động. Tùy vào mỗi Timer mà CNT và ARR có cỡ 16 hoặc 32 bit.
+• Prescaler (TIMx_PSC): Giá trị của thanh ghi bộ chia tần (16bit) cho phép người dùng cấu hình chia tần số đầu vào (CK_PSC) cho bất kì giá trị nào từ [1- 65536]. Sử dụng kết hợp bộ chia tần của timer và của RCC giúp chúng ta có thể thay đổi được thời gian của mỗi lần CNT thực hiện đếm, giúp tạo ra được những khoảng thời gian, điều chế được độ rộng xung phù hợp với nhu cầu.
+
+### 3. Các chế độ hoạt động:
 – Các chế độ đếm: Mỗi bộ timer đều hỗ trợ 3 chế chế độ đếm sau: 
+
 + Upcounting mode (chế độ đếm lên): Ở chế độ này, CNT đếm lên từ 0 (hoặc một giá trị nào đó được người dùng ghi vào CNT trước) đến giá trị của thanh ghi ARR, sau đó CNT bắt đầu lại từ 0. Lúc này có sự kiện tràn counter – overflow, sự kiện này có thể tạo yêu cầu ngắt nếu người dùng cấu hình cho phép ngắt. Một ví dụ với ARR = 36:
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/f1d95e3e-4158-4003-8a82-86e1dbb2d8a1)
@@ -960,9 +978,32 @@ Người dùng có thể thực hiện các lệnh đọc, ghi vào các thanh g
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/bc6f821c-97f8-48c4-9471-1b5251ddb4b7)
 
-// Bộ chia tần PSC, thanh ghi đếm CNT, thanh ghi tự động nạp lại ARR, yêu cầu ngắt mỗi khi cập nhật lại CNT (sự kiện tràn).
-// Ứng dụng của khối Time base giống như tên của nó, tạo ra 1 khoản thời gian cơ sở định kì để làm 1 việc gì đó mà không cần sử dụng delay - cpu vẫn có thể làm việc khác.
-// Thực hành tính năng timebase với việc cấu hình và viết code đảo trạng thái LED.
+### 4. Tính toán các thông số cơ bản của timer
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/6450db12-112c-4984-89d5-1f40932ecf58)
+
+- F_PSC: Tần số cấp vào bộ chia tần
+- F_CNT: Tần số counter 
+- t : thời gian timebase mong muốn (thời gian timer tràn)
+- ARR: Thanh ghi do người dùng cấu hình, lựa chọn giá trị
+- PSC: Thanh ghi do người dùng cấu hình, lựa chọn giá trị
+  
+Note: 
++ Thanh ghi PSC quyết định giá trị chia. Nếu PSC = 0 thì chia 1; **PSC = PSC thì chia (PSC + 1)**
++ Counter sẽ tràn khi gặp giá trị bằng 0. Nếu ARR = 10 thì đếm 11 lần; **ARR = ARR thì đếm (ARR + 1) lần**
++ Giá trị của thanh ghi PSC và ARR là có giới hạn. Có độ rộng là n bit thì giá trị tối đa là (2^n) - 1. VD thanh ghi ARR có độ rộng là 16 bit thì có giá trị tối đa là 65535
+
+Cho tần số vào PSC là 8MHz 
+Tính toán PSC và ARR để thời gian tràn timer là 150ms
+
+Theo đề, ta có F_PSC = 8MHz, t = 150ms
+Chọn **PSC = 7999Hz** hay  PSC + 1 = 8KHz 
+
+	+) F_CNT = F_PSC/(PSC+1) = 8M/8K = 1KHz -> T_CNT = 1/F_CNT = 1ms
+	+) t = (ARR+1) * T_CNT <-> 150ms = (ARR+1) * 1ms -> ARR = 149
+
+
+
 
 --------------------------------------------------------------------------------------------------------------------------------
 
