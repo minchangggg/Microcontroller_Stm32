@@ -1035,3 +1035,58 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/9e313071-0fdb-4773-969f-11797069fa66">
 
+> https://mecsu.vn/ho-tro-ky-thuat/moi-2022-pwm-la-gi-nguyen-ly-hoat-dong-pwm.rP0
+
+## Khái niệm PWM
+- PWM viết tắt của Pulse Width Modulation, có nghĩa là phương pháp điều chỉnh điện áp tải, hay hiểu đơn giản hơn đây là phương pháp điều chỉnh, thay đổi điện áp tải ra bằng việc thay đổi độ rộng của chuỗi xung vuông, từ đó có sự thay đổi điện áp.
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/329fe9f3-195e-4d0f-b514-4bac6ab23899)
+
+> Duty cycle (D): phần trăm thời gian xung ở mức cao trong 1 chu kì xung 
+
+- PWM generation: Tính năng điều chế độ rộng xung cho phép tạo ra xung với tần số được xác định bởi giá trị của thanh ghi ARR, và chu kỳ nhiệm vụ (Duty cycle) được xác định bởi giá trị thanh ghi CCR.
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/7f6e6685-e098-4233-9a90-1eeade71060c)
+
++ Mode1: Nếu sử dụng chế độ đếm lên thì ngõ ra sẽ ở mức logic 1 khi CNT <CCR và ngược lại, ở mức 0 nếu CNT>CCR.  Nếu sử dụng chế độ đếm xuống, đầu ra sẽ ở mức 0 khi CNT > CCR và ngược lại, ở mức 1 khi CNT < CCR. 
++ Mode2: Nếu sử dụng chế độ đếm lên thì ngõ ra sẽ ở mức logic 0 khi CNT <CCR và ngược lại, ở mức 1 nếu CNT>CCR.  Nếu sử dụng chế độ đếm xuống, đầu ra sẽ ở mức 1 khi CNT > CCR và ngược lại, ở mức 0 khi CNT<CCR.
+  
+## Tính toán thông số cơ bản 
+### 1.
+### Đề bài:
++ Tính toán cấu hình để có được 1 tín hiệu PWM với thông số như sau: 
++ F = 10KHz; D = 50%. Biết F_APB_TIMER2 = 8MHz, dùng timer2, chế độ đếm lên
++ Cho biết PSC, ARR, CRR
+
+### Đáp án:
++ F = 10KHz -> T = 0.1ms = 100 * 10^-6
++ Chọn PSC = 7 -> F_CNT = F_APB_TIMER2 / (PSC+1) = 8MHz/8 = 1MHz -> T_CNT = 1/F_CNT = 10^-6 
++ 100 * 10^-6 = 10^-6  * (ARR+1) -> ARR = 99
++ CRR/ARR * 100% = 50% -> CRR = 50
+
+### 2.
+### Đề bài:
++ Tính toán cấu hình để có được 1 tín hiệu PWM với thông số như sau: 
++ F = 5KHz; D = 30%. Biết F_APB_TIMER2 = 16MHz, dùng timer2, chế độ đếm lên
++ Cho biết PSC, ARR, CRR
+
+### Đáp án:
++ F = 5KHz -> T = 0.2ms = 200 * 10^-6
++ Chọn PSC = 15 -> F_CNT = F_APB_TIMER2 / (PSC+1) = 16MHz/16 = 1MHz -> T_CNT = 1/F_CNT = 10^-6 
++ 200 * 10^-6 = 10^-6  * (ARR+1) -> ARR = 199
++ CRR/(ARR+1) * 100% = 30% -> CRR = 60
+
+
+
+
+
+
+
+
+#1 Tại sao nên dùng PWM?
+Dùng PWM để điều chỉnh cường độ dòng điện sẽ hiệu quả hơn và cũng tiết kiệm hơn. Các phương pháp điều chỉnh dòng điện khác rất tốn kém và phức tạp.
+
+#2 Nguyên lý hoạt động PWM
+PWM hoạt động theo nguyên tắc đóng ngắt có chu kỳ của nguồn của tải.  Khi van G mở, toàn bộ điện áp được dùng cho tải. Khi van đóng, tải bị cắt nguồn điện áp.
+
+Vì vậy, trong suốt chu kỳ đóng mở van G này, tải sẽ có lúc nhận được toàn bộ nguồn điện áp, có lúc nhận được một phần và cũng có lúc hoàn toàn không nhận được gì.
