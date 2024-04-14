@@ -9,8 +9,8 @@
 + Thực hành tạp project với chế độ 1 kênh 1 lần interrupt
 
 ### TÀI LIỆU
-Video ghi lại:https://youtu.be/ulEPFKebdYg
-Slide: https://docs.google.com/presentation/d/1I_UWwNtzSkh2V7y1r5L3AwBlNHwUohRe/edit?usp=sharing&ouid=109030928772764985009&rtpof=true&sd=true
++ Video ghi lại:https://youtu.be/ulEPFKebdYg
++ Slide: https://docs.google.com/presentation/d/1I_UWwNtzSkh2V7y1r5L3AwBlNHwUohRe/edit?usp=sharing&ouid=109030928772764985009&rtpof=true&sd=true
 
 
 ### BÀI TẬP
