@@ -16,6 +16,10 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/c161d0c3-29b4-44f4-ae66-45c3aec2c851)
 
+### Test
+
+https://github.com/minchangggg/Stm32/assets/125820144/c18d0177-5a58-4c30-bc3d-e0d753293f3b
+
 ## Ex2: 
 ### Đề bài
 Led báo trạng thái của thiết bị:
