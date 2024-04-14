@@ -1039,6 +1039,7 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 
 ## Khái niệm PWM
 - PWM viết tắt của Pulse Width Modulation, có nghĩa là phương pháp điều chỉnh điện áp tải, hay hiểu đơn giản hơn đây là phương pháp điều chỉnh, thay đổi điện áp tải ra bằng việc thay đổi độ rộng của chuỗi xung vuông, từ đó có sự thay đổi điện áp.
+- Tại sao nên dùng PWM? Dùng PWM để điều chỉnh cường độ dòng điện sẽ hiệu quả hơn và cũng tiết kiệm hơn. Các phương pháp điều chỉnh dòng điện khác rất tốn kém và phức tạp.
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/329fe9f3-195e-4d0f-b514-4bac6ab23899)
 
@@ -1046,12 +1047,14 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 
 - PWM generation: Tính năng điều chế độ rộng xung cho phép tạo ra xung với tần số được xác định bởi giá trị của thanh ghi ARR, và chu kỳ nhiệm vụ (Duty cycle) được xác định bởi giá trị thanh ghi CCR.
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/7f6e6685-e098-4233-9a90-1eeade71060c)
+![image](https://github.com/minchangggg/Stm32/assets/125820144/9b785752-6917-4977-8676-21369c8affa0)
 
 + Mode1: Nếu sử dụng chế độ đếm lên thì ngõ ra sẽ ở mức logic 1 khi CNT <CCR và ngược lại, ở mức 0 nếu CNT>CCR.  Nếu sử dụng chế độ đếm xuống, đầu ra sẽ ở mức 0 khi CNT > CCR và ngược lại, ở mức 1 khi CNT < CCR. 
 + Mode2: Nếu sử dụng chế độ đếm lên thì ngõ ra sẽ ở mức logic 0 khi CNT <CCR và ngược lại, ở mức 1 nếu CNT>CCR.  Nếu sử dụng chế độ đếm xuống, đầu ra sẽ ở mức 1 khi CNT > CCR và ngược lại, ở mức 0 khi CNT<CCR.
   
 ## Tính toán thông số cơ bản 
+![image](https://github.com/minchangggg/Stm32/assets/125820144/7f6e6685-e098-4233-9a90-1eeade71060c)
+
 ### 1.
 ### Đề bài:
 + Tính toán cấu hình để có được 1 tín hiệu PWM với thông số như sau: 
@@ -1075,13 +1078,6 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 + Chọn PSC = 15 -> F_CNT = F_APB_TIMER2 / (PSC+1) = 16MHz/16 = 1MHz -> T_CNT = 1/F_CNT = 10^-6 
 + 200 * 10^-6 = 10^-6  * (ARR+1) -> ARR = 199
 + CRR/(ARR+1) * 100% = 30% -> CRR = 60
-
-
-
-
-
-
-
 
 #1 Tại sao nên dùng PWM?
 Dùng PWM để điều chỉnh cường độ dòng điện sẽ hiệu quả hơn và cũng tiết kiệm hơn. Các phương pháp điều chỉnh dòng điện khác rất tốn kém và phức tạp.
