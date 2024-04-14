@@ -14,9 +14,6 @@
 Lời khuyên: Ôn lại thêm bài UART và có những so sánh với I2C.
 - Trong buổi học mình cũng đã có chia sẻ với mọi người thông tin của IC DS1307, một IC chức năng thời gian thực. Mọi người đã xác định được địa chỉ của IC, địa chỉ và chức năng của các thanh ghi bên trong IC. Mọi người đã biết cách IC lưu trữ thời gian và viết được hàm chuyển đổi BCD2DEC và DEC2BCD.
 
-### BÀI TẬP
-Yêu cầu thực hành: Viết được chương trình giao tiếp được với Module DS1302/ DS1307/ DS3231 để thực hiện chức năng cơ bản sau: Cài đặt thời gian cho IC (trong main, trước while 1), định kì 500ms đọc thanh ghi giây và chuyển đổi về mã decimal, gán cho 1 biến toàn cục. Debug để xem, sau đó phát triển thêm mã code để in dữ liệu lên UART hercules.
-
 ### TÀI LIỆU
 + Video ghi lại buổi học: https://youtu.be/vWEX-9h_By8
 + Tài liệu tham khảo chính: https://www.ti.com/lit/an/slva704/slva704.pdf
@@ -26,3 +23,6 @@ Yêu cầu thực hành: Viết được chương trình giao tiếp được v�
 https://tapit.vn/giao-thuc-i2c-va-giao-tiep-voi-cam-bien-nhiet-hong-ngoai-mlx90614/
 2. Giao tiếp I2C trên STM32F103 với module RTC DS3231
 https://tapit.vn/giao-tiep-i2c-tren-stm32f103-voi-module-rtc-ds3131/
+
+### BÀI TẬP
+Yêu cầu thực hành: Viết được chương trình giao tiếp được với Module DS1302/ DS1307/ DS3231 để thực hiện chức năng cơ bản sau: Cài đặt thời gian cho IC (trong main, trước while 1), định kì 500ms đọc thanh ghi giây và chuyển đổi về mã decimal, gán cho 1 biến toàn cục. Debug để xem, sau đó phát triển thêm mã code để in dữ liệu lên UART hercules.
