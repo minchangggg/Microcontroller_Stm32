@@ -945,9 +945,11 @@ Ngoại trừ các Basic Timer chỉ có hoạt động cơ bản là đếm, c�
 • Output Compare: Đây là chế độ giúp tạo ra các sự kiện(ví dụ như ngắt) khi CNT đạt đến giá trị được lưu trong các thanh ghi TIMx_CCMRx (capture/compare mode register). Ứng dụng phổ biến nhất của Output Compare là tạo ra nhiều xung PWM với các tần số khác nhau trên cùng một Timer.
 
 ### 3. Sơ đồ khối General Purpose Timer
+
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/ec4765bb-cfe2-4398-ac73-a9f4cbfebaf1)
 
 ## II. Time-base unit (Khối cơ sở của bộ Timer)
+
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/6450db12-112c-4984-89d5-1f40932ecf58)
 
 ### 1. Cấu trúc cơ bản của một bộ Timer
@@ -1002,8 +1004,30 @@ Chọn **PSC = 7999Hz** hay  PSC + 1 = 8KHz
 	+) F_CNT = F_PSC/(PSC+1) = 8M/8K = 1KHz -> T_CNT = 1/F_CNT = 1ms
 	+) t = (ARR+1) * T_CNT <-> 150ms = (ARR+1) * 1ms -> ARR = 149
 
+## III. Thực hành với timer (Đang cập nhật)
+### 1. Yêu cầu bài toán:
+Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit. 
 
+### 2. Công thức
+![image](https://github.com/minchangggg/Stm32/assets/125820144/efd8b60b-35c3-40c1-86dd-fe67725b3657)
 
+### 3. Áp dụng tính toán vào Configuration 
+
++ Clock Source: chọn Internal Clock (8Mhz như mình cấu hình ở trên) -> F[hệ_thống] = F_PSC = 8Mhz
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/3b8acfd3-315d-4b83-a021-584e70daaf09)
+
++ Chọn **Prescaler = PSC = 8KHz-1** => F[timer] = F_CNT = F_PSC/(PSC+1) = 8M/8K = 1KHz -> T[timer] = T_CNT = 1/F_CNT = 1/1K = 1ms
+
++ Tìm ARR (hay Counter Period)
+  
++ T[event] = T_CNT * (ARR+1) Mà để thay đổi trạng thái đèn LED mỗi 1 giây thì T[event] = 1000 ms = 1s
+  
+=> 1000ms = 1ms * (ARR+1) => **Counter Period = ARR = 999**
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/c161d0c3-29b4-44f4-ae66-45c3aec2c851)
+
+### 4. Code 
 
 --------------------------------------------------------------------------------------------------------------------------------
 
