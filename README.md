@@ -1083,13 +1083,82 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
   
 --------------------------------------------------------------------------------------------------------------------------------
 
+![image](https://github.com/minchangggg/Stm32/assets/125820144/811efbc6-08a4-49ba-9d93-fbbbda137025)
 
+> https://tapit.vn/truyen-thong-noi-tiep-trong-lap-trinh-vi-dieu-khien-giao-tiep-uart/
 
+## I. Tổng quát 
+### 1. Khái niệm
+- UART (Universal synchronous asynchronous receiver transmitter ) là một ngoại vi cơ bản của STM32 sử dụng 2 chân Rx và Tx để nhận và truyền dữ liệu.
+- UART truyền dữ liệu không đồng bộ, có nghĩa là không có tín hiệu để đồng bộ hóa đầu ra của các bit từ UART truyền đến việc lấy mẫu các bit bởi UART nhận.
+- Thay vì tín hiệu đồng bộ, UART truyền thêm các bit start và stop vào gói dữ liệu được chuyển. Các bit này xác định điểm bắt đầu và điểm kết thúc của gói dữ liệu để UART nhận biết khi nào bắt đầu đọc các bit.
+![image](https://github.com/minchangggg/Stm32/assets/125820144/e175ae03-5459-488d-9056-979055bcb800)
 
+### 2. Các thông số cơ bản trong truyền nhận UART :
+- Data Frame (khung truyền)
+- Baund rate (tốc độ baund)
 
+#### a. Data Frame (khung truyền)
 
+![image](https://github.com/minchangggg/Stm32/assets/125820144/51d96603-251f-48a6-b23e-8bdfc7be0843)
 
+- Data Frame: Khung truyền quy định về số bit trong mỗi lần truyền.
+- Start bit: là bit đầu tiên được truyền trong 1 Frame. Báo hiệu cho thiết bị nhận có một gói dữ liệu sắp đc truyền đến. Bit bắt buộc.
+- Data: dữ liệu cần truyền. Bit có trọng số nhỏ nhất LSB được truyền trước sau đó đến bit MSB.
+- Parity bit: kiểm tra dữ liệu truyền có đúng không. Bit chẵn lẻ là một cách để UART nhận cho biết liệu có bất kỳ dữ liệu nào đã thay đổi trong quá trình truyền hay không. Bit có thể bị thay đổi bởi bức xạ điện từ, tốc độ truyền không khớp hoặc truyền dữ liệu khoảng cách xa. Sau khi UART nhận đọc khung dữ liệu, nó sẽ đếm số bit có giá trị là 1 và kiểm tra xem tổng số là số chẵn hay lẻ. Nếu bit chẵn lẻ là 0 (tính chẵn), thì tổng các bit 1 trong khung dữ liệu phải là một số chẵn. Nếu bit chẵn lẻ là 1 (tính lẻ), các bit 1 trong khung dữ liệu sẽ tổng thành một số lẻ. Khi bit chẵn lẻ khớp với dữ liệu, UART sẽ biết rằng quá trình truyền không có lỗi. Nhưng nếu bit chẵn lẻ là 0 và tổng là số lẻ; hoặc bit chẵn lẻ là 1 và tổng số là chẵn, UART sẽ biết rằng các bit trong khung dữ liệu đã thay đổi.
+> Tìm hiểu error detection and correction + CRC check
+- Stop bit: là 1 hoặc các bit báo cho thiết bị rằng các bit đã được gửi xong. Thiết bị nhận sẽ tiến hành kiểm tra khung truyền nhằm đảm bảo tính đúng đắn của dữ liệu. Bit bắt buộc.
 
+=> Quá trình truyền dữ liệu diễn ra dưới dạng các gói dữ liệu, bắt đầu bằng một bit bắt đầu, đường mức cao được kéo xuống đất. Sau bit bắt đầu, năm đến chín bit dữ liệu truyền trong khung dữ liệu của gói, theo sau là bit chẵn lẻ tùy chọn để xác minh việc truyền dữ liệu thích hợp. Cuối cùng, một hoặc nhiều bit dừng được truyền ở nơi đường đặt ở mức cao. Như vậy là kết thúc một gói. 
+
+[Ex]
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/a356abde-7c71-40c5-ba1b-5078047231e0)
+
++ 1001111 = 79 = 'O'
++ 1001011 = 75 = 'K'
+  
+=> data truyền đi là OK  
+
+#### b. Baudrate (tốc độ baund)
+- Baudrate (tốc độ baund): Khoảng thời gian dành cho 1 bit được truyền. Phải được cài đặt giống nhau ở gửi và nhận. Một số Baud Rate thông dụng: 9600, 38400, 115200, 230400,…
+- UART là giao thức không đồng bộ, do đó không có đường clock nào điều chỉnh tốc độ truyền dữ liệu. Người dùng phải đặt cả hai thiết bị để giao tiếp ở cùng tốc độ. Tốc độ này được gọi là tốc độ truyền, được biểu thị bằng bit trên giây hoặc bps. Tốc độ truyền thay đổi đáng kể, từ 9600 baud đến 115200 và hơn nữa. Tốc độ truyền giữa UART truyền và nhận chỉ có thể chênh lệch khoảng 10% trước khi thời gian của các bit bị lệch quá xa.
+- Tốc độ baund càng cao thì tốc độ truyền/nhận dữ liệu càng nhanh.
+
+[Ex]
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/392c40ce-573d-4561-bfe7-db4caf0a00a2)
+
+-> 115200/(8+2) = 11520 byte dữ liệu (byte dữ liệu có thêm 2 bit là start bit và stop bit)
+
+**Tốc độ bit và tốc độ baud**
+
+- Có hai thuật ngữ thường dùng trong truyền số liệu là tốc độ bit (bit rate) và tốc độ baud (baud rate) thường bị nhầm lẫn. Tốc độ bit là số bit được truyền trong một giây, Tốc độ baud là số đơn vị tín hiệu trong một giây cần có để biểu diễn số bit vừa nêu. Khi nói về hiệu quả của máy tính, thì tốc độ bit luôn là yếu tố quan trọng. Tuy nhiên, trong truyền số liệu ta lại cần quan tâm đến hiệu quả truyền dẫn dữ liệu từ nơi này đến nơi khác, như thế khi dùng ít đơn vị tín hiệu cần có, thì hiệu quả càng cao, và băng thông truyền càng thấp; như thế thì cần chú ý đến tốc độ baud. Tốc độ baud xác định băng thông cần thiết để truyền tín hiệu.Tốc độ bit là tốc độ baud nhân với số bit trong mỗi đơn vị tín hiệu. Tốc độ baud schia cho số bit biểu diễn trong mỗi đơn vị truyền.
+  
+	   + Tốc độ bit là số bit trong mỗi giây.
+	   + Tốc độ baud là số đơn vị tín hiệu trong mỗi giây.
+	   + Tốc độ baud thường bé hơn hay bằng tốc độ bit.
+  
+- Một ý niệm tương đồng có thể giúp hiểu rõ vấn đề này; baud tương tư như xe khách, còn bit tương tự như số hành khách. Một chuyến xe mang một hoặc nhiều hành khách. Nếu 1000 xe di chuyển từ điểm này sang điểm khác chỉ mang một hành khách (thí dụ lái xe) thì mang được 1000 hành khách. Tuy nhiên, với số xe này, mỗi xe mang 4 người, thì ta vận chuyển được 4000 hành khách. Chú ý là chính số xe, chứ không phải số hành khách, là đơn vị lưu thông trên đường, tức là tạo nhu cầu về độ rộng của xa lộ. Nói cách khác, tốc độ baud xác định băng thông cần thiết, chứ không phải số bit.
+  
+[Ex] Một tín hiệu analog mang 4 bit trong mỗi phần tử tín hiệu. Nếu 1000 phần tử tín hiệu được gởi trong một giây, xác định tốc độ baud và tốc độ bit.
+
+		+ Tốc độ baud = số đơn vị tín hiệu = 1000 baud/giây
+		+ Tốc độ bit = tốc độ baud x số bit trong một  đơn vị tín hiệu =1000 x 4 = 4000 bps.
+  
+[Ex] Tốc độ bit của tín hiệu là 3000. Nếu mỗi phần tử tín hiệu mang 6 bit, cho biết tốc độ baud?
+
+		+ Tốc độ baud = tốc độ bit/ số bit trong mỗi phần tử tín hiệu = 3000/6 =500 baud/giây
+
+### 3. Kết nối phần cứng 
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/c951302a-40b2-4308-82ee-f6fd5552dece)
+
+> Tìm hỉu về cách ly quang trong việc truyền nhận dữ liệu
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/c9f49a21-ed73-49da-a0e4-91b66675ce07)
 
 
 
