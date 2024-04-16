@@ -1140,18 +1140,21 @@ Gồm có 2 loại cảm biến chính:
 + Single-ended mode: Sensor sẽ được nối gnd chung với STM32 và chân output của sensor sẽ được nối vào channel ADC của STM32 từ đó giá trị đo được sẽ so với GND chung (đây là mode thường xuyên sài).
 + Differential mode: Sensor sẽ có 2 đầu ra và 2 đầu ra đó nối với 2 channel ADC trong STM32 và điện áp đo được là điện áp sai lệch giữa 2 ngõ ra 
 
-### 2. Độ phân giải ADC
-+ Có nhiều độ phân giải: 12,10,8, 6 bit   
-+ STM32 sử dụng ADC với độ phân giải là 12 bit
+### 2. Độ phân giải ADC (resolution): dùng để chỉ số bit cần thiết để chứa hết các mức giá trị số (digital) sau quá trình chuyển đổi ở ngõ ra 
 + Để giải thích rõ hơn, chúng ta cùng chuyển đổi điện áp thay đổi từ 0 – 3.3 V, nhưng chỉ có 1 bit để lưu giá trị của điện áp thay đổi này: 
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/22f0659e-2423-46a1-ac7b-cc31588ebc6e)
 
--> Như vậy chỉ có 2 mức, bởi vì 1 bit chỉ có giá trị bằng 0 hoặc giá trị bằng 1, nó sẽ chia đôi khoảng điện áp như hình vẽ (ở điểm của mũi tên chỉ vào) và nếu như bé hơn mũi tên sẽ mang giá trị là 0 và lớn hơn là sẽ mang giá trị là 1. Tương tự như vậy ta tăng lên n bit thì chia cái khoảng điện đó cho n lần và ta thấy được càng nhiều bit thì độ phân giải càng mịn hơn.
+-> Như vậy chỉ có 2 mức, bởi vì 1 bit chỉ có giá trị bằng 0 hoặc giá trị bằng 1, nó sẽ chia đôi khoảng điện áp như hình vẽ (ở điểm của mũi tên chỉ vào) và nếu như bé hơn mũi tên sẽ mang giá trị là 0 và lớn hơn là sẽ mang giá trị là 1. Tương tự như vậy ta **tăng lên n bit thì chia cái khoảng điện đó cho n lần** và ta thấy được **càng nhiều bit thì độ phân giải càng mịn hơn**.
 
+![image](https://github.com/minchangggg/Stm32/assets/125820144/5342501a-96c7-4c95-a50f-67c0a831310f)
+
++ Màu xanh tương ứng thể hiện độ phân giải của bộ chuyển đổi này là 3 bit, tương ứng với 8 sự thay đổi ở đầu ra số (23=8). Khi đưa v­­­­­­ào điện áp tương tự, bộ chuyển đổi sẽ thực hiện một công đoạn lượng tử hóa để đưa các kết quả tương ứng từ điện áp tương tự về số ở ngõ ra. 
++ Màu tím tương ứng với độ phân giải của bộ chuyển đổi 16 bit. Dễ dàng nhận thấy với một bộ chuyển đổi có độ phân giải càng thấp, quá trình chuyển đổi sẽ cho ra kết quả là một điện áp càng biến dạng ở ngõ ra so với ngõ vào và ngược lại. Bộ chuyển đổi ADC của STM32F103 có độ phân giải mặc định là 12 bit, tức là có thể chuyển đổi ra 212 = 4096 giá trị ở ngõ ra số.
 ### 3. Công thức chuyển đổi ADC
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/4806b487-4589-4d58-982f-be59d6160095)
 
+![image](https://github.com/minchangggg/Stm32/assets/125820144/c16fa7f7-8226-4087-9d70-7a6b938ce36f)
 ### 4. Tính toán giá trị chuyển đổi ADC
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/babe80ce-4dc3-4033-934f-dd82dc30b105)
 
@@ -1193,3 +1196,32 @@ Gồm có 2 loại cảm biến chính:
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/e47dace1-c142-42cc-936f-5019d0fd8aac">
 
 > https://tapit.vn/chuc-nang-adc-su-dung-vi-dieu-khien-stm32f103c8t6/
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/76332aec-cc26-4d7b-af34-5279d7dfd216)
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/0a683061-7ef0-42e3-a819-6138650da355)
+
+## Thời gian lấy 
+- Thời gian lấy mẫu (sampling time) là khái niệm được dùng để chỉ thời gian giữa 2 lần số hóa của bộ chuyển đổi. Như ở hình trên, sau khi thực hiện lấy mẫu, các điểm tròn chính là giá trị đưa ra tại ngõ ra số. Dễ nhận thấy nếu thời gian lấy mẫu quá lớn thì sẽ làm cho quá trình chuyển đổi càng bị mất tín hiệu ở những khoảng thời gian không nằm tại thời điểm lấy mẫu. Thời gian lấy mẫu càng nhỏ sẽ làm làm cho việc tái thiết tín hiệu trở nên tin cậy hơn.
+  
+- Thời gian lấy mẫu phụ thuộc nhiều vào kiểu ADC và cấu tạo phần lấy mẫu, đồng thời nó ảnh hưởng tới độ chính xác phép đo. Với vi điều khiển nói chung có nhiều đầu vào ADC, khi chuyển từ đầu vào này sang đầu vào khác thì cần có một quãng thời gian để ổn định tín hiệu vào phần lấy mẫu, vì thế thời gian lấy mẫu không thể nhanh tùy ý được, đơn giản vì giới hạn về mặt vật lý. Ngoài ra, thời gian lấy mẫu phải tương thích với cách cấu tạo bên trong của vi điều khiển nên không thể nhanh quá (phần lấy mẫu chạy không kịp), cũng không nên chậm quá (sai số tăng). Bạn đọc datasheet của bất kỳ chip PIC nào (hoặc vi điều khiển khác cũng tương tự) đều có dải thời gian chờ lấy mẫu tối ưu không nhanh không chậm.
+
+- Thứ đến, việc lấy mẫu nhanh quá mức cần thiết không phải lúc nào cũng tốt. Trong một thiết kế bài bản, thời gian lấy mẫu phải được tính toán cẩn thận xét theo cả hệ thông chứ không phải chỉ phụ thuộc vào mỗi khả năng ADC vì nhiều lý do.
+	+ Năng lực xử lý dữ liệu của lõi MCU
+	+ Khả năng lọc nhiễu tự thân : ví dụ đo tín hiệu từ điện áp lưới 50Hz (hoặc tín hiệu bất kỳ, đều bị ảnh hưởng bởi nhiễu 50Hz đầy rẫy trong không gian) 1 chu kỳ là 20ms; người ta thường chọn ADC kiểu tích lũy (ADC tích phân hai sườn xung đối xứng) lấy mẫu với thời gian là bội số của 20ms (40, 60, 100 ...) thì cái nhiễu 50Hz đó nó tự triệt tiêu lẫn nhau mà không cần mạch lọc phức tạp. Lấy mẫu đúng cách là kiểu xử lý số tín hiệu đơn giản nhất.
+	+ Về mặt điều khiển học, một hệ thống số (hoạt động gián đoạn trong cả miền thời gian lẫn miền giá trị) một mặt cần thời gian lấy mẫu đủ nhanh bị ràng buộc bởi tiêu chuẩn Nyquist nhưng mặt khác lại có thể bị mất ổn định khi lấy mẫu quá nhanh. Vụ này giáo trình lý thuyết điều khiển cũng đã giải thích rõ.
+
+
+- bên cạnh độ phân giải thì tốc độ chuyển đổi cũng rất quan trọng. Trong vi điều khiển STM32, chúng ta có thể tính được tốc độ chuyển đổi của bộ ADC bằng cách sau:
+- Tổng thời gian chuyển đổi = Thời gian lấy mẫu tín hiệu + thời gian chuyển đổi
+![image](https://github.com/minchangggg/Stm32/assets/125820144/5be572f8-d232-47d4-86f9-cc6854602e2a)
+- Trong đó, đối với bộ ADC xấp xỉ liên tiếp, với độ phân giải N-bit, thì thời gian chuyển đổi sẽ là N chu kỳ clock. Còn đối với Thời gian lấy mẫu tín hiệu, chúng ta có thể cấu hình như dưới đây. 
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/69093f18-a99d-4948-bfa4-2b1f4b36c021)
+
+Ngoại vi ADC trong STM32 sử dụng nguồn cấp xung clock là APB2, với một bộ chia với hệ số 2/4/6/8. Tạo thành tín hiệu ADCCLK, nguồn clock này có thể cùng với cấu hình 3 bit SMP[2:0] của thanh ghi ADC_SMPR1 và ADC_SMPR2 để tạo ra các Sampling time từ 1.5 đến 239.5 chu kỳ clock. 
+
+
+Bài tập ví dụ 
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/926c94b8-f7a2-46a1-a7fe-e9862244538a)
