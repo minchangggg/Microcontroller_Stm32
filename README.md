@@ -1120,8 +1120,33 @@ Gồm có 2 loại cảm biến chính:
 
 ## II. 
 
+![image](https://github.com/minchangggg/Stm32/assets/125820144/0f925e69-61a6-4ad8-b386-fe5aad02ecd2)
+
+STM32F103C8T6 gồm 2 khối ngoại vi ADC 
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/f22b4a42-8825-4e2c-8727-e444680e008a)
+
+Với mỗi khối ngoại vi ADC gồm có 2 loại kênh ngõ vào là bên ngoài và bên trong
+Kênh ngõ vào bên ngoài nối trực tiếp chân của vi điều khiển -> đo tín hiệu analog từ chân của vi điều khiển 
+Kênh ngõ vào bên trong thường kết nối cảm biến nhiệt độ và điện áp nội -> đo được nhiệt độ và điện áp hiện tại của vi điều khiển là bao nhiêu 
+
+### Các chế độ của kênh đo 
+![image](https://github.com/minchangggg/Stm32/assets/125820144/97bd8812-b712-4580-9961-38b9972cb880)
 
 
+### Tính toán giá trị chuyển đổi ADC
+![image](https://github.com/minchangggg/Stm32/assets/125820144/4806b487-4589-4d58-982f-be59d6160095)
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/babe80ce-4dc3-4033-934f-dd82dc30b105)
+
+
+Bài 1:
+0x7FF = 2047; 2^12 - 1 = 4095
+Vin = (2047*3.3)/4095 = 1.65V
+
+Bài 2:
+2^10 - 1 = 1023
+Vin = (511*3.3)/1023 = 1.65V
 
 --------------------------------------------------------------------------------------------------------------------------------
 
