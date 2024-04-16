@@ -1103,8 +1103,6 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/949972d7-a29b-4992-8cc3-070222dfb177">
 
-> https://tapit.vn/chuc-nang-adc-su-dung-vi-dieu-khien-stm32f103c8t6/
->
 > Trong các ứng dụng vi điều khiển – hệ thống nhúng, bộ chuyển đổi tương tự-số (ADC) là 1 thành phần rất quan trọng để có thể chuyển đổi các dữ liệu dạng analog từ môi trường (nhiệt độ, độ ẩm, độ sáng,…) sang dạng digital để vi điều khiển có thể xử lý được.
 > STM32F103C8 có tích hợp sẵn các bộ chuyển đổi ADC với độ phân giải 12bit. Có 12 kênh cho phép đo tín hiệu từ 10 nguồn bên ngoài và 2 nguồn nội bên trong.
 
@@ -1139,7 +1137,6 @@ Kênh ngõ vào bên trong thường kết nối cảm biến nhiệt độ và 
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/babe80ce-4dc3-4033-934f-dd82dc30b105)
 
-
 Bài 1:
 0x7FF = 2047; 2^12 - 1 = 4095
 Vin = (2047*3.3)/4095 = 1.65V
@@ -1152,4 +1149,4 @@ Vin = (511*3.3)/1023 = 1.65V
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/e47dace1-c142-42cc-936f-5019d0fd8aac">
 
-
+> https://tapit.vn/chuc-nang-adc-su-dung-vi-dieu-khien-stm32f103c8t6/
