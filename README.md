@@ -1151,17 +1151,24 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 		+ Tốc độ baud = tốc độ bit/ số bit trong mỗi phần tử tín hiệu = 3000/6 =500 baud/giây
 
 ### 3. Kết nối phần cứng 
-
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/c951302a-40b2-4308-82ee-f6fd5552dece)
 
 > Tìm hỉu về cách ly quang trong việc truyền nhận dữ liệu
+
+## II. Sơ đồ khối quá trình truyền nhận 1 byte dữ liệu 
+### Quá trình truyền 1 byte dữ liệu
+![image](https://github.com/minchangggg/Stm32/assets/125820144/8807eba4-c470-43f2-a5b0-0d6817b49f74)
+
+### Quá trình nhận 1 byte dữ liệu
+![image](https://github.com/minchangggg/Stm32/assets/125820144/44552493-1e44-48df-a481-edad4320a14e)
 
 --------------------------------------------------------------------------------------------------------------------------------
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/c9f49a21-ed73-49da-a0e4-91b66675ce07)
 
 
-
+### Nhận dữ liệu ở chế độ Interrupt 
+![image](https://github.com/minchangggg/Stm32/assets/125820144/9b90231c-d56a-4fa6-be6b-5987eb3eb196)
 
 
 
