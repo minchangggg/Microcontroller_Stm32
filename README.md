@@ -917,6 +917,8 @@ Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương
 > file:///C:/Users/tnmtr/Downloads/533355187-16-Timer-C%C6%A1-B%E1%BA%A3n-Va-Cac-Ch%E1%BA%BF-%C4%90%E1%BB%99-C%E1%BB%A7a-Timer.pdf
 >
 > https://tapit.vn/tim-hieu-va-su-dung-timer-tren-stm32f411/
+>
+> https://123docz.net/document/12290211-huong-dan-thuc-hanh-bai-03.htm
 > 
 > Timer là một loại ngoại vi được tích hợp ở hầu hết các vi điều khiển, cung cấp cho người dùng nhiều ứng dụng như xác định chính xác một khoảng thời gian, đo – đếm xung đầu vào, điều khiển dạng sóng đầu ra, băm xung….
 
