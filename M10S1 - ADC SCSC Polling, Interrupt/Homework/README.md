@@ -1,6 +1,8 @@
 ## Question
-Bài tập thực hành kết hợp ADC và PWM:
-Điều chỉnh biến trở (ADC) để thay đổi độ sáng LED (TIMER-PWM). Khi điều chỉnh biến trở về hết 1 hướng - LED OFF, khi điều chỉnh biến trở về hướng ngược lại - LED ON 100%.
+[Bài tập thực hành kết hợp ADC và PWM]
+
++ Điều chỉnh biến trở (ADC) để thay đổi độ sáng LED (TIMER-PWM). 
++ Khi điều chỉnh biến trở về hết 1 hướng - LED OFF, khi điều chỉnh biến trở về hướng ngược lại - LED ON 100%.
 ## Configuration
 ### Setting PWM
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/e41b70f7-0905-4394-b5c1-abd7dba6ce92)
