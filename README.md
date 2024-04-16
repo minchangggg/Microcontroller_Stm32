@@ -1103,7 +1103,10 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/949972d7-a29b-4992-8cc3-070222dfb177">
 
-> Trong các ứng dụng vi điều khiển – hệ thống nhúng, bộ chuyển đổi tương tự-số (ADC) là 1 thành phần rất quan trọng để có thể chuyển đổi các dữ liệu dạng analog từ môi trường (nhiệt độ, độ ẩm, độ sáng,…) sang dạng digital để vi điều khiển có thể xử lý được.
+> https://www.studocu.com/vn/document/truong-dai-hoc-tra-vinh/vat-ly-dai-cuong/stm32-adc/82063383
+> 
+> Trong các ứng dụng vi điều khiển – hệ thống nhúng, bộ chuyển đổi tương tự-số (Analog Digital Converter - ADC) là 1 thành phần rất quan trọng để có thể chuyển đổi các dữ liệu dạng analog từ môi trường (nhiệt độ, độ ẩm, độ sáng,…) sang dạng digital để vi điều khiển có thể xử lý được.
+> 
 > STM32F103C8 có tích hợp sẵn các bộ chuyển đổi ADC với độ phân giải 12bit. Có 12 kênh cho phép đo tín hiệu từ 10 nguồn bên ngoài và 2 nguồn nội bên trong.
 
 ## I. Tổng quan về cảm biến 
@@ -1116,21 +1119,33 @@ Gồm có 2 loại cảm biến chính:
  	+ Các chuẩn giao tiếp UART / I2C / SPI
 	+ Xung (Pulse)
 
-## II. 
+## II. Analog Digital Converter
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/0f925e69-61a6-4ad8-b386-fe5aad02ecd2)
 
-STM32F103C8T6 gồm 2 khối ngoại vi ADC 
+- STM32F103C8T6 gồm 2 khối ngoại vi ADC
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/f22b4a42-8825-4e2c-8727-e444680e008a)
 
-Với mỗi khối ngoại vi ADC gồm có 2 loại kênh ngõ vào là bên ngoài và bên trong
-Kênh ngõ vào bên ngoài nối trực tiếp chân của vi điều khiển -> đo tín hiệu analog từ chân của vi điều khiển 
-Kênh ngõ vào bên trong thường kết nối cảm biến nhiệt độ và điện áp nội -> đo được nhiệt độ và điện áp hiện tại của vi điều khiển là bao nhiêu 
+- Với mỗi khối ngoại vi ADC gồm có 2 loại kênh ngõ vào là bên ngoài và bên trong:
+  
+	+ Kênh ngõ vào bên ngoài nối trực tiếp chân của vi điều khiển -> đo tín hiệu analog từ chân của vi điều khiển 
+	+ Kênh ngõ vào bên trong thường kết nối cảm biến nhiệt độ và điện áp nội -> đo được nhiệt độ và điện áp hiện tại của vi điều khiển là bao nhiêu 
 
-### Các chế độ của kênh đo 
+### Các chế độ input ADC trong STM32
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/97bd8812-b712-4580-9961-38b9972cb880)
 
++ Single-ended mode: Sensor sẽ được nối gnd chung với STM32 và chân output của sensor sẽ được nối vào channel ADC của STM32 từ đó giá trị đo được sẽ so với GND chung (đây là mode thường xuyên sài).
++ Differential mode: Sensor sẽ có 2 đầu ra và 2 đầu ra đó nối với 2 channel ADC trong STM32 và điện áp đo được là điện áp sai lệch giữa 2 ngõ ra 
+
+### Độ phân giải ADC
++ Có nhiều độ phân giải: 12,10,8, 6 bit   
++ STM32 sử dụng ADC với độ phân giải là 12 bit
++ Để giải thích rõ hơn, chúng ta cùng chuyển đổi điện áp thay đổi từ 0 – 3.3 V, nhưng chỉ có 1 bit để lưu giá trị của điện áp thay đổi này: 
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/22f0659e-2423-46a1-ac7b-cc31588ebc6e)
+
+-> Như vậy chỉ có 2 mức, bởi vì 1 bit chỉ có giá trị bằng 0 hoặc giá trị bằng 1, nó sẽ chia đôi khoảng điện áp như hình vẽ (ở điểm của mũi tên chỉ vào) và nếu như bé hơn mũi tên sẽ mang giá trị là 0 và lớn hơn là sẽ mang giá trị là 1. Tương tự như vậy ta tăng lên n bit thì chia cái khoảng điện đó cho n lần và ta thấy được càng nhiều bit thì độ phân giải càng mịn hơn.
 
 ### Tính toán giá trị chuyển đổi ADC
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/4806b487-4589-4d58-982f-be59d6160095)
@@ -1144,6 +1159,28 @@ Vin = (2047*3.3)/4095 = 1.65V
 Bài 2:
 2^10 - 1 = 1023
 Vin = (511*3.3)/1023 = 1.65V
+
+### Một số hàm liên quan đến ADC:
+– HAL_ADC_Start(ADC_HandleTypeDef* hadc): cho phép ADC bắt đầu chuyển đổi
+– HAL_ADC_PollForConversion(ADC_HandleTypeDef* hadc, uint32_t Timeout): polling chờ cho chuyển đổi hoàn tất với thời gian timeout.
+– HAL_ADC_GetValue(ADC_HandleTypeDef* hadc): trả về giá trị adc của con trỏ hadc.
+– HAL_ADC_Stop(ADC_HandleTypeDef* hadc): stop chuyển đổi adc.
+### Có 3 phương pháp cho việc đọc ADC và các hàm dùng cho từng phương pháp:
+#### 1. Polling 
+• HAL_StatusTypeDef HAL_ADC_Start(ADC_HandleTypeDef* hadc); 
+	➔ Dùng để bật ADC 
+• HAL_StatusTypeDef HAL_ADC_Stop(ADC_HandleTypeDef* hadc); 
+	➔ Dùng để tắt ADC 
+• uint32_t HAL_ADC_GetValue(ADC_HandleTypeDef* hadc); 
+	➔ Dùng để đọc giá trị chuyển đổi 
+• HAL_ADC_PollForConversion(ADC_HandleTypeDef* hadc, uint32_t Timeout);
+	➔ Bởi vì sẽ có 1 khoảng thời gian chuyển đổi nhất định sau đó mới đọc được nên sẽ cần hàm này để kẹt tại hàm đó cho đến khi thời gian chuyển đổi hoàn tất. Ở đây có thêm tham số truyền vào là timeout, có nghĩa rằng sau khoảng thời gian timeout mà không chuyển đổi xog sẽ lập tức thoát khỏi hàm.
+#### 2. Interrupt
+• HAL_StatusTypeDef HAL_ADC_Start_IT(ADC_HandleTypeDef* hadc); 
+• HAL_StatusTypeDef HAL_ADC_Stop_IT(ADC_HandleTypeDef* hadc); 
+• void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){}; // hàm xử lý interrupt 
+#### 3. DMA
+• HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc); // có thể sử dụng để đọc multiple channel 
 
 --------------------------------------------------------------------------------------------------------------------------------
 
