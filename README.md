@@ -1122,7 +1122,21 @@ Gồm có 2 loại cảm biến chính:
 	+ Xung (Pulse)
 
 ## II. Analog Digital Converter
+### Bộ chuyển đổi ADC là gì
+- ADC là từ viết tắt của Analog to Digital Converter hay bộ chuyển đổi analog sang kỹ thuật số là một mạch chuyển đổi giá trị điện áp liên tục (analog) sang giá trị nhị phân (kỹ thuật số) mà thiết bị kỹ thuật số có thể hiểu được sau đó có thể được sử dụng để tính toán kỹ thuật số. Mạch ADC này có thể là vi mạch ADC hoặc được nhúng vào một bộ vi điều khiển.
 
+![image](https://github.com/minchangggg/Stm32/assets/125820144/98d2560b-9534-4d1e-9c50-3866b820800f)
+
+### Tại sao phải chuyển đổi analog sang kỹ thuật số
+- Thiết bị điện tử ngày nay hoàn toàn là kỹ thuật số, không còn là thời kỳ của máy tính analog. Thật không may cho các hệ thống kỹ thuật số, thế giới chúng ta đang sống vẫn là analog và đầy màu sắc, không chỉ đen và trắng.
+- Ví dụ, một cảm biến nhiệt độ như LM35 tạo ra điện áp phụ thuộc vào nhiệt độ, trong trường hợp của thiết bị cụ thể nó sẽ tăng 10mV khi nhiệt độ tăng lên mỗi độ. Nếu chúng ta kết nối trực tiếp thiết bị này với đầu vào kỹ thuật số, nó sẽ ghi là cao hoặc thấp tùy thuộc vào các ngưỡng đầu vào, điều này là hoàn toàn vô dụng.
+- Thay vào đó, chúng ta sử dụng một bộ ADC để chuyển đổi đầu vào điện áp analog thành một chuỗi các bit có thể được kết nối trực tiếp với bus dữ liệu của bộ vi xử lý và được sử dụng để tính toán.
+### ADC hoạt động như thế nào
+- Một cách rất hay để xem xét hoạt động của ADC là tưởng tượng nó như một **bộ chia tỷ lệ toán học**. **Tỷ lệ về cơ bản là ánh xạ các giá trị từ dải này sang dải khác, vì vậy ADC ánh xạ một giá trị điện áp sang một số nhị phân.** 
+
+
+
+---
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/0f925e69-61a6-4ad8-b386-fe5aad02ecd2)
 
 - STM32F103C8T6 gồm 2 khối ngoại vi ADC
@@ -1155,6 +1169,11 @@ Gồm có 2 loại cảm biến chính:
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/4806b487-4589-4d58-982f-be59d6160095)
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/c16fa7f7-8226-4087-9d70-7a6b938ce36f)
+
+#### Điện áp tham chiếu:
+- Không có ADC nào là tuyệt đối, vì vậy điện áp được ánh xạ tới giá trị nhị phân lớn nhất được gọi là điện áp tham chiếu. Ví dụ: trong bộ chuyển đổi 10 bit với 5V làm điện áp tham chiếu, 1111111111 (tất cả các bit một, số nhị phân 10 bit cao nhất có thể ) tương ứng với 5V và 0000000000 (số thấp nhất tương ứng với 0V). Vì vậy, mỗi bước nhị phân lên đại diện cho khoảng 4,9mV, vì có thể có 1024 chữ số trong 10 bit. Số đo điện áp trên mỗi bit này được gọi là độ phân giải của ADC.
+- Điều gì sẽ xảy ra nếu điện áp thay đổi dưới 4,9mV mỗi bước? Nó sẽ đặt ADC vào vùng chết, do đó kết quả chuyển đổi luôn có một lỗi nhỏ. Có ngăn chặn lỗi này bằng cách sử dụng ADC có độ phân giải cao hơn ví dụ như bộ ADC lên đến 24 bit, mặc dù tần số chuyển đổi thấp.
+  
 ### 4. Tính toán giá trị chuyển đổi ADC
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/babe80ce-4dc3-4033-934f-dd82dc30b105)
 
@@ -1196,32 +1215,41 @@ Gồm có 2 loại cảm biến chính:
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/e47dace1-c142-42cc-936f-5019d0fd8aac">
 
 > https://tapit.vn/chuc-nang-adc-su-dung-vi-dieu-khien-stm32f103c8t6/
+>
+> https://www.laptrinhdientu.com/2022/01/STM19.html
 
+## Chế độ chuyển đổi dữ liệu:
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/76332aec-cc26-4d7b-af34-5279d7dfd216)
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/0a683061-7ef0-42e3-a819-6138650da355)
 
-## Thời gian lấy 
+Với các chế độ quét nhiều kênh, có thể thấy các kênh có thể được đọc lần lượt, và mỗi kênh sau khi chuyển đổi xong sẽ tạo ra một tín hiệu trigger báo chuyển đổi xong. Nếu như mọi thứ diễn ra bình thường và các kênh được đọc tuần tự, đó chính là Regular Conversion, các tín hiệu báo một kênh hoạt động là Regular Trigger.
+## Thời gian lấy mẫu
+### Khái niệm
+- Bên cạnh độ phân giải thì tốc độ chuyển đổi cũng rất quan trọng.
 - Thời gian lấy mẫu (sampling time) là khái niệm được dùng để chỉ thời gian giữa 2 lần số hóa của bộ chuyển đổi. Như ở hình trên, sau khi thực hiện lấy mẫu, các điểm tròn chính là giá trị đưa ra tại ngõ ra số. Dễ nhận thấy nếu thời gian lấy mẫu quá lớn thì sẽ làm cho quá trình chuyển đổi càng bị mất tín hiệu ở những khoảng thời gian không nằm tại thời điểm lấy mẫu. Thời gian lấy mẫu càng nhỏ sẽ làm làm cho việc tái thiết tín hiệu trở nên tin cậy hơn.
   
 - Thời gian lấy mẫu phụ thuộc nhiều vào kiểu ADC và cấu tạo phần lấy mẫu, đồng thời nó ảnh hưởng tới độ chính xác phép đo. Với vi điều khiển nói chung có nhiều đầu vào ADC, khi chuyển từ đầu vào này sang đầu vào khác thì cần có một quãng thời gian để ổn định tín hiệu vào phần lấy mẫu, vì thế thời gian lấy mẫu không thể nhanh tùy ý được, đơn giản vì giới hạn về mặt vật lý. Ngoài ra, thời gian lấy mẫu phải tương thích với cách cấu tạo bên trong của vi điều khiển nên không thể nhanh quá (phần lấy mẫu chạy không kịp), cũng không nên chậm quá (sai số tăng). Bạn đọc datasheet của bất kỳ chip PIC nào (hoặc vi điều khiển khác cũng tương tự) đều có dải thời gian chờ lấy mẫu tối ưu không nhanh không chậm.
 
-- Thứ đến, việc lấy mẫu nhanh quá mức cần thiết không phải lúc nào cũng tốt. Trong một thiết kế bài bản, thời gian lấy mẫu phải được tính toán cẩn thận xét theo cả hệ thông chứ không phải chỉ phụ thuộc vào mỗi khả năng ADC vì nhiều lý do.
+- Việc lấy mẫu nhanh quá mức cần thiết không phải lúc nào cũng tốt. Trong một thiết kế bài bản, thời gian lấy mẫu phải được tính toán cẩn thận xét theo cả hệ thông chứ không phải chỉ phụ thuộc vào mỗi khả năng ADC vì nhiều lý do.
 	+ Năng lực xử lý dữ liệu của lõi MCU
 	+ Khả năng lọc nhiễu tự thân : ví dụ đo tín hiệu từ điện áp lưới 50Hz (hoặc tín hiệu bất kỳ, đều bị ảnh hưởng bởi nhiễu 50Hz đầy rẫy trong không gian) 1 chu kỳ là 20ms; người ta thường chọn ADC kiểu tích lũy (ADC tích phân hai sườn xung đối xứng) lấy mẫu với thời gian là bội số của 20ms (40, 60, 100 ...) thì cái nhiễu 50Hz đó nó tự triệt tiêu lẫn nhau mà không cần mạch lọc phức tạp. Lấy mẫu đúng cách là kiểu xử lý số tín hiệu đơn giản nhất.
 	+ Về mặt điều khiển học, một hệ thống số (hoạt động gián đoạn trong cả miền thời gian lẫn miền giá trị) một mặt cần thời gian lấy mẫu đủ nhanh bị ràng buộc bởi tiêu chuẩn Nyquist nhưng mặt khác lại có thể bị mất ổn định khi lấy mẫu quá nhanh. Vụ này giáo trình lý thuyết điều khiển cũng đã giải thích rõ.
 
-
-- bên cạnh độ phân giải thì tốc độ chuyển đổi cũng rất quan trọng. Trong vi điều khiển STM32, chúng ta có thể tính được tốc độ chuyển đổi của bộ ADC bằng cách sau:
+### Coversion time (thời gian chuyển đổi)
+- Trong vi điều khiển STM32, chúng ta có thể tính được tốc độ chuyển đổi của bộ ADC bằng cách sau:
 - Tổng thời gian chuyển đổi = Thời gian lấy mẫu tín hiệu + thời gian chuyển đổi
+  
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/5be572f8-d232-47d4-86f9-cc6854602e2a)
-- Trong đó, đối với bộ ADC xấp xỉ liên tiếp, với độ phân giải N-bit, thì thời gian chuyển đổi sẽ là N chu kỳ clock. Còn đối với Thời gian lấy mẫu tín hiệu, chúng ta có thể cấu hình như dưới đây. 
+
+![image](https://github.com/minchangggg/Stm32/assets/125820144/c1a6ef30-039b-425e-9d36-fd94bc7f7f9f)
+
+- Trong đó, đối với bộ ADC xấp xỉ liên tiếp, với độ phân giải N-bit, thì thời gian chuyển đổi sẽ là N chu kỳ clock. Còn đối với Thời gian lấy mẫu tín hiệu, chúng ta có thể cấu hình như dưới đây.
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/69093f18-a99d-4948-bfa4-2b1f4b36c021)
 
-Ngoại vi ADC trong STM32 sử dụng nguồn cấp xung clock là APB2, với một bộ chia với hệ số 2/4/6/8. Tạo thành tín hiệu ADCCLK, nguồn clock này có thể cùng với cấu hình 3 bit SMP[2:0] của thanh ghi ADC_SMPR1 và ADC_SMPR2 để tạo ra các Sampling time từ 1.5 đến 239.5 chu kỳ clock. 
+- Ngoại vi ADC trong STM32 sử dụng nguồn cấp xung clock là APB2, với một bộ chia với hệ số 2/4/6/8. Tạo thành tín hiệu ADCCLK, nguồn clock này có thể cùng với cấu hình 3 bit SMP[2:0] của thanh ghi ADC_SMPR1 và ADC_SMPR2 để tạo ra các Sampling time từ 1.5 đến 239.5 chu kỳ clock. 
 
-
-Bài tập ví dụ 
+### Bài tập ví dụ 
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/926c94b8-f7a2-46a1-a7fe-e9862244538a)
