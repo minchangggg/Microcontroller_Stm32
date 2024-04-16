@@ -1147,27 +1147,28 @@ Gồm có 2 loại cảm biến chính:
 
 -> Như vậy chỉ có 2 mức, bởi vì 1 bit chỉ có giá trị bằng 0 hoặc giá trị bằng 1, nó sẽ chia đôi khoảng điện áp như hình vẽ (ở điểm của mũi tên chỉ vào) và nếu như bé hơn mũi tên sẽ mang giá trị là 0 và lớn hơn là sẽ mang giá trị là 1. Tương tự như vậy ta tăng lên n bit thì chia cái khoảng điện đó cho n lần và ta thấy được càng nhiều bit thì độ phân giải càng mịn hơn.
 
-### 3. Tính toán giá trị chuyển đổi ADC
+### 3. Công thức chuyển đổi ADC
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/4806b487-4589-4d58-982f-be59d6160095)
 
+### 4. Tính toán giá trị chuyển đổi ADC
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/babe80ce-4dc3-4033-934f-dd82dc30b105)
 
 - Bài 1:
   
-	0x7FF = 2047; 2^12 - 1 = 4095
-	Vin = (2047*3.3)/4095 = 1.65V
+		0x7FF = 2047; 2^12 - 1 = 4095
+		Vin = (2047*3.3)/4095 = 1.65V
 
 - Bài 2:
   
-	2^10 - 1 = 1023
-	Vin = (511*3.3)/1023 = 1.65V
+		2^10 - 1 = 1023
+		Vin = (511*3.3)/1023 = 1.65V
 
 ## III. Chạy chương trình
 ### 1. Một số hàm liên quan đến ADC:
-– HAL_ADC_Start(ADC_HandleTypeDef* hadc): cho phép ADC bắt đầu chuyển đổi
-– HAL_ADC_PollForConversion(ADC_HandleTypeDef* hadc, uint32_t Timeout): polling chờ cho chuyển đổi hoàn tất với thời gian timeout.
-– HAL_ADC_GetValue(ADC_HandleTypeDef* hadc): trả về giá trị adc của con trỏ hadc.
-– HAL_ADC_Stop(ADC_HandleTypeDef* hadc): stop chuyển đổi adc.
+- HAL_ADC_Start(ADC_HandleTypeDef* hadc): cho phép ADC bắt đầu chuyển đổi
+- HAL_ADC_PollForConversion(ADC_HandleTypeDef* hadc, uint32_t Timeout): polling chờ cho chuyển đổi hoàn tất với thời gian timeout.
+- HAL_ADC_GetValue(ADC_HandleTypeDef* hadc): trả về giá trị adc của con trỏ hadc.
+- HAL_ADC_Stop(ADC_HandleTypeDef* hadc): stop chuyển đổi adc.
 ### 2. Có 3 phương pháp cho việc đọc ADC và các hàm dùng cho từng phương pháp:
 #### a. Polling 
 + HAL_StatusTypeDef HAL_ADC_Start(ADC_HandleTypeDef* hadc); 
