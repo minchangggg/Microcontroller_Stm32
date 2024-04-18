@@ -1329,3 +1329,20 @@ Với các chế độ quét nhiều kênh, có thể thấy các kênh có th�
 ### Bài tập ví dụ 
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/926c94b8-f7a2-46a1-a7fe-e9862244538a)
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/e47dace1-c142-42cc-936f-5019d0fd8aac">
+
+> https://tapit.vn/real-time-clock-rtc-tren-stm32f103c8t6/
+
+## A. Lý thuyết chung về RTC
+- RTC (Real time clock) là bộ thời gian thực được cung cấp cho chúng ta thời gian giống như một chiếc đồng hồ thông thường.
+- So với các loại module hiện có trên thị trường như DS3231, DS1307… chúng ta phải dùng thêm IC để đọc được dữ liệu thời gian về ngày, tháng, năm, giờ, phút, giây và đa số các loại IC này đều sử dụng giao thức I2C để đọc/ghi dữ liệu.
+- Còn đối với chip STM32F103C8 của chúng ta, ở bên trong nó đã tích hợp sẵn một bộ thời gian thực.
+### Ưu và nhược điểm khi sử dụng bộ RTC trong chip STM32F103C8:
+- Ưu điểm: Không phải tốn chi phí cho bất kì IC RTC nào vì đã được tích hợp sẵn, tiết kiểm diện tích thiết kế mạch. 
+- Nhược điểm: Bộ RTC trong chip STM32F103C8 sử dụng từ Clock từ các bộ LSI, LSE, HSE. Nếu sử dụng LSI làm bộ nguồn Clock thì đây là bộ clock nội và sai số tầm khoảng 1%, vì vậy trong quá trình hoạt động thì khi chúng ta đọc thời gian sẽ bị sai lệch (có thể lưu ý khắc phục được)
+
+
+Việc của chúng ta chỉ cần tìm hiểu và sử dụng chứ không cần bận tâm đến phần cứng nữa. Một số ứng dụng chính mà bộ RTC mang lại là làm đồng hồ, mạch kiểm soát thời gian, báo thức, bộ đếm…Bộ RTC này sử dụng timer độc lập, tách biệt với các bộ timer khác. Việc cài đặt thời gian, đọc thời gian cũng trở nên dễ dàng bằng cách tác động trực tiếp vào thanh ghi.
