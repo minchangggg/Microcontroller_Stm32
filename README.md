@@ -553,6 +553,13 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 ### 1, Sơ đồ nguyên lý
 ![Bản sao của Blue-Pink Cute Class Schedule (5)](https://github.com/minchangggg/Stm32/assets/125820144/b60a78f2-01f1-4c66-ab08-3ac52e267a0a)
 
+[INPUT]
+- Bit nào tương ứng pin đó, bit1 tương ứng pin1, bit2 tương ứng pin2
+
+[OUTPUT]
+- P-MOS kéo lên VDđ tạo ra điện áp 3.3v
+- N-MOS kéo xuống VSs tạo ra điện áp 0V
+
 ### 2, Cấu hình thanh ghi dữ liệu của các Port
 
 <img width="650" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/6aa28a55-c481-4085-83ab-a26225dbd6ad">
@@ -586,7 +593,7 @@ Lưu ý:
 #### Cách 2: Tác động gián tiếp lên thanh ghi ODR thông qua thanh qua thanh ghi BSRR
 VD:
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/441cb9c1-1ed2-4a0f-9ec1-e09c312dec83)
+<img width="400" alt="image" src="(https://github.com/minchangggg/Stm32/assets/125820144/441cb9c1-1ed2-4a0f-9ec1-e09c312dec83">
 
 + Ở đây t chỉ đơn giản thực hiện phép gán -> chỉ cần 1 bước gán là xong, không bị mắc sai lầm như TH trên 
   
