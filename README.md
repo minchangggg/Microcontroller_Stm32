@@ -4,7 +4,7 @@
 
 <img width="450" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/a42e5da1-1f29-4edd-9c67-6f6c9432a246">
 
-## I. SƠ LƯỢC VỀ CHƯƠNG TRÌNH CC
+## I. SƠ LƯỢC VỀ CHƯƠNG TRÌNH C
 ### A, Quá trình biên dịch một chương trình C/C++
 > https://tapit.vn/qua-trinh-bien-dich-mot-chuong-trinh-cc/?fbclid=IwAR30Vb0QtPRumEMEmWeFqYsndk2tRrhgGLDh16K8cHTBoPU1J-A_XpFGl9o
 
@@ -663,11 +663,13 @@ VD:
 
 ## I. Vấn đề 1
 ### 1. Bài toán đặt ra
-- Cấu hình và viết chương trình thực hiện: Ban đầu LED sáng, khi "nhấn thả" nút, LED đảo trạng thái. Ta thực hiện như sau:
+- Cấu hình và viết chương trình thực hiện: Ban đầu LED sáng, khi "nhấn thả" nút, LED đảo trạng thái. Ta thực hiện bằng cách dùng hàm HAL_GPIO_TogglePin(...) 
 
-<img width="450" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/bd7116f9-17da-4c72-93cf-f396cb01bae">
+Đọc giá trị của PC13 => nếu nhấn nút, giá trị LEDSTATUS = 1 thì đảo = 0, và ngược lại
 
 Nhận xét: giá trị của LEDSTATUS không ổn định -> có vấn đề ở phần mềm/ phần cứng 
+
+Câu hỏi: Nếu viết hàm như vậy thì chtrình chạy được không? => chạy lúc được lúc không
 
 ### 2. Giải thích vấn đề
 + Với nút nhấn lý tưởng, nhấn nút lập tức về 0, thả ra lập tức về lại 1.
@@ -675,7 +677,7 @@ Nhận xét: giá trị của LEDSTATUS không ổn định -> có vấn đề �
   
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/bce405dd-85b2-4b0f-adbc-ad2e5c91423c)
 
-+ Tốc độ vi xử lý là 8MHz hay 1s sẽ thực hiện được 8 triệu lệnh (ở dạng mã máy). Giả sử 3 câu lệnh C trong vòng lặp phía trên tương đương 8 câu lệnh mã máy -> Trong 1s vòng lặp được thực hiện 1 triệu lần -> Trong 1ms vòng lặp được thực hiện 1 ngàn lần.
++ Tốc độ vi xử lý khi chưa cấu hình là 8MHz hay 1s sẽ thực hiện được 8 triệu lệnh (ở dạng mã máy). Giả sử 3 câu lệnh C trong vòng lặp phía trên tương đương 8 câu lệnh mã máy -> Trong 1s vòng lặp được thực hiện 1 triệu lần -> Trong 1ms vòng lặp được thực hiện 1 ngàn lần.
 + Vậy bản thân GPIO đã đảo hàng nghìn lần trong 1s (vì cứ ktra điều kiện, cứ mức logic nút nhấn bằng 0 thì đảo led) -> nếu may mắn, thì số lần đảo là số lẻ -> đúng yêu cầu bài toán.
 
 ### 3. Cách giải quyết vấn đề
