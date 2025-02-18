@@ -116,6 +116,13 @@ The **struct tm** has the following definition
 	
 	– Ngắt Timer: Thường sử dụng khi tràn thanh ghi đếm, hoặc khi giá trị đếm bằng với thanh ghi so sánh
 
+### Các thiết bị vào ra tiêu biểu
+• Timer (Bộ định thời): Các timer có thể được lập trình cho khoảng thời gian định trước. Ví dụ: để đo khoảng thời gian giữa hai sự kiện, tạo sự kiện tại các khoảng thời gian xác định, hoặc tạo tín hiệu ở tần số xác định, ứng dụng cho bộ điều biến độ rộng xung (PWM) và nhiều sự kiện khác.
+• Watch-Dog-Timer (WDT - Đồng hồ bấm giờ): Đây là một loại timer đặc biệt, được sử dụng như một thiết bị an toàn. WDT sẽ reset hệ thống (chương trình) nếu không nhận được tín hiệu do chương trình tạo ra sau mỗi đơn vị thời gian X, một tính năng hữu ích trong một số ứng dụng đề phòng trường hợp chương trình bị treo. WDT cũng có thể được cấu hình để tự tạo tín hiệu ngắt trong khoảng thời gian đều đặn.
+• Communication Interfaces (Các giao diện truyền thông): bao gồm UART, SPI, USB, I2C, etc.
+• ADC (Bộ chuyển đổi tương tự - số)
+• DAC (Bộ chuyển đổi số - tương tự)
+
 > Xem thêm: Tổng hợp các bài hướng dẫn Lập trình vi điều khiển STM32 
 > https://tapit.vn/tong-hop-cac-bai-huong-dan-lap-trinh-vi-dieu-khien-stm32/
 
@@ -406,6 +413,32 @@ Nhận xét 3 trường hợp trên:
 <img width="800" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/ae9b56c5-d8be-490b-8f74-87465986bfbe">
 <img width="800" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/35a032e7-b732-46dc-b936-d6bf8743bcdb">
 <img width="800" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/737d574d-a87e-41a1-96fd-f3d0b7447af4">
+
+### CPU, MPU, MCU và GPU là gì?
+> https://www.eejournal.com/article/what-the-faq-are-cpus-mpus-mcus-and-gpus/
+
+#### a. CPU (Central Processing Unit) – Bộ xử lý trung tâm
+- Là bộ xử lý chính của máy tính, điều khiển hầu hết các hoạt động tính toán và xử lý dữ liệu.
+- Có thể thực hiện các tác vụ chung như chạy phần mềm, xử lý dữ liệu, điều khiển hệ điều hành.
+- Ví dụ: Intel Core i9, AMD Ryzen 7.
+- Đặc điểm chính: Hiệu suất cao, có nhiều lõi (core) và luồng (thread).
+#### b. MPU (Microprocessor Unit) – Vi xử lý
+- Thực chất là một loại CPU thu nhỏ, thường được dùng trong các hệ thống nhúng hoặc thiết bị điện tử đơn giản.
+- MPU thường không có bộ nhớ RAM hay bộ nhớ Flash tích hợp, nên cần các linh kiện ngoài để hoạt động.
+- Ví dụ: Intel 8086, ARM Cortex-A.
+- Đặc điểm chính: Dùng cho các ứng dụng cần linh hoạt và hiệu suất cao, nhưng phải có bộ nhớ ngoài.
+#### c. MCU (Microcontroller Unit) – Vi điều khiển
+- Là một hệ thống tích hợp bao gồm CPU, RAM, ROM (Flash), và các ngoại vi (GPIO, UART, SPI, I2C, PWM...) trên một chip duy nhất.
+- MCU thường được dùng trong các ứng dụng nhúng, điều khiển các thiết bị như xe hơi, máy giặt, robot, IoT.
+- Ví dụ: Arduino (ATmega328), STM32, ESP32.
+- Đặc điểm chính: Tiêu thụ điện năng thấp, tích hợp nhiều thành phần, chuyên dụng cho điều khiển nhúng.
+#### d. GPU (Graphics Processing Unit) – Bộ xử lý đồ họa
+- Chuyên xử lý các tác vụ đồ họa, xử lý song song nhiều dữ liệu hình ảnh.
+- Được sử dụng trong game, đồ họa, AI, tính toán khoa học.
+- Ví dụ: NVIDIA GeForce RTX, AMD Radeon.
+- Đặc điểm chính: Xử lý song song mạnh mẽ, tối ưu hóa cho đồ họa và trí tuệ nhân tạo (AI).
+
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/e9bf3ce9-7126-4249-abc8-8e84ab4b10a8">
 
 ## II, PHẦN CỨNG THỰC HÀNH
 
