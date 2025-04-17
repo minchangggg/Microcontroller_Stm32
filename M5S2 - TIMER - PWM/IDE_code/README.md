@@ -7,6 +7,9 @@ Tăng giảm cường độ sáng của led bằng cách thay đổi giá trị 
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/84937533-57b4-404e-994e-76c0e2dc5732)
 
+![image](https://github.com/user-attachments/assets/d581e48f-ab2e-49c3-974c-271674bd9c1d)
+
+
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/b040ede1-7b83-4b6c-97af-0a214ce0357a)
 
 ## Test 
