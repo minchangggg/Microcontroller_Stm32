@@ -1085,6 +1085,9 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 - PWM viết tắt của Pulse Width Modulation, có nghĩa là phương pháp điều chỉnh điện áp tải, hay hiểu đơn giản hơn đây là phương pháp điều chỉnh, thay đổi điện áp tải ra bằng việc thay đổi độ rộng của chuỗi xung vuông, từ đó có sự thay đổi điện áp.
 - Tại sao nên dùng PWM? Dùng PWM để điều chỉnh cường độ dòng điện sẽ hiệu quả hơn và cũng tiết kiệm hơn. Các phương pháp điều chỉnh dòng điện khác rất tốn kém và phức tạp.
 
+![image](https://github.com/user-attachments/assets/929c486f-d688-4e9e-a319-8159d09f2feb)
+
+
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/329fe9f3-195e-4d0f-b514-4bac6ab23899)
 
 > Duty cycle (D): phần trăm thời gian xung ở mức cao trong 1 chu kì xung 
@@ -1095,7 +1098,11 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 
 + Mode1: Nếu sử dụng chế độ đếm lên thì ngõ ra sẽ ở mức logic 1 khi CNT <CCR và ngược lại, ở mức 0 nếu CNT>CCR.  Nếu sử dụng chế độ đếm xuống, đầu ra sẽ ở mức 0 khi CNT > CCR và ngược lại, ở mức 1 khi CNT < CCR. 
 + Mode2: Nếu sử dụng chế độ đếm lên thì ngõ ra sẽ ở mức logic 0 khi CNT <CCR và ngược lại, ở mức 1 nếu CNT>CCR.  Nếu sử dụng chế độ đếm xuống, đầu ra sẽ ở mức 1 khi CNT > CCR và ngược lại, ở mức 0 khi CNT<CCR.
-  
+
+![image](https://github.com/user-attachments/assets/18314c6f-ec4e-49b9-b7c3-513a8c6e7dfc)
+
+![image](https://github.com/user-attachments/assets/4564e0c2-7da1-4738-a755-2565f784e982)
+
 ## II. Tính toán thông số cơ bản 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/7f6e6685-e098-4233-9a90-1eeade71060c)
 
