@@ -1085,14 +1085,18 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 - PWM viết tắt của Pulse Width Modulation, có nghĩa là phương pháp điều chỉnh điện áp tải, hay hiểu đơn giản hơn đây là phương pháp điều chỉnh, thay đổi điện áp tải ra bằng việc thay đổi độ rộng của chuỗi xung vuông, từ đó có sự thay đổi điện áp.
 - Tại sao nên dùng PWM? Dùng PWM để điều chỉnh cường độ dòng điện sẽ hiệu quả hơn và cũng tiết kiệm hơn. Các phương pháp điều chỉnh dòng điện khác rất tốn kém và phức tạp.
 
-![image](https://github.com/user-attachments/assets/929c486f-d688-4e9e-a319-8159d09f2feb)
-
-
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/329fe9f3-195e-4d0f-b514-4bac6ab23899)
 
-> Duty cycle (D): phần trăm thời gian xung ở mức cao trong 1 chu kì xung 
-
+- Duty cycle (D): phần trăm thời gian xung ở mức cao trong 1 chu kì xung 
 - PWM generation: Tính năng điều chế độ rộng xung cho phép tạo ra xung với tần số được xác định bởi giá trị của thanh ghi ARR, và chu kỳ nhiệm vụ (Duty cycle) được xác định bởi giá trị thanh ghi CCR.
+
+![image](https://github.com/user-attachments/assets/929c486f-d688-4e9e-a319-8159d09f2feb)
+
+![image](https://github.com/user-attachments/assets/1186a5d9-7186-437e-8d27-8cc653979d71)
+
+- PWM không tạo ra điện áp “ổn định” liên tục, mà tạo ra các xung bật/tắt cực nhanh.
+- Bộ lọc mắt người, tai người, hoặc máy đo điện áp số không nhận biết được xung dao động quá nhanh.
+- Thay vào đó, chúng “cảm” thấy mức trung bình của điện áp → chính là Vavg = Duty × Vmax
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/9b785752-6917-4977-8676-21369c8affa0)
 
@@ -1250,7 +1254,7 @@ Gồm có 2 loại cảm biến chính:
 ### Bộ chuyển đổi ADC là gì
 - ADC là từ viết tắt của Analog to Digital Converter hay bộ chuyển đổi analog sang kỹ thuật số là một mạch chuyển đổi giá trị điện áp liên tục (analog) sang giá trị nhị phân (kỹ thuật số) mà thiết bị kỹ thuật số có thể hiểu được sau đó có thể được sử dụng để tính toán kỹ thuật số. Mạch ADC này có thể là vi mạch ADC hoặc được nhúng vào một bộ vi điều khiển.
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/98d2560b-9534-4d1e-9c50-3866b820800f)
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/98d2560b-9534-4d1e-9c50-3866b820800f">
 
 ### Tại sao phải chuyển đổi analog sang kỹ thuật số
 - Thiết bị điện tử ngày nay hoàn toàn là kỹ thuật số, không còn là thời kỳ của máy tính analog. Thật không may cho các hệ thống kỹ thuật số, thế giới chúng ta đang sống vẫn là analog và đầy màu sắc, không chỉ đen và trắng.
@@ -1280,9 +1284,9 @@ Gồm có 2 loại cảm biến chính:
 + Differential mode: Sensor sẽ có 2 đầu ra và 2 đầu ra đó nối với 2 channel ADC trong STM32 và điện áp đo được là điện áp sai lệch giữa 2 ngõ ra 
 
 ### 2. Độ phân giải ADC (resolution): dùng để chỉ số bit cần thiết để chứa hết các mức giá trị số (digital) sau quá trình chuyển đổi ở ngõ ra 
-+ Để giải thích rõ hơn, chúng ta cùng chuyển đổi điện áp thay đổi từ 0 – 3.3 V, nhưng chỉ có 1 bit để lưu giá trị của điện áp thay đổi này: 
-
-![image](https://github.com/minchangggg/Stm32/assets/125820144/22f0659e-2423-46a1-ac7b-cc31588ebc6e)
++ Để giải thích rõ hơn, chúng ta cùng chuyển đổi điện áp thay đổi từ 0 – 3.3 V, nhưng chỉ có 1 bit để lưu giá trị của điện áp thay đổi này:
+  
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/22f0659e-2423-46a1-ac7b-cc31588ebc6e">
 
 -> Như vậy chỉ có 2 mức, bởi vì 1 bit chỉ có giá trị bằng 0 hoặc giá trị bằng 1, nó sẽ chia đôi khoảng điện áp như hình vẽ (ở điểm của mũi tên chỉ vào) và nếu như bé hơn mũi tên sẽ mang giá trị là 0 và lớn hơn là sẽ mang giá trị là 1. Tương tự như vậy ta **tăng lên n bit thì chia cái khoảng điện đó cho n lần** và ta thấy được **càng nhiều bit thì độ phân giải càng mịn hơn**.
 
@@ -1300,7 +1304,8 @@ Gồm có 2 loại cảm biến chính:
 - Điều gì sẽ xảy ra nếu điện áp thay đổi dưới 4,9mV mỗi bước? Nó sẽ đặt ADC vào vùng chết, do đó kết quả chuyển đổi luôn có một lỗi nhỏ. Có ngăn chặn lỗi này bằng cách sử dụng ADC có độ phân giải cao hơn ví dụ như bộ ADC lên đến 24 bit, mặc dù tần số chuyển đổi thấp.
   
 ### 4. Tính toán giá trị chuyển đổi ADC
-![image](https://github.com/minchangggg/Stm32/assets/125820144/babe80ce-4dc3-4033-934f-dd82dc30b105)
+
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/babe80ce-4dc3-4033-934f-dd82dc30b105">
 
 - Bài 1:
   
