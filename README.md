@@ -1136,7 +1136,7 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
   
 --------------------------------------------------------------------------------------------------------------------------------
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/811efbc6-08a4-49ba-9d93-fbbbda137025)
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/811efbc6-08a4-49ba-9d93-fbbbda137025">
 
 > https://tapit.vn/truyen-thong-noi-tiep-trong-lap-trinh-vi-dieu-khien-giao-tiep-uart/
 
@@ -1145,7 +1145,8 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 - UART (Universal synchronous asynchronous receiver transmitter ) là một ngoại vi cơ bản của STM32 sử dụng 2 chân Rx và Tx để nhận và truyền dữ liệu.
 - UART truyền dữ liệu không đồng bộ, có nghĩa là không có tín hiệu để đồng bộ hóa đầu ra của các bit từ UART truyền đến việc lấy mẫu các bit bởi UART nhận.
 - Thay vì tín hiệu đồng bộ, UART truyền thêm các bit start và stop vào gói dữ liệu được chuyển. Các bit này xác định điểm bắt đầu và điểm kết thúc của gói dữ liệu để UART nhận biết khi nào bắt đầu đọc các bit.
-![image](https://github.com/minchangggg/Stm32/assets/125820144/e175ae03-5459-488d-9056-979055bcb800)
+
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/e175ae03-5459-488d-9056-979055bcb800">
 
 ### 2. Các thông số cơ bản trong truyền nhận UART :
 - Data Frame (khung truyền)
@@ -1223,13 +1224,6 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 ### Nhận dữ liệu ở chế độ Interrupt 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/9b90231c-d56a-4fa6-be6b-5987eb3eb196)
 
-
-
-
-
-
-
-
 --------------------------------------------------------------------------------------------------------------------------------
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/949972d7-a29b-4992-8cc3-070222dfb177">
@@ -1262,8 +1256,6 @@ Gồm có 2 loại cảm biến chính:
 - Thay vào đó, chúng ta sử dụng một bộ ADC để chuyển đổi đầu vào điện áp analog thành một chuỗi các bit có thể được kết nối trực tiếp với bus dữ liệu của bộ vi xử lý và được sử dụng để tính toán.
 ### ADC hoạt động như thế nào
 - Một cách rất hay để xem xét hoạt động của ADC là tưởng tượng nó như một **bộ chia tỷ lệ toán học**. **Tỷ lệ về cơ bản là ánh xạ các giá trị từ dải này sang dải khác, vì vậy ADC ánh xạ một giá trị điện áp sang một số nhị phân.** 
-
-
 
 ---
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/0f925e69-61a6-4ad8-b386-fe5aad02ecd2)
