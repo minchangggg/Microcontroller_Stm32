@@ -4,12 +4,11 @@
 
 <img width="450" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/a42e5da1-1f29-4edd-9c67-6f6c9432a246">
 
-## I. SƠ LƯỢC VỀ CHƯƠNG TRÌNH C
-### A, Quá trình biên dịch một chương trình C/C++
+# I. SƠ LƯỢC VỀ CHƯƠNG TRÌNH C
+## A, Quá trình biên dịch một chương trình C/C++
 > https://tapit.vn/qua-trinh-bien-dich-mot-chuong-trinh-cc/?fbclid=IwAR30Vb0QtPRumEMEmWeFqYsndk2tRrhgGLDh16K8cHTBoPU1J-A_XpFGl9o
-
-#### 1. ĐỊNH NGHĨA
-- Là quá trình chuyển đổi từ ngôn ngữ bậc cao (C/C++, Pascal, Java, C#…) sang ngôn ngữ ngôn ngữ máy-> máy tính có thể hiểu và thực thi.
+### 1. ĐỊNH NGHĨA
+Là quá trình chuyển đổi từ ngôn ngữ bậc cao (C/C++, Pascal, Java, C#…) sang ngôn ngữ ngôn ngữ máy-> máy tính có thể hiểu và thực thi.
 Ngôn ngữ C là một ngôn ngữ dạng biên dịch. Chương trình được viết bằng C muốn chạy được trên máy tính phải trải qua một quá trình biên dịch để chuyển đổi từ dạng mã nguồn sang chương trình dạng mã thực thi. Quá trình được chia ra làm 4 giai đoạn chính:
 
 	+ Giai đoàn tiền xử lý (Pre-processor)
@@ -19,37 +18,28 @@ Ngôn ngữ C là một ngôn ngữ dạng biên dịch. Chương trình đượ
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/bc85d275-e61e-4deb-a55a-7ab20df96215)
 
-#### 2. HOẠT ĐỘNG
-
-**a. Giai đoạn tiền xử lý – Preprocessor**
-
-	+ Nhận mã nguồn
-	+ Xóa bỏ tất cả chú thích, comments của chương trình
-	+ Chỉ thị tiền xử lý (bắt đầu bằng #) cũng được xử lý
-	+ Ví dụ: chỉ thị #include cho phép ghép thêm mã chương trình của một tệp tiêu để vào mã nguồn cần dịch. Các hằng số được định nghĩa bằng #define sẽ được thay thế bằng giá trị cụ thể tại mỗi nơi sử dụng trong chương trình.
-
-**b. Cộng đoạn dịch Ngôn Ngữ Bậc Cao sang Assembly**
-
-	+ Phân tích cú pháp (syntax) của mã nguồn NNBC
-	+ Chuyển chúng sang dạng mã Assembly là một ngôn ngữ bậc thấp (hợp ngữ) gần với tập lệnh của bộ vi xử lý.
-
-**c. Công đoạn dịch Assembly**
-
-	+ Dich chương trình => Sang mã máy 0 và 1
-	+ Một tệp mã máy (.obj) sinh ra trong hệ thống sau đó.
-
-**d. Giai đoạn Linker**
-
+### 2. HOẠT ĐỘNG
+#### a. Giai đoạn tiền xử lý – Preprocessor
++ Nhận mã nguồn
++ Xóa bỏ tất cả chú thích, comments của chương trình
++ Chỉ thị tiền xử lý (bắt đầu bằng #) cũng được xử lý
++ Ví dụ: chỉ thị #include cho phép ghép thêm mã chương trình của một tệp tiêu để vào mã nguồn cần dịch. Các hằng số được định nghĩa bằng #define sẽ được thay thế bằng giá trị cụ thể tại mỗi nơi sử dụng trong chương trình.
+#### b. Cộng đoạn dịch Ngôn Ngữ Bậc Cao sang Assembly
++ Phân tích cú pháp (syntax) của mã nguồn NNBC
++ Chuyển chúng sang dạng mã Assembly là một ngôn ngữ bậc thấp (hợp ngữ) gần với tập lệnh của bộ vi xử lý.
+#### c. Công đoạn dịch Assembly
++ Dich chương trình => Sang mã máy 0 và 1
++ Một tệp mã máy (.obj) sinh ra trong hệ thống sau đó.
+#### d. Giai đoạn Linker
 + Trong giai đoạn này mã máy của một chương trình dịch từ nhiều nguồn (file .c hoặc file thư viện .lib) được liên kết lại với nhau để tạo thành chương trình đích duy nhất
 + Mã máy của các hàm thư viện gọi trong chương trình cũng được đưa vào chương trình cuối trong giai đoạn này. -> Chính vì vậy mà các lỗi liên quan đến việc gọi hàm hay sử dụng biến tổng thể mà không tồn tại sẽ bị phát hiện. Kể cả lỗi viết chương trình chính không có hàm main() cũng được phát hiện trong liên kết.
 + Kết thúc quá trình tất cả các đối tượng được liên kết lại với nhau thành một chương trình có thể thực thi được (executable hay .exe) thống nhất.
+## B. Các thư viện cần học trong C
 
-### B. Các thư viện cần học trong C
-
-### C Library - <time.h>
+## C Library - <time.h>
 *The time.h header defines: four variable types + two macro + various functions -> for manipulating date and time.*
 
-#### 1. Library Variables
+### 1. Library Variables
 |  No |       Variable     |                                    Description                                     | 
 | :---| :------------------|------------------------------------------------------------------------------------| 
 |  1  |   **size_t**       |  *This is the unsigned integral type and is the **result of the sizeof keyword***  | 
@@ -71,13 +61,13 @@ The **struct tm** has the following definition
                                  int tm_isdst;     // daylight saving time             
                               };
               
-#### 2. Library Macros
+### 2. Library Macros
 |  No |          Macro        |                             Description                                         | 
 | :---| :---------------------|---------------------------------------------------------------------------------| 
 |  1  |   **NULL**            |  *This macro is the value of a **null pointer constant***                       | 
 |  2  |   **CLOCKS_PER_SEC**  |  *This macro represents the **number of processor clocks per second***          | 
 
-#### 3. Library Functions 
+### 3. Library Functions 
 |  No |      Function      |                                   Description                                                       | 
 | :---| :------------------|-----------------------------------------------------------------------------------------------------| 
 |  1  | ```char *asctime(const struct tm *timeptr)```  |  *Returns a pointer to a string which represents the day and time of the structure timeptr*  | 
@@ -90,12 +80,12 @@ The **struct tm** has the following definition
 |  8  | ```size_t strftime(char *str, size_t maxsize, const char *format, const struct tm *timeptr)```  |  *Formats the time represented in the structure timeptr according to the formatting rules defined in format and stored into str*  |
 |  9  | ```time_t time(time_t *timer)``` |  *Calculates the current calender time and encodes it into time_t format*  | 
 
-## II. CẤU TRÚC CỦA MỘT CHƯƠNG TRÌNH C CHO VI ĐIỀU KHIỂN 
+# II. CẤU TRÚC CỦA MỘT CHƯƠNG TRÌNH C CHO VI ĐIỀU KHIỂN 
 <img width="700" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/9a676761-63a9-4fa3-9066-bd4ddaaba427">
 
 <img width="580" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/18b5990f-0c9f-4a68-b69c-a62e4189deb4">
 
-### Quá trình thực hiện ngắt của vi điều khiển – MCU Interrupt processing
+## 1. Quá trình thực hiện ngắt của vi điều khiển – MCU Interrupt processing
 > https://tapit.vn/qua-trinh-thuc-hien-ngat-cua-vi-dieu-khien-mcu-interrupt-processing/?fbclid=IwAR2PXlKLeeP945BvFNK_58rtfPEntMePA2Nz42NHYgTHVPACBNR3fAmJtDA
 
 + Bình thường, vi điều khiển sẽ thực thi các lệnh do người dùng viết một cách tuần tự từ trên xuống. 
@@ -116,7 +106,7 @@ The **struct tm** has the following definition
 	
 	– Ngắt Timer: Thường sử dụng khi tràn thanh ghi đếm, hoặc khi giá trị đếm bằng với thanh ghi so sánh
 
-### Các thiết bị vào ra tiêu biểu
+## 2. Các thiết bị vào ra tiêu biểu
 • Timer (Bộ định thời): Các timer có thể được lập trình cho khoảng thời gian định trước. Ví dụ: để đo khoảng thời gian giữa hai sự kiện, tạo sự kiện tại các khoảng thời gian xác định, hoặc tạo tín hiệu ở tần số xác định, ứng dụng cho bộ điều biến độ rộng xung (PWM) và nhiều sự kiện khác.
 • Watch-Dog-Timer (WDT - Đồng hồ bấm giờ): Đây là một loại timer đặc biệt, được sử dụng như một thiết bị an toàn. WDT sẽ reset hệ thống (chương trình) nếu không nhận được tín hiệu do chương trình tạo ra sau mỗi đơn vị thời gian X, một tính năng hữu ích trong một số ứng dụng đề phòng trường hợp chương trình bị treo. WDT cũng có thể được cấu hình để tự tạo tín hiệu ngắt trong khoảng thời gian đều đặn.
 • Communication Interfaces (Các giao diện truyền thông): bao gồm UART, SPI, USB, I2C, etc.
@@ -126,9 +116,8 @@ The **struct tm** has the following definition
 > Xem thêm: Tổng hợp các bài hướng dẫn Lập trình vi điều khiển STM32 
 > https://tapit.vn/tong-hop-cac-bai-huong-dan-lap-trinh-vi-dieu-khien-stm32/
 
-## III. TỔ CHỨC BỘ NHỚ CỦA VI ĐIỀU KHIỂN, CHƯƠNG TRÌNH VÀ DỮ LIỆU TRONG BỘ NHỚ 
-### Tổ chức bộ nhớ
-
+# III. TỔ CHỨC BỘ NHỚ CỦA VI ĐIỀU KHIỂN, CHƯƠNG TRÌNH VÀ DỮ LIỆU TRONG BỘ NHỚ 
+## Tổ chức bộ nhớ
 + Bộ nhớ chương trình - FLASH (ROM)
 + Bộ nhớ dữ liệu - SRAM
 + Các ngoại vi - Register
@@ -137,10 +126,10 @@ The **struct tm** has the following definition
 
 <img width="179" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/4e67c60b-b7b8-4a35-ac71-2fcee694ceaf">
 
-## IV. CÁC PHÉP TOÁN TRONG C
-### 1. Ép kiểu
+# IV. CÁC PHÉP TOÁN TRONG C
+## 1. Ép kiểu
 
-### 2. Phép tăng giảm giá trị
+## 2. Phép tăng giảm giá trị
 
 `a. ++ là toán tử tăng`
 
@@ -164,9 +153,9 @@ The **struct tm** has the following definition
 		Xem ví dụ sau: x = 10; y = x++;// y = 10 và x = 11.
 		Nếu dùng toán tử tăng ++ sau biến x thì giá trị của biến x sẽ được gán cho biến y, rồi sau đó biến x mới tăng lên 1.
 
-### 3. Phép toán số học
+## 3. Phép toán số học
 
-### 4.  Phép toán quan hệ
+## 4.  Phép toán quan hệ
 
 <img width="230" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/1cbfd42a-4b43-4f16-bcb0-cb8aeab336d9">
 
@@ -178,11 +167,11 @@ The **struct tm** has the following definition
 
 <img width="450" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/ed37a163-3ee3-48a6-a3b1-97c79465e08a">
 
-### 5.  Phép gán
+## 5.  Phép gán
 
-### 6.  Phép toán điền kiện
+## 6.  Phép toán điền kiện
 
-### 7.  Phép toán logic
+## 7.  Phép toán logic
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/eff30b5e-02dc-4156-9a70-80dda4810576">
 
@@ -195,7 +184,7 @@ VD2:
 
 <img width="550" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/9125fdc2-78b1-47df-85fd-4e3425e81a87">
 
-### 8. Phép toán Bitwise
+## 8. Phép toán Bitwise
 
 > https://viblo.asia/p/toan-tu-bitwise-naQZR9qGKvx
 > https://openplanning.net/12281/cac-toan-tu-bitwise
@@ -203,7 +192,7 @@ VD2:
 
 <img width="700" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/a7f26a16-ef26-4f01-8c6e-ee4ca44da596">
 
-#### a. Bitwise AND operator & 
+### a. Bitwise AND operator & 
 
 <img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/52bbce36-cae4-44d5-b864-d6c64254cd6e">
 
@@ -219,7 +208,7 @@ VD2:
 
 <img width="530" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/9b842310-35c5-4c70-8f54-4a56ce11b3d5">
 
-#### b. Bitwise OR operator |
+### b. Bitwise OR operator |
 
 <img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/8a8646c4-8238-4164-bc47-72d0836a5649">
 
@@ -234,7 +223,7 @@ VD2:
 
 <img width="550" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/fef4f79d-1b04-40d8-a0c3-8fed15ab23ac">
 
-#### c. Bitwise XOR (exclusive OR) operator ^
+### c. Bitwise XOR (exclusive OR) operator ^
 
 <img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/edb7c512-c685-4396-a4f1-e57b5e4eb342">
 
@@ -256,7 +245,7 @@ VD2:
 
 		hay dễ hiểu hơn là: (0 0 0 1 XOR 0 0 1 1) XOR 0 1 1 1 = 0 0 1 0 ^ 0 1 1 1 = 0 1 0 1
 		
-#### d. Bitwise NOT operator ~
+### d. Bitwise NOT operator ~
 
 <img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/d8a580e8-c843-4b76-a649-1f92f4436e6b">
 
@@ -268,7 +257,7 @@ VD2:
   
 <img width="500" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/ccda5143-6449-442b-8fc1-5a6374c1f1d2">
 
-#### e. Toán tử dịch bit trái (<<) và toán tử dịch bit phải (>>)
+### e. Toán tử dịch bit trái (<<) và toán tử dịch bit phải (>>)
 
 + Trong phép dịch trái, toán hạng bên trái là biểu thức để dịch chuyển các bit, còn toán hạng bên phải là con số bit cần dịch chuyển. vì vậy, khi chúng ta viết x<<1, nghĩa là chúng ta dịch chuyển x sang trái 1 bit. các bit mới được dịch chuyển bên phải sẽ là 0.
 + VD:
@@ -283,16 +272,16 @@ VD2:
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/c2ab7160-6a45-45b9-becf-417f44f9ab7d)
 
-#### f. Phép gán toán tử bitwise
+### f. Phép gán toán tử bitwise
 <img width="650" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/993470f6-5de5-4fe3-8e97-b23024d39c64">
 
 VD:
 
 <img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/469aaf64-078f-473b-8ba2-b9085803b6ff">
 
-## V. Kỹ thuật mặt nạ bit - Bit Mask
+# V. Kỹ thuật mặt nạ bit - Bit Mask
 > https://www.laptrinhdientu.com/2021/08/bitwise-operator.html
-### 1. Giới thiệu
+## 1. Giới thiệu
 + Bitwise là toán tử xử lý với các bit trong một số, nó là một toán tử rất quan trọng trong C, đặc biệt là C nhúng. Các toán tử bitwise cho phép xử lý với từng bit riêng lẻ trên một số nguyên, một thanh ghi. 
 
     ➤ Người dùng có thể set, clear, toggle, read a bit, ... mà không làm ảnh hưởng đến các thành phần khác của thanh ghi bằng toán tử bitwise. 
@@ -310,13 +299,13 @@ VD:
   
 + Xử lý với **bit (1 hoặc 1 vài bit) xem chừng khó khăn hơn**:
 
-🧐🧐 Nếu MCU chỉ cho phép tác động đến byte, ta nên sử dụng kỹ thuật mặt nạ: "Mask" - Đó là cách sử dụng các phép AND (&), OR (|), EXOR (^) các thanh ghi với các số đặc biệt để chỉ tác động tới các bit cần thiết.`
+Nếu MCU chỉ cho phép tác động đến byte, ta nên sử dụng kỹ thuật mặt nạ: "Mask" - Đó là cách sử dụng các phép AND (&), OR (|), EXOR (^) các thanh ghi với các số đặc biệt để chỉ tác động tới các bit cần thiết.`
 
-### 2. Ứng dụng
+## 2. Ứng dụng
 
 <img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/e2520455-45e5-4e11-ad75-09b67b44011a">
 
-#### a. SET BITS 
+### a. SET BITS 
 `Set 1 (1 vài) bit lên mức 1 => dùng OR`
 
 + Ví dụ: set chân P1.4 lên mức 1
@@ -329,7 +318,7 @@ VD:
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/03de2689-fa61-4306-9037-6a246cdca656">
 
-#### b. CLEAR BITS
+### b. CLEAR BITS
 `Clear 1 (1 vài) bit = 0 => dùng AND + NOT`
 
 + Ví dụ: Clear chân P1.4 về mức 0
@@ -344,7 +333,7 @@ VD:
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/a8713f3e-9fdd-4d77-9127-a40c2a29d1e4">
 
-#### c. TOGGLE BITS
+### c. TOGGLE BITS
 `Đảo logic 1 (1 vài) bit => dùng EXOR`
 
 + Ví dụ: Đảo logic chân P1.4
@@ -358,7 +347,7 @@ VD:
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/b3e1dad0-e7f2-40b4-8fee-688a63666deb">
 
-#### d. CHECKING BITS
+### d. CHECKING BITS
 `Kiểm tra giá trị 1 bit => dùng AND`
 
 + Ví dụ: Kiểm tra nút bấm tại chân P1.4
@@ -371,7 +360,7 @@ VD:
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/b5214141-e849-44ba-bcdf-26a88e30ec2c">
 
-#### Nhận xét
+### Nhận xét
 Nhận xét 3 trường hợp trên:
 
 + Cách 1 (Cách thông thường): **không áp dụng cho MCU, chỉ cho phép tác động theo byte, trường hợp đảo bit phải dùng if** -> dài dòng.
@@ -385,8 +374,8 @@ Nhận xét 3 trường hợp trên:
 
 <img width="650" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/9e23c9de-7c47-4198-ba04-a8b30ed0a9e9">
 
-## I, Một số khái niệm cơ bản và Cấu trúc của 1 vi điều khiển
-### 1. Một số khái niệm cơ bản
+# I, Một số khái niệm cơ bản và Cấu trúc của 1 vi điều khiển
+## 1. Một số khái niệm cơ bản
 - User manual board: Tổng quan và hướng dẫn sử dụng board mạch thực hành, các thành phần trên board mạch. (F103 BluePill: website)
 - Schematic: Sơ đồ nguyên lý mạch của board mạch thực hành, linh kiện nào, chân nào nối với chân nào. 
 - Datasheet: Tổng quan về thiết bị và thông suất kỹ thuật.
@@ -398,7 +387,7 @@ Nhận xét 3 trường hợp trên:
   + Độ rộng thanh ghi của vi xử: Thực hiện 1 số chức năng nhất định, chứa hoặc tính toán các dữ liệu. VD: MCU 8 bits thì thanh ghi 8 bit, MCU 16 bits thì thanh ghi 16 bits....
   + Độ rộng đường bus dữ liệu ( khả năng vận chuyển của nó, bao nhiêu bits trong 1 lần vận chuyển dữ ). VD: có 1 biến dữ liệu 32 bits (dữ liệu đc lưu trong bộ nhớ) -> để tính toán những dữ liệu này thì chính Vi Xử Lý là nơi tính toán -> Cần chuyển dữ liệu 32 bits từ bộ nhớ lên Vi Xử Lý => đối với MCU 32 bits, chỉ cần load 1 lượt; đối với MCU 8 bits cần lấy 4 lượt. => Số bits càng lớn thì khả năng làm việc càng nhanh càng tối ưu (lấy dữ liệu và tính toán nhanh hơn). 
 
-### 2. Cấu trúc của vi điều khiển
+## 2. Cấu trúc của vi điều khiển
 
           + Vi xử lý - CPU
           + Bộ nhớ 
@@ -414,25 +403,25 @@ Nhận xét 3 trường hợp trên:
 <img width="800" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/35a032e7-b732-46dc-b936-d6bf8743bcdb">
 <img width="800" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/737d574d-a87e-41a1-96fd-f3d0b7447af4">
 
-### CPU, MPU, MCU và GPU là gì?
+## CPU, MPU, MCU và GPU là gì?
 > https://www.eejournal.com/article/what-the-faq-are-cpus-mpus-mcus-and-gpus/
 
-#### a. CPU (Central Processing Unit) – Bộ xử lý trung tâm
+### a. CPU (Central Processing Unit) – Bộ xử lý trung tâm
 - Là bộ xử lý chính của máy tính, điều khiển hầu hết các hoạt động tính toán và xử lý dữ liệu.
 - Có thể thực hiện các tác vụ chung như chạy phần mềm, xử lý dữ liệu, điều khiển hệ điều hành.
 - Ví dụ: Intel Core i9, AMD Ryzen 7.
 - Đặc điểm chính: Hiệu suất cao, có nhiều lõi (core) và luồng (thread).
-#### b. MPU (Microprocessor Unit) – Vi xử lý
+### b. MPU (Microprocessor Unit) – Vi xử lý
 - Thực chất là một loại CPU thu nhỏ, thường được dùng trong các hệ thống nhúng hoặc thiết bị điện tử đơn giản.
 - MPU thường không có bộ nhớ RAM hay bộ nhớ Flash tích hợp, nên cần các linh kiện ngoài để hoạt động.
 - Ví dụ: Intel 8086, ARM Cortex-A.
 - Đặc điểm chính: Dùng cho các ứng dụng cần linh hoạt và hiệu suất cao, nhưng phải có bộ nhớ ngoài.
-#### c. MCU (Microcontroller Unit) – Vi điều khiển
+### c. MCU (Microcontroller Unit) – Vi điều khiển
 - Là một hệ thống tích hợp bao gồm CPU, RAM, ROM (Flash), và các ngoại vi (GPIO, UART, SPI, I2C, PWM...) trên một chip duy nhất.
 - MCU thường được dùng trong các ứng dụng nhúng, điều khiển các thiết bị như xe hơi, máy giặt, robot, IoT.
 - Ví dụ: Arduino (ATmega328), STM32, ESP32.
 - Đặc điểm chính: Tiêu thụ điện năng thấp, tích hợp nhiều thành phần, chuyên dụng cho điều khiển nhúng.
-#### d. GPU (Graphics Processing Unit) – Bộ xử lý đồ họa
+### d. GPU (Graphics Processing Unit) – Bộ xử lý đồ họa
 - Chuyên xử lý các tác vụ đồ họa, xử lý song song nhiều dữ liệu hình ảnh.
 - Được sử dụng trong game, đồ họa, AI, tính toán khoa học.
 - Ví dụ: NVIDIA GeForce RTX, AMD Radeon.
@@ -440,13 +429,13 @@ Nhận xét 3 trường hợp trên:
 
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/e9bf3ce9-7126-4249-abc8-8e84ab4b10a8">
 
-## II, PHẦN CỨNG THỰC HÀNH
+# II, PHẦN CỨNG THỰC HÀNH
 
 <img width="700" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/83ad9192-6abb-446d-ab46-129fde9f087e">
 
 > 	https://stm32-base.org/boards/STM32F103C8T6-Blue-Pill.html
 
-### 1. Giới thiệu vi điều khiển STM32F103C8T6
+## 1. Giới thiệu vi điều khiển STM32F103C8T6
 
 - STM32F103C8T6 là vi điều khiển **32bit**, thuộc họ F1 của dòng chip STM32 hãng ST.
 
@@ -510,7 +499,7 @@ Nhận xét 3 trường hợp trên:
 
  - Kiểm tra lỗi CRC và 96-bit ID.
 
-### 2. Giới thiệu kit BluePill sử dụng STM32F103C8T6
+## 2. Giới thiệu kit BluePill sử dụng STM32F103C8T6
 
 Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử dụng để nghiên cứu về ARM nhiều nhất hiện nay. 
 
@@ -525,7 +514,7 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 + Tích hợp Led trạng thái nguồn, Led PC13, Nút Reset.
 + Kích thước: 53.34 x 15.24mm.
 
-### III, LÀM QUEN MỘT SỐ THAO TÁC IDE
+# III, LÀM QUEN MỘT SỐ THAO TÁC IDE
 <img width="500" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/827f61cb-0350-47c7-bace-fb6ad4b3fa56">
 
 **Các bước tạo ra một project**
@@ -540,11 +529,11 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 
 <img width="350" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/283fa967-2ecc-48a5-99fc-f5a714e8b285">
 
-## I, TÌM HIỂU CHUNG CHỨC NĂNG CỦA CÁC CHÂN STM32F103C8T6
+# I, TÌM HIỂU CHUNG CHỨC NĂNG CỦA CÁC CHÂN STM32F103C8T6
 ![Bản sao của Blue-Pink Cute Class Schedule (4)](https://github.com/minchangggg/Stm32/assets/125820144/ec67b5bb-7804-4734-b973-d52d16a4908e)
 
-### 1, Các chân không phải GPIO
-#### a, Những nguồn cung cấp cho mạch gồm 
+## 1, Các chân không phải GPIO
+### a, Những nguồn cung cấp cho mạch gồm 
 > Note: Những chân VDD (như VCC) và VSS (như GND) là những chân dùng để cấp nguồn
 
 + 3 cặp chân nguồn (VDD1, VSS1), (VDD2, VSS2), (VDD3, VSS3) là 3 cặp chân cấp nguồn cho phần mạch có tính năng digital.
@@ -554,16 +543,16 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 >  Khi mà layout mạch, chú ý sơ đồ nguyên lý phải cấp nguồn hết tất cả 3 cặp chân nguồn digital (VDD1, VSS1), (VDD2, VSS2), (VDD3, VSS3) và cặp chân 			nguồn analog (VDDA, VSSA).
 + 1 Chân nguồn VBAT (Volt battery) dành riêng cho Real-time clock hoạt động (đếm giờ, phút, giây)
   
-#### b, Chân NRST
+### b, Chân NRST
 + là chân Reset (RST)
 + NRST là Tích cực mức 0 (tích cực thấp).
 + Khi chân Reset tích cực thấp, nghĩa là nó sẽ thực hiện chức năng Reset khi cấp mức logic 0.
 > Note: Tìm hiểu về POR (power on reset)
 
-#### c, Chân BOOT
+### c, Chân BOOT
 + là chân chọn vùng nhớ khởi động, chạy các chương trình khác nhau trong vi điều khiển (nên để mặc định, không tác động đến nó)
 
-### 2, Các chân GPIO
+## 2, Các chân GPIO
 - GPIO (GENERAL PURPOSE INPUT OUPUT) pin là các chân Input/ Ouput của vi điều khiển có thể được sử dụng với nhiều mục đích khác nhau -> Giúp vi điều khiển có thể giao tiếp với thế giới bên ngoài.
 - Mỗi GPIO port có:
   + 32-bit configuration registers (Thanh ghi cấu hình): GPIOx_MODER, GPIOx_OTYPER, GPIOx_OSPEEDR, GPIOx_PUPDR
@@ -582,8 +571,8 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 	+ Đọc thanh ghi (r)
 	+ Ghi thanh ghi (w)
  
-## II, Output 
-### 1, Sơ đồ nguyên lý
+# II, Output 
+## 1, Sơ đồ nguyên lý
 ![Bản sao của Blue-Pink Cute Class Schedule (5)](https://github.com/minchangggg/Stm32/assets/125820144/b60a78f2-01f1-4c66-ab08-3ac52e267a0a)
 
 [INPUT]
@@ -593,11 +582,11 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 - P-MOS kéo lên VDđ tạo ra điện áp 3.3v
 - N-MOS kéo xuống VSs tạo ra điện áp 0V
 
-### 2, Cấu hình thanh ghi dữ liệu của các Port
+## 2, Cấu hình thanh ghi dữ liệu của các Port
 
 <img width="650" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/6aa28a55-c481-4085-83ab-a26225dbd6ad">
 
-### 3, Phân tích cách hoạt động hàm HAL_GPIO_WritePin()
+## 3, Phân tích cách hoạt động hàm HAL_GPIO_WritePin()
 
 <img width="950" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/8a722b81-6da8-49d2-a417-72c06f088c46">
 
@@ -605,9 +594,9 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/816a62e2-cbc3-4178-ae2a-320140f0a67e">
 
-### 4, Tính tối ưu của thanh ghi BSRR của vi xử lý 32 bit 
-#### Muốn điều chỉnh trạng thái của 1 chân bất kì (VD PC13) t sẽ có 2 cách: tác động lên ODR và tác động lên BSRR
-#### Cách 1: Tác động trực tiếp lên ODR (thanh ghi dữ liệu) mà không thông qua BSRR
+## 4, Tính tối ưu của thanh ghi BSRR của vi xử lý 32 bit 
+### Muốn điều chỉnh trạng thái của 1 chân bất kì (VD PC13) t sẽ có 2 cách: tác động lên ODR và tác động lên BSRR
+### Cách 1: Tác động trực tiếp lên ODR (thanh ghi dữ liệu) mà không thông qua BSRR
 VD: ODR ban đầu = 0x0000 -> muốn ODR 13 bằng 1 thì làm cách nào?
 
 Cách giải: T sẽ dùng pp set bit (trong bitmask đã học để thực hiện): ODR = ODR | 0x 0010 0000 0000 0000
@@ -623,25 +612,25 @@ Lưu ý:
 + T giả sử sau khi thực hiện B1, có 1 luồng ngắt đc gởi đến, giá trị ODR lúc này thực chất đã trở thành ob 1111 1111 1111 1111, tuy nhiên lúc này giá trị được lưu trữ trên vi xử lý vẫn là 0x 0000 0000 0000 0000.
 + Sau khi ngắt, vi xử lý tiếp tục làm việc với bước 2, rồi đến bước 3. Tuy nhiên lúc này giá trị đã xảy ra sai sót (nó làm việc vs bản sao ODR trước đó mà ko làm việc với giá trị mới nhất -> hệ thống ghi ngược lại kết quả làm việc với bản sao cũ đó -> chương trình chạy sai)
 
-#### Cách 2: Tác động gián tiếp lên thanh ghi ODR thông qua thanh qua thanh ghi BSRR
+### Cách 2: Tác động gián tiếp lên thanh ghi ODR thông qua thanh qua thanh ghi BSRR
 VD:
 
 <img width="600" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/441cb9c1-1ed2-4a0f-9ec1-e09c312dec83">
 
 + Ở đây t chỉ đơn giản thực hiện phép gán -> chỉ cần 1 bước gán là xong, không bị mắc sai lầm như TH trên 
   
-## I, Input
-### 1, Mức điện áp ngõ vào
+# I, Input
+## 1, Mức điện áp ngõ vào
 
 + Mức logic 0 của 1 chân Input là từ -0.3V đến 1.164V
 + Mức logic 1 của 1 chân Input là từ 1.833V đến 4V
 
-### 2, Sơ đồ nguyên lý
+## 2, Sơ đồ nguyên lý
 
 ![Bản sao của Blue-Pink Cute Class Schedule (6)](https://github.com/minchangggg/Stm32/assets/125820144/58abc013-0e26-454c-a12c-e2398f612f30)
 
-### 3, Phân tích các chế độ Input
-#### a, Input floating
+## 3, Phân tích các chế độ Input
+### a, Input floating
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/b7a8c900-a564-4d7a-8a57-725af9e9b923)
 
 > 1 chân Input ở chế độ Floating nếu **ngõ vào hở mạch** hoặc **trở kháng cao** => điện áp không xác định => giá trị logic của bit tương ứng trên thanh ghi ODR thay đổi ngẫu nhiên, không xác định, bị trôi nổi.
@@ -662,7 +651,7 @@ VD:
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/fe278d7f-4a9d-4f9b-a897-8e3e0995e824)
 
-#### b, Input pull-up
+### b, Input pull-up
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/5c92976c-d47f-40a4-adfa-1241a92393c4)
 
 > Là chế độ sử dụng điện trở nội kéo lên (INTERNAL PULL UP RESISTOR)
@@ -676,7 +665,7 @@ VD:
   
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/791daa1c-be53-41b5-8e90-9bf4f433c756)
 
-#### c, Input pull-down
+### c, Input pull-down
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/614d086b-cd45-4244-a483-fd07ea8eb5d1)
 
 > Là chế độ sử dụng điện trở nội kéo xuống (INTERNAL PULL DOWN RESISTOR)
@@ -1153,8 +1142,7 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 - Baund rate (tốc độ baund)
 
 #### a. Data Frame (khung truyền)
-
-![image](https://github.com/minchangggg/Stm32/assets/125820144/51d96603-251f-48a6-b23e-8bdfc7be0843)
+<img width="600" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/51d96603-251f-48a6-b23e-8bdfc7be0843">
 
 - Data Frame: Khung truyền quy định về số bit trong mỗi lần truyền.
 - Start bit: là bit đầu tiên được truyền trong 1 Frame. Báo hiệu cho thiết bị nhận có một gói dữ liệu sắp đc truyền đến. Bit bắt buộc.
@@ -1167,7 +1155,7 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 
 [Ex]
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/a356abde-7c71-40c5-ba1b-5078047231e0)
+<img width="600" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/a356abde-7c71-40c5-ba1b-5078047231e0">
 
 + 1001111 = 79 = 'O'
 + 1001011 = 75 = 'K'
