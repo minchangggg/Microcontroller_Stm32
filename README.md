@@ -436,66 +436,49 @@ Nhận xét 3 trường hợp trên:
 > 	https://stm32-base.org/boards/STM32F103C8T6-Blue-Pill.html
 
 ## 1. Giới thiệu vi điều khiển STM32F103C8T6
-
 - STM32F103C8T6 là vi điều khiển **32bit**, thuộc họ F1 của dòng chip STM32 hãng ST.
-
 - Lõi **ARM COTEX M3**.
-
 - Tốc độ tối đa **72Mhz**. 
-
 - Bộ nhớ :
 
-	**64** kbytes bộ nhớ **Flash** 
-
-	**20** kbytes bộ nhớ **SRAM**      
+	+ **64** kbytes bộ nhớ **Flash** 
+	+ **20** kbytes bộ nhớ **SRAM**      
 
 - Clock, reset và quản lý nguồn
 
-	Điện áp hoạt động từ 2.0 → 3.6V.
-
-	Sử dụng thạch anh ngoài từ 4Mhz → 20Mhz.     
-
-	Thạch anh nội dùng dao động RC ở mode 8Mhz hoặc 40Khz.	 
+	+ Điện áp hoạt động từ 2.0 → 3.6V.
+	+ Sử dụng thạch anh ngoài từ 4Mhz → 20Mhz.     
+	+ Thạch anh nội dùng dao động RC ở mode 8Mhz hoặc 40Khz.	 
 
 - Chế độ điện áp thấp:        
 
-	Có các mode: ngủ, ngừng hoạt động hoặc hoạt động ở chế độ chờ.
-	
-	Cấp nguồn ở chân Vbat bằng pin ngoài để dùng bộ RTC và sử dụng dữ liệu được lưu trữ khi mất nguồn cấp chính. 
+	+ Có các mode: ngủ, ngừng hoạt động hoặc hoạt động ở chế độ chờ.
+	+ Cấp nguồn ở chân Vbat bằng pin ngoài để dùng bộ RTC và sử dụng dữ liệu được lưu trữ khi mất nguồn cấp chính. 
 
 - 2 bộ ADC 12 bit với 9 kênh cho mỗi bộ        
 
-	Khoảng giá trị chuyển đổi từ 0 – 3.6 V
-	
-	Có chế độ lấy mẫu 1 kênh hoặc nhiều kênh.    
+	+ Khoảng giá trị chuyển đổi từ 0 – 3.6 V
+	+ Có chế độ lấy mẫu 1 kênh hoặc nhiều kênh.    
 
 - DMA:         
 
-	7 kênh DMA
-	
-	Có hỗ trợ DMA cho ADC, UART, I2C, SPI.
+	+ 7 kênh DMA
+	+ Có hỗ trợ DMA cho ADC, UART, I2C, SPI.
 
 - 7 bộ Timer:
 
-	3 Timer 16 bit hỗ trợ các mode Input Capture/ Output Compare/ PWM.
-	
-	1 Timer 16 bit hỗ trợ để điều khiển động cơ với các mode bảo vệ ngắt Input, dead-time.
-	
-	2 Watchdog Timer để bảo vệ và kiểm tra lỗi.
-	
-	1 Systick Timer 24 bit đếm xuống cho hàm Delay,….
+	+ 3 Timer 16 bit hỗ trợ các mode Input Capture/ Output Compare/ PWM.
+	+ 1 Timer 16 bit hỗ trợ để điều khiển động cơ với các mode bảo vệ ngắt Input, dead-time.
+	+ 2 Watchdog Timer để bảo vệ và kiểm tra lỗi.
+	+ 1 Systick Timer 24 bit đếm xuống cho hàm Delay,….
 
 - Có hỗ trợ 9 kênh giao tiếp:
 
-	2 bộ I2C.
-
-     3 bộ USART
-
-	2 SPI
-	
-	1 CAN
-	
-	USB 2.0 full-speed interface
+	+ 2 bộ I2C
+ 	+ 3 bộ USART
+	+ 2 SPI
+	+ 1 CAN	
+	+ USB 2.0 full-speed interface
 
  - Kiểm tra lỗi CRC và 96-bit ID.
 
@@ -517,14 +500,56 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 # III, LÀM QUEN MỘT SỐ THAO TÁC IDE
 <img width="500" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/827f61cb-0350-47c7-bace-fb6ad4b3fa56">
 
-**Các bước tạo ra một project**
-
+### Các bước tạo ra một project
 	+ Bước 1: Chọn Workspace (thư mục)
 	+ Bước 2: Chọn vi điều khiển
 	+ Bước 3: Cấu hình -> Sinh mã code
 	+ Bước 4: Viết mã code, biên dịch
 	+ Bước 5: Nạp chương trình/ debug
+# IV. ST-Link v2
+- ST-Link v2 là công cụ lập trình và debug cho STM8 và STM32.
+- Kết nối với Blue Pill qua các chân: GND, SWCLK, SWDIO, và 3.3V.
+- Kết nối phần cứng [Blue Pill to ST-LINK v2]
 
+	+ GND to GND
+	+ CLK to SWCLK
+	+ DIO to SWDIO
+	+ 3.3 to 3.3V
+
+- Trong ST-Link, các chân SWCLK và SWDIO được sử dụng để giao tiếp với vi điều khiển thông qua giao thức SWD (Serial Wire Debug). Dưới đây là giải thích chi tiết về vai trò của hai chân này:
+#### SWCLK (Serial Wire Clock)
+- Chức năng: Cung cấp xung nhịp (clock signal) để đồng bộ hóa quá trình truyền dữ liệu giữa ST-Link và vi điều khiển.
+- Cách hoạt động:
+
+	+ ST-Link tạo ra tín hiệu xung nhịp trên chân SWCLK, được gửi đến vi điều khiển.
+	+ Xung nhịp này điều khiển thời điểm dữ liệu được gửi hoặc nhận trên chân SWDIO.
+	+ Tần số SWCLK có thể được điều chỉnh bởi ST-Link (thường tối đa vài MHz, tùy thuộc vào cấu hình và phần cứng).
+	- Vai trò trong debug:
+	+ Đồng bộ hóa các lệnh debug (ví dụ: đọc/ghi thanh ghi, nạp chương trình, đặt điểm dừng).
+	+ Đảm bảo dữ liệu được truyền chính xác giữa ST-Link và vi điều khiển.
+#### SWDIO (Serial Wire Data Input/Output)
+- Chức năng: Là đường dữ liệu hai chiều (bidirectional) dùng để truyền lệnh và dữ liệu giữa ST-Link và vi điều khiển.
+- Cách hoạt động:
+
+	+ Từ ST-Link đến vi điều khiển: SWDIO gửi các lệnh debug hoặc dữ liệu chương trình (ví dụ: nạp firmware vào bộ nhớ Flash).
+	+ Từ vi điều khiển đến ST-Link: SWDIO trả về dữ liệu trạng thái, giá trị thanh ghi, hoặc thông tin debug (ví dụ: nội dung bộ nhớ hoặc CPU state).
+	+ Dữ liệu trên SWDIO được gửi/nhận đồng bộ với các cạnh của tín hiệu SWCLK (thường là cạnh lên hoặc xuống, tùy cấu hình).
+	- Vai trò trong debug: Cho phép ST-Link thực hiện các tác vụ như:
+	+ Nạp chương trình vào Flash.
+	+ Đọc/ghi thanh ghi CPU hoặc bộ nhớ.
+	+ Theo dõi và kiểm soát quá trình thực thi chương trình (breakpoints, stepping).
+#### => Giao thức SWD (Serial Wire Debug)
+- SWD là giao thức debug được ARM phát triển, sử dụng chỉ hai chân (SWCLK và SWDIO), so với JTAG (yêu cầu nhiều chân hơn: TCK, TMS, TDI, TDO).
+- Ưu điểm của SWD:
+
+	+ Tiết kiệm chân GPIO trên vi điều khiển (chỉ cần 2 chân thay vì 4-5 chân như JTAG).
+	+ Tốc độ truyền dữ liệu cao, phù hợp cho debug thời gian thực.
+	+ Đơn giản hơn JTAG, dễ triển khai trên các vi điều khiển nhỏ như STM32F103.
+	- Ứng dụng:
+	+ Lập trình: Nạp firmware vào bộ nhớ Flash của STM32.
+	+ Debug: Theo dõi trạng thái CPU, đặt điểm dừng (breakpoints), chạy từng bước (stepping), đọc/ghi bộ nhớ.
+	+ Kiểm tra: Đọc thông tin chip (IDCODE) hoặc kiểm tra trạng thái hệ thống.
+  
 --------------------------------------------------------------------------------------------------------------------------------
 
 <img width="350" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/283fa967-2ecc-48a5-99fc-f5a714e8b285">
