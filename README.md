@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/b7d07bfa-8b17-4353-a58c-27627428a8e9)# STM32
+# STM32
 ## Table of contents
 - [M1S1 - Tổng quan chương trình học](#m1s1)
 - [M1S2 - Ôn tập ngôn ngữ lập trình C](#m1s2)
