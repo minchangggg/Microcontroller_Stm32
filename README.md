@@ -789,6 +789,7 @@ VD:
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/5a031478-7c14-4647-ab06-6e983d114584)
 
 - Trên MCU STM32F103C8T6 có hai loại ưu tiên ngắt khác nhau đó là Preemption Priorities và Sub Priorities:
+  
 		+ Mặc định thì ngắt nào có Preemtion Priority cao hơn thì sẽ được thực hiện trước.
 		+ Khi nào 2 ngắt có cùng một mức Preemption Priority thì ngắt nào có Sub Priority cao hơn thì ngắt đó được thực hiện trước.
 		+ Còn trường hợp 2 ngắt có cùng mức Preemption và Sub Priority luôn thì ngắt nào đến trước được thực hiện trước
