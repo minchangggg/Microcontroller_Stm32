@@ -1,36 +1,44 @@
 # STM32
 ## Table of contents
-- [M1S1 - Tổng quan chương trình học](#m1s1)
-- [M1S2 - Ôn tập ngôn ngữ lập trình C](#m1s2)
-- [M1S3 - Tổng quan vi điều khiển, kết nối phần cứng, phần mềm](#m1s3)
-  
-- [M2S1 - GPIO, OUTPUT](#m2s1)
-- [M2S2 - GPIO, INPUT](#m2s2)
-- [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
-
-- [M3S1 - Exception, External Interrupt](#m3s1)
-- [M3S2 - External Interrupt](#m3s2)
-  
-- [M4S1 - Ôn tập EXTI & Clock tree](#m4s1)
-  
-- [M5S1 - TIMER - TIME BASE](#m5s1)
-- [M5S2 - TIMER - PWM](#m5s2)
-  
-- [M6 - UART Transmit](#m6)
-- [M7 - UART Receive IT](#m7)
-  
-- [M8 - Giao tiếp I2C](#m8)
-
-- [M9 - Thư viện C](#m9)
-
-- [M10S1 - ADC SCSC Polling, Interrupt](#m10s1)
-- [M10S2 - Chuyển đổi tín hiệu tương tự - số ADC](#m10s2)
-
-- [M11 - Ngoại vi RTC](#m11)
-
-- [M12 - DMA, DMA ADC, DMA UART](#m12)
-
-- [M13 - WDG & Tổng kết](#m13)
+> [M1S1 - Tổng quan chương trình học](#m1s1)
+>
+> [M1S2 - Ôn tập ngôn ngữ lập trình C](#m1s2)
+>
+> [M1S3 - Tổng quan vi điều khiển, kết nối phần cứng, phần mềm](#m1s3)
+>
+> [M2S1 - GPIO, OUTPUT](#m2s1)
+>
+> [M2S2 - GPIO, INPUT](#m2s2)
+>
+> [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
+>
+> [M3S1 - Exception, External Interrupt](#m3s1)
+>
+> [M3S2 - External Interrupt](#m3s2)
+>
+> [M4S1 - Ôn tập EXTI & Clock tree](#m4s1)
+>
+> [M5S1 - TIMER - TIME BASE](#m5s1)
+>
+> [M5S2 - TIMER - PWM](#m5s2)
+>
+> [M6 - UART Transmit](#m6)
+>
+> [M7 - UART Receive IT](#m7)
+>
+> [M8 - Giao tiếp I2C](#m8)
+>
+> [M9 - Thư viện C](#m9)
+>
+> [M10S1 - ADC SCSC Polling, Interrupt](#m10s1)
+>
+> [M10S2 - Chuyển đổi tín hiệu tương tự - số ADC](#m10s2)
+>
+> [M11 - Ngoại vi RTC](#m11)
+>
+> [M12 - DMA, DMA ADC, DMA UART](#m12)
+>
+> [M13 - WDG & Tổng kết](#m13)
  
 --------------------------------------------------------------------------------------------------------------------------------
 
@@ -583,7 +591,7 @@ Là chân chọn vùng nhớ khởi động, chạy các chương trình khác n
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M2S2 
-<img width="290" alt="image" src="https://github.com/user-attachments/assets/7b9dd2b1-0509-444e-ac47-a80d3796cbca">
+<img width="275" alt="image" src="https://github.com/user-attachments/assets/7b9dd2b1-0509-444e-ac47-a80d3796cbca">
 
 ### 3, Tính tối ưu của thanh ghi BSRR của vi xử lý 32 bit 
 #### Muốn điều chỉnh trạng thái của 1 chân bất kì (VD PC13) t sẽ có 2 cách: tác động lên ODR và tác động lên BSRR
