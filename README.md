@@ -37,7 +37,6 @@ Ngôn ngữ C là một ngôn ngữ dạng biên dịch. Chương trình đượ
 ## B. Các thư viện cần học trong C
 ## C Library - <time.h>
 *The time.h header defines: four variable types + two macro + various functions -> for manipulating date and time.*
-
 ### 1. Library Variables
 |  No |       Variable     |                                    Description                                     | 
 | :---| :------------------|------------------------------------------------------------------------------------| 
@@ -48,24 +47,22 @@ Ngôn ngữ C là một ngôn ngữ dạng biên dịch. Chương trình đượ
 
 The **struct tm** has the following definition
 
-                              struct tm {
-                                 int tm_sec;       // seconds,  range 0 to 59
-                                 int tm_min;       // minutes, range 0 to 59
-                                 int tm_hour;      // hours, range 0 to 23     
-                                 int tm_mday;      // day of the month, range 1 to 31  
-                                 int tm_mon;       // month, range 0 to 11            
-                                 int tm_year;      // The number of years since 1900  
-                                 int tm_wday;      // day of the week, range 0 to 6    
-                                 int tm_yday;      // day in the year, range 0 to 365  
-                                 int tm_isdst;     // daylight saving time             
-                              };
-              
+      struct tm {
+	 int tm_sec;       // seconds,  range 0 to 59
+	 int tm_min;       // minutes, range 0 to 59
+	 int tm_hour;      // hours, range 0 to 23     
+	 int tm_mday;      // day of the month, range 1 to 31  
+	 int tm_mon;       // month, range 0 to 11            
+	 int tm_year;      // The number of years since 1900  
+	 int tm_wday;      // day of the week, range 0 to 6    
+	 int tm_yday;      // day in the year, range 0 to 365  
+	 int tm_isdst;     // daylight saving time             
+      };
 ### 2. Library Macros
 |  No |          Macro        |                             Description                                         | 
 | :---| :---------------------|---------------------------------------------------------------------------------| 
 |  1  |   **NULL**            |  *This macro is the value of a **null pointer constant***                       | 
 |  2  |   **CLOCKS_PER_SEC**  |  *This macro represents the **number of processor clocks per second***          | 
-
 ### 3. Library Functions 
 |  No |      Function      |                                   Description                                                       | 
 | :---| :------------------|-----------------------------------------------------------------------------------------------------| 
@@ -275,12 +272,12 @@ The **struct tm** has the following definition
 
 + Đây, **xử lý với cả byte thì đơn giản** rồi:
 
-		Muốn đảo cả byte: P2 = ~P2; (trong khi muốn đảo bit thì ta sử dụng P2_1 = !P2_1;
-		Muốn thay đổi giá trị cả byte: P2 = 0x5A; // P2 = 0b0101.1010
+	Muốn đảo cả byte: P2 = ~P2; (trong khi muốn đảo bit thì ta sử dụng P2_1 = !P2_1;
+	Muốn thay đổi giá trị cả byte: P2 = 0x5A; // P2 = 0b0101.1010
   
 + Xử lý với **bit (1 hoặc 1 vài bit) xem chừng khó khăn hơn**:
 
-Nếu MCU chỉ cho phép tác động đến byte, ta nên sử dụng kỹ thuật mặt nạ: "Mask" - Đó là cách sử dụng các phép AND (&), OR (|), EXOR (^) các thanh ghi với các số đặc biệt để chỉ tác động tới các bit cần thiết.`
+	Nếu MCU chỉ cho phép tác động đến byte, ta nên sử dụng kỹ thuật mặt nạ: "Mask" - Đó là cách sử dụng các phép AND (&), OR (|), EXOR (^) các thanh ghi với các số đặc biệt để chỉ tác động tới các bit cần thiết.`
 
 ## 2. Ứng dụng
 <img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/e2520455-45e5-4e11-ad75-09b67b44011a">
@@ -314,7 +311,7 @@ Nếu MCU chỉ cho phép tác động đến byte, ta nên sử dụng kỹ thu
 - Ví dụ: Đảo logic chân P1.4
 
 	+ Cách thông thường: if (P1_4 == 0) P1_4 = 1;
-			   else P1_4 = 0;	
+			     else P1_4 = 0;	
 	+ Cách sử dụng phép EXOR: P1 ^= 0x10;
 	+ Cách sử dụng Bit - Mask: P1 ^= (1 << 4);
 
@@ -352,18 +349,14 @@ Nhận xét 3 trường hợp trên:
 - Reference manual: Hướng dẫn sử dụng thiết bị, các tính năng, bước thực hiện và thanh ghi => Hiểu chức năng.
 - Tài liệu HAL Description: Hiểu thư viện, hiểu cách dùng.
 - Application note: Ghi chú, hướng dẫn sử dụng một tính năng ngoại vi nào đấy.
-  
 - Ý nghĩa của vi xử lý 8 bits, 16 bits, 32 bits
   + Độ rộng thanh ghi của vi xử: Thực hiện 1 số chức năng nhất định, chứa hoặc tính toán các dữ liệu. VD: MCU 8 bits thì thanh ghi 8 bit, MCU 16 bits thì thanh ghi 16 bits....
   + Độ rộng đường bus dữ liệu ( khả năng vận chuyển của nó, bao nhiêu bits trong 1 lần vận chuyển dữ ). VD: có 1 biến dữ liệu 32 bits (dữ liệu đc lưu trong bộ nhớ) -> để tính toán những dữ liệu này thì chính Vi Xử Lý là nơi tính toán -> Cần chuyển dữ liệu 32 bits từ bộ nhớ lên Vi Xử Lý => đối với MCU 32 bits, chỉ cần load 1 lượt; đối với MCU 8 bits cần lấy 4 lượt. => Số bits càng lớn thì khả năng làm việc càng nhanh càng tối ưu (lấy dữ liệu và tính toán nhanh hơn). 
-
 ## 2. Cấu trúc của vi điều khiển
-
-          + Vi xử lý - CPU
-          + Bộ nhớ 
-          + Ngoại vi 
-          + Hệ thống bus 
-
+	+ Vi xử lý - CPU
+	+ Bộ nhớ 
+	+ Ngoại vi 
+	+ Hệ thống bus 
 > https://www.keil.com/dd/docs/datashts/atmel/at89c51_ds.pdf
 > https://ww1.microchip.com/downloads/en/devicedoc/41291d.pdf
 > https://www.ti.com/lit/ds/symlink/msp430g2553.pdf
@@ -375,7 +368,6 @@ Nhận xét 3 trường hợp trên:
 
 ## CPU, MPU, MCU và GPU là gì?
 > https://www.eejournal.com/article/what-the-faq-are-cpus-mpus-mcus-and-gpus/
-
 ### a. CPU (Central Processing Unit) – Bộ xử lý trung tâm
 - Là bộ xử lý chính của máy tính, điều khiển hầu hết các hoạt động tính toán và xử lý dữ liệu.
 - Có thể thực hiện các tác vụ chung như chạy phần mềm, xử lý dữ liệu, điều khiển hệ điều hành.
@@ -402,7 +394,7 @@ Nhận xét 3 trường hợp trên:
 # II, PHẦN CỨNG THỰC HÀNH
 <img width="700" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/83ad9192-6abb-446d-ab46-129fde9f087e">
 
-> 	https://stm32-base.org/boards/STM32F103C8T6-Blue-Pill.html
+> https://stm32-base.org/boards/STM32F103C8T6-Blue-Pill.html
 
 ## 1. Giới thiệu vi điều khiển STM32F103C8T6
 - STM32F103C8T6 là vi điều khiển **32bit**, thuộc họ F1 của dòng chip STM32 hãng ST.
@@ -468,7 +460,7 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 # III, LÀM QUEN MỘT SỐ THAO TÁC IDE
 <img width="500" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/827f61cb-0350-47c7-bace-fb6ad4b3fa56">
 
-### Các bước tạo ra một project
+## Các bước tạo ra một project
 	+ Bước 1: Chọn Workspace (thư mục)
 	+ Bước 2: Chọn vi điều khiển
 	+ Bước 3: Cấu hình -> Sinh mã code
@@ -478,17 +470,14 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 - ST-Link v2 là công cụ lập trình và debug cho STM8 và STM32.
 - Kết nối với Blue Pill qua các chân: GND, SWCLK, SWDIO, và 3.3V.
 - Kết nối phần cứng [Blue Pill to ST-LINK v2]
-
 	+ GND to GND
 	+ CLK to SWCLK
 	+ DIO to SWDIO
 	+ 3.3 to 3.3V
-
 - Trong ST-Link, các chân SWCLK và SWDIO được sử dụng để giao tiếp với vi điều khiển thông qua giao thức SWD (Serial Wire Debug). Dưới đây là giải thích chi tiết về vai trò của hai chân này:
 #### SWCLK (Serial Wire Clock)
 - Chức năng: Cung cấp xung nhịp (clock signal) để đồng bộ hóa quá trình truyền dữ liệu giữa ST-Link và vi điều khiển.
 - Cách hoạt động:
-
 	+ ST-Link tạo ra tín hiệu xung nhịp trên chân SWCLK, được gửi đến vi điều khiển.
 	+ Xung nhịp này điều khiển thời điểm dữ liệu được gửi hoặc nhận trên chân SWDIO.
 	+ Tần số SWCLK có thể được điều chỉnh bởi ST-Link (thường tối đa vài MHz, tùy thuộc vào cấu hình và phần cứng).
@@ -498,7 +487,6 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 #### SWDIO (Serial Wire Data Input/Output)
 - Chức năng: Là đường dữ liệu hai chiều (bidirectional) dùng để truyền lệnh và dữ liệu giữa ST-Link và vi điều khiển.
 - Cách hoạt động:
-
 	+ Từ ST-Link đến vi điều khiển: SWDIO gửi các lệnh debug hoặc dữ liệu chương trình (ví dụ: nạp firmware vào bộ nhớ Flash).
 	+ Từ vi điều khiển đến ST-Link: SWDIO trả về dữ liệu trạng thái, giá trị thanh ghi, hoặc thông tin debug (ví dụ: nội dung bộ nhớ hoặc CPU state).
 	+ Dữ liệu trên SWDIO được gửi/nhận đồng bộ với các cạnh của tín hiệu SWCLK (thường là cạnh lên hoặc xuống, tùy cấu hình).
@@ -509,7 +497,6 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 #### => Giao thức SWD (Serial Wire Debug)
 - SWD là giao thức debug được ARM phát triển, sử dụng chỉ hai chân (SWCLK và SWDIO), so với JTAG (yêu cầu nhiều chân hơn: TCK, TMS, TDI, TDO).
 - Ưu điểm của SWD:
-
 	+ Tiết kiệm chân GPIO trên vi điều khiển (chỉ cần 2 chân thay vì 4-5 chân như JTAG).
 	+ Tốc độ truyền dữ liệu cao, phù hợp cho debug thời gian thực.
 	+ Đơn giản hơn JTAG, dễ triển khai trên các vi điều khiển nhỏ như STM32F103.
@@ -544,7 +531,6 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 
 ### c, Chân BOOT
 + là chân chọn vùng nhớ khởi động, chạy các chương trình khác nhau trong vi điều khiển (nên để mặc định, không tác động đến nó)
-
 ## 2, Các chân GPIO
 - GPIO (GENERAL PURPOSE INPUT OUPUT) pin là các chân Input/ Ouput của vi điều khiển có thể được sử dụng với nhiều mục đích khác nhau -> Giúp vi điều khiển có thể giao tiếp với thế giới bên ngoài.
 - Mỗi GPIO port có:
@@ -555,12 +541,11 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
   + 32-bit alternate function selection registers (Thanh ghi cài đặt các chức năng khác dùng để thay thế): GPIOx_AFRH and GPIOx_AFRL
 
 => Các nhóm thanh ghi của một ngoại vi gồm:
-
 	+ Thanh ghi cấu hình (VXL tác động đến các thanh ghi cấu hình của các ngoại vi -> cài đặt để nó thực hiện chức năng chúng ta mong muốn)
 	+ Thanh ghi dữ liệu (Sau khi cấu hình, thì chúng ta sử dụng nó -> tác động vào dữ liệu của nó) 
 	+ Thanh ghi trạng thái (Trạng thái của nó như thế nào, có sẵn sàng làm việc hay không)
-=> `Bản chất của lập trình các ngoại vi của vi điều khiển` là `làm việc với các thanh ghi`:
 
+=> `Bản chất của lập trình các ngoại vi của vi điều khiển` là `làm việc với các thanh ghi`:
 	+ Đọc thanh ghi (r)
 	+ Ghi thanh ghi (w)
  
@@ -590,20 +575,16 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 ## 4, Tính tối ưu của thanh ghi BSRR của vi xử lý 32 bit 
 ### Muốn điều chỉnh trạng thái của 1 chân bất kì (VD PC13) t sẽ có 2 cách: tác động lên ODR và tác động lên BSRR
 ### Cách 1: Tác động trực tiếp lên ODR (thanh ghi dữ liệu) mà không thông qua BSRR
-VD: ODR ban đầu = 0x0000 -> muốn ODR 13 bằng 1 thì làm cách nào?
-
-Cách giải: T sẽ dùng pp set bit (trong bitmask đã học để thực hiện): ODR = ODR | 0x 0010 0000 0000 0000
-
+- VD: ODR ban đầu = 0x0000 -> muốn ODR 13 bằng 1 thì làm cách nào?
+- Cách giải: T sẽ dùng pp set bit (trong bitmask đã học để thực hiện): ODR = ODR | 0x 0010 0000 0000 0000
 	Thực chất để sử dụng phương pháp này, mày phải thực hiện tuần tự 3 bước sau:
 	+ Bước 1: READ -> vi xử lý phải đọc các giá trị của ODR lên vi xử lý (lưu trên thanh ghi của vi xử lý)
 	+ Bước 2: MODIFY -> vi xử lý thực hiện toán tử bit OR của thanh ghi chứa giá trị ODR và 0x 0010 0000 0000 0000
 	+ Bước 3: WRITE -> vi xử lý ghi lại giá trị đã được hiệu chỉnh về lại thanh ghi ODR
-
-Lưu ý: 
-
-+ Vi xử lý thường phải xử lý nhiều việc, có thể xảy ra 1 luồng ngắt interrupt -> làm gián đoạn 3 bước trên và làm thay đổi giá trị ODR -> xảy ra lỗi không mong muốn
-+ T giả sử sau khi thực hiện B1, có 1 luồng ngắt đc gởi đến, giá trị ODR lúc này thực chất đã trở thành ob 1111 1111 1111 1111, tuy nhiên lúc này giá trị được lưu trữ trên vi xử lý vẫn là 0x 0000 0000 0000 0000.
-+ Sau khi ngắt, vi xử lý tiếp tục làm việc với bước 2, rồi đến bước 3. Tuy nhiên lúc này giá trị đã xảy ra sai sót (nó làm việc vs bản sao ODR trước đó mà ko làm việc với giá trị mới nhất -> hệ thống ghi ngược lại kết quả làm việc với bản sao cũ đó -> chương trình chạy sai)
+- Lưu ý: 
+	+ Vi xử lý thường phải xử lý nhiều việc, có thể xảy ra 1 luồng ngắt interrupt -> làm gián đoạn 3 bước trên và làm thay đổi giá trị ODR -> xảy ra lỗi không mong muốn
+	+ T giả sử sau khi thực hiện B1, có 1 luồng ngắt đc gởi đến, giá trị ODR lúc này thực chất đã trở thành ob 1111 1111 1111 1111, tuy nhiên lúc này giá trị được lưu trữ trên vi xử lý vẫn là 0x 0000 0000 0000 0000.
+	+ Sau khi ngắt, vi xử lý tiếp tục làm việc với bước 2, rồi đến bước 3. Tuy nhiên lúc này giá trị đã xảy ra sai sót (nó làm việc vs bản sao ODR trước đó mà ko làm việc với giá trị mới nhất -> hệ thống ghi ngược lại kết quả làm việc với bản sao cũ đó -> chương trình chạy sai)
 
 ### Cách 2: Tác động gián tiếp lên thanh ghi ODR thông qua thanh qua thanh ghi BSRR
 VD:
