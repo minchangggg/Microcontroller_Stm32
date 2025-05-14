@@ -886,8 +886,8 @@ Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương
 > 
 > Timer là một loại ngoại vi được tích hợp ở hầu hết các vi điều khiển, cung cấp cho người dùng nhiều ứng dụng như xác định chính xác một khoảng thời gian, đo – đếm xung đầu vào, điều khiển dạng sóng đầu ra, băm xung….
 
-## I. Giới thiệu chung về timer
-### 1. Các loại của timer
+# I. Giới thiệu chung về timer
+## 1. Các loại của timer
 Dòng vi điều khiển STM32 có ba loại Timer:
 
 + Basic Timer: là loại Timer đơn giản và dễ sử dụng nhất, chỉ có chức năng đếm và thường được dùng để tạo cơ sở thời gian.
@@ -902,39 +902,38 @@ Dòng vi điều khiển STM32 có ba loại Timer:
   
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/b6e0c65c-d2a2-4754-a408-efb4a2d79cbd)
 
-### 2. Một vài chức năng thường xuyên được sử dụng của Timer:
+## 2. Một vài chức năng thường xuyên được sử dụng của Timer:
 Ngoại trừ các Basic Timer chỉ có hoạt động cơ bản là đếm, các Timers còn lại của vi điều khiển còn có nhiều chức năng khác, điển hình như:
 
-• PWM Generation: Tính năng điều chế độ rộng xung (băm xung).
-• One Pulse Mode: Tạo ra một xung duy nhất với độ rộng có thể cấu hình được, CNT sẽ tự động dừng khi có sự kiện tràn.
-• Input Capture: Chế độ này phát hiện và lưu lại sự xuất hiện sự thay đổi mức logic (sườn lên/ sườn xuống) của tín hiệu. Từ đó, ta có thể biết được khoảng thời gian giữa hai lần có sườn lên/ sườn xuống.
-• Output Compare: Đây là chế độ giúp tạo ra các sự kiện(ví dụ như ngắt) khi CNT đạt đến giá trị được lưu trong các thanh ghi TIMx_CCMRx (capture/compare mode register). Ứng dụng phổ biến nhất của Output Compare là tạo ra nhiều xung PWM với các tần số khác nhau trên cùng một Timer.
+	+ PWM Generation: Tính năng điều chế độ rộng xung (băm xung).
+	+ One Pulse Mode: Tạo ra một xung duy nhất với độ rộng có thể cấu hình được, CNT sẽ tự động dừng khi có sự kiện tràn.
+	+ Input Capture: Chế độ này phát hiện và lưu lại sự xuất hiện sự thay đổi mức logic (sườn lên/ sườn xuống) của tín hiệu. Từ đó, ta có thể biết được khoảng thời gian giữa hai lần có sườn lên/ sườn xuống.
+	+ Output Compare: Đây là chế độ giúp tạo ra các sự kiện(ví dụ như ngắt) khi CNT đạt đến giá trị được lưu trong các thanh ghi TIMx_CCMRx (capture/compare mode register). Ứng dụng phổ biến nhất của Output Compare là tạo ra nhiều xung PWM với các tần số khác nhau trên cùng một Timer.
 
-### 3. Sơ đồ khối General Purpose Timer
-
+## 3. Sơ đồ khối General Purpose Timer
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/ec4765bb-cfe2-4398-ac73-a9f4cbfebaf1)
 
-## II. Time-base unit (Khối cơ sở của bộ Timer)
-
+# II. Time-base unit (Khối cơ sở của bộ Timer)
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/6450db12-112c-4984-89d5-1f40932ecf58)
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/47531b71-fba6-4dc2-96a0-e1936dc060d4)
 
-### 1. Cấu trúc cơ bản của một bộ Timer
-• Bộ đếm (Giá trị được lưu ở thanh ghi Counter Register)
-• Giá trị Auto Reload (Giá trị được lưu ở thanh ghi Auto Reload)
-• Bộ chia tần (Giá trị được lưu ở thanh ghi Prescaler)
+## 1. Cấu trúc cơ bản của một bộ Timer
+- Bộ đếm (Giá trị được lưu ở thanh ghi Counter Register)
+- Giá trị Auto Reload (Giá trị được lưu ở thanh ghi Auto Reload)
+- Bộ chia tần (Giá trị được lưu ở thanh ghi Prescaler)
 
--> Thành phần chính của timer chính là bộ đếm – counter (CNT), với các ngưỡng trên được thiết lập bởi thanh ghi Auto Reload (ARR). Counter có thể đếm lên lên hoặc đếm xuống. Clock đưa vào bộ đếm có thể được chia bởi một bộ chia tần – Prescaler.
+=> Thành phần chính của timer chính là bộ đếm – counter (CNT), với các ngưỡng trên được thiết lập bởi thanh ghi Auto Reload (ARR). Counter có thể đếm lên lên hoặc đếm xuống. Clock đưa vào bộ đếm có thể được chia bởi một bộ chia tần – Prescaler.
 
-### 2. Các thanh ghi quan trọng:
+## 2. Các thanh ghi quan trọng:
 Người dùng có thể thực hiện các lệnh đọc, ghi vào các thanh ghi CNT, ARR và PSC để cấu hình cho khối cơ sở của mỗi bộ Timer.
-• Auto Reload(TIMx_ARR): Giá trị của ARR được người dùng xác định sẵn khi cài đặt bộ timer, làm cơ sở cho CNT thực hiện nạp lại giá trị đếm mỗi khi tràn (overflow khi đếm lên – CNT vượt giá trị ARR, underflow khi đếm xuống – CNT bé hơn 0).Tùy vào bộ timer mà counter này có thể là 16bit hoặc 32bit.
-• Counter Register(TIMx_CNT): Lưu giá trị đếm Counter (CNT), tăng hoặc giảm mỗi nhịp xung clock của Timer. Giá trị của Counter luôn nằm trong khoảng [0; ARR]. Nếu ngoài khoảng đó, Timer sẽ thực hiện nạp lại giá trị CNT như ban đầu và tiếp tục hoạt động. Tùy vào mỗi Timer mà CNT và ARR có cỡ 16 hoặc 32 bit.
-• Prescaler (TIMx_PSC): Giá trị của thanh ghi bộ chia tần (16bit) cho phép người dùng cấu hình chia tần số đầu vào (CK_PSC) cho bất kì giá trị nào từ [1- 65536]. Sử dụng kết hợp bộ chia tần của timer và của RCC giúp chúng ta có thể thay đổi được thời gian của mỗi lần CNT thực hiện đếm, giúp tạo ra được những khoảng thời gian, điều chế được độ rộng xung phù hợp với nhu cầu.
 
-### 3. Các chế độ hoạt động:
-– Các chế độ đếm: Mỗi bộ timer đều hỗ trợ 3 chế chế độ đếm sau: 
+- Auto Reload(TIMx_ARR): Giá trị của ARR được người dùng xác định sẵn khi cài đặt bộ timer, làm cơ sở cho CNT thực hiện nạp lại giá trị đếm mỗi khi tràn (overflow khi đếm lên – CNT vượt giá trị ARR, underflow khi đếm xuống – CNT bé hơn 0).Tùy vào bộ timer mà counter này có thể là 16bit hoặc 32bit.
+- Counter Register(TIMx_CNT): Lưu giá trị đếm Counter (CNT), tăng hoặc giảm mỗi nhịp xung clock của Timer. Giá trị của Counter luôn nằm trong khoảng [0; ARR]. Nếu ngoài khoảng đó, Timer sẽ thực hiện nạp lại giá trị CNT như ban đầu và tiếp tục hoạt động. Tùy vào mỗi Timer mà CNT và ARR có cỡ 16 hoặc 32 bit.
+- Prescaler (TIMx_PSC): Giá trị của thanh ghi bộ chia tần (16bit) cho phép người dùng cấu hình chia tần số đầu vào (CK_PSC) cho bất kì giá trị nào từ [1- 65536]. Sử dụng kết hợp bộ chia tần của timer và của RCC giúp chúng ta có thể thay đổi được thời gian của mỗi lần CNT thực hiện đếm, giúp tạo ra được những khoảng thời gian, điều chế được độ rộng xung phù hợp với nhu cầu.
+
+## 3. Các chế độ hoạt động:
+Các chế độ đếm: Mỗi bộ timer đều hỗ trợ 3 chế chế độ đếm sau: 
 
 + Upcounting mode (chế độ đếm lên): Ở chế độ này, CNT đếm lên từ 0 (hoặc một giá trị nào đó được người dùng ghi vào CNT trước) đến giá trị của thanh ghi ARR, sau đó CNT bắt đầu lại từ 0. Lúc này có sự kiện tràn counter – overflow, sự kiện này có thể tạo yêu cầu ngắt nếu người dùng cấu hình cho phép ngắt. Một ví dụ với ARR = 36:
 
@@ -948,47 +947,41 @@ Người dùng có thể thực hiện các lệnh đọc, ghi vào các thanh g
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/bc6f821c-97f8-48c4-9471-1b5251ddb4b7)
 
-### 4. Tính toán các thông số cơ bản của timer
-
+## 4. Tính toán các thông số cơ bản của timer
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/6450db12-112c-4984-89d5-1f40932ecf58)
 
-- F_PSC: Tần số cấp vào bộ chia tần
-- F_CNT: Tần số counter 
-- t : thời gian timebase mong muốn (thời gian timer tràn)
-- ARR: Thanh ghi do người dùng cấu hình, lựa chọn giá trị
-- PSC: Thanh ghi do người dùng cấu hình, lựa chọn giá trị
+	- F_PSC: Tần số cấp vào bộ chia tần
+	- F_CNT: Tần số counter 
+	- t : thời gian timebase mong muốn (thời gian timer tràn)
+	- ARR: Thanh ghi do người dùng cấu hình, lựa chọn giá trị
+	- PSC: Thanh ghi do người dùng cấu hình, lựa chọn giá trị
   
-Note: 
-+ Thanh ghi PSC quyết định giá trị chia. Nếu PSC = 0 thì chia 1; **PSC = PSC thì chia (PSC + 1)**
-+ Counter sẽ tràn khi gặp giá trị bằng 0. Nếu ARR = 10 thì đếm 11 lần; **ARR = ARR thì đếm (ARR + 1) lần**
-+ Giá trị của thanh ghi PSC và ARR là có giới hạn. Có độ rộng là n bit thì giá trị tối đa là (2^n) - 1. VD thanh ghi ARR có độ rộng là 16 bit thì có giá trị tối đa là 65535
+- Note: 
 
-Cho tần số vào PSC là 8MHz 
-Tính toán PSC và ARR để thời gian tràn timer là 150ms
+	+ Thanh ghi PSC quyết định giá trị chia. Nếu PSC = 0 thì chia 1; **PSC = PSC thì chia (PSC + 1)**
+	+ Counter sẽ tràn khi gặp giá trị bằng 0. Nếu ARR = 10 thì đếm 11 lần; **ARR = ARR thì đếm (ARR + 1) lần**
+	+ Giá trị của thanh ghi PSC và ARR là có giới hạn. Có độ rộng là n bit thì giá trị tối đa là (2^n) - 1. VD thanh ghi ARR có độ rộng là 16 bit thì có giá trị tối đa là 65535
 
-Theo đề, ta có F_PSC = 8MHz, t = 150ms
-Chọn **PSC = 7999Hz** hay  PSC + 1 = 8KHz 
+- VD: Cho tần số vào PSC là 8MHz. Tính toán PSC và ARR để thời gian tràn timer là 150ms
+	Theo đề, ta có F_PSC = 8MHz, t = 150ms
+	Chọn **PSC = 7999Hz** hay  PSC + 1 = 8KHz 
 
 	+) F_CNT = F_PSC/(PSC+1) = 8M/8K = 1KHz -> T_CNT = 1/F_CNT = 1ms
 	+) t = (ARR+1) * T_CNT <-> 150ms = (ARR+1) * 1ms -> ARR = 149
 
-## III. Thực hành với timer (Đang cập nhật)
-### 1. Yêu cầu bài toán:
+# III. Thực hành với timer (Đang cập nhật)
+## 1. Yêu cầu bài toán:
 Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit. 
-
-### 2. Công thức
+## 2. Công thức
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/efd8b60b-35c3-40c1-86dd-fe67725b3657)
 
-### 3. Áp dụng tính toán vào Configuration 
-
+## 3. Áp dụng tính toán vào Configuration 
 + Clock Source: chọn Internal Clock (8Mhz như mình cấu hình ở trên) -> F[hệ_thống] = F_PSC = 8Mhz
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/3b8acfd3-315d-4b83-a021-584e70daaf09)
 
 + Chọn **Prescaler = PSC = 8KHz-1** => F[timer] = F_CNT = F_PSC/(PSC+1) = 8M/8K = 1KHz -> T[timer] = T_CNT = 1/F_CNT = 1/1K = 1ms
-
 + Tìm ARR (hay Counter Period)
-  
 + T[event] = T_CNT * (ARR+1) Mà để thay đổi trạng thái đèn LED mỗi 1 giây thì T[event] = 1000 ms = 1s
   
 => 1000ms = 1ms * (ARR+1) => **Counter Period = ARR = 999**
@@ -1003,7 +996,7 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 
 > https://mecsu.vn/ho-tro-ky-thuat/moi-2022-pwm-la-gi-nguyen-ly-hoat-dong-pwm.rP0
 
-## I. Khái niệm PWM
+# I. Khái niệm PWM
 - PWM viết tắt của Pulse Width Modulation, có nghĩa là phương pháp điều chỉnh điện áp tải, hay hiểu đơn giản hơn đây là phương pháp điều chỉnh, thay đổi điện áp tải ra bằng việc thay đổi độ rộng của chuỗi xung vuông, từ đó có sự thay đổi điện áp.
 - Tại sao nên dùng PWM? Dùng PWM để điều chỉnh cường độ dòng điện sẽ hiệu quả hơn và cũng tiết kiệm hơn. Các phương pháp điều chỉnh dòng điện khác rất tốn kém và phức tạp.
 
@@ -1029,10 +1022,10 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 
 ![image](https://github.com/user-attachments/assets/4564e0c2-7da1-4738-a755-2565f784e982)
 
-## II. Tính toán thông số cơ bản 
+# II. Tính toán thông số cơ bản 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/7f6e6685-e098-4233-9a90-1eeade71060c)
 
-### 1.
+## 1.
 ### Đề bài:
 + Tính toán cấu hình để có được 1 tín hiệu PWM với thông số như sau: 
 + F = 10KHz; D = 50%. Biết F_APB_TIMER2 = 8MHz, dùng timer2, chế độ đếm lên
@@ -1043,7 +1036,6 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 + Chọn PSC = 7 -> F_CNT = F_APB_TIMER2 / (PSC+1) = 8MHz/8 = 1MHz -> T_CNT = 1/F_CNT = 10^-6 
 + 100 * 10^-6 = 10^-6  * (ARR+1) -> ARR = 99
 + CRR/ARR * 100% = 50% -> CRR = 50
-
 ### 2.
 ### Đề bài:
 + Tính toán cấu hình để có được 1 tín hiệu PWM với thông số như sau: 
