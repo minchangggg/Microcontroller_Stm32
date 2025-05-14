@@ -1,7 +1,21 @@
 # STM32
 ## Table of contents
-- [M1S1 - TỔNG QUAN CHƯƠNG TRÌNH HỌC](#m1S1)
+- [M1S1 - Tổng quan chương trình học](#m1S1)
 - [M1S2 - Ôn tập ngôn ngữ lập trình C](#m1s2)
+- [M1S3 - Tổng quan vi điều khiển, kết nối phần cứng, phần mềm](#m1s3)
+  
+- [M2S1 - GPIO, OUTPUT](#m2s1)
+- [M2S2 - GPIO, INPUT](#m2s2)
+- [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
+
+- [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
+- [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
+- [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
+- [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
+- [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
+- [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
+- [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
+- [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
 
 # M1S1 <img width="450" alt="image" src="https://github.com/user-attachments/assets/e3bc6c3f-fe9f-45f1-ac4d-02be285479a6">
 
@@ -329,10 +343,9 @@ Nhận xét 3 trường hợp trên:
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-<img width="650" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/9e23c9de-7c47-4198-ba04-a8b30ed0a9e9">
-
-# I, Một số khái niệm cơ bản và Cấu trúc của 1 vi điều khiển
-## 1. Một số khái niệm cơ bản
+# M1S3 <img width="700" alt="image" src="https://github.com/user-attachments/assets/5b55facd-766b-482d-8fc9-7b6990154cbb">
+## I, Một số khái niệm cơ bản và Cấu trúc của 1 vi điều khiển
+### 1. Một số khái niệm cơ bản
 - User manual board: Tổng quan và hướng dẫn sử dụng board mạch thực hành, các thành phần trên board mạch. (F103 BluePill: website)
 - Schematic: Sơ đồ nguyên lý mạch của board mạch thực hành, linh kiện nào, chân nào nối với chân nào. 
 - Datasheet: Tổng quan về thiết bị và thông suất kỹ thuật.
@@ -342,11 +355,11 @@ Nhận xét 3 trường hợp trên:
 - Ý nghĩa của vi xử lý 8 bits, 16 bits, 32 bits
   + Độ rộng thanh ghi của vi xử: Thực hiện 1 số chức năng nhất định, chứa hoặc tính toán các dữ liệu. VD: MCU 8 bits thì thanh ghi 8 bit, MCU 16 bits thì thanh ghi 16 bits....
   + Độ rộng đường bus dữ liệu ( khả năng vận chuyển của nó, bao nhiêu bits trong 1 lần vận chuyển dữ ). VD: có 1 biến dữ liệu 32 bits (dữ liệu đc lưu trong bộ nhớ) -> để tính toán những dữ liệu này thì chính Vi Xử Lý là nơi tính toán -> Cần chuyển dữ liệu 32 bits từ bộ nhớ lên Vi Xử Lý => đối với MCU 32 bits, chỉ cần load 1 lượt; đối với MCU 8 bits cần lấy 4 lượt. => Số bits càng lớn thì khả năng làm việc càng nhanh càng tối ưu (lấy dữ liệu và tính toán nhanh hơn). 
-## 2. Cấu trúc của vi điều khiển
-	+ Vi xử lý - CPU
-	+ Bộ nhớ 
-	+ Ngoại vi 
-	+ Hệ thống bus 
+### 2. Cấu trúc của vi điều khiển
++ Vi xử lý - CPU
++ Bộ nhớ 
++ Ngoại vi 
++ Hệ thống bus 
 > https://www.keil.com/dd/docs/datashts/atmel/at89c51_ds.pdf
 > https://ww1.microchip.com/downloads/en/devicedoc/41291d.pdf
 > https://www.ti.com/lit/ds/symlink/msp430g2553.pdf
@@ -356,24 +369,32 @@ Nhận xét 3 trường hợp trên:
 <img width="800" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/35a032e7-b732-46dc-b936-d6bf8743bcdb">
 <img width="800" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/737d574d-a87e-41a1-96fd-f3d0b7447af4">
 
-## CPU, MPU, MCU và GPU là gì?
+#### CPU, MPU, MCU và GPU là gì?
 > https://www.eejournal.com/article/what-the-faq-are-cpus-mpus-mcus-and-gpus/
-### a. CPU (Central Processing Unit) – Bộ xử lý trung tâm
+
+`a. CPU (Central Processing Unit) – Bộ xử lý trung tâm`
+
 - Là bộ xử lý chính của máy tính, điều khiển hầu hết các hoạt động tính toán và xử lý dữ liệu.
 - Có thể thực hiện các tác vụ chung như chạy phần mềm, xử lý dữ liệu, điều khiển hệ điều hành.
 - Ví dụ: Intel Core i9, AMD Ryzen 7.
 - Đặc điểm chính: Hiệu suất cao, có nhiều lõi (core) và luồng (thread).
-### b. MPU (Microprocessor Unit) – Vi xử lý
+
+`b. MPU (Microprocessor Unit) – Vi xử lý`
+
 - Thực chất là một loại CPU thu nhỏ, thường được dùng trong các hệ thống nhúng hoặc thiết bị điện tử đơn giản.
 - MPU thường không có bộ nhớ RAM hay bộ nhớ Flash tích hợp, nên cần các linh kiện ngoài để hoạt động.
 - Ví dụ: Intel 8086, ARM Cortex-A.
 - Đặc điểm chính: Dùng cho các ứng dụng cần linh hoạt và hiệu suất cao, nhưng phải có bộ nhớ ngoài.
-### c. MCU (Microcontroller Unit) – Vi điều khiển
+
+`c. MCU (Microcontroller Unit) – Vi điều khiển`
+
 - Là một hệ thống tích hợp bao gồm CPU, RAM, ROM (Flash), và các ngoại vi (GPIO, UART, SPI, I2C, PWM...) trên một chip duy nhất.
 - MCU thường được dùng trong các ứng dụng nhúng, điều khiển các thiết bị như xe hơi, máy giặt, robot, IoT.
 - Ví dụ: Arduino (ATmega328), STM32, ESP32.
 - Đặc điểm chính: Tiêu thụ điện năng thấp, tích hợp nhiều thành phần, chuyên dụng cho điều khiển nhúng.
-### d. GPU (Graphics Processing Unit) – Bộ xử lý đồ họa
+
+`d. GPU (Graphics Processing Unit) – Bộ xử lý đồ họa`
+
 - Chuyên xử lý các tác vụ đồ họa, xử lý song song nhiều dữ liệu hình ảnh.
 - Được sử dụng trong game, đồ họa, AI, tính toán khoa học.
 - Ví dụ: NVIDIA GeForce RTX, AMD Radeon.
@@ -381,12 +402,12 @@ Nhận xét 3 trường hợp trên:
 
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/e9bf3ce9-7126-4249-abc8-8e84ab4b10a8">
 
-# II, PHẦN CỨNG THỰC HÀNH
+## II, PHẦN CỨNG THỰC HÀNH
 <img width="700" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/83ad9192-6abb-446d-ab46-129fde9f087e">
 
 > https://stm32-base.org/boards/STM32F103C8T6-Blue-Pill.html
 
-## 1. Giới thiệu vi điều khiển STM32F103C8T6
+### 1. Giới thiệu vi điều khiển STM32F103C8T6
 - STM32F103C8T6 là vi điều khiển **32bit**, thuộc họ F1 của dòng chip STM32 hãng ST.
 - Lõi **ARM COTEX M3**.
 - Tốc độ tối đa **72Mhz**. 
@@ -418,11 +439,11 @@ Nhận xét 3 trường hợp trên:
 	+ 1 CAN	
 	+ USB 2.0 full-speed interface
  - Kiểm tra lỗi CRC và 96-bit ID.
-## 2. Giới thiệu kit BluePill sử dụng STM32F103C8T6
+### 2. Giới thiệu kit BluePill sử dụng STM32F103C8T6
 Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử dụng để nghiên cứu về ARM nhiều nhất hiện nay. 
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/da5c1792-a962-4398-af54-928af0681355)
-### Thông số kỹ thuật
+#### Thông số kỹ thuật
 + Vi điều khiển: STM32F103C8T6.
 + Điện áp cấp 5VDC qua cổng Micro USB sẽ được chuyển đổi thành 3.3VDC qua IC nguồn và cấp cho Vi điều khiển chính.
 + Tích hợp sẵn thạch anh 8Mhz.
@@ -431,16 +452,16 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 + Tích hợp Led trạng thái nguồn, Led PC13, Nút Reset.
 + Kích thước: 53.34 x 15.24mm.
 
-# III, LÀM QUEN MỘT SỐ THAO TÁC IDE
+## III, LÀM QUEN MỘT SỐ THAO TÁC IDE
 <img width="500" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/827f61cb-0350-47c7-bace-fb6ad4b3fa56">
 
-## Các bước tạo ra một project
+### Các bước tạo ra một project
 	+ Bước 1: Chọn Workspace (thư mục)
 	+ Bước 2: Chọn vi điều khiển
 	+ Bước 3: Cấu hình -> Sinh mã code
 	+ Bước 4: Viết mã code, biên dịch
 	+ Bước 5: Nạp chương trình/ debug
-# IV. ST-Link v2
+## IV. ST-Link v2
 - ST-Link v2 là công cụ lập trình và debug cho STM8 và STM32.
 - Kết nối với Blue Pill qua các chân: GND, SWCLK, SWDIO, và 3.3V.
 - Kết nối phần cứng [Blue Pill to ST-LINK v2]
@@ -481,20 +502,18 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
   
 --------------------------------------------------------------------------------------------------------------------------------
 
-<img width="350" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/283fa967-2ecc-48a5-99fc-f5a714e8b285">
-
-# I, TÌM HIỂU CHUNG CHỨC NĂNG CỦA CÁC CHÂN STM32F103C8T6
+# M2S1 <img width="450" alt="image" src="https://github.com/user-attachments/assets/2e5aeb91-615d-4d11-a2ba-953535236a73">
+## I, TÌM HIỂU CHUNG CHỨC NĂNG CỦA CÁC CHÂN STM32F103C8T6
 ![Bản sao của Blue-Pink Cute Class Schedule (4)](https://github.com/minchangggg/Stm32/assets/125820144/ec67b5bb-7804-4734-b973-d52d16a4908e)
-
-## 1, Các chân không phải GPIO
-### a, Những nguồn cung cấp cho mạch gồm 
+### 1, Các chân không phải GPIO
+#### a, Những nguồn cung cấp cho mạch gồm 
 > Note: Những chân VDD (như VCC) và VSS (như GND) là những chân dùng để cấp nguồn
 
 + 3 cặp chân nguồn (VDD1, VSS1), (VDD2, VSS2), (VDD3, VSS3) là 3 cặp chân cấp nguồn cho phần mạch có tính năng digital.
 + 1 cặp chân nguồn (VDDA, VSSA) là cặp chân cấp nguồn cho phần mạch có tính năng analog, được thiết kế rời. Với mạch nguồn tạo ra điện áp phải là 1 mạch nguồn có chất lượng cao (có độ gợn Vr rất nhỏ) để phần analog hoạt động chính.
 > Thông thường chúng ta không quan tâm nhiều đến tính năng analog, chỉ làm việc với digital => Người ta nối chung VDDA với VDD và VSSA với VSS.
 >
->  Khi mà layout mạch, chú ý sơ đồ nguyên lý phải cấp nguồn hết tất cả 3 cặp chân nguồn digital (VDD1, VSS1), (VDD2, VSS2), (VDD3, VSS3) và cặp chân 			nguồn analog (VDDA, VSSA).
+>  Khi mà layout mạch, chú ý sơ đồ nguyên lý phải cấp nguồn hết tất cả 3 cặp chân nguồn digital (VDD1, VSS1), (VDD2, VSS2), (VDD3, VSS3) và cặp chân nguồn analog (VDDA, VSSA).
 + 1 Chân nguồn VBAT (Volt battery) dành riêng cho Real-time clock hoạt động (đếm giờ, phút, giây)
   
 ### b, Chân NRST
@@ -503,9 +522,9 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 + Khi chân Reset tích cực thấp, nghĩa là nó sẽ thực hiện chức năng Reset khi cấp mức logic 0.
 > Note: Tìm hiểu về POR (power on reset)
 
-### c, Chân BOOT
-+ là chân chọn vùng nhớ khởi động, chạy các chương trình khác nhau trong vi điều khiển (nên để mặc định, không tác động đến nó)
-## 2, Các chân GPIO
+#### c, Chân BOOT
+Là chân chọn vùng nhớ khởi động, chạy các chương trình khác nhau trong vi điều khiển (nên để mặc định, không tác động đến nó)
+### 2, Các chân GPIO
 - GPIO (GENERAL PURPOSE INPUT OUPUT) pin là các chân Input/ Ouput của vi điều khiển có thể được sử dụng với nhiều mục đích khác nhau -> Giúp vi điều khiển có thể giao tiếp với thế giới bên ngoài.
 - Mỗi GPIO port có:
   + 32-bit configuration registers (Thanh ghi cấu hình): GPIOx_MODER, GPIOx_OTYPER, GPIOx_OSPEEDR, GPIOx_PUPDR
@@ -523,8 +542,8 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 	+ Đọc thanh ghi (r)
 	+ Ghi thanh ghi (w)
  
-# II, Output 
-## 1, Sơ đồ nguyên lý
+## II, Output 
+### 1, Sơ đồ nguyên lý
 ![Bản sao của Blue-Pink Cute Class Schedule (5)](https://github.com/minchangggg/Stm32/assets/125820144/b60a78f2-01f1-4c66-ab08-3ac52e267a0a)
 
 #### [INPUT]
@@ -532,19 +551,17 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 #### [OUTPUT]
 - P-MOS kéo lên VDđ tạo ra điện áp 3.3v
 - N-MOS kéo xuống VSs tạo ra điện áp 0V
-## 2, Cấu hình thanh ghi dữ liệu của các Port
+### 2, Cấu hình thanh ghi dữ liệu của các Port
 <img width="650" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/6aa28a55-c481-4085-83ab-a26225dbd6ad">
-
-## 3, Phân tích cách hoạt động hàm HAL_GPIO_WritePin()
+### 3, Phân tích cách hoạt động hàm HAL_GPIO_WritePin()
 <img width="950" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/8a722b81-6da8-49d2-a417-72c06f088c46">
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/816a62e2-cbc3-4178-ae2a-320140f0a67e">
-
-## 4, Tính tối ưu của thanh ghi BSRR của vi xử lý 32 bit 
-### Muốn điều chỉnh trạng thái của 1 chân bất kì (VD PC13) t sẽ có 2 cách: tác động lên ODR và tác động lên BSRR
-### Cách 1: Tác động trực tiếp lên ODR (thanh ghi dữ liệu) mà không thông qua BSRR
+# M2S2 <img width="400" alt="image" src="https://github.com/user-attachments/assets/7b9dd2b1-0509-444e-ac47-a80d3796cbca">
+### 4, Tính tối ưu của thanh ghi BSRR của vi xử lý 32 bit 
+#### Muốn điều chỉnh trạng thái của 1 chân bất kì (VD PC13) t sẽ có 2 cách: tác động lên ODR và tác động lên BSRR
+#### Cách 1: Tác động trực tiếp lên ODR (thanh ghi dữ liệu) mà không thông qua BSRR
 - VD: ODR ban đầu = 0x0000 -> muốn ODR 13 bằng 1 thì làm cách nào?
 - Cách giải: T sẽ dùng pp set bit (trong bitmask đã học để thực hiện): ODR = ODR | 0x 0010 0000 0000 0000
 	Thực chất để sử dụng phương pháp này, mày phải thực hiện tuần tự 3 bước sau:
@@ -555,23 +572,22 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 	+ Vi xử lý thường phải xử lý nhiều việc, có thể xảy ra 1 luồng ngắt interrupt -> làm gián đoạn 3 bước trên và làm thay đổi giá trị ODR -> xảy ra lỗi không mong muốn
 	+ T giả sử sau khi thực hiện B1, có 1 luồng ngắt đc gởi đến, giá trị ODR lúc này thực chất đã trở thành ob 1111 1111 1111 1111, tuy nhiên lúc này giá trị được lưu trữ trên vi xử lý vẫn là 0x 0000 0000 0000 0000.
 	+ Sau khi ngắt, vi xử lý tiếp tục làm việc với bước 2, rồi đến bước 3. Tuy nhiên lúc này giá trị đã xảy ra sai sót (nó làm việc vs bản sao ODR trước đó mà ko làm việc với giá trị mới nhất -> hệ thống ghi ngược lại kết quả làm việc với bản sao cũ đó -> chương trình chạy sai)
-
-### Cách 2: Tác động gián tiếp lên thanh ghi ODR thông qua thanh qua thanh ghi BSRR
+#### Cách 2: Tác động gián tiếp lên thanh ghi ODR thông qua thanh qua thanh ghi BSRR
 VD:
 
 <img width="600" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/441cb9c1-1ed2-4a0f-9ec1-e09c312dec83">
 
 + Ở đây t chỉ đơn giản thực hiện phép gán -> chỉ cần 1 bước gán là xong, không bị mắc sai lầm như TH trên 
   
-# I, Input
-## 1, Mức điện áp ngõ vào
+## I, Input
+### 1, Mức điện áp ngõ vào
 + Mức logic 0 của 1 chân Input là từ -0.3V đến 1.164V
 + Mức logic 1 của 1 chân Input là từ 1.833V đến 4V
-## 2, Sơ đồ nguyên lý
+### 2, Sơ đồ nguyên lý
 ![Bản sao của Blue-Pink Cute Class Schedule (6)](https://github.com/minchangggg/Stm32/assets/125820144/58abc013-0e26-454c-a12c-e2398f612f30)
 
-## 3, Phân tích các chế độ Input
-### a, Input floating
+### 3, Phân tích các chế độ Input
+#### a, Input floating
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/b7a8c900-a564-4d7a-8a57-725af9e9b923)
 
 > 1 chân Input ở chế độ Floating nếu **ngõ vào hở mạch** hoặc **trở kháng cao** => điện áp không xác định => giá trị logic của bit tương ứng trên thanh ghi ODR thay đổi ngẫu nhiên, không xác định, bị trôi nổi.
@@ -591,7 +607,7 @@ VD:
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/fe278d7f-4a9d-4f9b-a897-8e3e0995e824)
 
-### b, Input pull-up
+#### b, Input pull-up
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/5c92976c-d47f-40a4-adfa-1241a92393c4)
 
 > Là chế độ sử dụng điện trở nội kéo lên (INTERNAL PULL UP RESISTOR)
@@ -604,7 +620,7 @@ VD:
   
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/791daa1c-be53-41b5-8e90-9bf4f433c756)
 
-### c, Input pull-down
+#### c, Input pull-down
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/614d086b-cd45-4244-a483-fd07ea8eb5d1)
 
 > Là chế độ sử dụng điện trở nội kéo xuống (INTERNAL PULL DOWN RESISTOR)
@@ -619,10 +635,9 @@ VD:
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-<img width="450" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/1048789d-b0f8-4d24-8631-0d09395df7e3">
-
-# I. Vấn đề 1
-## 1. Bài toán đặt ra
+# M2S3 <img width="450" alt="image" src="https://github.com/user-attachments/assets/06942956-10cc-42c7-b1f0-3afef582c3b9">
+## I. Vấn đề 1
+### 1. Bài toán đặt ra
 - Cấu hình và viết chương trình thực hiện: Ban đầu LED sáng, khi "nhấn thả" nút, LED đảo trạng thái.
 
 => Ta thực hiện bằng cách dùng hàm HAL_GPIO_TogglePin(...). Đọc giá trị của PC13 => nếu nhấn nút, giá trị LEDSTATUS = 1 thì đảo = 0, và ngược lại
@@ -630,8 +645,7 @@ VD:
 => Nhận xét: giá trị của LEDSTATUS không ổn định -> có vấn đề ở phần mềm/ phần cứng 
 
 - Câu hỏi: Nếu viết hàm như vậy thì chtrình chạy được không? => chạy lúc được lúc không
-
-## 2. Giải thích vấn đề
+### 2. Giải thích vấn đề
 + Với nút nhấn lý tưởng, nhấn nút lập tức về 0, thả ra lập tức về lại 1.
 + Tuy nhiên trong thực tế sẽ không như vậy, muốn ở mức logic 0 về mức logic 1, t sẽ mất 1 khoảng thời gian T-Low (khoảng thời gian nút nhấn giữ mức logic 0) với T-low bé nhất ở đơn vị mili giây.
   
@@ -639,22 +653,19 @@ VD:
 
 + Tốc độ vi xử lý khi chưa cấu hình là 8MHz hay 1s sẽ thực hiện được 8 triệu lệnh (ở dạng mã máy). Giả sử 3 câu lệnh C trong vòng lặp phía trên tương đương 8 câu lệnh mã máy -> Trong 1s vòng lặp được thực hiện 1 triệu lần -> Trong 1ms vòng lặp được thực hiện 1 ngàn lần.
 + Vậy bản thân GPIO đã đảo hàng nghìn lần trong 1s (vì cứ ktra điều kiện, cứ mức logic nút nhấn bằng 0 thì đảo led) -> nếu may mắn, thì số lần đảo là số lẻ -> đúng yêu cầu bài toán.
-
-## 3. Cách giải quyết vấn đề
+### 3. Cách giải quyết vấn đề
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/c5e33e14-12a5-4eaf-8031-ed0fe8e2e951)
-
-# II. Vấn đề 2 và phương pháp Polling
-## 1. Bài toán đặt ra
+## II. Vấn đề 2 và phương pháp Polling
+### 1. Bài toán đặt ra
 - Cấu hình và viết chương trình thực hiện: Ban đầu LED sáng, khi "nhấn thả" nút, LED đảo mode: Từ 1->2, từ 2->1.
 - Trong đó:
-  
 	mode1: LED nhấp nháy 500ms
 	mode2: LED nhấp nháy 1000ms
 
-## 2. Hoạt động của cơ chế Polling
+### 2. Hoạt động của cơ chế Polling
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/2d6a9de1-c36e-4216-87e2-6c916e53eec9">
 
-## 3. Lưu đồ thuật toán phương pháp Polling
+### 3. Lưu đồ thuật toán phương pháp Polling
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/c15c579a-5cf9-497c-8081-d6531999cb1f">
 
 --------------------------------------------------------------------------------------------------------------------------------
