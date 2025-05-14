@@ -561,10 +561,8 @@ VD:
   
 # I, Input
 ## 1, Mức điện áp ngõ vào
-
 + Mức logic 0 của 1 chân Input là từ -0.3V đến 1.164V
 + Mức logic 1 của 1 chân Input là từ 1.833V đến 4V
-
 ## 2, Sơ đồ nguyên lý
 ![Bản sao của Blue-Pink Cute Class Schedule (6)](https://github.com/minchangggg/Stm32/assets/125820144/58abc013-0e26-454c-a12c-e2398f612f30)
 
@@ -777,13 +775,15 @@ Viết chương trình đảo led dùng ngắt ngoài
 ### a. Tại sao sử dụng HAL_Delay ở chương trình phục vụ ngắt thì vi điều khiển bị treo?
 > https://tapit.vn/tim-hieu-system-timer-ngat-systick-va-su-dung-hal_delay-trong-trinh-phuc-vu-ngat-vdk-stm32/
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/b4101ba3-faf5-4900-9840-6cd48b349a6a)
+<img width="550" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/b4101ba3-faf5-4900-9840-6cd48b349a6a">
 
 – Để trả lời cho câu hỏi trên, chúng ta cùng phân tích hình ảnh minh họa luồng thực thi của vi điều khiển ở trên. Giả sử vi xử lý sẽ xử lý 2 tín hiệu yêu cầu ngắt: một đến từ system timer và một đến từ ngoại vi bất kỳ, 2 tín hiệu này có cùng độ ưu tiên hoặc độ ưu tiên của tín hiệu yêu cầu ngắt Systick (đến từ hàm HAL_Delay) nhỏ hơn độ ưu tiên của tín hiệu yêu cầu ngắt (đến từ hàm HAL_GPIO_EXTI_Callback) còn lại. 
+
 – Cứ mỗi 1 mili giây thì vi xử lý sẽ thực hiện hàm SysTick_Handler một lần và giá trị uwTick sẽ được tăng thêm một đơn vị. Giả sử có một tín hiệu yêu cầu ngắt đến từ một ngoại vi bên ngoài và chương trình phục vụ ngắt của ngoại vi này (Peripheral_Handler) có gọi hàm HAL_Delay, lúc này vi xử lý thực hiện các câu lệnh trong Peripheral_Handler cho đến khi gặp câu lệnh HAL_Delay(x); //delay x mili giay. Vì tín hiệu yêu cầu ngắt của ngoại vi này đang được xử lý nên tín hiệu yêu cầu ngắt Systick đến sau sẽ được đưa vào trạng thái chờ (pending), hàm SysTick_Handler chưa được thực hiện dẫn đến giá trị uwTick không đổi, vi xử lý sẽ thực hiện lặp vô tận trong câu lệnh while của hàm HAL_Delay, điều này dẫn đến chương trình bị treo tại vòng lặp while này. 
+
 – Xem ví dụ dưới đây để hiểu vì sao vi xử lý thực hiện lặp vô tận trong câu lệnh while:
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/3661ce60-16de-427c-a373-924374598d3e)
+<img width="500" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/3661ce60-16de-427c-a373-924374598d3e">
 
 	+ Đầu tiên, biến tickstart chứa giá trị uwTick hiện tại được trả về từ hàm HAL_GetTick.
 	+ Vì SysTick_Handler chưa được thực hiện dẫn đến giá trị uwTick không đổi, giá trị trả về của HAL_GetTick trong điều kiện while bằng giá trị của tickstart ban đầu, dẫn đến kết quả của HAL_GetTick() – tickstart luôn bé hơn wait, dẫn đến vi điều khiển thực hiện lặp vô hạn trong vòng lặp while này.
@@ -796,8 +796,7 @@ Các bạn phải thực hiện điều chỉnh độ ưu tiên của ngắt Sys
 Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương trình phục vụ ngắt vào các trường hợp cần thiết vì các chương trình phục vụ ngắt nên được xử lý tức thời và càng ngắn gọn càng tốt, tránh ảnh hưởng đến các ngắt đến sau, không đáp ứng được tính realtime của hệ thống dẫn đến bỏ lỡ sự kiện hoặc mất dữ liệu. 
 
 ## 4. Tại sao cần phải dùng `EXTI->PR |= GPIO_PIN_0;` để xóa pending ngắt
-**Để tránh tình trạng nhảy vào hàm ngắt nhiều lần khi nhấn nút.**
-
+#### Để tránh tình trạng nhảy vào hàm ngắt nhiều lần khi nhấn nút.
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/821ae480-11e7-4c26-a973-26f5e1a25aa0)
 
 + Trong thực tế, ta sẽ gặp trường hợp rung phím, t sẽ gặp nhiều hơn 1 sườn xuống
