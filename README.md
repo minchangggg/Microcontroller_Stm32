@@ -1,4 +1,4 @@
-<img width="450" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/fae6fe05-a314-4c64-9143-c84573a10ebc">
+<img width="470" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/fae6fe05-a314-4c64-9143-c84573a10ebc">
 
 --------------------------------------------------------------------------------------------------------------------------------
 
@@ -8,16 +8,15 @@
 ## A, Quá trình biên dịch một chương trình C/C++
 > https://tapit.vn/qua-trinh-bien-dich-mot-chuong-trinh-cc/?fbclid=IwAR30Vb0QtPRumEMEmWeFqYsndk2tRrhgGLDh16K8cHTBoPU1J-A_XpFGl9o
 ### 1. ĐỊNH NGHĨA
-Là quá trình chuyển đổi từ ngôn ngữ bậc cao (C/C++, Pascal, Java, C#…) sang ngôn ngữ ngôn ngữ máy-> máy tính có thể hiểu và thực thi.
-Ngôn ngữ C là một ngôn ngữ dạng biên dịch. Chương trình được viết bằng C muốn chạy được trên máy tính phải trải qua một quá trình biên dịch để chuyển đổi từ dạng mã nguồn sang chương trình dạng mã thực thi. Quá trình được chia ra làm 4 giai đoạn chính:
-
+- Biên dịch là quá trình chuyển đổi từ ngôn ngữ bậc cao (C/C++, Pascal, Java, C#…) sang ngôn ngữ ngôn ngữ máy-> máy tính có thể hiểu và thực thi.
+- Ngôn ngữ C là một ngôn ngữ dạng biên dịch. Chương trình được viết bằng C muốn chạy được trên máy tính phải trải qua một quá trình biên dịch để chuyển đổi từ dạng mã nguồn sang chương trình dạng mã thực thi.
+- Quá trình được chia ra làm 4 giai đoạn chính:
 	+ Giai đoàn tiền xử lý (Pre-processor)
 	+ Giai đoạn dịch NNBC sang Asembly (Compiler)
 	+ Giai đoạn dịch asembly sang ngôn ngữ máy (Asember)
 	+ Giai đoạn liên kết (Linker)
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/bc85d275-e61e-4deb-a55a-7ab20df96215)
-
 ### 2. HOẠT ĐỘNG
 #### a. Giai đoạn tiền xử lý – Preprocessor
 + Nhận mã nguồn
@@ -401,54 +400,38 @@ Nhận xét 3 trường hợp trên:
 - Lõi **ARM COTEX M3**.
 - Tốc độ tối đa **72Mhz**. 
 - Bộ nhớ :
-
 	+ **64** kbytes bộ nhớ **Flash** 
 	+ **20** kbytes bộ nhớ **SRAM**      
-
 - Clock, reset và quản lý nguồn
-
 	+ Điện áp hoạt động từ 2.0 → 3.6V.
 	+ Sử dụng thạch anh ngoài từ 4Mhz → 20Mhz.     
 	+ Thạch anh nội dùng dao động RC ở mode 8Mhz hoặc 40Khz.	 
-
 - Chế độ điện áp thấp:        
-
 	+ Có các mode: ngủ, ngừng hoạt động hoặc hoạt động ở chế độ chờ.
 	+ Cấp nguồn ở chân Vbat bằng pin ngoài để dùng bộ RTC và sử dụng dữ liệu được lưu trữ khi mất nguồn cấp chính. 
-
 - 2 bộ ADC 12 bit với 9 kênh cho mỗi bộ        
-
 	+ Khoảng giá trị chuyển đổi từ 0 – 3.6 V
 	+ Có chế độ lấy mẫu 1 kênh hoặc nhiều kênh.    
-
 - DMA:         
-
 	+ 7 kênh DMA
 	+ Có hỗ trợ DMA cho ADC, UART, I2C, SPI.
-
 - 7 bộ Timer:
-
 	+ 3 Timer 16 bit hỗ trợ các mode Input Capture/ Output Compare/ PWM.
 	+ 1 Timer 16 bit hỗ trợ để điều khiển động cơ với các mode bảo vệ ngắt Input, dead-time.
 	+ 2 Watchdog Timer để bảo vệ và kiểm tra lỗi.
 	+ 1 Systick Timer 24 bit đếm xuống cho hàm Delay,….
-
 - Có hỗ trợ 9 kênh giao tiếp:
-
 	+ 2 bộ I2C
  	+ 3 bộ USART
 	+ 2 SPI
 	+ 1 CAN	
 	+ USB 2.0 full-speed interface
-
  - Kiểm tra lỗi CRC và 96-bit ID.
-
 ## 2. Giới thiệu kit BluePill sử dụng STM32F103C8T6
 Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử dụng để nghiên cứu về ARM nhiều nhất hiện nay. 
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/da5c1792-a962-4398-af54-928af0681355)
-
-**Thông số kỹ thuật**
+### Thông số kỹ thuật
 + Vi điều khiển: STM32F103C8T6.
 + Điện áp cấp 5VDC qua cổng Micro USB sẽ được chuyển đổi thành 3.3VDC qua IC nguồn và cấp cho Vi điều khiển chính.
 + Tích hợp sẵn thạch anh 8Mhz.
@@ -553,19 +536,15 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 ## 1, Sơ đồ nguyên lý
 ![Bản sao của Blue-Pink Cute Class Schedule (5)](https://github.com/minchangggg/Stm32/assets/125820144/b60a78f2-01f1-4c66-ab08-3ac52e267a0a)
 
-[INPUT]
+#### [INPUT]
 - Bit nào tương ứng pin đó, bit1 tương ứng pin1, bit2 tương ứng pin2
-
-[OUTPUT]
+#### [OUTPUT]
 - P-MOS kéo lên VDđ tạo ra điện áp 3.3v
 - N-MOS kéo xuống VSs tạo ra điện áp 0V
-
 ## 2, Cấu hình thanh ghi dữ liệu của các Port
-
 <img width="650" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/6aa28a55-c481-4085-83ab-a26225dbd6ad">
 
 ## 3, Phân tích cách hoạt động hàm HAL_GPIO_WritePin()
-
 <img width="950" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/8a722b81-6da8-49d2-a417-72c06f088c46">
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -771,7 +750,6 @@ c. NVIC (Nested Vector Interrupt Controller) – Bộ xử lý ngắt lồng nha
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/5a031478-7c14-4647-ab06-6e983d114584)
 
 - Trên MCU STM32F103C8T6 có hai loại ưu tiên ngắt khác nhau đó là Preemption Priorities và Sub Priorities:
-
 		+ Mặc định thì ngắt nào có Preemtion Priority cao hơn thì sẽ được thực hiện trước.
 		+ Khi nào 2 ngắt có cùng một mức Preemption Priority thì ngắt nào có Sub Priority cao hơn thì ngắt đó được thực hiện trước.
 		+ Còn trường hợp 2 ngắt có cùng mức Preemption và Sub Priority luôn thì ngắt nào đến trước được thực hiện trước
