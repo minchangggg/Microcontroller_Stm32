@@ -1,4 +1,4 @@
-# STM32
+![image](https://github.com/user-attachments/assets/b7d07bfa-8b17-4353-a58c-27627428a8e9)# STM32
 ## Table of contents
 - [M1S1 - Tổng quan chương trình học](#m1s1)
 - [M1S2 - Ôn tập ngôn ngữ lập trình C](#m1s2)
@@ -13,11 +13,12 @@
   
 - [M4S1 - Ôn tập EXTI & Clock tree](#m4s1)
   
-- [M5S1 - TIMER, TIME BASE](#m5s1)
+- [M5S1 - TIMER - TIME BASE](#m5s1)
 - [M5S2 - TIMER - PWM](#m5s2)
   
-- [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
-- [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
+- [M6 - UART Transmit](#m6)
+- [M7 - UART Receive IT](#m7)
+  
 - [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
 
 # M1S1 
@@ -591,7 +592,7 @@ VD:
 
 + Ở đây t chỉ đơn giản thực hiện phép gán -> chỉ cần 1 bước gán là xong, không bị mắc sai lầm như TH trên 
   
-## I, Input
+## III, Input
 ### 1, Mức điện áp ngõ vào
 + Mức logic 0 của 1 chân Input là từ -0.3V đến 1.164V
 + Mức logic 1 của 1 chân Input là từ 1.833V đến 4V
@@ -895,8 +896,8 @@ Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương
 		3. Cấu hình System Clock Switch (SW) với nguồn dao động ca
 
 --------------------------------------------------------------------------------------------------------------------------------
-
-<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/23cc1482-2554-4368-9f8e-fc14f1d0d9b0">
+# M5S1
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/f2f86f73-9b3f-4d79-829c-ecdabe5c18d0">
 
 > https://www.st.com/resource/en/reference_manual/cd00171190-stm32f101xx-stm32f102xx-stm32f103xx-stm32f105xx-and-stm32f107xx-advanced-arm-based-32-bit-mcus-stmicroelectronics.pdf
 >
@@ -1016,7 +1017,8 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/9e313071-0fdb-4773-969f-11797069fa66">
+# M5S2
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/0c380080-11fd-4b68-bd17-11353cf065f1">
 
 > https://mecsu.vn/ho-tro-ky-thuat/moi-2022-pwm-la-gi-nguyen-ly-hoat-dong-pwm.rP0
 
@@ -1072,34 +1074,32 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
   
 --------------------------------------------------------------------------------------------------------------------------------
 
-<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/811efbc6-08a4-49ba-9d93-fbbbda137025">
+# M6
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/799a508f-c290-4e10-99d7-c7713416b78d">
 
 > https://tapit.vn/truyen-thong-noi-tiep-trong-lap-trinh-vi-dieu-khien-giao-tiep-uart/
 
-# I. Tổng quát 
-## 1. Khái niệm
+## I. Tổng quát 
+### 1. Khái niệm
 - UART (Universal synchronous asynchronous receiver transmitter ) là một ngoại vi cơ bản của STM32 sử dụng 2 chân Rx và Tx để nhận và truyền dữ liệu.
 - UART là giao thức truyền dữ liệu không đồng bộ, có nghĩa là không có tín hiệu để đồng bộ hóa đầu ra của các bit từ UART truyền đến việc lấy mẫu các bit bởi UART nhận., do đó không có đường clock nào điều chỉnh tốc độ truyền dữ liệu. Người dùng phải đặt cả hai thiết bị để giao tiếp ở cùng tốc độ. Tốc độ này được gọi là tốc độ truyền, được biểu thị bằng bit trên giây hoặc bps. Tốc độ truyền thay đổi đáng kể, từ 9600 baud đến 115200 và hơn nữa. Tốc độ truyền giữa UART truyền và nhận chỉ có thể chênh lệch khoảng 10% trước khi thời gian của các bit bị lệch quá xa.
 - Thay vì tín hiệu đồng bộ, UART truyền thêm các bit start và stop vào gói dữ liệu được chuyển. Các bit này xác định điểm bắt đầu và điểm kết thúc của gói dữ liệu để UART nhận biết khi nào bắt đầu đọc các bit.
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/e175ae03-5459-488d-9056-979055bcb800">
 
-### Trong một sơ đồ giao tiếp UART:
+#### Trong một sơ đồ giao tiếp UART:
 1. Chân Tx (truyền) của một chip kết nối trực tiếp với chân Rx (nhận) của chip kia và ngược lại. Thông thường, quá trình truyền sẽ diễn ra ở 3.3V hoặc 5V. UART là một giao thức một master, một slave, trong đó một thiết bị được thiết lập để giao tiếp với duy nhất một thiết bị khác.
 2. Dữ liệu truyền đến và đi từ UART song song với thiết bị điều khiển (ví dụ: CPU).
 3. Khi gửi trên chân Tx, UART đầu tiên sẽ dịch thông tin song song này thành nối tiếp và truyền đến thiết bị nhận.
 4. UART thứ hai nhận dữ liệu này trên chân Rx của nó và biến đổi nó trở lại thành song song để giao tiếp với thiết bị điều khiển của nó.
-
-### UART truyền dữ liệu nối tiếp, theo một trong ba chế độ:
+#### UART truyền dữ liệu nối tiếp, theo một trong ba chế độ:
 - Full duplex: Giao tiếp đồng thời đến và đi từ mỗi master và slave
 - Half duplex: Dữ liệu đi theo một hướng tại một thời điểm
 - Simplex: Chỉ giao tiếp một chiều
-
-## 2. Các thông số cơ bản trong truyền nhận UART
+### 2. Các thông số cơ bản trong truyền nhận UART
 - Data Frame (khung truyền)
 - Baund rate (tốc độ baund)
-
-### a. Data Frame (khung truyền)
+#### a. Data Frame (khung truyền)
 Dữ liệu truyền qua UART được tổ chức thành các gói. Mỗi gói chứa 1 bit bắt đầu, 5 đến 9 bit dữ liệu (tùy thuộc vào UART), một bit chẵn lẻ tùy chọn và 1 hoặc 2 bit dừng.
 
 ![image](https://github.com/user-attachments/assets/611836eb-c178-44f9-8be1-c4b9872c404d)
@@ -1128,7 +1128,7 @@ Dữ liệu truyền qua UART được tổ chức thành các gói. Mỗi gói 
   
 => data truyền đi là OK  
 
-### b. Baudrate (tốc độ baund)
+#### b. Baudrate (tốc độ baund)
 - Baudrate (tốc độ baund): Khoảng thời gian dành cho 1 bit được truyền. Phải được cài đặt giống nhau ở gửi và nhận. Một số Baud Rate thông dụng: 9600, 38400, 115200, 230400,…
 - UART là giao thức không đồng bộ, do đó không có đường clock nào điều chỉnh tốc độ truyền dữ liệu. Người dùng phải đặt cả hai thiết bị để giao tiếp ở cùng tốc độ. Tốc độ này được gọi là tốc độ truyền, được biểu thị bằng bit trên giây hoặc bps. Tốc độ truyền thay đổi đáng kể, từ 9600 baud đến 115200 và hơn nữa. Tốc độ truyền giữa UART truyền và nhận chỉ có thể chênh lệch khoảng 10% trước khi thời gian của các bit bị lệch quá xa.
 - Tốc độ baund càng cao thì tốc độ truyền/nhận dữ liệu càng nhanh.
@@ -1156,52 +1156,53 @@ Dữ liệu truyền qua UART được tổ chức thành các gói. Mỗi gói 
 [Ex] Tốc độ bit của tín hiệu là 3000. Nếu mỗi phần tử tín hiệu mang 6 bit, cho biết tốc độ baud?
 
 		+ Tốc độ baud = tốc độ bit/ số bit trong mỗi phần tử tín hiệu = 3000/6 =500 baud/giây
-## 3. Cách thức đồng bộ hóa tính hiệu
+### 3. Cách thức đồng bộ hóa tính hiệu
 Trong giao tiếp UART, hai chế độ Asynchronous và Synchronous liên quan đến cách thức đồng bộ hóa tín hiệu giữa các thiết bị:
-### +) Chế độ Asynchronous (Bất đồng bộ)
+#### +) Chế độ Asynchronous (Bất đồng bộ)
 - Không có tín hiệu đồng hồ chung (Clock).
 - Mỗi thiết bị gửi và nhận dữ liệu một cách độc lập.
 - Thời gian giữa các bit dữ liệu có thể thay đổi tùy theo tốc độ baud rate.
 - Ưu điểm: Đơn giản, ít yêu cầu phần cứng.
 - Ứng dụng: Dùng trong truyền thông đơn giản, thông thường như giao tiếp với cảm biến, module GSM, và hầu hết các ứng dụng UART.
-### +) Chế độ Synchronous (Đồng bộ)
+#### +) Chế độ Synchronous (Đồng bộ)
 - Có tín hiệu đồng hồ chung giữa hai thiết bị.
 - Dữ liệu được truyền và nhận cùng với tín hiệu đồng hồ, đảm bảo các bit được truyền chính xác theo thời gian.
 - Ưu điểm: Đảm bảo độ chính xác cao, tốc độ truyền nhanh hơn vì không phải truyền thêm các bit start/stop như trong chế độ bất đồng bộ.
 - Ứng dụng: Dùng khi cần truyền tải dữ liệu ở tốc độ cao và độ chính xác cao, như trong các giao tiếp truyền thông phức tạp.
-### => Tóm lại:
+#### => Tóm lại:
 - Asynchronous (Bất đồng bộ): Không có đồng hồ chung, truyền dữ liệu theo cách đơn giản, phổ biến.
 - Synchronous (Đồng bộ): Có tín hiệu đồng hồ chung, chính xác hơn, thường dùng khi yêu cầu tốc độ và độ chính xác cao.
 
 => chế độ UART2 được cài đặt là Asynchronous, nghĩa là không sử dụng đồng hồ chung, và dữ liệu được truyền theo cách bất đồng bộ.
 
-## 4. Ưu và nhược điểm của UART
+### 4. Ưu và nhược điểm của UART
 Không có giao thức truyền thông nào là hoàn hảo, nhưng UART thực hiện khá tốt công việc của nó. Dưới đây là một số ưu và nhược điểm để giúp bạn quyết định xem nó có phù hợp với nhu cầu của bạn hay không:
-### Ưu điểm
+#### Ưu điểm
 - Chỉ sử dụng hai dây
 - Không cần tín hiệu clock
 - Có một bit chẵn lẻ để cho phép kiểm tra lỗi
 - Cấu trúc của gói dữ liệu có thể được thay đổi miễn là cả hai bên đều được thiết lập cho nó
 - Phương pháp có nhiều tài liệu và được sử dụng rộng rãi
-### Nhược điểm
+#### Nhược điểm
 - Kích thước của khung dữ liệu được giới hạn tối đa là 9 bit
 - Không hỗ trợ nhiều hệ thống slave hoặc nhiều hệ thống master
 - Tốc độ truyền của mỗi UART phải nằm trong khoảng 10% của nhau
-## 5. Kết nối phần cứng 
+### 5. Kết nối phần cứng 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/c951302a-40b2-4308-82ee-f6fd5552dece)
 
 > Tìm hỉu về cách ly quang trong việc truyền nhận dữ liệu
 
-# II. Sơ đồ khối quá trình truyền nhận 1 byte dữ liệu 
-## Quá trình truyền 1 byte dữ liệu
+## II. Sơ đồ khối quá trình truyền nhận 1 byte dữ liệu 
+### Quá trình truyền 1 byte dữ liệu
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/8807eba4-c470-43f2-a5b0-0d6817b49f74)
 
-## Quá trình nhận 1 byte dữ liệu
+### Quá trình nhận 1 byte dữ liệu
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/44552493-1e44-48df-a481-edad4320a14e)
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/c9f49a21-ed73-49da-a0e4-91b66675ce07">
+# M7
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/822aef49-f79c-415e-93c1-9223732e2d08">
 
 ### Nhận dữ liệu ở chế độ Interrupt 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/9b90231c-d56a-4fa6-be6b-5987eb3eb196)
