@@ -1,5 +1,5 @@
 # STM32
-## Table of contents
+## Table of course module content
 > [M1S1 - Tổng quan chương trình học](#m1s1)
 >
 > [M1S2 - Ôn tập ngôn ngữ lập trình C](#m1s2)
@@ -39,7 +39,12 @@
 > [M12 - DMA, DMA ADC, DMA UART](#m12)
 >
 > [M13 - WDG & Tổng kết](#m13)
- 
+
+## Table of supplementary content
+> [SPI]()
+>
+> [CAN]()
+
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M1S1 
