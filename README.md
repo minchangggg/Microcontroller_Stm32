@@ -1,6 +1,6 @@
 # STM32
 ## Table of contents
-- [M1S1 - Tổng quan chương trình học](#m1S1)
+- [M1S1 - Tổng quan chương trình học](#M1S1)
 - [M1S2 - Ôn tập ngôn ngữ lập trình C](#m1s2)
 - [M1S3 - Tổng quan vi điều khiển, kết nối phần cứng, phần mềm](#m1s3)
   
@@ -17,11 +17,14 @@
 - [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
 - [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
 
-# M1S1 <img width="450" alt="image" src="https://github.com/user-attachments/assets/e3bc6c3f-fe9f-45f1-ac4d-02be285479a6">
+# M1S1 
+<img width="450" alt="image" src="https://github.com/user-attachments/assets/e3bc6c3f-fe9f-45f1-ac4d-02be285479a6">
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-# M1S2 <img width="450" alt="image" src="https://github.com/user-attachments/assets/47073b04-b513-443f-8618-166f95a0eea8">
+# M1S2 
+<img width="450" alt="image" src="https://github.com/user-attachments/assets/47073b04-b513-443f-8618-166f95a0eea8">
+
 ## I. SƠ LƯỢC VỀ CHƯƠNG TRÌNH C
 ### A, Quá trình biên dịch một chương trình C/C++
 > https://tapit.vn/qua-trinh-bien-dich-mot-chuong-trinh-cc/?fbclid=IwAR30Vb0QtPRumEMEmWeFqYsndk2tRrhgGLDh16K8cHTBoPU1J-A_XpFGl9o
