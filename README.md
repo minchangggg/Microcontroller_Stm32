@@ -19,7 +19,9 @@
 - [M6 - UART Transmit](#m6)
 - [M7 - UART Receive IT](#m7)
   
-- [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
+- [M8 - Giao tiếp I2C](#m8)
+
+- [M9 - Thư viện C](#m9)
 
 # M1S1 
 <img width="450" alt="image" src="https://github.com/user-attachments/assets/e3bc6c3f-fe9f-45f1-ac4d-02be285479a6">
@@ -1209,7 +1211,8 @@ Không có giao thức truyền thông nào là hoàn hảo, nhưng UART thực 
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-<img width="400" alt="image" src="https://github.com/user-attachments/assets/50f54d67-6b7d-49a3-8b7b-1408ffd293a2">
+# M8
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/ae705213-8ab4-4e76-b3c2-15e64d26ea5c">
 
 # 1. Giao thức I2C là gì
 - I2C viết tắt của Inter- Integrated Circuit  là một phương thức giao tiếp được phát triển bởi hãng Philips Semiconductors. Dùng để truyền tín hiệu giữa vi xử lý và các IC trên các bus nối tiếp.
@@ -1261,7 +1264,10 @@ chúng ở chế độ ngủ (sleep mode) và đợi bit địa chỉ.
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-<img width="400" alt="image" src="https://github.com/user-attachments/assets/1e4c33c4-84e2-4242-b33c-8725d0b04b58">
+# M9
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/01a4cfa6-2d48-4d43-a62c-a053cc73c97f">
+
+
 
 --------------------------------------------------------------------------------------------------------------------------------
 
