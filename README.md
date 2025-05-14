@@ -1170,24 +1170,32 @@ Không có giao thức truyền thông nào là hoàn hảo, nhưng UART thực 
 
 > Tìm hỉu về cách ly quang trong việc truyền nhận dữ liệu
 
-## II. Sơ đồ khối quá trình truyền nhận 1 byte dữ liệu 
-### Quá trình truyền 1 byte dữ liệu
+# II. Sơ đồ khối quá trình truyền nhận 1 byte dữ liệu 
+## Quá trình truyền 1 byte dữ liệu
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/8807eba4-c470-43f2-a5b0-0d6817b49f74)
 
-### Quá trình nhận 1 byte dữ liệu
+## Quá trình nhận 1 byte dữ liệu
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/44552493-1e44-48df-a481-edad4320a14e)
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/c9f49a21-ed73-49da-a0e4-91b66675ce07)
-
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/c9f49a21-ed73-49da-a0e4-91b66675ce07">
 
 ### Nhận dữ liệu ở chế độ Interrupt 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/9b90231c-d56a-4fa6-be6b-5987eb3eb196)
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/949972d7-a29b-4992-8cc3-070222dfb177">
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/50f54d67-6b7d-49a3-8b7b-1408ffd293a2">
+
+I2C
+--------------------------------------------------------------------------------------------------------------------------------
+
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/1e4c33c4-84e2-4242-b33c-8725d0b04b58">
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+<img width="500" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/949972d7-a29b-4992-8cc3-070222dfb177">
 
 > https://www.studocu.com/vn/document/truong-dai-hoc-tra-vinh/vat-ly-dai-cuong/stm32-adc/82063383
 > 
@@ -1323,8 +1331,8 @@ Với các chế độ quét nhiều kênh, có thể thấy các kênh có th�
 ### Coversion time (thời gian chuyển đổi)
 - Trong vi điều khiển STM32, chúng ta có thể tính được tốc độ chuyển đổi của bộ ADC bằng cách sau:
 - Tổng thời gian chuyển đổi = Thời gian lấy mẫu tín hiệu + thời gian chuyển đổi
-  
-![image](https://github.com/minchangggg/Stm32/assets/125820144/5be572f8-d232-47d4-86f9-cc6854602e2a)
+
+<img width="600" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/5be572f8-d232-47d4-86f9-cc6854602e2a">
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/c1a6ef30-039b-425e-9d36-fd94bc7f7f9f)
 
@@ -1339,7 +1347,7 @@ Với các chế độ quét nhiều kênh, có thể thấy các kênh có th�
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/e47dace1-c142-42cc-936f-5019d0fd8aac">
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/64a1dbdf-aa51-4467-ad50-607625a8517b">
 
 > https://tapit.vn/real-time-clock-rtc-tren-stm32f103c8t6/
 
@@ -1351,5 +1359,12 @@ Với các chế độ quét nhiều kênh, có thể thấy các kênh có th�
 - Ưu điểm: Không phải tốn chi phí cho bất kì IC RTC nào vì đã được tích hợp sẵn, tiết kiểm diện tích thiết kế mạch. 
 - Nhược điểm: Bộ RTC trong chip STM32F103C8 sử dụng từ Clock từ các bộ LSI, LSE, HSE. Nếu sử dụng LSI làm bộ nguồn Clock thì đây là bộ clock nội và sai số tầm khoảng 1%, vì vậy trong quá trình hoạt động thì khi chúng ta đọc thời gian sẽ bị sai lệch (có thể lưu ý khắc phục được)
 
-
 Việc của chúng ta chỉ cần tìm hiểu và sử dụng chứ không cần bận tâm đến phần cứng nữa. Một số ứng dụng chính mà bộ RTC mang lại là làm đồng hồ, mạch kiểm soát thời gian, báo thức, bộ đếm…Bộ RTC này sử dụng timer độc lập, tách biệt với các bộ timer khác. Việc cài đặt thời gian, đọc thời gian cũng trở nên dễ dàng bằng cách tác động trực tiếp vào thanh ghi.
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+<img width="450" alt="image" src="https://github.com/user-attachments/assets/b4d8ec62-da06-4422-b371-71e277f6e9ec">
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/72211819-c174-4b75-8285-9367c3b1cd17">
