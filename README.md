@@ -8,11 +8,14 @@
 - [M2S2 - GPIO, INPUT](#m2s2)
 - [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
 
-- [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
-- [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
-- [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
-- [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
-- [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
+- [M3S1 - Exception, External Interrupt](#m3s1)
+- [M3S2 - External Interrupt](#m3s2)
+  
+- [M4S1 - Ôn tập EXTI & Clock tree](#m4s1)
+  
+- [M5S1 - TIMER, TIME BASE](#m5s1)
+- [M5S2 - TIMER - PWM](#m5s2)
+  
 - [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
 - [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
 - [M2S3 - GPIO, Button, Debug, Polling](#m2s3)
@@ -347,7 +350,7 @@ Nhận xét 3 trường hợp trên:
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M1S3 
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/5b55facd-766b-482d-8fc9-7b6990154cbb">
+<img width="750" alt="image" src="https://github.com/user-attachments/assets/5b55facd-766b-482d-8fc9-7b6990154cbb">
 
 ## I, Một số khái niệm cơ bản và Cấu trúc của 1 vi điều khiển
 ### 1. Một số khái niệm cơ bản
@@ -508,7 +511,7 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M2S1 
-<img width="450" alt="image" src="https://github.com/user-attachments/assets/2e5aeb91-615d-4d11-a2ba-953535236a73">
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/2a49b6b2-7570-4e1c-8c3f-4056c9ac4144">
 
 ## I, TÌM HIỂU CHUNG CHỨC NĂNG CỦA CÁC CHÂN STM32F103C8T6
 ![Bản sao của Blue-Pink Cute Class Schedule (4)](https://github.com/minchangggg/Stm32/assets/125820144/ec67b5bb-7804-4734-b973-d52d16a4908e)
@@ -566,7 +569,7 @@ Là chân chọn vùng nhớ khởi động, chạy các chương trình khác n
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M2S2 
-<img width="400" alt="image" src="https://github.com/user-attachments/assets/7b9dd2b1-0509-444e-ac47-a80d3796cbca">
+<img width="290" alt="image" src="https://github.com/user-attachments/assets/7b9dd2b1-0509-444e-ac47-a80d3796cbca">
 
 ### 3, Tính tối ưu của thanh ghi BSRR của vi xử lý 32 bit 
 #### Muốn điều chỉnh trạng thái của 1 chân bất kì (VD PC13) t sẽ có 2 cách: tác động lên ODR và tác động lên BSRR
@@ -681,21 +684,20 @@ VD:
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/eda3912d-28fb-42ac-a412-7a1b2ba58c9f">
+# M3S1
+<img width="440" alt="image" src="https://github.com/user-attachments/assets/b284774b-d716-40ef-8084-e248f66a2973">
 
 ### Kiến trúc cơ bản của Vi điều khiển
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/7370bc6c-e0a4-4253-9663-6ff45b38a659">
 
-# I, Exception
+## I, Exception
 - Là một điều kiện làm thay đổi thứ tự thực hiện bình thường của một chương trình.
 - Gồm 2 loại:
-  
     + System Exceptions (hầu như là lỗi, không mong muốn, đến từ bên trong vi xử lý)
     + Interrupts (là tính năng, chức năng mong muốn, từ bên ngoài các ngoại vi vi điều khiển gửi đến vi xử lý)
       
-# II, Interrupt
-## 1. Tổng quan về Interrupt
-
+## II, Interrupt
+### 1. Tổng quan về Interrupt
 <img width="454" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/75ab877c-5deb-43c3-8934-134487fa1d0f">
 
 	+ Các tín hiệu Interrupt được tạo ra bởi các ngoại vi của vi điều khiển (INPUT, ADC, TIMER, UART..) và được gửi đến vi xử lý. Các tín hiệu này được gọi là Interrupt Request (IRQ).
@@ -703,20 +705,20 @@ VD:
 
 - **Các tín hiệu yêu cầu Interrupt (IRQ) được gửi vào khối NVIC của vi xử lý**
   
-### a. Cơ chế hoạt động của cơ chế Interrupt
+#### 1.1. Cơ chế hoạt động của cơ chế Interrupt
 <img width="407" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/d53cd2bc-ddf4-4cee-8d45-dd9d48fc473d">
 
-### b. Lưu đồ thuật toán Interrupt
+#### 1.2. Lưu đồ thuật toán Interrupt
 <img width="379" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/530f410c-b0b0-424e-ab9e-85ce5cdcf3b8">
 
-### c. NVIC (Nested Vector Interrupt Controller) – Bộ xử lý ngắt lồng nhau
+#### 1.3. NVIC (Nested Vector Interrupt Controller) – Bộ xử lý ngắt lồng nhau
 > https://www.laptrinhdientu.com/2021/09/Core8.html
 
 	+ Là một ngoại vi của lõi vi xử lý ARM-Cortex M
 	+ Cấu hình enable/disable các ngắt
 	+ Cấu hình độ ưu tiên (priority) các ngắt
 
-## 2. Phân tích về quá trình stacking và unstacking khi vào và thoát ngắt
+### 2. Phân tích về quá trình stacking và unstacking khi vào và thoát ngắt
 ![Bản sao của Blue-Pink Cute Class Schedule (7)](https://github.com/minchangggg/Stm32/assets/125820144/13c6847b-301d-4b08-8964-60bb0292b32c)
 
 + Các thanh ghi từ R0 đến R12 (13 thanh ghi) là những thanh ghi được sử dụng với nhiều mục đích chung như lưu trữ dữ liệu của các phép tính toán, lưu trữ địa chỉ… Tất cả những thanh ghi này đều có độ rộng 32bit.
@@ -725,7 +727,7 @@ VD:
 + Thanh ghi R15 là thanh ghi Program Counter(PC). Thanh ghi này chứa địa chỉ câu lệnh sẽ được thực thi. Khi reset, vi xử lý sẽ nạp thanh ghi PC với giá trị reset là 0x00000004.
 + Ngoài các thanh ghi được sử dụng với nhiều mục đích chung (R0-R12), SP, LR, PC thì vi xử lý ARM Cortex-M4 còn có 5 thanh ghi đặc biệt. Trong đó, thanh ghi Program status (PSR) bao gồm các thanh ghi cung cấp thông tin trạng thái của chương trình Application với các cờ N,Z,C,V,Q, chương trình Interrupt và các thanh ghi liên quan đến stack của vi xử lý. Những thanh ghi còn lại, các bạn tìm đọc trong tài liệu đã được đề cập đến ở phần trên.
 
-## 3. Phân tích về các trường hợp độ ưu tiên và trạng thái của các ngắt.
+### 3. Phân tích về các trường hợp độ ưu tiên và trạng thái của các ngắt.
 > https://tapit.vn/cau-hinh-uu-tien-ngat-vi-dieu-khien-stm32-tren-cubemx/
  
 <img width="" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/cb915b9a-0e6b-45ad-b358-bbe1cbd53a79">
@@ -756,7 +758,7 @@ VD:
 		+ Khi nào 2 ngắt có cùng một mức Preemption Priority thì ngắt nào có Sub Priority cao hơn thì ngắt đó được thực hiện trước.
 		+ Còn trường hợp 2 ngắt có cùng mức Preemption và Sub Priority luôn thì ngắt nào đến trước được thực hiện trước
 
-# II, External Interrupt
+## II, External Interrupt
 + Cấu hình chân EXTI
 + Cấu hình sườn kích hoạt ngắt
 + Cấu hình trở kéo nếu cần
@@ -772,7 +774,8 @@ VD:
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-<img width="550" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/8b19da2d-0974-4e4f-95ab-86522b101a41">
+# M3S2
+<img width="450" alt="image" src="https://github.com/user-attachments/assets/500ebf49-1d02-4da7-8f29-029f6f94e186">
 
 > https://tapit.vn/hieu-va-lap-trinh-ngat-ngoai-stm32f411/
 
@@ -796,18 +799,18 @@ EXTI (External Interupts) tạm dịch là ngắt ngoài hay ngắt sự kiện 
 Viết chương trình đảo led dùng ngắt ngoài
 ## 2. Bài giải
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/9bb25c38-1107-4613-bb4e-173237cc3d23)
-
 ## 3. Tại sao không dùng hàm HAL_Delay mà lại dùng `for(int i = 0; i < 100000; i++);`
 ### a. Tại sao sử dụng HAL_Delay ở chương trình phục vụ ngắt thì vi điều khiển bị treo?
 > https://tapit.vn/tim-hieu-system-timer-ngat-systick-va-su-dung-hal_delay-trong-trinh-phuc-vu-ngat-vdk-stm32/
 
 <img width="550" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/b4101ba3-faf5-4900-9840-6cd48b349a6a">
 
-– Để trả lời cho câu hỏi trên, chúng ta cùng phân tích hình ảnh minh họa luồng thực thi của vi điều khiển ở trên. Giả sử vi xử lý sẽ xử lý 2 tín hiệu yêu cầu ngắt: một đến từ system timer và một đến từ ngoại vi bất kỳ, 2 tín hiệu này có cùng độ ưu tiên hoặc độ ưu tiên của tín hiệu yêu cầu ngắt Systick (đến từ hàm HAL_Delay) nhỏ hơn độ ưu tiên của tín hiệu yêu cầu ngắt (đến từ hàm HAL_GPIO_EXTI_Callback) còn lại. 
+- Để trả lời cho câu hỏi trên, chúng ta cùng phân tích hình ảnh minh họa luồng thực thi của vi điều khiển ở trên. 
+- Giả sử vi xử lý sẽ xử lý 2 tín hiệu yêu cầu ngắt: một đến từ system timer và một đến từ ngoại vi bất kỳ, 2 tín hiệu này có cùng độ ưu tiên hoặc độ ưu tiên của tín hiệu yêu cầu ngắt Systick (đến từ hàm HAL_Delay) nhỏ hơn độ ưu tiên của tín hiệu yêu cầu ngắt (đến từ hàm HAL_GPIO_EXTI_Callback) còn lại. 
+- Cứ mỗi 1 mili giây thì vi xử lý sẽ thực hiện hàm SysTick_Handler một lần và giá trị uwTick sẽ được tăng thêm một đơn vị. Giả sử có một tín hiệu yêu cầu ngắt đến từ một ngoại vi bên ngoài và chương trình phục vụ ngắt của ngoại vi này (Peripheral_Handler) có gọi hàm HAL_Delay, lúc này vi xử lý thực hiện các câu lệnh trong Peripheral_Handler cho đến khi gặp câu lệnh HAL_Delay(x); //delay x mili giay.
+- Vì tín hiệu yêu cầu ngắt của ngoại vi này đang được xử lý nên tín hiệu yêu cầu ngắt Systick đến sau sẽ được đưa vào trạng thái chờ (pending), hàm SysTick_Handler chưa được thực hiện dẫn đến giá trị uwTick không đổi, vi xử lý sẽ thực hiện lặp vô tận trong câu lệnh while của hàm HAL_Delay, điều này dẫn đến chương trình bị treo tại vòng lặp while này. 
 
-– Cứ mỗi 1 mili giây thì vi xử lý sẽ thực hiện hàm SysTick_Handler một lần và giá trị uwTick sẽ được tăng thêm một đơn vị. Giả sử có một tín hiệu yêu cầu ngắt đến từ một ngoại vi bên ngoài và chương trình phục vụ ngắt của ngoại vi này (Peripheral_Handler) có gọi hàm HAL_Delay, lúc này vi xử lý thực hiện các câu lệnh trong Peripheral_Handler cho đến khi gặp câu lệnh HAL_Delay(x); //delay x mili giay. Vì tín hiệu yêu cầu ngắt của ngoại vi này đang được xử lý nên tín hiệu yêu cầu ngắt Systick đến sau sẽ được đưa vào trạng thái chờ (pending), hàm SysTick_Handler chưa được thực hiện dẫn đến giá trị uwTick không đổi, vi xử lý sẽ thực hiện lặp vô tận trong câu lệnh while của hàm HAL_Delay, điều này dẫn đến chương trình bị treo tại vòng lặp while này. 
-
-– Xem ví dụ dưới đây để hiểu vì sao vi xử lý thực hiện lặp vô tận trong câu lệnh while:
+`Xem ví dụ dưới đây để hiểu vì sao vi xử lý thực hiện lặp vô tận trong câu lệnh while`
 
 <img width="500" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/3661ce60-16de-427c-a373-924374598d3e">
 
@@ -831,17 +834,18 @@ Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-<img width="500" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/a93753b7-626e-4048-bbb2-dc8db8957e98">
+# M4S1
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/23b68ec1-94ff-426b-b2a2-e37f62c13990">
 
 > https://www.laptrinhdientu.com/2021/09/STM2.html
 
-# 1. Khái niệm Xung clock là gì? Xung clock dùng để làm gì?
+## 1. Khái niệm Xung clock là gì? Xung clock dùng để làm gì?
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/427bfc18-512f-4d1b-a840-ab8f255db57d)
 
 - Trong vấn đề logic, chỉ có 2 khái niệm đúng (true) hoặc sai (false). Cũng như vậy, trong kỹ thuật logic, tín hiệu có dạng mức "cao" (H) và mức "thấp" (L) hay còn gọi là mức "1" & mức "0". Để có tín hiệu như vậy, linh kiện phải có trạng thái "dẫn" hoặc "không dẫn" -> cần có một tín hiệu để điều khiển. Trong kỹ thuât logic, người ta sử dụng tín hiệu dạng xung (có mức cao và mức thấp) để làm việc điều khiển đó. Tín hiệu này được gọi là clock (xung nhịp).
 - Mặt khác, tất cả các thiết bị IC số đều cần một cách để đồng bộ hoạt động của các mạch điện bên trong IC hoặc để đồng bộ IC với các mạch khác ở bên ngoài khi giao tiếp với nhau. Và tín hiệu clock đã được sử dụng cho mục đích này. Tín hiệu clock là một tín hiệu dao động định kỳ, với thông số quan trọng nhất mà chúng ta thường biết đến là tần số, được thể hiện bằng đơn vị Hertz. Người ta thường ví tín hiệu clock giống như nhịp tim của thiết bị điện tử.
 - Như vậy có thể thấy, clock có ảnh hưởng đến việc truyền dẫn tín hiệu. **Tần số clock càng cao, thì lượng dữ liệu (tín hiệu) được truyền tải càng nhanh**.
-# 2. Thiết kế clock của mcu 
+## 2. Thiết kế clock của mcu 
 > Clock secure: https://tapit.vn/tim-hieu-clock-secuity-system-css-vi-dieu-khien-stm32-qua-vi-du-thuc-te/
 
 - Tần số clock bên trong vi điều khiển liên quan trực tiếp đến **hiệu năng** và **mức độ tiêu thụ năng lượng** bên trong vi điều khiển (hiệu năng cao -> mức độ tiêu thụ năng lương cao, và ngược lại).
@@ -850,7 +854,7 @@ Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương
 - Phải được thiết kế để có thể thực hiện được việc bật/tắt
 - Cấu hình tốc độ riêng biệt cho các khối khác nhau bên trong vi điều khiển.
 
-## Công suất tiêu thụ của một MCU phụ thuộc vào các yếu tố
+### Công suất tiêu thụ của một MCU phụ thuộc vào các yếu tố
 > Năng lượng tiêu thụ: https://tapit.vn/co-cong-suat-va-nang-luong-tieu-thu-tren-mcu/
 
 		+ Kích cỡ của MCU: Công nghệ sử dụng, số lượng transistor, các ngoại vi được tích hợp bên trong vi điều khiển càng nhiều thì càng xuất hiện nhiều CMOS.
@@ -858,24 +862,24 @@ Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương
 		+ Tần số clock: Công suất tiêu thụ có thể được giảm đi bằng cách giảm tần số hoạt động của vi điều khiển (sử dụng tần số phù hợp với yêu cầu của ứng dụng).
 		+ Chế độ hoạt động: Vi điều khiển cung cấp nhiều chế độ hoạt động tương ứng với nhiều mức tiêu hao năng lượng khác nhau bằng cách điều khiển khối nguồn hoặc bộ giao động đến CPU hay các ngoại vi
   
-# 3. Nguồn cung cấp clock 
+## 3. Nguồn cung cấp clock 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/73d77dc0-db3a-4864-87bb-37423a645f58)
 
-## a. Gồm 2 nhánh lớn là: High Speed (MHz) và Low Speed (KHz)
-### High Speed - HS (MHz) : Nguồn cung cấp chính cho mcu
+### 3.1. Gồm 2 nhánh lớn là: High Speed (MHz) và Low Speed (KHz)
+#### High Speed - HS (MHz) : Nguồn cung cấp chính cho mcu
 + Bộ dao động nội RC -> **HSI** (High Speed Internal)
 + Bộ dao động thạch anh bên ngoài -> **HSE** (High Speed External)
-### Low Speed - LS (KHz) : Sử dụng cho RTC (real-time clock) và IWDG (Independent Watchdog Timer)
+#### Low Speed - LS (KHz) : Sử dụng cho RTC (real-time clock) và IWDG (Independent Watchdog Timer)
 + Bộ dao động nội RC TỐC ĐỘ THẤP chuyên dụng -> **LSI** (Low Speed Internal)
 + Bộ dao động thạch anh bên ngoài TỐC ĐỘ THẤP -> **LSE** (Low Speed External)
 
-## b. Sử dung Bộ dao động ngoại thạch anh hay Bộ dao động nội RC 
+### 3.2. Sử dung Bộ dao động ngoại thạch anh hay Bộ dao động nội RC 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/e2bc48b3-658f-4302-92b6-2a4158d1c340)
 
 - Có nhiều lý do ta sẽ sử dung xung ngoại thay cho xung nội như khi thạch anh ngoài có thể cung cấp dao động cao hơn nguồn xung nội, giúp thu được số lieu chính xác hơn khi giao tiếp với ngoại vi đo nhiệt độ cao hơn rất nhiều so với 25 độ C.
 - Hay như trong một vài trường hợp phải giao tiếp với ngoại vi chỉ có thể hoạt động ở một tần số xác định.
 
-# 4. Clock Tree là gì ?
+## 4. Clock Tree là gì ?
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/284412b2-9108-4bae-9192-77f508257d97)
 
 - **Một mạng lưới phức tạp chịu trách nhiệm truyền tín hiệu dao động bên trong STM32 được gọi là Clock Tree**.
@@ -1050,7 +1054,6 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 + Tính toán cấu hình để có được 1 tín hiệu PWM với thông số như sau: 
 + F = 10KHz; D = 50%. Biết F_APB_TIMER2 = 8MHz, dùng timer2, chế độ đếm lên
 + Cho biết PSC, ARR, CRR
-
 ### Đáp án:
 + F = 10KHz -> T = 0.1ms = 100 * 10^-6
 + Chọn PSC = 7 -> F_CNT = F_APB_TIMER2 / (PSC+1) = 8MHz/8 = 1MHz -> T_CNT = 1/F_CNT = 10^-6 
@@ -1061,7 +1064,6 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 + Tính toán cấu hình để có được 1 tín hiệu PWM với thông số như sau: 
 + F = 5KHz; D = 30%. Biết F_APB_TIMER2 = 16MHz, dùng timer2, chế độ đếm lên
 + Cho biết PSC, ARR, CRR
-
 ### Đáp án:
 + F = 5KHz -> T = 0.2ms = 200 * 10^-6
 + Chọn PSC = 15 -> F_CNT = F_APB_TIMER2 / (PSC+1) = 16MHz/16 = 1MHz -> T_CNT = 1/F_CNT = 10^-6 
