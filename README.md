@@ -662,15 +662,15 @@ VD:
 ### Kiến trúc cơ bản của Vi điều khiển
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/7370bc6c-e0a4-4253-9663-6ff45b38a659">
 
-## I, Exception
+# I, Exception
 - Là một điều kiện làm thay đổi thứ tự thực hiện bình thường của một chương trình.
 - Gồm 2 loại:
   
     + System Exceptions (hầu như là lỗi, không mong muốn, đến từ bên trong vi xử lý)
     + Interrupts (là tính năng, chức năng mong muốn, từ bên ngoài các ngoại vi vi điều khiển gửi đến vi xử lý)
       
-## II, Interrupt
-### 1. Tổng quan về Interrupt
+# II, Interrupt
+## 1. Tổng quan về Interrupt
 
 <img width="454" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/75ab877c-5deb-43c3-8934-134487fa1d0f">
 
@@ -679,24 +679,20 @@ VD:
 
 - **Các tín hiệu yêu cầu Interrupt (IRQ) được gửi vào khối NVIC của vi xử lý**
   
-a. Cơ chế hoạt động của cơ chế Interrupt
-
+### a. Cơ chế hoạt động của cơ chế Interrupt
 <img width="407" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/d53cd2bc-ddf4-4cee-8d45-dd9d48fc473d">
 
-b. Lưu đồ thuật toán Interrupt
-
+### b. Lưu đồ thuật toán Interrupt
 <img width="379" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/530f410c-b0b0-424e-ab9e-85ce5cdcf3b8">
 
-c. NVIC (Nested Vector Interrupt Controller) – Bộ xử lý ngắt lồng nhau
-
+### c. NVIC (Nested Vector Interrupt Controller) – Bộ xử lý ngắt lồng nhau
 > https://www.laptrinhdientu.com/2021/09/Core8.html
 
 	+ Là một ngoại vi của lõi vi xử lý ARM-Cortex M
 	+ Cấu hình enable/disable các ngắt
 	+ Cấu hình độ ưu tiên (priority) các ngắt
 
-### 2. Phân tích về quá trình stacking và unstacking khi vào và thoát ngắt
-
+## 2. Phân tích về quá trình stacking và unstacking khi vào và thoát ngắt
 ![Bản sao của Blue-Pink Cute Class Schedule (7)](https://github.com/minchangggg/Stm32/assets/125820144/13c6847b-301d-4b08-8964-60bb0292b32c)
 
 + Các thanh ghi từ R0 đến R12 (13 thanh ghi) là những thanh ghi được sử dụng với nhiều mục đích chung như lưu trữ dữ liệu của các phép tính toán, lưu trữ địa chỉ… Tất cả những thanh ghi này đều có độ rộng 32bit.
@@ -705,12 +701,12 @@ c. NVIC (Nested Vector Interrupt Controller) – Bộ xử lý ngắt lồng nha
 + Thanh ghi R15 là thanh ghi Program Counter(PC). Thanh ghi này chứa địa chỉ câu lệnh sẽ được thực thi. Khi reset, vi xử lý sẽ nạp thanh ghi PC với giá trị reset là 0x00000004.
 + Ngoài các thanh ghi được sử dụng với nhiều mục đích chung (R0-R12), SP, LR, PC thì vi xử lý ARM Cortex-M4 còn có 5 thanh ghi đặc biệt. Trong đó, thanh ghi Program status (PSR) bao gồm các thanh ghi cung cấp thông tin trạng thái của chương trình Application với các cờ N,Z,C,V,Q, chương trình Interrupt và các thanh ghi liên quan đến stack của vi xử lý. Những thanh ghi còn lại, các bạn tìm đọc trong tài liệu đã được đề cập đến ở phần trên.
 
-### 3. Phân tích về các trường hợp độ ưu tiên và trạng thái của các ngắt.
+## 3. Phân tích về các trường hợp độ ưu tiên và trạng thái của các ngắt.
 > https://tapit.vn/cau-hinh-uu-tien-ngat-vi-dieu-khien-stm32-tren-cubemx/
  
- <img width="" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/cb915b9a-0e6b-45ad-b358-bbe1cbd53a79">
+<img width="" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/cb915b9a-0e6b-45ad-b358-bbe1cbd53a79">
 
- <img width="500" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/a4190936-289a-44d9-97c1-085d83b3bf43">
+<img width="500" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/a4190936-289a-44d9-97c1-085d83b3bf43">
 
 - Trong thực tế, có những trường hợp sau: 
 
@@ -720,6 +716,7 @@ c. NVIC (Nested Vector Interrupt Controller) – Bộ xử lý ngắt lồng nha
 		+ Yêu cầu ngắt mới có độ ưu tiên thấp hơn ngắt đang thực thi => Phải chờ (ở trạng thái Pending) 
 		+ Yêu cầu ngắt mới có độ ưu tiên bằng ngắt đang thực thi => Phải chờ (ở trạng thái Pending)
 		+ Yêu cầu ngắt mới có độ ưu tiên cao hơn ngắt đang thực thi => Chiếm dụng ngắt (thực thi ngắt mới,trạng thái active, ngắt cũ sẽ ở trạng thái inactive )
+
 > Các trạng thái:
 > 
 > pending: Chưa được chấp nhận xử lý, đang chờ
@@ -735,7 +732,7 @@ c. NVIC (Nested Vector Interrupt Controller) – Bộ xử lý ngắt lồng nha
 		+ Khi nào 2 ngắt có cùng một mức Preemption Priority thì ngắt nào có Sub Priority cao hơn thì ngắt đó được thực hiện trước.
 		+ Còn trường hợp 2 ngắt có cùng mức Preemption và Sub Priority luôn thì ngắt nào đến trước được thực hiện trước
 
-## II, External Interrupt
+# II, External Interrupt
 + Cấu hình chân EXTI
 + Cấu hình sườn kích hoạt ngắt
 + Cấu hình trở kéo nếu cần
@@ -757,27 +754,27 @@ c. NVIC (Nested Vector Interrupt Controller) – Bộ xử lý ngắt lồng nha
 
 EXTI (External Interupts) tạm dịch là ngắt ngoài hay ngắt sự kiện bên ngoài. Ngắt EXTI được kích hoạt khi có sự kiện từ bên ngoài tác động vào chân EXTI đó, tùy theo sự kiện đó có phù hợp với điều kiện ngắt không thì ngắt ngoài mới sảy ra.
 
-## I, Các chức năng chính của khối External Interrupt
+# I, Các chức năng chính của khối External Interrupt
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/850adfec-310e-47ff-940f-a6c62141bead)
 
 + Khối External Interrupt bao gồm 23 bộ phát hiện sườn để tạo ra yêu cầu ngắt, người sử dụng có thể cấu hình lựa chọn sườn ngắt (sườn lên, sườn xuống hoặc cả 2) để kích hoạt ngắt.
 + Mỗi line ngắt đều có thể cấu hình cho phép tạo yêu cầu ngắt hoặc không một cách độc lập. Khi có yêu cầu ngắt thì người sử dụng có thể giám sát được trạng thái của line ngắt.
 
-## II> Hiểu về Line Interrupt
+# II> Hiểu về Line Interrupt
 > Mạch mux (mạch chọn kênh) là gì ?
 
 + Vi điều khiển STM32F411VET6 trên board STM32F411DISCOVERY có 81 chân GPIO được chia thành 16 line ngắt ngoài theo sơ đồ bên dưới.
 + Mỗi line ngắt là tập hợp các chân có cùng thứ tự trên các Port khác nhau.
 + Ví dụ line 0 (EXTI0) là tập hợp các chân PA0, PB0, PC0, PD0, PE0 và PH0.
   
-## III> Đặt vấn đề
-### 1. Bài toán
+# III> Đặt vấn đề
+## 1. Bài toán
 Viết chương trình đảo led dùng ngắt ngoài
-### 2. Bài giải
+## 2. Bài giải
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/9bb25c38-1107-4613-bb4e-173237cc3d23)
 
-### 3. Tại sao không dùng hàm HAL_Delay mà lại dùng `for(int i = 0; i < 100000; i++);`
-#### a. Tại sao sử dụng HAL_Delay ở chương trình phục vụ ngắt thì vi điều khiển bị treo?
+## 3. Tại sao không dùng hàm HAL_Delay mà lại dùng `for(int i = 0; i < 100000; i++);`
+### a. Tại sao sử dụng HAL_Delay ở chương trình phục vụ ngắt thì vi điều khiển bị treo?
 > https://tapit.vn/tim-hieu-system-timer-ngat-systick-va-su-dung-hal_delay-trong-trinh-phuc-vu-ngat-vdk-stm32/
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/b4101ba3-faf5-4900-9840-6cd48b349a6a)
@@ -791,14 +788,14 @@ Viết chương trình đảo led dùng ngắt ngoài
 	+ Đầu tiên, biến tickstart chứa giá trị uwTick hiện tại được trả về từ hàm HAL_GetTick.
 	+ Vì SysTick_Handler chưa được thực hiện dẫn đến giá trị uwTick không đổi, giá trị trả về của HAL_GetTick trong điều kiện while bằng giá trị của tickstart ban đầu, dẫn đến kết quả của HAL_GetTick() – tickstart luôn bé hơn wait, dẫn đến vi điều khiển thực hiện lặp vô hạn trong vòng lặp while này.
 
-#### b. Vậy làm thế nào để có thể sử dụng HAL_Delay trong các chương trình phục ngắt?
+### b. Vậy làm thế nào để có thể sử dụng HAL_Delay trong các chương trình phục ngắt?
 Các bạn phải thực hiện điều chỉnh độ ưu tiên của ngắt SysTick cao hơn so với các ngắt ngoại vi đó. Ví dụ:
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/1f7781e4-7a83-41bb-a9e1-953f22ec614c)
 
 Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương trình phục vụ ngắt vào các trường hợp cần thiết vì các chương trình phục vụ ngắt nên được xử lý tức thời và càng ngắn gọn càng tốt, tránh ảnh hưởng đến các ngắt đến sau, không đáp ứng được tính realtime của hệ thống dẫn đến bỏ lỡ sự kiện hoặc mất dữ liệu. 
 
-### 4. Tại sao cần phải dùng `EXTI->PR |= GPIO_PIN_0;` để xóa pending ngắt
+## 4. Tại sao cần phải dùng `EXTI->PR |= GPIO_PIN_0;` để xóa pending ngắt
 **Để tránh tình trạng nhảy vào hàm ngắt nhiều lần khi nhấn nút.**
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/821ae480-11e7-4c26-a973-26f5e1a25aa0)
@@ -813,13 +810,13 @@ Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương
 
 > https://www.laptrinhdientu.com/2021/09/STM2.html
 
-## 1. Khái niệm Xung clock là gì? Xung clock dùng để làm gì?
+# 1. Khái niệm Xung clock là gì? Xung clock dùng để làm gì?
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/427bfc18-512f-4d1b-a840-ab8f255db57d)
 
 - Trong vấn đề logic, chỉ có 2 khái niệm đúng (true) hoặc sai (false). Cũng như vậy, trong kỹ thuật logic, tín hiệu có dạng mức "cao" (H) và mức "thấp" (L) hay còn gọi là mức "1" & mức "0". Để có tín hiệu như vậy, linh kiện phải có trạng thái "dẫn" hoặc "không dẫn" -> cần có một tín hiệu để điều khiển. Trong kỹ thuât logic, người ta sử dụng tín hiệu dạng xung (có mức cao và mức thấp) để làm việc điều khiển đó. Tín hiệu này được gọi là clock (xung nhịp).
 - Mặt khác, tất cả các thiết bị IC số đều cần một cách để đồng bộ hoạt động của các mạch điện bên trong IC hoặc để đồng bộ IC với các mạch khác ở bên ngoài khi giao tiếp với nhau. Và tín hiệu clock đã được sử dụng cho mục đích này. Tín hiệu clock là một tín hiệu dao động định kỳ, với thông số quan trọng nhất mà chúng ta thường biết đến là tần số, được thể hiện bằng đơn vị Hertz. Người ta thường ví tín hiệu clock giống như nhịp tim của thiết bị điện tử.
 - Như vậy có thể thấy, clock có ảnh hưởng đến việc truyền dẫn tín hiệu. **Tần số clock càng cao, thì lượng dữ liệu (tín hiệu) được truyền tải càng nhanh**.
-## 2. Thiết kế clock của mcu 
+# 2. Thiết kế clock của mcu 
 > Clock secure: https://tapit.vn/tim-hieu-clock-secuity-system-css-vi-dieu-khien-stm32-qua-vi-du-thuc-te/
 
 - Tần số clock bên trong vi điều khiển liên quan trực tiếp đến **hiệu năng** và **mức độ tiêu thụ năng lượng** bên trong vi điều khiển (hiệu năng cao -> mức độ tiêu thụ năng lương cao, và ngược lại).
@@ -828,8 +825,7 @@ Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương
 - Phải được thiết kế để có thể thực hiện được việc bật/tắt
 - Cấu hình tốc độ riêng biệt cho các khối khác nhau bên trong vi điều khiển.
 
-*Công suất tiêu thụ của một MCU phụ thuộc vào các yếu tố*
-
+## Công suất tiêu thụ của một MCU phụ thuộc vào các yếu tố
 > Năng lượng tiêu thụ: https://tapit.vn/co-cong-suat-va-nang-luong-tieu-thu-tren-mcu/
 
 		+ Kích cỡ của MCU: Công nghệ sử dụng, số lượng transistor, các ngoại vi được tích hợp bên trong vi điều khiển càng nhiều thì càng xuất hiện nhiều CMOS.
@@ -837,25 +833,24 @@ Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương
 		+ Tần số clock: Công suất tiêu thụ có thể được giảm đi bằng cách giảm tần số hoạt động của vi điều khiển (sử dụng tần số phù hợp với yêu cầu của ứng dụng).
 		+ Chế độ hoạt động: Vi điều khiển cung cấp nhiều chế độ hoạt động tương ứng với nhiều mức tiêu hao năng lượng khác nhau bằng cách điều khiển khối nguồn hoặc bộ giao động đến CPU hay các ngoại vi
   
-## 3. Nguồn cung cấp clock 
+# 3. Nguồn cung cấp clock 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/73d77dc0-db3a-4864-87bb-37423a645f58)
 
-### a. Gồm 2 nhánh lớn là: High Speed (MHz) và Low Speed (KHz)
-#### High Speed - HS (MHz) : Nguồn cung cấp chính cho mcu
+## a. Gồm 2 nhánh lớn là: High Speed (MHz) và Low Speed (KHz)
+### High Speed - HS (MHz) : Nguồn cung cấp chính cho mcu
 + Bộ dao động nội RC -> **HSI** (High Speed Internal)
 + Bộ dao động thạch anh bên ngoài -> **HSE** (High Speed External)
-#### Low Speed - LS (KHz) : Sử dụng cho RTC (real-time clock) và IWDG (Independent Watchdog Timer)
+### Low Speed - LS (KHz) : Sử dụng cho RTC (real-time clock) và IWDG (Independent Watchdog Timer)
 + Bộ dao động nội RC TỐC ĐỘ THẤP chuyên dụng -> **LSI** (Low Speed Internal)
 + Bộ dao động thạch anh bên ngoài TỐC ĐỘ THẤP -> **LSE** (Low Speed External)
 
-### b. Sử dung Bộ dao động ngoại thạch anh hay Bộ dao động nội RC 
-
+## b. Sử dung Bộ dao động ngoại thạch anh hay Bộ dao động nội RC 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/e2bc48b3-658f-4302-92b6-2a4158d1c340)
 
 - Có nhiều lý do ta sẽ sử dung xung ngoại thay cho xung nội như khi thạch anh ngoài có thể cung cấp dao động cao hơn nguồn xung nội, giúp thu được số lieu chính xác hơn khi giao tiếp với ngoại vi đo nhiệt độ cao hơn rất nhiều so với 25 độ C.
 - Hay như trong một vài trường hợp phải giao tiếp với ngoại vi chỉ có thể hoạt động ở một tần số xác định.
 
-### 4. Clock Tree là gì ?
+# 4. Clock Tree là gì ?
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/284412b2-9108-4bae-9192-77f508257d97)
 
 - **Một mạng lưới phức tạp chịu trách nhiệm truyền tín hiệu dao động bên trong STM32 được gọi là Clock Tree**.
