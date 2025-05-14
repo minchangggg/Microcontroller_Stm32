@@ -784,26 +784,26 @@ VD:
 
 EXTI (External Interupts) tạm dịch là ngắt ngoài hay ngắt sự kiện bên ngoài. Ngắt EXTI được kích hoạt khi có sự kiện từ bên ngoài tác động vào chân EXTI đó, tùy theo sự kiện đó có phù hợp với điều kiện ngắt không thì ngắt ngoài mới sảy ra.
 
-# I. Các chức năng chính của khối External Interrupt
+## I. Các chức năng chính của khối External Interrupt
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/850adfec-310e-47ff-940f-a6c62141bead)
 
 + Khối External Interrupt bao gồm 23 bộ phát hiện sườn để tạo ra yêu cầu ngắt, người sử dụng có thể cấu hình lựa chọn sườn ngắt (sườn lên, sườn xuống hoặc cả 2) để kích hoạt ngắt.
 + Mỗi line ngắt đều có thể cấu hình cho phép tạo yêu cầu ngắt hoặc không một cách độc lập. Khi có yêu cầu ngắt thì người sử dụng có thể giám sát được trạng thái của line ngắt.
 
-# II. Hiểu về Line Interrupt
+## II. Hiểu về Line Interrupt
 > Mạch mux (mạch chọn kênh) là gì ?
 
 + Vi điều khiển STM32F411VET6 trên board STM32F411DISCOVERY có 81 chân GPIO được chia thành 16 line ngắt ngoài theo sơ đồ bên dưới.
 + Mỗi line ngắt là tập hợp các chân có cùng thứ tự trên các Port khác nhau.
 + Ví dụ line 0 (EXTI0) là tập hợp các chân PA0, PB0, PC0, PD0, PE0 và PH0.
   
-# III. Đặt vấn đề
-## 1. Bài toán
+## III. Đặt vấn đề
+### 1. Bài toán
 Viết chương trình đảo led dùng ngắt ngoài
-## 2. Bài giải
+### 2. Bài giải
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/9bb25c38-1107-4613-bb4e-173237cc3d23)
-## 3. Tại sao không dùng hàm HAL_Delay mà lại dùng `for(int i = 0; i < 100000; i++);`
-### a. Tại sao sử dụng HAL_Delay ở chương trình phục vụ ngắt thì vi điều khiển bị treo?
+### 3. Tại sao không dùng hàm HAL_Delay mà lại dùng `for(int i = 0; i < 100000; i++);`
+#### a. Tại sao sử dụng HAL_Delay ở chương trình phục vụ ngắt thì vi điều khiển bị treo?
 > https://tapit.vn/tim-hieu-system-timer-ngat-systick-va-su-dung-hal_delay-trong-trinh-phuc-vu-ngat-vdk-stm32/
 
 <img width="550" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/b4101ba3-faf5-4900-9840-6cd48b349a6a">
@@ -820,14 +820,14 @@ Viết chương trình đảo led dùng ngắt ngoài
 	+ Đầu tiên, biến tickstart chứa giá trị uwTick hiện tại được trả về từ hàm HAL_GetTick.
 	+ Vì SysTick_Handler chưa được thực hiện dẫn đến giá trị uwTick không đổi, giá trị trả về của HAL_GetTick trong điều kiện while bằng giá trị của tickstart ban đầu, dẫn đến kết quả của HAL_GetTick() – tickstart luôn bé hơn wait, dẫn đến vi điều khiển thực hiện lặp vô hạn trong vòng lặp while này.
 
-### b. Vậy làm thế nào để có thể sử dụng HAL_Delay trong các chương trình phục ngắt?
+#### b. Vậy làm thế nào để có thể sử dụng HAL_Delay trong các chương trình phục ngắt?
 Các bạn phải thực hiện điều chỉnh độ ưu tiên của ngắt SysTick cao hơn so với các ngắt ngoại vi đó. Ví dụ:
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/1f7781e4-7a83-41bb-a9e1-953f22ec614c)
 
 Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương trình phục vụ ngắt vào các trường hợp cần thiết vì các chương trình phục vụ ngắt nên được xử lý tức thời và càng ngắn gọn càng tốt, tránh ảnh hưởng đến các ngắt đến sau, không đáp ứng được tính realtime của hệ thống dẫn đến bỏ lỡ sự kiện hoặc mất dữ liệu. 
 
-## 4. Tại sao cần phải dùng `EXTI->PR |= GPIO_PIN_0;` để xóa pending ngắt
+### 4. Tại sao cần phải dùng `EXTI->PR |= GPIO_PIN_0;` để xóa pending ngắt
 #### Để tránh tình trạng nhảy vào hàm ngắt nhiều lần khi nhấn nút.
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/821ae480-11e7-4c26-a973-26f5e1a25aa0)
 
@@ -913,8 +913,8 @@ Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương
 > 
 > Timer là một loại ngoại vi được tích hợp ở hầu hết các vi điều khiển, cung cấp cho người dùng nhiều ứng dụng như xác định chính xác một khoảng thời gian, đo – đếm xung đầu vào, điều khiển dạng sóng đầu ra, băm xung….
 
-# I. Giới thiệu chung về timer
-## 1. Các loại của timer
+## I. Giới thiệu chung về timer
+### 1. Các loại của timer
 Dòng vi điều khiển STM32 có ba loại Timer:
 
 + Basic Timer: là loại Timer đơn giản và dễ sử dụng nhất, chỉ có chức năng đếm và thường được dùng để tạo cơ sở thời gian.
@@ -929,7 +929,7 @@ Dòng vi điều khiển STM32 có ba loại Timer:
   
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/b6e0c65c-d2a2-4754-a408-efb4a2d79cbd)
 
-## 2. Một vài chức năng thường xuyên được sử dụng của Timer:
+### 2. Một vài chức năng thường xuyên được sử dụng của Timer:
 Ngoại trừ các Basic Timer chỉ có hoạt động cơ bản là đếm, các Timers còn lại của vi điều khiển còn có nhiều chức năng khác, điển hình như:
 
 	+ PWM Generation: Tính năng điều chế độ rộng xung (băm xung).
@@ -937,29 +937,29 @@ Ngoại trừ các Basic Timer chỉ có hoạt động cơ bản là đếm, c�
 	+ Input Capture: Chế độ này phát hiện và lưu lại sự xuất hiện sự thay đổi mức logic (sườn lên/ sườn xuống) của tín hiệu. Từ đó, ta có thể biết được khoảng thời gian giữa hai lần có sườn lên/ sườn xuống.
 	+ Output Compare: Đây là chế độ giúp tạo ra các sự kiện(ví dụ như ngắt) khi CNT đạt đến giá trị được lưu trong các thanh ghi TIMx_CCMRx (capture/compare mode register). Ứng dụng phổ biến nhất của Output Compare là tạo ra nhiều xung PWM với các tần số khác nhau trên cùng một Timer.
 
-## 3. Sơ đồ khối General Purpose Timer
+### 3. Sơ đồ khối General Purpose Timer
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/ec4765bb-cfe2-4398-ac73-a9f4cbfebaf1)
 
-# II. Time-base unit (Khối cơ sở của bộ Timer)
+## II. Time-base unit (Khối cơ sở của bộ Timer)
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/6450db12-112c-4984-89d5-1f40932ecf58)
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/47531b71-fba6-4dc2-96a0-e1936dc060d4)
 
-## 1. Cấu trúc cơ bản của một bộ Timer
+### 1. Cấu trúc cơ bản của một bộ Timer
 - Bộ đếm (Giá trị được lưu ở thanh ghi Counter Register)
 - Giá trị Auto Reload (Giá trị được lưu ở thanh ghi Auto Reload)
 - Bộ chia tần (Giá trị được lưu ở thanh ghi Prescaler)
 
 => Thành phần chính của timer chính là bộ đếm – counter (CNT), với các ngưỡng trên được thiết lập bởi thanh ghi Auto Reload (ARR). Counter có thể đếm lên lên hoặc đếm xuống. Clock đưa vào bộ đếm có thể được chia bởi một bộ chia tần – Prescaler.
 
-## 2. Các thanh ghi quan trọng:
+### 2. Các thanh ghi quan trọng:
 Người dùng có thể thực hiện các lệnh đọc, ghi vào các thanh ghi CNT, ARR và PSC để cấu hình cho khối cơ sở của mỗi bộ Timer.
 
 - Auto Reload(TIMx_ARR): Giá trị của ARR được người dùng xác định sẵn khi cài đặt bộ timer, làm cơ sở cho CNT thực hiện nạp lại giá trị đếm mỗi khi tràn (overflow khi đếm lên – CNT vượt giá trị ARR, underflow khi đếm xuống – CNT bé hơn 0).Tùy vào bộ timer mà counter này có thể là 16bit hoặc 32bit.
 - Counter Register(TIMx_CNT): Lưu giá trị đếm Counter (CNT), tăng hoặc giảm mỗi nhịp xung clock của Timer. Giá trị của Counter luôn nằm trong khoảng [0; ARR]. Nếu ngoài khoảng đó, Timer sẽ thực hiện nạp lại giá trị CNT như ban đầu và tiếp tục hoạt động. Tùy vào mỗi Timer mà CNT và ARR có cỡ 16 hoặc 32 bit.
 - Prescaler (TIMx_PSC): Giá trị của thanh ghi bộ chia tần (16bit) cho phép người dùng cấu hình chia tần số đầu vào (CK_PSC) cho bất kì giá trị nào từ [1- 65536]. Sử dụng kết hợp bộ chia tần của timer và của RCC giúp chúng ta có thể thay đổi được thời gian của mỗi lần CNT thực hiện đếm, giúp tạo ra được những khoảng thời gian, điều chế được độ rộng xung phù hợp với nhu cầu.
 
-## 3. Các chế độ hoạt động:
+### 3. Các chế độ hoạt động:
 Các chế độ đếm: Mỗi bộ timer đều hỗ trợ 3 chế chế độ đếm sau: 
 
 + Upcounting mode (chế độ đếm lên): Ở chế độ này, CNT đếm lên từ 0 (hoặc một giá trị nào đó được người dùng ghi vào CNT trước) đến giá trị của thanh ghi ARR, sau đó CNT bắt đầu lại từ 0. Lúc này có sự kiện tràn counter – overflow, sự kiện này có thể tạo yêu cầu ngắt nếu người dùng cấu hình cho phép ngắt. Một ví dụ với ARR = 36:
@@ -974,7 +974,7 @@ Các chế độ đếm: Mỗi bộ timer đều hỗ trợ 3 chế chế độ 
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/bc6f821c-97f8-48c4-9471-1b5251ddb4b7)
 
-## 4. Tính toán các thông số cơ bản của timer
+### 4. Tính toán các thông số cơ bản của timer
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/6450db12-112c-4984-89d5-1f40932ecf58)
 
 	- F_PSC: Tần số cấp vào bộ chia tần
@@ -996,13 +996,12 @@ Các chế độ đếm: Mỗi bộ timer đều hỗ trợ 3 chế chế độ 
 	+) F_CNT = F_PSC/(PSC+1) = 8M/8K = 1KHz -> T_CNT = 1/F_CNT = 1ms
 	+) t = (ARR+1) * T_CNT <-> 150ms = (ARR+1) * 1ms -> ARR = 149
 
-# III. Thực hành với timer (Đang cập nhật)
-## 1. Yêu cầu bài toán:
+## III. Thực hành với timer (Đang cập nhật)
+### 1. Yêu cầu bài toán:
 Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit. 
-## 2. Công thức
+### 2. Công thức
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/efd8b60b-35c3-40c1-86dd-fe67725b3657)
-
-## 3. Áp dụng tính toán vào Configuration 
+### 3. Áp dụng tính toán vào Configuration 
 + Clock Source: chọn Internal Clock (8Mhz như mình cấu hình ở trên) -> F[hệ_thống] = F_PSC = 8Mhz
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/3b8acfd3-315d-4b83-a021-584e70daaf09)
