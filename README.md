@@ -94,7 +94,6 @@ The **struct tm** has the following definition
 	5. Khi thực hiện xong chương trình phục vụ ngắt, vi điều khiển sẽ thực hiện quá trình unstacking: nạp lại giá trị thanh ghi PC đã lưu, bật lại bit cho phép ngắt toàn cục, quay về trạng thái năng lượng ban đầu.
 
 - Một số ngắt phổ biến trên vi điều khiển phổ biến mà chúng ta thường sử dụng:
-  
   	+ Ngắt ngoài: Sự kiện là khi sự thay đổi sườn tín hiệu (edge) sườn lên, sườn xuống, hoặc cả 2. 	
 	+ Ngắt UART: Thường sử dụng ngắt nhận, sự kiện là khi buffer nhận đủ 1 byte dữ liệu
 	+ Ngắt ADC: Thường sử dụng khi hoàn thành việc chuyển đổi ADC
@@ -179,7 +178,6 @@ The **struct tm** has the following definition
 
 + Khi một bitwise AND được thực hiện trên một cặp bit, nó trả về 1 nếu cả 2 bit là 1, ngược lại trả về 0.
 + Hãy xem xét biểu thức 0b0101 & 0b0110. Sắp xếp từng bit lên và áp dụng thao tác AND cho từng cột bit:
-
 		0 1 0 1 AND
 		0 1 1 0
 		--------
@@ -208,20 +206,17 @@ The **struct tm** has the following definition
 
 + Khi một bitwise XOR được thực hiện trên một cặp bit, nó trả về 1 nếu các bit khác nhau, ngược lại (cả 2 đều đúng hoặc không đúng) trả về 0.
 + Hãy xem xét biểu thức 0b0110 ^ 0b0011:
-  
 		0 1 1 0 XOR
 		0 0 1 1
 		-------
 		0 1 0 1
 
 + Ta cũng có thể đánh giá kiểu cột biểu thức XOR ghép, chẳng hạn như 0b0001 ^ 0b0011 ^ 0b0111. Nếu có số chẵn bit 1 trong một cột, kết quả là 0. Nếu có một số lẻ bit 1 trong một cột, kết quả là 1:
-
 		0 0 0 1 XOR
 		0 0 1 1 XOR
 		0 1 1 1
 		--------
 		0 1 0 1
-
 		hay dễ hiểu hơn là: (0 0 0 1 XOR 0 0 1 1) XOR 0 1 1 1 = 0 0 1 0 ^ 0 1 1 1 = 0 1 0 1
 		
 ### d. Bitwise NOT operator ~
@@ -229,7 +224,6 @@ The **struct tm** has the following definition
 
 + Khi một Bitwise NOT được sử dụng nó sẽ đảo ngược tất cả các bit. 1 thành 0, và 0 thành 1
 + Lưu ý rằng kết quả của NOT phụ thuộc vào kích thước loại dữ liệu của bạn:
-  
 		+ Lật 4 bits: ~0100 = 1011
 		+ lật 8 bits: ~0000 0100 = ~0100u = 1111 1011
   
@@ -238,7 +232,6 @@ The **struct tm** has the following definition
 ### e. Toán tử dịch bit trái (<<) và toán tử dịch bit phải (>>)
 - Trong phép dịch trái, toán hạng bên trái là biểu thức để dịch chuyển các bit, còn toán hạng bên phải là con số bit cần dịch chuyển. vì vậy, khi chúng ta viết x<<1, nghĩa là chúng ta dịch chuyển x sang trái 1 bit. các bit mới được dịch chuyển bên phải sẽ là 0.
 - VD:
-  
 	0011 << 1 == 0110
 	0011 << 2 == 1100
 	0011 << 3 == 1000
@@ -260,22 +253,16 @@ The **struct tm** has the following definition
 > https://www.laptrinhdientu.com/2021/08/bitwise-operator.html
 ## 1. Giới thiệu
 + Bitwise là toán tử xử lý với các bit trong một số, nó là một toán tử rất quan trọng trong C, đặc biệt là C nhúng. Các toán tử bitwise cho phép xử lý với từng bit riêng lẻ trên một số nguyên, một thanh ghi. 
-
     ➤ Người dùng có thể set, clear, toggle, read a bit, ... mà không làm ảnh hưởng đến các thành phần khác của thanh ghi bằng toán tử bitwise. 
-
     ➤ Ví dụ vi điều khiển 8051 cho phép tác động tới từng bit của thanh ghi port, muốn tác động đến chân P1.0 thì ta dùng bit P1_0.
-
     Một số dòng vi điều khiển, hoặc IDE khác lại không cho phép điều này (chúng ta chỉ có thể tác động đến cả thanh ghi).
-
     ➤ Trường hợp khác là muốn tác động lên nhiều bit trong thanh ghi (khoảng 3 4 bit chẳng hạn), mà chỉ dùng 1 lệnh 😃
 
 + Đây, **xử lý với cả byte thì đơn giản** rồi:
-
 	Muốn đảo cả byte: P2 = ~P2; (trong khi muốn đảo bit thì ta sử dụng P2_1 = !P2_1;
 	Muốn thay đổi giá trị cả byte: P2 = 0x5A; // P2 = 0b0101.1010
   
 + Xử lý với **bit (1 hoặc 1 vài bit) xem chừng khó khăn hơn**:
-
 	Nếu MCU chỉ cho phép tác động đến byte, ta nên sử dụng kỹ thuật mặt nạ: "Mask" - Đó là cách sử dụng các phép AND (&), OR (|), EXOR (^) các thanh ghi với các số đặc biệt để chỉ tác động tới các bit cần thiết.`
 
 ## 2. Ứng dụng
@@ -579,7 +566,6 @@ VD:
 + Mức logic 1 của 1 chân Input là từ 1.833V đến 4V
 
 ## 2, Sơ đồ nguyên lý
-
 ![Bản sao của Blue-Pink Cute Class Schedule (6)](https://github.com/minchangggg/Stm32/assets/125820144/58abc013-0e26-454c-a12c-e2398f612f30)
 
 ## 3, Phân tích các chế độ Input
@@ -588,19 +574,18 @@ VD:
 
 > 1 chân Input ở chế độ Floating nếu **ngõ vào hở mạch** hoặc **trở kháng cao** => điện áp không xác định => giá trị logic của bit tương ứng trên thanh ghi ODR thay đổi ngẫu nhiên, không xác định, bị trôi nổi.
 
-**Khi nào nên nên sử dụng Input floating?**
-
-+ Khi **mạch bên ngoài nối với chân vi điều khiển luôn xác định với 2 mức logic cả 0 và 1** (vd như cảm biến đọc dữ liệu)
-+ Không thuộc TH hở mạch hoặc trở kháng cao.
-+ Không sử dụng 2 điện trở bên trong, giá trị Input phụ thuộc hoàn toàn vào mạch bên ngoài, mạch bên ngoài bằng 1 thì giá trị input bằng 1, mạch bên ngoài bằng 0 thì giá trị input bằng 0.
+#### Khi nào nên nên sử dụng Input floating?
+- Khi **mạch bên ngoài nối với chân vi điều khiển luôn xác định với 2 mức logic cả 0 và 1** (vd như cảm biến đọc dữ liệu)
+- Không thuộc TH hở mạch hoặc trở kháng cao.
+- Không sử dụng 2 điện trở bên trong, giá trị Input phụ thuộc hoàn toàn vào mạch bên ngoài, mạch bên ngoài bằng 1 thì giá trị input bằng 1, mạch bên ngoài bằng 0 thì giá trị input bằng 0.
   
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/91730a57-94f8-41ba-b96b-15629f2070a8)
 
-+ VD1: (Nhấn nút thì xuống VSS -> mức 0) và (Không nhấn thì có trở kéo lên, lên nguồn -> mức 1)
+- VD1: (Nhấn nút thì xuống VSS -> mức 0) và (Không nhấn thì có trở kéo lên, lên nguồn -> mức 1)
   
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/3765d798-9819-4b03-b6a8-0c58bd7e5105)
   
-+ VD2: (Nhấn nút thì lên nguồn -> mức 1) và (Không nhấn nút, trở kéo xuống -> mức 0)
+- VD2: (Nhấn nút thì lên nguồn -> mức 1) và (Không nhấn nút, trở kéo xuống -> mức 0)
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/fe278d7f-4a9d-4f9b-a897-8e3e0995e824)
 
@@ -610,11 +595,10 @@ VD:
 > Là chế độ sử dụng điện trở nội kéo lên (INTERNAL PULL UP RESISTOR)
 > Điện trở kéo lên giúp chân Input có giá trị logic bằng 1 khi chân I/O hở mạch hoặc có trở kháng lớn
 
-**Khi nào nên nên sử dụng Input pull-up?**
-
-+ Khi mạch bên ngoài hoạt động thì tạo ra giá trị logic mức 0, còn lại thì không xác định
-+ Cần điện trở pull-up hỗ trợ tạo ra logic mức 1
-+ VD:
+#### Khi nào nên nên sử dụng Input pull-up?
+- Khi mạch bên ngoài hoạt động thì tạo ra giá trị logic mức 0, còn lại thì không xác định
+- Cần điện trở pull-up hỗ trợ tạo ra logic mức 1
+- VD:
   
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/791daa1c-be53-41b5-8e90-9bf4f433c756)
 
@@ -624,11 +608,10 @@ VD:
 > Là chế độ sử dụng điện trở nội kéo xuống (INTERNAL PULL DOWN RESISTOR)
 > Điện trở kéo lên giúp chân Input có giá trị logic bằng 0 khi chân I/O hở mạch hoặc có trở kháng lớn
 
-**Khi nào nên nên sử dụng Input pull-down?**
-
-+ Khi mạch bên ngoài hoạt động thì tạo ra giá trị logic mức 1, còn lại thì không xác định
-+ Cần điện trở pull-up hỗ trợ tạo ra logic mức 0
-+ VD:
+#### Khi nào nên nên sử dụng Input pull-down?
+- Khi mạch bên ngoài hoạt động thì tạo ra giá trị logic mức 1, còn lại thì không xác định
+- Cần điện trở pull-up hỗ trợ tạo ra logic mức 0
+- VD:
   
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/a54d6bff-3ecd-473b-b52c-57a9be1a5526)
 
@@ -636,17 +619,17 @@ VD:
 
 <img width="450" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/1048789d-b0f8-4d24-8631-0d09395df7e3">
 
-## I. Vấn đề 1
-### 1. Bài toán đặt ra
-- Cấu hình và viết chương trình thực hiện: Ban đầu LED sáng, khi "nhấn thả" nút, LED đảo trạng thái. Ta thực hiện bằng cách dùng hàm HAL_GPIO_TogglePin(...) 
+# I. Vấn đề 1
+## 1. Bài toán đặt ra
+- Cấu hình và viết chương trình thực hiện: Ban đầu LED sáng, khi "nhấn thả" nút, LED đảo trạng thái.
 
-Đọc giá trị của PC13 => nếu nhấn nút, giá trị LEDSTATUS = 1 thì đảo = 0, và ngược lại
+=> Ta thực hiện bằng cách dùng hàm HAL_GPIO_TogglePin(...). Đọc giá trị của PC13 => nếu nhấn nút, giá trị LEDSTATUS = 1 thì đảo = 0, và ngược lại
 
-Nhận xét: giá trị của LEDSTATUS không ổn định -> có vấn đề ở phần mềm/ phần cứng 
+=> Nhận xét: giá trị của LEDSTATUS không ổn định -> có vấn đề ở phần mềm/ phần cứng 
 
-Câu hỏi: Nếu viết hàm như vậy thì chtrình chạy được không? => chạy lúc được lúc không
+- Câu hỏi: Nếu viết hàm như vậy thì chtrình chạy được không? => chạy lúc được lúc không
 
-### 2. Giải thích vấn đề
+## 2. Giải thích vấn đề
 + Với nút nhấn lý tưởng, nhấn nút lập tức về 0, thả ra lập tức về lại 1.
 + Tuy nhiên trong thực tế sẽ không như vậy, muốn ở mức logic 0 về mức logic 1, t sẽ mất 1 khoảng thời gian T-Low (khoảng thời gian nút nhấn giữ mức logic 0) với T-low bé nhất ở đơn vị mili giây.
   
@@ -655,23 +638,21 @@ Câu hỏi: Nếu viết hàm như vậy thì chtrình chạy được không? =
 + Tốc độ vi xử lý khi chưa cấu hình là 8MHz hay 1s sẽ thực hiện được 8 triệu lệnh (ở dạng mã máy). Giả sử 3 câu lệnh C trong vòng lặp phía trên tương đương 8 câu lệnh mã máy -> Trong 1s vòng lặp được thực hiện 1 triệu lần -> Trong 1ms vòng lặp được thực hiện 1 ngàn lần.
 + Vậy bản thân GPIO đã đảo hàng nghìn lần trong 1s (vì cứ ktra điều kiện, cứ mức logic nút nhấn bằng 0 thì đảo led) -> nếu may mắn, thì số lần đảo là số lẻ -> đúng yêu cầu bài toán.
 
-### 3. Cách giải quyết vấn đề
-
+## 3. Cách giải quyết vấn đề
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/c5e33e14-12a5-4eaf-8031-ed0fe8e2e951)
 
-## II. Vấn đề 2 và phương pháp Polling
-### 1. Bài toán đặt ra
+# II. Vấn đề 2 và phương pháp Polling
+## 1. Bài toán đặt ra
 - Cấu hình và viết chương trình thực hiện: Ban đầu LED sáng, khi "nhấn thả" nút, LED đảo mode: Từ 1->2, từ 2->1.
 - Trong đó:
   
 	mode1: LED nhấp nháy 500ms
-
 	mode2: LED nhấp nháy 1000ms
 
-### 2. Hoạt động của cơ chế Polling
+## 2. Hoạt động của cơ chế Polling
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/2d6a9de1-c36e-4216-87e2-6c916e53eec9">
 
-### 3. Lưu đồ thuật toán phương pháp Polling
+## 3. Lưu đồ thuật toán phương pháp Polling
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/c15c579a-5cf9-497c-8081-d6531999cb1f">
 
 --------------------------------------------------------------------------------------------------------------------------------
