@@ -918,7 +918,7 @@ Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương
 
 --------------------------------------------------------------------------------------------------------------------------------
 # M5S1
-<img width="400" alt="image" src="https://github.com/user-attachments/assets/f2f86f73-9b3f-4d79-829c-ecdabe5c18d0">
+<img width="370" alt="image" src="https://github.com/user-attachments/assets/f2f86f73-9b3f-4d79-829c-ecdabe5c18d0">
 
 > https://www.st.com/resource/en/reference_manual/cd00171190-stm32f101xx-stm32f102xx-stm32f103xx-stm32f105xx-and-stm32f107xx-advanced-arm-based-32-bit-mcus-stmicroelectronics.pdf
 >
@@ -934,18 +934,38 @@ Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương
 
 ## I. Giới thiệu chung về timer
 ### 1. Các loại của timer
-Dòng vi điều khiển STM32 có ba loại Timer:
+Dòng vi điều khiển STM32 có ba loại Timer.
+#### Basic Timer (TIM6, TIM7): là loại Timer đơn giản và dễ sử dụng nhất, chỉ có chức năng đếm và thường được dùng để tạo cơ sở thời gian.
+	Basic timers (TIM6, TIM7): 
+	+ These timers are mainly used for DAC trigger generation. They can also be used as a generic 16-bit time base. 
+	+ 16-bit auto-reload upcounter 
+	+ 16-bit programmable prescaler used to divide (also "on the fly") the counter clock frequency by any factor between 1 and 65535 
+	+ Interrupt/DMA generation on the update event: counter overflow
+#### General Purpose Timer (TIM2, TIM3, TIM4, TIM15, TIM16, TIM17): là loại Timer nhiều tính năng hơn Basic Timer, có đầy đủ các tính năng của một bộ định thời như đếm thời gian, tạo xung PWM, xử lí tín hiệu vào, so sánh đầu ra, …
+- TIM2,3, and TIM4 (full-featured general-purpose timers) 
+	+ TIM2 has a 32-bit auto-reload up/down counter and 32-bit prescaler 
+	+ TIM3 and 4 have 16-bit auto-reload up/down counters and 16-bit prescalers. 
+	+ 4 independent channels for input capture/output compare, PWM or one-pulse mode output. 
 
-+ Basic Timer: là loại Timer đơn giản và dễ sử dụng nhất, chỉ có chức năng đếm và thường được dùng để tạo cơ sở thời gian.
+- TIM15, 16 and 17 (general-purpose timers) 
+	+ 16-bit auto-reload upcounters and 16-bit prescalers. 
+	+ TIM15 has 2 channels and 1 complementary channel 
+	+ TIM16 and TIM17 have 1 channel and 1 complementary channel 
+	+ 4 independent channels for input capture/output compare, PWM or one-pulse mode output. 
 
-![image](https://github.com/minchangggg/Stm32/assets/125820144/09020758-8fbb-4e69-8538-1588784c84fe)
+- Interrupt/DMA generation on the following events: 
+	+ Update: counter overflow/underflow, counter initialization (by software or internal/external trigger) 
+	+ Trigger event (counter start, stop, initialization or count by internal/external trigger) 
+	+ Input capture 
+	+ Output compare 
 
-+ General Purpose Timer: là loại Timer nhiều tính năng hơn Basic Timer, có đầy đủ các tính năng của một bộ định thời như đếm thời gian, tạo xung PWM, xử lí tín hiệu vào, so sánh đầu ra, …
-
-![image](https://github.com/minchangggg/Stm32/assets/125820144/216e8c0c-d86d-4396-ac89-d0ad40033c65)
-
-+ Advanced Timer: đây là loại Timer nâng cao, mang đầy đủ đặc điểm của General Purpose Timer, ngoài ra còn có nhiều tính năng khác và độ chính xác cao hơn. Thường được sử dụng để làm bộ đếm thời gian cho hệ thống.
-  
+#### Advanced Timer (TIM1, TIM8): đây là loại Timer nâng cao, mang đầy đủ đặc điểm của General Purpose Timer, ngoài ra còn có nhiều tính năng khác và độ chính xác cao hơn. Thường được sử dụng để làm bộ đếm thời gian cho hệ thống.
+- Three timers dedicated to motor control 
+- The four independent channels can be used for: 
+	+ Input capture 
+	+ Output compare 
++ PWM generation 
++ One-pulse mode output  
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/b6e0c65c-d2a2-4754-a408-efb4a2d79cbd)
 
 ### 2. Một vài chức năng thường xuyên được sử dụng của Timer:
@@ -979,17 +999,23 @@ Người dùng có thể thực hiện các lệnh đọc, ghi vào các thanh g
 - Prescaler (TIMx_PSC): Giá trị của thanh ghi bộ chia tần (16bit) cho phép người dùng cấu hình chia tần số đầu vào (CK_PSC) cho bất kì giá trị nào từ [1- 65536]. Sử dụng kết hợp bộ chia tần của timer và của RCC giúp chúng ta có thể thay đổi được thời gian của mỗi lần CNT thực hiện đếm, giúp tạo ra được những khoảng thời gian, điều chế được độ rộng xung phù hợp với nhu cầu.
 
 ### 3. Các chế độ hoạt động:
-Các chế độ đếm: Mỗi bộ timer đều hỗ trợ 3 chế chế độ đếm sau: 
+Các chế độ đếm: Mỗi bộ timer đều hỗ trợ 3 chế chế độ đếm.
 
-+ Upcounting mode (chế độ đếm lên): Ở chế độ này, CNT đếm lên từ 0 (hoặc một giá trị nào đó được người dùng ghi vào CNT trước) đến giá trị của thanh ghi ARR, sau đó CNT bắt đầu lại từ 0. Lúc này có sự kiện tràn counter – overflow, sự kiện này có thể tạo yêu cầu ngắt nếu người dùng cấu hình cho phép ngắt. Một ví dụ với ARR = 36:
+#### 3.1. Upcounting mode (chế độ đếm lên)
+- Ở chế độ này, CNT đếm lên từ 0 (hoặc- một giá trị nào đó được người dùng ghi vào CNT trước) đến giá trị của thanh ghi ARR, sau đó CNT bắt đầu lại từ 0. Lúc này có sự kiện tràn counter – overflow, sự kiện này có thể tạo yêu cầu ngắt nếu người dùng cấu hình cho phép ngắt. 
+- Một ví dụ với ARR = 36:
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/f1d95e3e-4158-4003-8a82-86e1dbb2d8a1)
 
-+ Downcouting mode (chế độ đếm xuống): Ở chế độ này, CNT đếm xuống từ giá trị thanh ghi ARR (hoặc 1 giá trị nào đó do người dùng ghi trực tiếp vào CNT trước) đến 0, sau đó CNT bắt đầu lại từ giá trị ARR, lúc này có sự kiện tràn counter – underflow, sự kiện này có thể tạo yêu cầu ngắt nếu người dùng cấu hình cho phép ngắt. Một ví dụ với ARR = 36:
+#### 3.2. Downcouting mode (chế độ đếm xuống)
+- Ở chế độ này, CNT đếm xuống từ giá trị thanh ghi ARR (hoặc 1 giá trị nào đó do người dùng ghi trực tiếp vào CNT trước) đến 0, sau đó CNT bắt đầu lại từ giá trị ARR, lúc này có sự kiện tràn counter – underflow, sự kiện này có thể tạo yêu cầu ngắt nếu người dùng cấu hình cho phép ngắt.
+- Một ví dụ với ARR = 36:
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/b8122242-a3d3-468c-b991-49e23bd15eb3)
 
-+ Center-Aligned mode (chế độ đếm lên và xuống): Ở chế độ này, counter sẽ đếm lên từ 0 (hoặc một giá trị nào đó được người dùng ghi vào CNT trước) đến giá trị thanh ghi ARR – 1, lúc này xuất hiện sự kiện tràn counter – overflow, tiếp theo CNT  sẽ đếm xuống từ ARR tới 1, lúc này có sự kiện tràn counter – underflow, sau đó CNT sẽ về giá trị 0 và bắt đầu lại quá trình đếm lên. Một ví dụ với ARR = 06:
+#### 3.3. Center-Aligned mode (chế độ đếm lên và xuống)
+- Ở chế độ này, counter sẽ đếm lên từ 0 (hoặc một giá trị nào đó được người dùng ghi vào CNT trước) đến giá trị thanh ghi ARR – 1, lúc này xuất hiện sự kiện tràn counter – overflow, tiếp theo CNT sẽ đếm xuống từ ARR tới 1, lúc này có sự kiện tràn counter – underflow, sau đó CNT sẽ về giá trị 0 và bắt đầu lại quá trình đếm lên.
+- Một ví dụ với ARR = 06:
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/bc6f821c-97f8-48c4-9471-1b5251ddb4b7)
 
