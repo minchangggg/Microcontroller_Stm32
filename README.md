@@ -51,7 +51,7 @@
 <img width="450" alt="image" src="https://github.com/user-attachments/assets/47073b04-b513-443f-8618-166f95a0eea8">
 
 ## I. SƠ LƯỢC VỀ CHƯƠNG TRÌNH C
-### A, Quá trình biên dịch một chương trình C/C++
+### A. Quá trình biên dịch một chương trình C/C++
 > https://tapit.vn/qua-trinh-bien-dich-mot-chuong-trinh-cc/?fbclid=IwAR30Vb0QtPRumEMEmWeFqYsndk2tRrhgGLDh16K8cHTBoPU1J-A_XpFGl9o
 #### 1. ĐỊNH NGHĨA
 - Biên dịch là quá trình chuyển đổi từ ngôn ngữ bậc cao (C/C++, Pascal, Java, C#…) sang ngôn ngữ ngôn ngữ máy-> máy tính có thể hiểu và thực thi.
@@ -80,7 +80,7 @@
 + Mã máy của các hàm thư viện gọi trong chương trình cũng được đưa vào chương trình cuối trong giai đoạn này. -> Chính vì vậy mà các lỗi liên quan đến việc gọi hàm hay sử dụng biến tổng thể mà không tồn tại sẽ bị phát hiện. Kể cả lỗi viết chương trình chính không có hàm main() cũng được phát hiện trong liên kết.
 + Kết thúc quá trình tất cả các đối tượng được liên kết lại với nhau thành một chương trình có thể thực thi được (executable hay .exe) thống nhất.
 ### B. Các thư viện cần học trong C
-### C Library - <time.h>
+### C. Library - <time.h>
 *The time.h header defines: four variable types + two macro + various functions -> for manipulating date and time.*
 #### 1. Library Variables
 |  No |       Variable     |                                    Description                                     | 
@@ -224,6 +224,7 @@ The **struct tm** has the following definition
 
 + Khi một bitwise AND được thực hiện trên một cặp bit, nó trả về 1 nếu cả 2 bit là 1, ngược lại trả về 0.
 + Hãy xem xét biểu thức 0b0101 & 0b0110. Sắp xếp từng bit lên và áp dụng thao tác AND cho từng cột bit:
+  
 		0 1 0 1 AND
 		0 1 1 0
 		--------
@@ -252,12 +253,14 @@ The **struct tm** has the following definition
 
 + Khi một bitwise XOR được thực hiện trên một cặp bit, nó trả về 1 nếu các bit khác nhau, ngược lại (cả 2 đều đúng hoặc không đúng) trả về 0.
 + Hãy xem xét biểu thức 0b0110 ^ 0b0011:
+  
 		0 1 1 0 XOR
 		0 0 1 1
 		-------
 		0 1 0 1
 
 + Ta cũng có thể đánh giá kiểu cột biểu thức XOR ghép, chẳng hạn như 0b0001 ^ 0b0011 ^ 0b0111. Nếu có số chẵn bit 1 trong một cột, kết quả là 0. Nếu có một số lẻ bit 1 trong một cột, kết quả là 1:
+  
 		0 0 0 1 XOR
 		0 0 1 1 XOR
 		0 1 1 1
@@ -270,6 +273,7 @@ The **struct tm** has the following definition
 
 + Khi một Bitwise NOT được sử dụng nó sẽ đảo ngược tất cả các bit. 1 thành 0, và 0 thành 1
 + Lưu ý rằng kết quả của NOT phụ thuộc vào kích thước loại dữ liệu của bạn:
+  
 		+ Lật 4 bits: ~0100 = 1011
 		+ lật 8 bits: ~0000 0100 = ~0100u = 1111 1011
   
@@ -278,6 +282,7 @@ The **struct tm** has the following definition
 #### e. Toán tử dịch bit trái (<<) và toán tử dịch bit phải (>>)
 - Trong phép dịch trái, toán hạng bên trái là biểu thức để dịch chuyển các bit, còn toán hạng bên phải là con số bit cần dịch chuyển. vì vậy, khi chúng ta viết x<<1, nghĩa là chúng ta dịch chuyển x sang trái 1 bit. các bit mới được dịch chuyển bên phải sẽ là 0.
 - VD:
+  
 	0011 << 1 == 0110
 	0011 << 2 == 1100
 	0011 << 3 == 1000
@@ -298,17 +303,20 @@ The **struct tm** has the following definition
 ## V. Kỹ thuật mặt nạ bit - Bit Mask
 > https://www.laptrinhdientu.com/2021/08/bitwise-operator.html
 ### 1. Giới thiệu
-+ Bitwise là toán tử xử lý với các bit trong một số, nó là một toán tử rất quan trọng trong C, đặc biệt là C nhúng. Các toán tử bitwise cho phép xử lý với từng bit riêng lẻ trên một số nguyên, một thanh ghi. 
++ Bitwise là toán tử xử lý với các bit trong một số, nó là một toán tử rất quan trọng trong C, đặc biệt là C nhúng. Các toán tử bitwise cho phép xử lý với từng bit riêng lẻ trên một số nguyên, một thanh ghi.
+  
     ➤ Người dùng có thể set, clear, toggle, read a bit, ... mà không làm ảnh hưởng đến các thành phần khác của thanh ghi bằng toán tử bitwise. 
     ➤ Ví dụ vi điều khiển 8051 cho phép tác động tới từng bit của thanh ghi port, muốn tác động đến chân P1.0 thì ta dùng bit P1_0.
     Một số dòng vi điều khiển, hoặc IDE khác lại không cho phép điều này (chúng ta chỉ có thể tác động đến cả thanh ghi).
     ➤ Trường hợp khác là muốn tác động lên nhiều bit trong thanh ghi (khoảng 3 4 bit chẳng hạn), mà chỉ dùng 1 lệnh 😃
 
 + Đây, **xử lý với cả byte thì đơn giản** rồi:
+  
 	Muốn đảo cả byte: P2 = ~P2; (trong khi muốn đảo bit thì ta sử dụng P2_1 = !P2_1;
 	Muốn thay đổi giá trị cả byte: P2 = 0x5A; // P2 = 0b0101.1010
   
 + Xử lý với **bit (1 hoặc 1 vài bit) xem chừng khó khăn hơn**:
+  
 	Nếu MCU chỉ cho phép tác động đến byte, ta nên sử dụng kỹ thuật mặt nạ: "Mask" - Đó là cách sử dụng các phép AND (&), OR (|), EXOR (^) các thanh ghi với các số đặc biệt để chỉ tác động tới các bit cần thiết.`
 
 ### 2. Ứng dụng
