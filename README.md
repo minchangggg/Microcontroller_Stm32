@@ -748,26 +748,26 @@ VD:
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/8b19da2d-0974-4e4f-95ab-86522b101a41">
+<img width="550" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/8b19da2d-0974-4e4f-95ab-86522b101a41">
 
 > https://tapit.vn/hieu-va-lap-trinh-ngat-ngoai-stm32f411/
 
 EXTI (External Interupts) tạm dịch là ngắt ngoài hay ngắt sự kiện bên ngoài. Ngắt EXTI được kích hoạt khi có sự kiện từ bên ngoài tác động vào chân EXTI đó, tùy theo sự kiện đó có phù hợp với điều kiện ngắt không thì ngắt ngoài mới sảy ra.
 
-# I, Các chức năng chính của khối External Interrupt
+# I. Các chức năng chính của khối External Interrupt
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/850adfec-310e-47ff-940f-a6c62141bead)
 
 + Khối External Interrupt bao gồm 23 bộ phát hiện sườn để tạo ra yêu cầu ngắt, người sử dụng có thể cấu hình lựa chọn sườn ngắt (sườn lên, sườn xuống hoặc cả 2) để kích hoạt ngắt.
 + Mỗi line ngắt đều có thể cấu hình cho phép tạo yêu cầu ngắt hoặc không một cách độc lập. Khi có yêu cầu ngắt thì người sử dụng có thể giám sát được trạng thái của line ngắt.
 
-# II> Hiểu về Line Interrupt
+# II. Hiểu về Line Interrupt
 > Mạch mux (mạch chọn kênh) là gì ?
 
 + Vi điều khiển STM32F411VET6 trên board STM32F411DISCOVERY có 81 chân GPIO được chia thành 16 line ngắt ngoài theo sơ đồ bên dưới.
 + Mỗi line ngắt là tập hợp các chân có cùng thứ tự trên các Port khác nhau.
 + Ví dụ line 0 (EXTI0) là tập hợp các chân PA0, PB0, PC0, PD0, PE0 và PH0.
   
-# III> Đặt vấn đề
+# III. Đặt vấn đề
 ## 1. Bài toán
 Viết chương trình đảo led dùng ngắt ngoài
 ## 2. Bài giải
