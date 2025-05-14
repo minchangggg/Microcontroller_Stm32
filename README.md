@@ -743,8 +743,8 @@ VD:
 
 ### 3. Phân tích về các trường hợp độ ưu tiên và trạng thái của các ngắt.
 > https://tapit.vn/cau-hinh-uu-tien-ngat-vi-dieu-khien-stm32-tren-cubemx/
- 
-<img width="" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/cb915b9a-0e6b-45ad-b358-bbe1cbd53a79">
+
+<img width="500" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/cb915b9a-0e6b-45ad-b358-bbe1cbd53a79">
 
 <img width="500" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/a4190936-289a-44d9-97c1-085d83b3bf43">
 
