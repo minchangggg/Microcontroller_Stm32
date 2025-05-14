@@ -35,7 +35,6 @@ Ngôn ngữ C là một ngôn ngữ dạng biên dịch. Chương trình đượ
 + Mã máy của các hàm thư viện gọi trong chương trình cũng được đưa vào chương trình cuối trong giai đoạn này. -> Chính vì vậy mà các lỗi liên quan đến việc gọi hàm hay sử dụng biến tổng thể mà không tồn tại sẽ bị phát hiện. Kể cả lỗi viết chương trình chính không có hàm main() cũng được phát hiện trong liên kết.
 + Kết thúc quá trình tất cả các đối tượng được liên kết lại với nhau thành một chương trình có thể thực thi được (executable hay .exe) thống nhất.
 ## B. Các thư viện cần học trong C
-
 ## C Library - <time.h>
 *The time.h header defines: four variable types + two macro + various functions -> for manipulating date and time.*
 
@@ -88,30 +87,29 @@ The **struct tm** has the following definition
 ## 1. Quá trình thực hiện ngắt của vi điều khiển – MCU Interrupt processing
 > https://tapit.vn/qua-trinh-thuc-hien-ngat-cua-vi-dieu-khien-mcu-interrupt-processing/?fbclid=IwAR2PXlKLeeP945BvFNK_58rtfPEntMePA2Nz42NHYgTHVPACBNR3fAmJtDA
 
-+ Bình thường, vi điều khiển sẽ thực thi các lệnh do người dùng viết một cách tuần tự từ trên xuống. 
-+ Tuy nhiên, nó cũng được thiết kế để sẵn sàng xử lý các tình huống, sự kiện do tác động từ bên ngoài của con người, các cảm biến, hoặc từ các ngoại vi bên trong như Timer, UART, ADC…vv… mà chúng ta không biết, không dự đoán trước được khi nào tình huống, sự kiện đó sẽ xảy ra. 
-+ Một cách tổng quát, khi xảy ra Interrupt, vi điều khiển sẽ thực hiện qua các bước sau: 
+- Bình thường, vi điều khiển sẽ thực thi các lệnh do người dùng viết một cách tuần tự từ trên xuống. 
+- Tuy nhiên, nó cũng được thiết kế để sẵn sàng xử lý các tình huống, sự kiện do tác động từ bên ngoài của con người, các cảm biến, hoặc từ các ngoại vi bên trong như Timer, UART, ADC…vv… mà chúng ta không biết, không dự đoán trước được khi nào tình huống, sự kiện đó sẽ xảy ra. 
+- Một cách tổng quát, khi xảy ra Interrupt, vi điều khiển sẽ thực hiện qua các bước sau:
+  
 	1. Thực hiện xong câu lệnh đang thực hiện (câu lệnh ở mã máy sau quá trình compiler, asembler từ ngôn ngữ bật cao do người dùng viết. Để thực hiện 1 câu lệnh ở mã máy, vi điều khiển thường thực hiện các bước sau: lấy lệnh từ bộ nhớ; giải mã lệnh; thực thi lệnh). 
 	2. Lưu ngữ cảnh gồm lưu địa chỉ câu lệnh tiếp theo sẽ thực hiện (giá trị thanh ghi Program Counter), lưu trạng thái năng lượng đang hoạt động (trong thanh ghi Status) vào vùng nhớ Stack, gọi là quá trình Stacking.(Vùng nhớ Stack là vùng nhớ First In Last Out.)
 	3. Xóa bit cho phép ngắt toàn cục trong thanh ghi Status, đưa vi điều khiển về chế độ hoạt động bình thường (active mode) nếu nó đang ở chế độ tiết kiệm năng lượng. Bit cho phép ngắt cũng có thể được bật lên lại để cho phép ngắt chồng ngắt (Nested Interrupt)
 	4. Vi điều khiển thực thi chương trình phục vụ ngắt (ISR) bằng cách nạp địa chỉ câu lệnh đầu tiên của chương trình phục vụ ngắt vào thanh ghi PC. (Địa chỉ này cũng là địa chỉ của vecter ngắt trong interrupt vector table)
 	5. Khi thực hiện xong chương trình phục vụ ngắt, vi điều khiển sẽ thực hiện quá trình unstacking: nạp lại giá trị thanh ghi PC đã lưu, bật lại bit cho phép ngắt toàn cục, quay về trạng thái năng lượng ban đầu.
 
-+ Một số ngắt phổ biến trên vi điều khiển phổ biến mà chúng ta thường sử dụng: 
-	– Ngắt ngoài: Sự kiện là khi sự thay đổi sườn tín hiệu (edge) sườn lên, sườn xuống, hoặc cả 2. 
-	
-	– Ngắt UART: Thường sử dụng ngắt nhận, sự kiện là khi buffer nhận đủ 1 byte dữ liệu
-	
-	– Ngắt ADC: Thường sử dụng khi hoàn thành việc chuyển đổi ADC
-	
-	– Ngắt Timer: Thường sử dụng khi tràn thanh ghi đếm, hoặc khi giá trị đếm bằng với thanh ghi so sánh
+- Một số ngắt phổ biến trên vi điều khiển phổ biến mà chúng ta thường sử dụng:
+  
+  	+ Ngắt ngoài: Sự kiện là khi sự thay đổi sườn tín hiệu (edge) sườn lên, sườn xuống, hoặc cả 2. 	
+	+ Ngắt UART: Thường sử dụng ngắt nhận, sự kiện là khi buffer nhận đủ 1 byte dữ liệu
+	+ Ngắt ADC: Thường sử dụng khi hoàn thành việc chuyển đổi ADC
+	+ Ngắt Timer: Thường sử dụng khi tràn thanh ghi đếm, hoặc khi giá trị đếm bằng với thanh ghi so sánh
 
 ## 2. Các thiết bị vào ra tiêu biểu
-• Timer (Bộ định thời): Các timer có thể được lập trình cho khoảng thời gian định trước. Ví dụ: để đo khoảng thời gian giữa hai sự kiện, tạo sự kiện tại các khoảng thời gian xác định, hoặc tạo tín hiệu ở tần số xác định, ứng dụng cho bộ điều biến độ rộng xung (PWM) và nhiều sự kiện khác.
-• Watch-Dog-Timer (WDT - Đồng hồ bấm giờ): Đây là một loại timer đặc biệt, được sử dụng như một thiết bị an toàn. WDT sẽ reset hệ thống (chương trình) nếu không nhận được tín hiệu do chương trình tạo ra sau mỗi đơn vị thời gian X, một tính năng hữu ích trong một số ứng dụng đề phòng trường hợp chương trình bị treo. WDT cũng có thể được cấu hình để tự tạo tín hiệu ngắt trong khoảng thời gian đều đặn.
-• Communication Interfaces (Các giao diện truyền thông): bao gồm UART, SPI, USB, I2C, etc.
-• ADC (Bộ chuyển đổi tương tự - số)
-• DAC (Bộ chuyển đổi số - tương tự)
+- Timer (Bộ định thời): Các timer có thể được lập trình cho khoảng thời gian định trước. Ví dụ: để đo khoảng thời gian giữa hai sự kiện, tạo sự kiện tại các khoảng thời gian xác định, hoặc tạo tín hiệu ở tần số xác định, ứng dụng cho bộ điều biến độ rộng xung (PWM) và nhiều sự kiện khác.
+- Watch-Dog-Timer (WDT - Đồng hồ bấm giờ): Đây là một loại timer đặc biệt, được sử dụng như một thiết bị an toàn. WDT sẽ reset hệ thống (chương trình) nếu không nhận được tín hiệu do chương trình tạo ra sau mỗi đơn vị thời gian X, một tính năng hữu ích trong một số ứng dụng đề phòng trường hợp chương trình bị treo. WDT cũng có thể được cấu hình để tự tạo tín hiệu ngắt trong khoảng thời gian đều đặn.
+- Communication Interfaces (Các giao diện truyền thông): bao gồm UART, SPI, USB, I2C, etc.
+- ADC (Bộ chuyển đổi tương tự - số)
+- DAC (Bộ chuyển đổi số - tương tự)
 
 > Xem thêm: Tổng hợp các bài hướng dẫn Lập trình vi điều khiển STM32 
 > https://tapit.vn/tong-hop-cac-bai-huong-dan-lap-trinh-vi-dieu-khien-stm32/
@@ -128,21 +126,15 @@ The **struct tm** has the following definition
 
 # IV. CÁC PHÉP TOÁN TRONG C
 ## 1. Ép kiểu
-
 ## 2. Phép tăng giảm giá trị
-
-`a. ++ là toán tử tăng`
-
+### a. ++ là toán tử tăng
 ++i tương đương với i = i + 1
-
-`b. -- là toán tử giảm`
-
+### b. -- là toán tử giảm
 --i tương đương với i = i - 1
 
 + Có 2 cách viết ++i và i++ nhưng ý nghĩa của chúng khác nhau:
 + ++i thì i được tăng trước sau đó sẽ lấy kết quả để thực hiện biểu thức
-+ i++ thì i được đưa vào thực hiện biểu thức trước sau đó mới tăng i lên.
-  
++ i++ thì i được đưa vào thực hiện biểu thức trước sau đó mới tăng i lên.  
 + Xem ví dụ sau:
 
 		Tăng trước:
@@ -154,9 +146,7 @@ The **struct tm** has the following definition
 		Nếu dùng toán tử tăng ++ sau biến x thì giá trị của biến x sẽ được gán cho biến y, rồi sau đó biến x mới tăng lên 1.
 
 ## 3. Phép toán số học
-
 ## 4.  Phép toán quan hệ
-
 <img width="230" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/1cbfd42a-4b43-4f16-bcb0-cb8aeab336d9">
 
 `Note 1: Đừng quên dấu "=" trong phép so sánh Bằng nhé, nếu không nó sẽ trở thành phép gán. Đây là một lỗi sai rất cơ bản.`
@@ -168,24 +158,20 @@ The **struct tm** has the following definition
 <img width="450" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/ed37a163-3ee3-48a6-a3b1-97c79465e08a">
 
 ## 5.  Phép gán
-
 ## 6.  Phép toán điền kiện
-
 ## 7.  Phép toán logic
-
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/eff30b5e-02dc-4156-9a70-80dda4810576">
 
-VD1: Giả sử biến A giữ giá trị 1 và biến B giữ giá trị 0, thì khi đó:
+- VD1: Giả sử biến A giữ giá trị 1 và biến B giữ giá trị 0, thì khi đó:
 
 		(A && B) là false.
 		(A || B) là true.
 		!(A && B) là true.
-VD2:
+- VD2:
 
 <img width="550" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/9125fdc2-78b1-47df-85fd-4e3425e81a87">
 
 ## 8. Phép toán Bitwise
-
 > https://viblo.asia/p/toan-tu-bitwise-naQZR9qGKvx
 > https://openplanning.net/12281/cac-toan-tu-bitwise
 > https://byjus.com/gate/bitwise-operators-in-c/
@@ -193,7 +179,6 @@ VD2:
 <img width="700" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/a7f26a16-ef26-4f01-8c6e-ee4ca44da596">
 
 ### a. Bitwise AND operator & 
-
 <img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/52bbce36-cae4-44d5-b864-d6c64254cd6e">
 
 + Khi một bitwise AND được thực hiện trên một cặp bit, nó trả về 1 nếu cả 2 bit là 1, ngược lại trả về 0.
@@ -209,7 +194,6 @@ VD2:
 <img width="530" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/9b842310-35c5-4c70-8f54-4a56ce11b3d5">
 
 ### b. Bitwise OR operator |
-
 <img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/8a8646c4-8238-4164-bc47-72d0836a5649">
 
 + Khi một bitwise OR được thực hiện trên một cặp bit, nó trả về 1 nếu một trong các bit là 1, ngược lại trả về 0.
@@ -224,7 +208,6 @@ VD2:
 <img width="550" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/fef4f79d-1b04-40d8-a0c3-8fed15ab23ac">
 
 ### c. Bitwise XOR (exclusive OR) operator ^
-
 <img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/edb7c512-c685-4396-a4f1-e57b5e4eb342">
 
 + Khi một bitwise XOR được thực hiện trên một cặp bit, nó trả về 1 nếu các bit khác nhau, ngược lại (cả 2 đều đúng hoặc không đúng) trả về 0.
@@ -246,7 +229,6 @@ VD2:
 		hay dễ hiểu hơn là: (0 0 0 1 XOR 0 0 1 1) XOR 0 1 1 1 = 0 0 1 0 ^ 0 1 1 1 = 0 1 0 1
 		
 ### d. Bitwise NOT operator ~
-
 <img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/d8a580e8-c843-4b76-a649-1f92f4436e6b">
 
 + Khi một Bitwise NOT được sử dụng nó sẽ đảo ngược tất cả các bit. 1 thành 0, và 0 thành 1
@@ -258,9 +240,8 @@ VD2:
 <img width="500" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/ccda5143-6449-442b-8fc1-5a6374c1f1d2">
 
 ### e. Toán tử dịch bit trái (<<) và toán tử dịch bit phải (>>)
-
-+ Trong phép dịch trái, toán hạng bên trái là biểu thức để dịch chuyển các bit, còn toán hạng bên phải là con số bit cần dịch chuyển. vì vậy, khi chúng ta viết x<<1, nghĩa là chúng ta dịch chuyển x sang trái 1 bit. các bit mới được dịch chuyển bên phải sẽ là 0.
-+ VD:
+- Trong phép dịch trái, toán hạng bên trái là biểu thức để dịch chuyển các bit, còn toán hạng bên phải là con số bit cần dịch chuyển. vì vậy, khi chúng ta viết x<<1, nghĩa là chúng ta dịch chuyển x sang trái 1 bit. các bit mới được dịch chuyển bên phải sẽ là 0.
+- VD:
   
 	0011 << 1 == 0110
 	0011 << 2 == 1100
@@ -275,7 +256,7 @@ VD2:
 ### f. Phép gán toán tử bitwise
 <img width="650" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/993470f6-5de5-4fe3-8e97-b23024d39c64">
 
-VD:
+- VD:
 
 <img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/469aaf64-078f-473b-8ba2-b9085803b6ff">
 
@@ -302,72 +283,61 @@ VD:
 Nếu MCU chỉ cho phép tác động đến byte, ta nên sử dụng kỹ thuật mặt nạ: "Mask" - Đó là cách sử dụng các phép AND (&), OR (|), EXOR (^) các thanh ghi với các số đặc biệt để chỉ tác động tới các bit cần thiết.`
 
 ## 2. Ứng dụng
-
 <img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/e2520455-45e5-4e11-ad75-09b67b44011a">
 
 ### a. SET BITS 
 `Set 1 (1 vài) bit lên mức 1 => dùng OR`
 
-+ Ví dụ: set chân P1.4 lên mức 1
+- Ví dụ: set chân P1.4 lên mức 1
 
-	Cách thông thường: P1_4 = 1;
-	
-	Cách sử dụng phép OR: P1 |= 0x10;
-	
-	Cách sử dụng Bit - Mask: P1 |= (1 << 4);
+	+ Cách thông thường: P1_4 = 1;
+	+ Cách sử dụng phép OR: P1 |= 0x10;
+	+ Cách sử dụng Bit - Mask: P1 |= (1 << 4);
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/03de2689-fa61-4306-9037-6a246cdca656">
 
 ### b. CLEAR BITS
 `Clear 1 (1 vài) bit = 0 => dùng AND + NOT`
 
-+ Ví dụ: Clear chân P1.4 về mức 0
+- Ví dụ: Clear chân P1.4 về mức 0
 
-	Cách thông thường: P1_4 = 0;
-
-	Cách sử dụng phép AND: P1 &= ~0x10;
-
-	Cách sử dụng Bit - Mask: P1 &= ~(1 << 4);
-
-	Clear 2 bit (hoặc nhiều hơn) - Clear P1.4 và P1.5: P1 &= ~(0x03 << 4);
+	+ Cách thông thường: P1_4 = 0;
+	+ Cách sử dụng phép AND: P1 &= ~0x10;
+	+ Cách sử dụng Bit - Mask: P1 &= ~(1 << 4);
+	+ Clear 2 bit (hoặc nhiều hơn) - Clear P1.4 và P1.5: P1 &= ~(0x03 << 4);
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/a8713f3e-9fdd-4d77-9127-a40c2a29d1e4">
 
 ### c. TOGGLE BITS
 `Đảo logic 1 (1 vài) bit => dùng EXOR`
 
-+ Ví dụ: Đảo logic chân P1.4
+- Ví dụ: Đảo logic chân P1.4
 
-	Cách thông thường: if (P1_4 == 0) P1_4 = 1;
-			   else P1_4 = 0;
-	
-	Cách sử dụng phép EXOR: P1 ^= 0x10;
-	
-	Cách sử dụng Bit - Mask: P1 ^= (1 << 4);
+	+ Cách thông thường: if (P1_4 == 0) P1_4 = 1;
+			   else P1_4 = 0;	
+	+ Cách sử dụng phép EXOR: P1 ^= 0x10;
+	+ Cách sử dụng Bit - Mask: P1 ^= (1 << 4);
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/b3e1dad0-e7f2-40b4-8fee-688a63666deb">
 
 ### d. CHECKING BITS
 `Kiểm tra giá trị 1 bit => dùng AND`
 
-+ Ví dụ: Kiểm tra nút bấm tại chân P1.4
+- Ví dụ: Kiểm tra nút bấm tại chân P1.4
 
-        Cách thông thường: if (P1_4 == 0) hoặc if (!P1_4)
-
-        Cách sử dụng phép AND: if ((P1 & 0x10) == 0) hoặc if (!(P1 & 0x10))
-
-        Cách sử dụng Bit - Mask: if ((P1 & (1 << 4)) == 0) hoặc if (!(P1 & (1 << 4)))
+        + Cách thông thường: if (P1_4 == 0) hoặc if (!P1_4)
+        + Cách sử dụng phép AND: if ((P1 & 0x10) == 0) hoặc if (!(P1 & 0x10))
+        + Cách sử dụng Bit - Mask: if ((P1 & (1 << 4)) == 0) hoặc if (!(P1 & (1 << 4)))
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/b5214141-e849-44ba-bcdf-26a88e30ec2c">
 
 ### Nhận xét
 Nhận xét 3 trường hợp trên:
 
-+ Cách 1 (Cách thông thường): **không áp dụng cho MCU, chỉ cho phép tác động theo byte, trường hợp đảo bit phải dùng if** -> dài dòng.
-+ Cách 2: **phải nhớ mã hexa tương ứng với từng bit muốn tác động**, **khó thay đổi chương trình khi muốn thay đổi bit khác**. **Trường hợp đọc nút nhấn còn gây thay đổi các bit khác.**
-+ Cách 3, bitmask -> Oke nhất 😁😁😁
+	+ Cách 1 (Cách thông thường): **không áp dụng cho MCU, chỉ cho phép tác động theo byte, trường hợp đảo bit phải dùng if** -> dài dòng.
+	+ Cách 2: **phải nhớ mã hexa tương ứng với từng bit muốn tác động**, **khó thay đổi chương trình khi muốn thay đổi bit khác**. **Trường hợp đọc nút nhấn còn gây thay đổi các bit khác.**
+	+ Cách 3, bitmask -> Oke nhất 😁😁😁
 #### Kết luận 
-
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/dae45f23-07f4-4f07-a599-b9d088677b9d">
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -430,7 +400,6 @@ Nhận xét 3 trường hợp trên:
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/e9bf3ce9-7126-4249-abc8-8e84ab4b10a8">
 
 # II, PHẦN CỨNG THỰC HÀNH
-
 <img width="700" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/83ad9192-6abb-446d-ab46-129fde9f087e">
 
 > 	https://stm32-base.org/boards/STM32F103C8T6-Blue-Pill.html
@@ -483,7 +452,6 @@ Nhận xét 3 trường hợp trên:
  - Kiểm tra lỗi CRC và 96-bit ID.
 
 ## 2. Giới thiệu kit BluePill sử dụng STM32F103C8T6
-
 Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử dụng để nghiên cứu về ARM nhiều nhất hiện nay. 
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/da5c1792-a962-4398-af54-928af0681355)
@@ -1154,29 +1122,48 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 
 > https://tapit.vn/truyen-thong-noi-tiep-trong-lap-trinh-vi-dieu-khien-giao-tiep-uart/
 
-## I. Tổng quát 
-### 1. Khái niệm
+# I. Tổng quát 
+## 1. Khái niệm
 - UART (Universal synchronous asynchronous receiver transmitter ) là một ngoại vi cơ bản của STM32 sử dụng 2 chân Rx và Tx để nhận và truyền dữ liệu.
-- UART truyền dữ liệu không đồng bộ, có nghĩa là không có tín hiệu để đồng bộ hóa đầu ra của các bit từ UART truyền đến việc lấy mẫu các bit bởi UART nhận.
+- UART là giao thức truyền dữ liệu không đồng bộ, có nghĩa là không có tín hiệu để đồng bộ hóa đầu ra của các bit từ UART truyền đến việc lấy mẫu các bit bởi UART nhận., do đó không có đường clock nào điều chỉnh tốc độ truyền dữ liệu. Người dùng phải đặt cả hai thiết bị để giao tiếp ở cùng tốc độ. Tốc độ này được gọi là tốc độ truyền, được biểu thị bằng bit trên giây hoặc bps. Tốc độ truyền thay đổi đáng kể, từ 9600 baud đến 115200 và hơn nữa. Tốc độ truyền giữa UART truyền và nhận chỉ có thể chênh lệch khoảng 10% trước khi thời gian của các bit bị lệch quá xa.
 - Thay vì tín hiệu đồng bộ, UART truyền thêm các bit start và stop vào gói dữ liệu được chuyển. Các bit này xác định điểm bắt đầu và điểm kết thúc của gói dữ liệu để UART nhận biết khi nào bắt đầu đọc các bit.
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/e175ae03-5459-488d-9056-979055bcb800">
 
-### 2. Các thông số cơ bản trong truyền nhận UART :
+### Trong một sơ đồ giao tiếp UART:
+1. Chân Tx (truyền) của một chip kết nối trực tiếp với chân Rx (nhận) của chip kia và ngược lại. Thông thường, quá trình truyền sẽ diễn ra ở 3.3V hoặc 5V. UART là một giao thức một master, một slave, trong đó một thiết bị được thiết lập để giao tiếp với duy nhất một thiết bị khác.
+2. Dữ liệu truyền đến và đi từ UART song song với thiết bị điều khiển (ví dụ: CPU).
+3. Khi gửi trên chân Tx, UART đầu tiên sẽ dịch thông tin song song này thành nối tiếp và truyền đến thiết bị nhận.
+4. UART thứ hai nhận dữ liệu này trên chân Rx của nó và biến đổi nó trở lại thành song song để giao tiếp với thiết bị điều khiển của nó.
+
+### UART truyền dữ liệu nối tiếp, theo một trong ba chế độ:
+- Full duplex: Giao tiếp đồng thời đến và đi từ mỗi master và slave
+- Half duplex: Dữ liệu đi theo một hướng tại một thời điểm
+- Simplex: Chỉ giao tiếp một chiều
+
+## 2. Các thông số cơ bản trong truyền nhận UART
 - Data Frame (khung truyền)
 - Baund rate (tốc độ baund)
 
-#### a. Data Frame (khung truyền)
+### a. Data Frame (khung truyền)
+Dữ liệu truyền qua UART được tổ chức thành các gói. Mỗi gói chứa 1 bit bắt đầu, 5 đến 9 bit dữ liệu (tùy thuộc vào UART), một bit chẵn lẻ tùy chọn và 1 hoặc 2 bit dừng.
+
+![image](https://github.com/user-attachments/assets/611836eb-c178-44f9-8be1-c4b9872c404d)
+
+// Một ký tự (ví dụ: 'A', mã ASCII là 65) thường được biểu diễn bằng 8 bit dữ liệu trong UART
+
+![image](https://github.com/user-attachments/assets/5399383f-9ad2-442d-a30d-bcefacf07546)
+
 <img width="600" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/51d96603-251f-48a6-b23e-8bdfc7be0843">
 
-- Data Frame: Khung truyền quy định về số bit trong mỗi lần truyền.
-- Start bit: là bit đầu tiên được truyền trong 1 Frame. Báo hiệu cho thiết bị nhận có một gói dữ liệu sắp đc truyền đến. Bit bắt buộc.
-- Data: dữ liệu cần truyền. Bit có trọng số nhỏ nhất LSB được truyền trước sau đó đến bit MSB.
-- Parity bit: kiểm tra dữ liệu truyền có đúng không. Bit chẵn lẻ là một cách để UART nhận cho biết liệu có bất kỳ dữ liệu nào đã thay đổi trong quá trình truyền hay không. Bit có thể bị thay đổi bởi bức xạ điện từ, tốc độ truyền không khớp hoặc truyền dữ liệu khoảng cách xa. Sau khi UART nhận đọc khung dữ liệu, nó sẽ đếm số bit có giá trị là 1 và kiểm tra xem tổng số là số chẵn hay lẻ. Nếu bit chẵn lẻ là 0 (tính chẵn), thì tổng các bit 1 trong khung dữ liệu phải là một số chẵn. Nếu bit chẵn lẻ là 1 (tính lẻ), các bit 1 trong khung dữ liệu sẽ tổng thành một số lẻ. Khi bit chẵn lẻ khớp với dữ liệu, UART sẽ biết rằng quá trình truyền không có lỗi. Nhưng nếu bit chẵn lẻ là 0 và tổng là số lẻ; hoặc bit chẵn lẻ là 1 và tổng số là chẵn, UART sẽ biết rằng các bit trong khung dữ liệu đã thay đổi.
+- **Data Frame**: Khung truyền quy định về số bit trong mỗi lần truyền.
+- **Start bit**: là bit đầu tiên được truyền trong 1 Frame. Báo hiệu cho thiết bị nhận có một gói dữ liệu sắp đc truyền đến. Bit bắt buộc. (Đường truyền dữ liệu UART thường được giữ ở mức điện áp cao khi không truyền dữ liệu. Để bắt đầu truyền dữ liệu, UART truyền sẽ kéo đường truyền từ mức cao xuống mức thấp trong một chu kỳ clock. Khi UART nhận phát hiện sự chuyển đổi điện áp cao xuống thấp, nó bắt đầu đọc các bit trong khung dữ liệu ở tần số của tốc độ truyền.)
+- **Data**: dữ liệu cần truyền. Bit có trọng số nhỏ nhất LSB được truyền trước sau đó đến bit MSB. (Khung dữ liệu chứa dữ liệu thực tế được chuyển. Nó có thể dài từ 5 bit đến 8 bit nếu sử dụng bit chẵn lẻ. Nếu không sử dụng bit chẵn lẻ, khung dữ liệu có thể dài 9 bit.)
+- **Parity bit**: kiểm tra dữ liệu truyền có đúng không. Bit chẵn lẻ là một cách để UART nhận cho biết liệu có bất kỳ dữ liệu nào đã thay đổi trong quá trình truyền hay không. Bit có thể bị thay đổi bởi bức xạ điện từ, tốc độ truyền không khớp hoặc truyền dữ liệu khoảng cách xa. Sau khi UART nhận đọc khung dữ liệu, nó sẽ đếm số bit có giá trị là 1 và kiểm tra xem tổng số là số chẵn hay lẻ. Nếu bit chẵn lẻ là 0 (tính chẵn), thì tổng các bit 1 trong khung dữ liệu phải là một số chẵn. Nếu bit chẵn lẻ là 1 (tính lẻ), các bit 1 trong khung dữ liệu sẽ tổng thành một số lẻ. Khi bit chẵn lẻ khớp với dữ liệu, UART sẽ biết rằng quá trình truyền không có lỗi. Nhưng nếu bit chẵn lẻ là 0 và tổng là số lẻ; hoặc bit chẵn lẻ là 1 và tổng số là chẵn, UART sẽ biết rằng các bit trong khung dữ liệu đã thay đổi.
 > Tìm hiểu error detection and correction + CRC check
-- Stop bit: là 1 hoặc các bit báo cho thiết bị rằng các bit đã được gửi xong. Thiết bị nhận sẽ tiến hành kiểm tra khung truyền nhằm đảm bảo tính đúng đắn của dữ liệu. Bit bắt buộc.
+- **Stop bit**: là 1 hoặc các bit báo hiệu sự kết thúc của gói dữ liệu, UART gửi sẽ điều khiển đường truyền dữ liệu từ điện áp thấp đến điện áp cao trong ít nhất khoảng 2 bit. Thiết bị nhận sẽ tiến hành kiểm tra khung truyền nhằm đảm bảo tính đúng đắn của dữ liệu. Bit bắt buộc.
 
-=> Quá trình truyền dữ liệu diễn ra dưới dạng các gói dữ liệu, bắt đầu bằng một bit bắt đầu, đường mức cao được kéo xuống đất. Sau bit bắt đầu, năm đến chín bit dữ liệu truyền trong khung dữ liệu của gói, theo sau là bit chẵn lẻ tùy chọn để xác minh việc truyền dữ liệu thích hợp. Cuối cùng, một hoặc nhiều bit dừng được truyền ở nơi đường đặt ở mức cao. Như vậy là kết thúc một gói. 
+=> Có thể tóm tắt lại như sau. Quá trình truyền dữ liệu diễn ra dưới dạng các gói dữ liệu, bắt đầu bằng một bit bắt đầu, đường mức cao được kéo xuống đất. Sau bit bắt đầu, năm đến chín bit dữ liệu truyền trong khung dữ liệu của gói, theo sau là bit chẵn lẻ tùy chọn để xác minh việc truyền dữ liệu thích hợp. Cuối cùng, một hoặc nhiều bit dừng được truyền ở nơi đường đặt ở mức cao. Như vậy là kết thúc một gói.
 
 [Ex]
 
@@ -1187,7 +1174,7 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
   
 => data truyền đi là OK  
 
-#### b. Baudrate (tốc độ baund)
+### b. Baudrate (tốc độ baund)
 - Baudrate (tốc độ baund): Khoảng thời gian dành cho 1 bit được truyền. Phải được cài đặt giống nhau ở gửi và nhận. Một số Baud Rate thông dụng: 9600, 38400, 115200, 230400,…
 - UART là giao thức không đồng bộ, do đó không có đường clock nào điều chỉnh tốc độ truyền dữ liệu. Người dùng phải đặt cả hai thiết bị để giao tiếp ở cùng tốc độ. Tốc độ này được gọi là tốc độ truyền, được biểu thị bằng bit trên giây hoặc bps. Tốc độ truyền thay đổi đáng kể, từ 9600 baud đến 115200 và hơn nữa. Tốc độ truyền giữa UART truyền và nhận chỉ có thể chênh lệch khoảng 10% trước khi thời gian của các bit bị lệch quá xa.
 - Tốc độ baund càng cao thì tốc độ truyền/nhận dữ liệu càng nhanh.
@@ -1198,8 +1185,7 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 
 -> 115200/(8+2) = 11520 byte dữ liệu (byte dữ liệu có thêm 2 bit là start bit và stop bit)
 
-**Tốc độ bit và tốc độ baud**
-
+#### Tốc độ bit và tốc độ baud
 - Có hai thuật ngữ thường dùng trong truyền số liệu là tốc độ bit (bit rate) và tốc độ baud (baud rate) thường bị nhầm lẫn. Tốc độ bit là số bit được truyền trong một giây, Tốc độ baud là số đơn vị tín hiệu trong một giây cần có để biểu diễn số bit vừa nêu. Khi nói về hiệu quả của máy tính, thì tốc độ bit luôn là yếu tố quan trọng. Tuy nhiên, trong truyền số liệu ta lại cần quan tâm đến hiệu quả truyền dẫn dữ liệu từ nơi này đến nơi khác, như thế khi dùng ít đơn vị tín hiệu cần có, thì hiệu quả càng cao, và băng thông truyền càng thấp; như thế thì cần chú ý đến tốc độ baud. Tốc độ baud xác định băng thông cần thiết để truyền tín hiệu.Tốc độ bit là tốc độ baud nhân với số bit trong mỗi đơn vị tín hiệu. Tốc độ baud schia cho số bit biểu diễn trong mỗi đơn vị truyền.
   
 	   + Tốc độ bit là số bit trong mỗi giây.
@@ -1216,8 +1202,38 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 [Ex] Tốc độ bit của tín hiệu là 3000. Nếu mỗi phần tử tín hiệu mang 6 bit, cho biết tốc độ baud?
 
 		+ Tốc độ baud = tốc độ bit/ số bit trong mỗi phần tử tín hiệu = 3000/6 =500 baud/giây
+## 3. Cách thức đồng bộ hóa tính hiệu
+Trong giao tiếp UART, hai chế độ Asynchronous và Synchronous liên quan đến cách thức đồng bộ hóa tín hiệu giữa các thiết bị:
+### +) Chế độ Asynchronous (Bất đồng bộ)
+- Không có tín hiệu đồng hồ chung (Clock).
+- Mỗi thiết bị gửi và nhận dữ liệu một cách độc lập.
+- Thời gian giữa các bit dữ liệu có thể thay đổi tùy theo tốc độ baud rate.
+- Ưu điểm: Đơn giản, ít yêu cầu phần cứng.
+- Ứng dụng: Dùng trong truyền thông đơn giản, thông thường như giao tiếp với cảm biến, module GSM, và hầu hết các ứng dụng UART.
+### +) Chế độ Synchronous (Đồng bộ)
+- Có tín hiệu đồng hồ chung giữa hai thiết bị.
+- Dữ liệu được truyền và nhận cùng với tín hiệu đồng hồ, đảm bảo các bit được truyền chính xác theo thời gian.
+- Ưu điểm: Đảm bảo độ chính xác cao, tốc độ truyền nhanh hơn vì không phải truyền thêm các bit start/stop như trong chế độ bất đồng bộ.
+- Ứng dụng: Dùng khi cần truyền tải dữ liệu ở tốc độ cao và độ chính xác cao, như trong các giao tiếp truyền thông phức tạp.
+### => Tóm lại:
+- Asynchronous (Bất đồng bộ): Không có đồng hồ chung, truyền dữ liệu theo cách đơn giản, phổ biến.
+- Synchronous (Đồng bộ): Có tín hiệu đồng hồ chung, chính xác hơn, thường dùng khi yêu cầu tốc độ và độ chính xác cao.
 
-### 3. Kết nối phần cứng 
+=> chế độ UART2 được cài đặt là Asynchronous, nghĩa là không sử dụng đồng hồ chung, và dữ liệu được truyền theo cách bất đồng bộ.
+
+## 4. Ưu và nhược điểm của UART
+Không có giao thức truyền thông nào là hoàn hảo, nhưng UART thực hiện khá tốt công việc của nó. Dưới đây là một số ưu và nhược điểm để giúp bạn quyết định xem nó có phù hợp với nhu cầu của bạn hay không:
+### Ưu điểm
+- Chỉ sử dụng hai dây
+- Không cần tín hiệu clock
+- Có một bit chẵn lẻ để cho phép kiểm tra lỗi
+- Cấu trúc của gói dữ liệu có thể được thay đổi miễn là cả hai bên đều được thiết lập cho nó
+- Phương pháp có nhiều tài liệu và được sử dụng rộng rãi
+### Nhược điểm
+- Kích thước của khung dữ liệu được giới hạn tối đa là 9 bit
+- Không hỗ trợ nhiều hệ thống slave hoặc nhiều hệ thống master
+- Tốc độ truyền của mỗi UART phải nằm trong khoảng 10% của nhau
+## 5. Kết nối phần cứng 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/c951302a-40b2-4308-82ee-f6fd5552dece)
 
 > Tìm hỉu về cách ly quang trong việc truyền nhận dữ liệu
@@ -1249,6 +1265,7 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 
 ## I. Tổng quan về cảm biến 
 Gồm có 2 loại cảm biến chính:
+
 - Cảm biến có ngõ ra tương tự Analog. Trong đó lại chia làm 2 loại là:
 	+ Điện áp (0V - 3.3V ; 0V - 5V ; 0V - 10V). VD: cảm biến nhiệt độ 
  	+ Dòng điện (0/4 - 20/24 mA)
@@ -1386,8 +1403,7 @@ Với các chế độ quét nhiều kênh, có thể thấy các kênh có th�
 - Ngoại vi ADC trong STM32 sử dụng nguồn cấp xung clock là APB2, với một bộ chia với hệ số 2/4/6/8. Tạo thành tín hiệu ADCCLK, nguồn clock này có thể cùng với cấu hình 3 bit SMP[2:0] của thanh ghi ADC_SMPR1 và ADC_SMPR2 để tạo ra các Sampling time từ 1.5 đến 239.5 chu kỳ clock. 
 
 ### Bài tập ví dụ 
-
-![image](https://github.com/minchangggg/Stm32/assets/125820144/926c94b8-f7a2-46a1-a7fe-e9862244538a)
+<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/926c94b8-f7a2-46a1-a7fe-e9862244538a">
 
 --------------------------------------------------------------------------------------------------------------------------------
 
