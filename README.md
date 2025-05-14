@@ -1188,7 +1188,54 @@ Không có giao thức truyền thông nào là hoàn hảo, nhưng UART thực 
 
 <img width="400" alt="image" src="https://github.com/user-attachments/assets/50f54d67-6b7d-49a3-8b7b-1408ffd293a2">
 
-I2C
+# 1. Giao thức I2C là gì
+- I2C viết tắt của Inter- Integrated Circuit  là một phương thức giao tiếp được phát triển bởi hãng Philips Semiconductors. Dùng để truyền tín hiệu giữa vi xử lý và các IC trên các bus nối tiếp.
+- Đặc điểm:
+	+ Tốc độ không cao
+	+ Thường sử dụng onboard với đường truyền ngắn
+	+ Nối được nhiều thiết bị trên cùng một bus
+	+ Giao tiếp đồng bộ, sử dụng Clock từ master
+	+ Sử dụng 7 bit hoặc 10 bit địa chỉ
+	+ Chỉ sử dụng 2 chân tín hiệu SDA, SCL
+	+ Có 2 tốc độ tiêu chuẩn là Standard mode (100 kb/s)và Low mode (10 kbit/s)
+
+- Kết nối vật lý của giao thức I2C:
+	+ Bus I2C sử dụng 2 dây tín hiệu là SDA (Serial Data Line) và SCL (Serial Clock Line).
+	+ Dữ liệu truyền trên SDA được đồng bộ với mỗi xung SCL. Đường SCL chỉ master mới có quyền điều khiển.
+	+ Tất cả các thiết bị đều dùng chung 2 đường tín hiệu này
+	+ Hai đường bus SDA và SCL hoạt động ở chế độ Open Drain hay cực máng hở. Nghĩa là tất cả các thiết bị trong mạng đều chỉ có thể lái 2 chân này về 0 chứ ko thể kéo lên 1. Để tránh việc sảy ra ngắn mạch khi thiết bị này kéo lên cao, thiết bị kia kéo xuống thấp.
+	+ Để giữ mức logic là 1 ở trạng thái mặc định phải mắc thêm 2 điện trở treo lên Vcc (thường từ 1k – 4k7).
+
+- Mỗi Bus I2C sẽ có 3 chế độ chính:
+	+ Một Master, nhiều Slave
+	+ Nhiều master, nhiều Slave
+	+ Một Master, một Slave
+
+Một master nhiều Slave
+
+Nhiều Master, nhiều Slave
+
+- Tại một thời điểm truyền nhận dữ liệu chỉ có một Master được hoạt động, điều khiển dây SCL và phát tín hiệu bắt đầu tới các Slave.
+- Tất cả các thiết bị đáp ứng sự điều hướng của Master gọi là Slave. Giữa các Slave với nhau, phân biệt bằng 7bit địa chỉ.
+
+# II. Cách truyền dữ liệu của giao thức I2C
+- Giao thức (phương thức giao tiếp) là cách các thiết bị đã thống nhất với nhau khi sử dụng một chuẩn nào đó để truyền và nhận tín hiệu.
+- Dữ liệu được truyền đi trên dây SDA được thực hiện như sau:
+1. Master thực hiện điều kiện bắt đầu I2C (Start Condition)
+2. Gửi địa chỉ 7 bit + 1bit Đọc/Ghi (R/W) để giao tiếp muốn đọc hoặc ghi dữ liệu tại Slave có địa chỉ trên
+3. Nhận phải hồi từ Bus, nếu có một bit ACK (Kéo SDA xuống thấp) Master sẽ gửi dữ liệu
+4. Nếu là đọc dữ liệu R/W bit = 1, chân SDA của master sẽ là input, đọc dữ liệu từ Slave gửi về. Nếu là ghi dữ liệu R/W = 0, chân SDA sẽ là output ghi dữ liệu vào Slave
+5. Truyền điều khiện kết thúc (Stop Condition)
+
+Mỗi lần giao tiếp có cấu trúc như sau
+
+
+Start condition (Điều khiện bắt đầu)
+Bất cứ khi nào một thiết bị chủ / IC quyết định bắt đầu một giao dịch, nó sẽ chuyển mạch SDA từ mức điện áp cao xuống mức điện áp thấp trước khi đường SCL chuyển từ cao xuống thấp.
+Khi điều kiện bắt đầu được gửi bởi thiết bị Master, tất cả các thiết bị Slave đều hoạt động ngay cả khi
+chúng ở chế độ ngủ (sleep mode) và đợi bit địa chỉ.
+
+
 --------------------------------------------------------------------------------------------------------------------------------
 
 <img width="400" alt="image" src="https://github.com/user-attachments/assets/1e4c33c4-84e2-4242-b33c-8725d0b04b58">
@@ -1203,7 +1250,7 @@ I2C
 > 
 > STM32F103C8 có tích hợp sẵn các bộ chuyển đổi ADC với độ phân giải 12bit. Có 12 kênh cho phép đo tín hiệu từ 10 nguồn bên ngoài và 2 nguồn nội bên trong.
 
-## I. Tổng quan về cảm biến 
+# I. Tổng quan về cảm biến 
 Gồm có 2 loại cảm biến chính:
 
 - Cảm biến có ngõ ra tương tự Analog. Trong đó lại chia làm 2 loại là:
@@ -1214,7 +1261,7 @@ Gồm có 2 loại cảm biến chính:
  	+ Các chuẩn giao tiếp UART / I2C / SPI
 	+ Xung (Pulse)
 
-## II. Analog Digital Converter
+# II. Analog Digital Converter
 ### Bộ chuyển đổi ADC là gì
 - ADC là từ viết tắt của Analog to Digital Converter hay bộ chuyển đổi analog sang kỹ thuật số là một mạch chuyển đổi giá trị điện áp liên tục (analog) sang giá trị nhị phân (kỹ thuật số) mà thiết bị kỹ thuật số có thể hiểu được sau đó có thể được sử dụng để tính toán kỹ thuật số. Mạch ADC này có thể là vi mạch ADC hoặc được nhúng vào một bộ vi điều khiển.
 
@@ -1235,17 +1282,16 @@ Gồm có 2 loại cảm biến chính:
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/f22b4a42-8825-4e2c-8727-e444680e008a)
 
 - Với mỗi khối ngoại vi ADC gồm có 2 loại kênh ngõ vào là bên ngoài và bên trong:
-  
 	+ Kênh ngõ vào bên ngoài nối trực tiếp chân của vi điều khiển -> đo tín hiệu analog từ chân của vi điều khiển 
 	+ Kênh ngõ vào bên trong thường kết nối cảm biến nhiệt độ và điện áp nội -> đo được nhiệt độ và điện áp hiện tại của vi điều khiển là bao nhiêu 
 
-### 1. Các chế độ input ADC trong STM32
+## 1. Các chế độ input ADC trong STM32
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/97bd8812-b712-4580-9961-38b9972cb880)
 
 + Single-ended mode: Sensor sẽ được nối gnd chung với STM32 và chân output của sensor sẽ được nối vào channel ADC của STM32 từ đó giá trị đo được sẽ so với GND chung (đây là mode thường xuyên sài).
 + Differential mode: Sensor sẽ có 2 đầu ra và 2 đầu ra đó nối với 2 channel ADC trong STM32 và điện áp đo được là điện áp sai lệch giữa 2 ngõ ra 
 
-### 2. Độ phân giải ADC (resolution): dùng để chỉ số bit cần thiết để chứa hết các mức giá trị số (digital) sau quá trình chuyển đổi ở ngõ ra 
+## 2. Độ phân giải ADC (resolution): dùng để chỉ số bit cần thiết để chứa hết các mức giá trị số (digital) sau quá trình chuyển đổi ở ngõ ra 
 + Để giải thích rõ hơn, chúng ta cùng chuyển đổi điện áp thay đổi từ 0 – 3.3 V, nhưng chỉ có 1 bit để lưu giá trị của điện áp thay đổi này:
   
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/22f0659e-2423-46a1-ac7b-cc31588ebc6e">
@@ -1256,7 +1302,7 @@ Gồm có 2 loại cảm biến chính:
 
 + Màu xanh tương ứng thể hiện độ phân giải của bộ chuyển đổi này là 3 bit, tương ứng với 8 sự thay đổi ở đầu ra số (23=8). Khi đưa v­­­­­­ào điện áp tương tự, bộ chuyển đổi sẽ thực hiện một công đoạn lượng tử hóa để đưa các kết quả tương ứng từ điện áp tương tự về số ở ngõ ra. 
 + Màu tím tương ứng với độ phân giải của bộ chuyển đổi 16 bit. Dễ dàng nhận thấy với một bộ chuyển đổi có độ phân giải càng thấp, quá trình chuyển đổi sẽ cho ra kết quả là một điện áp càng biến dạng ở ngõ ra so với ngõ vào và ngược lại. Bộ chuyển đổi ADC của STM32F103 có độ phân giải mặc định là 12 bit, tức là có thể chuyển đổi ra 212 = 4096 giá trị ở ngõ ra số.
-### 3. Công thức chuyển đổi ADC
+## 3. Công thức chuyển đổi ADC
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/4806b487-4589-4d58-982f-be59d6160095)
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/c16fa7f7-8226-4087-9d70-7a6b938ce36f)
@@ -1265,28 +1311,25 @@ Gồm có 2 loại cảm biến chính:
 - Không có ADC nào là tuyệt đối, vì vậy điện áp được ánh xạ tới giá trị nhị phân lớn nhất được gọi là điện áp tham chiếu. Ví dụ: trong bộ chuyển đổi 10 bit với 5V làm điện áp tham chiếu, 1111111111 (tất cả các bit một, số nhị phân 10 bit cao nhất có thể ) tương ứng với 5V và 0000000000 (số thấp nhất tương ứng với 0V). Vì vậy, mỗi bước nhị phân lên đại diện cho khoảng 4,9mV, vì có thể có 1024 chữ số trong 10 bit. Số đo điện áp trên mỗi bit này được gọi là độ phân giải của ADC.
 - Điều gì sẽ xảy ra nếu điện áp thay đổi dưới 4,9mV mỗi bước? Nó sẽ đặt ADC vào vùng chết, do đó kết quả chuyển đổi luôn có một lỗi nhỏ. Có ngăn chặn lỗi này bằng cách sử dụng ADC có độ phân giải cao hơn ví dụ như bộ ADC lên đến 24 bit, mặc dù tần số chuyển đổi thấp.
   
-### 4. Tính toán giá trị chuyển đổi ADC
-
+## 4. Tính toán giá trị chuyển đổi ADC
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/babe80ce-4dc3-4033-934f-dd82dc30b105">
 
 - Bài 1:
-  
 		0x7FF = 2047; 2^12 - 1 = 4095
 		Vin = (2047*3.3)/4095 = 1.65V
 
 - Bài 2:
-  
 		2^10 - 1 = 1023
 		Vin = (511*3.3)/1023 = 1.65V
 
-## III. Chạy chương trình
-### 1. Một số hàm liên quan đến ADC:
+# III. Chạy chương trình
+## 1. Một số hàm liên quan đến ADC:
 - HAL_ADC_Start(ADC_HandleTypeDef* hadc): cho phép ADC bắt đầu chuyển đổi
 - HAL_ADC_PollForConversion(ADC_HandleTypeDef* hadc, uint32_t Timeout): polling chờ cho chuyển đổi hoàn tất với thời gian timeout.
 - HAL_ADC_GetValue(ADC_HandleTypeDef* hadc): trả về giá trị adc của con trỏ hadc.
 - HAL_ADC_Stop(ADC_HandleTypeDef* hadc): stop chuyển đổi adc.
-### 2. Có 3 phương pháp cho việc đọc ADC và các hàm dùng cho từng phương pháp:
-#### a. Polling 
+## 2. Có 3 phương pháp cho việc đọc ADC và các hàm dùng cho từng phương pháp:
+### a. Polling 
 + HAL_StatusTypeDef HAL_ADC_Start(ADC_HandleTypeDef* hadc); 
 	➔ Dùng để bật ADC 
 + HAL_StatusTypeDef HAL_ADC_Stop(ADC_HandleTypeDef* hadc); 
