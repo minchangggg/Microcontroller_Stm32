@@ -1,19 +1,17 @@
 # STM32
 ## Table of contents
-- [I. SƠ LƯỢC VỀ CHƯƠNG TRÌNH C](#i-so-luoc-ve-chuong-trinh-c)
+- [M1S1 - TỔNG QUAN CHƯƠNG TRÌNH HỌC](#m1S1)
+- [M1S2 - Ôn tập ngôn ngữ lập trình C](#m1s2)
 
-- [I. SƠ LƯỢC VỀ CHƯƠNG TRÌNH C](#i-so-luoc-ve-chuong-trinh-c)
-
-<img width="470" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/fae6fe05-a314-4c64-9143-c84573a10ebc">
+# M1S1 <img width="450" alt="image" src="https://github.com/user-attachments/assets/e3bc6c3f-fe9f-45f1-ac4d-02be285479a6">
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-<img width="450" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/a42e5da1-1f29-4edd-9c67-6f6c9432a246">
-
+# M1S2 <img width="450" alt="image" src="https://github.com/user-attachments/assets/47073b04-b513-443f-8618-166f95a0eea8">
 ## I. SƠ LƯỢC VỀ CHƯƠNG TRÌNH C
 ### A, Quá trình biên dịch một chương trình C/C++
 > https://tapit.vn/qua-trinh-bien-dich-mot-chuong-trinh-cc/?fbclid=IwAR30Vb0QtPRumEMEmWeFqYsndk2tRrhgGLDh16K8cHTBoPU1J-A_XpFGl9o
-### 1. ĐỊNH NGHĨA
+#### 1. ĐỊNH NGHĨA
 - Biên dịch là quá trình chuyển đổi từ ngôn ngữ bậc cao (C/C++, Pascal, Java, C#…) sang ngôn ngữ ngôn ngữ máy-> máy tính có thể hiểu và thực thi.
 - Ngôn ngữ C là một ngôn ngữ dạng biên dịch. Chương trình được viết bằng C muốn chạy được trên máy tính phải trải qua một quá trình biên dịch để chuyển đổi từ dạng mã nguồn sang chương trình dạng mã thực thi.
 - Quá trình được chia ra làm 4 giai đoạn chính:
@@ -23,26 +21,26 @@
 	+ Giai đoạn liên kết (Linker)
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/bc85d275-e61e-4deb-a55a-7ab20df96215)
-## 2. HOẠT ĐỘNG
-#### a. Giai đoạn tiền xử lý – Preprocessor
+#### 2. HOẠT ĐỘNG
+#### 2.1. Giai đoạn tiền xử lý – Preprocessor
 + Nhận mã nguồn
 + Xóa bỏ tất cả chú thích, comments của chương trình
 + Chỉ thị tiền xử lý (bắt đầu bằng #) cũng được xử lý
 + Ví dụ: chỉ thị #include cho phép ghép thêm mã chương trình của một tệp tiêu để vào mã nguồn cần dịch. Các hằng số được định nghĩa bằng #define sẽ được thay thế bằng giá trị cụ thể tại mỗi nơi sử dụng trong chương trình.
-#### b. Cộng đoạn dịch Ngôn Ngữ Bậc Cao sang Assembly
+#### 2.2. Cộng đoạn dịch Ngôn Ngữ Bậc Cao sang Assembly
 + Phân tích cú pháp (syntax) của mã nguồn NNBC
 + Chuyển chúng sang dạng mã Assembly là một ngôn ngữ bậc thấp (hợp ngữ) gần với tập lệnh của bộ vi xử lý.
-#### c. Công đoạn dịch Assembly
+#### 2.3. Công đoạn dịch Assembly
 + Dich chương trình => Sang mã máy 0 và 1
 + Một tệp mã máy (.obj) sinh ra trong hệ thống sau đó.
-#### d. Giai đoạn Linker
+#### 2.4. Giai đoạn Linker
 + Trong giai đoạn này mã máy của một chương trình dịch từ nhiều nguồn (file .c hoặc file thư viện .lib) được liên kết lại với nhau để tạo thành chương trình đích duy nhất
 + Mã máy của các hàm thư viện gọi trong chương trình cũng được đưa vào chương trình cuối trong giai đoạn này. -> Chính vì vậy mà các lỗi liên quan đến việc gọi hàm hay sử dụng biến tổng thể mà không tồn tại sẽ bị phát hiện. Kể cả lỗi viết chương trình chính không có hàm main() cũng được phát hiện trong liên kết.
 + Kết thúc quá trình tất cả các đối tượng được liên kết lại với nhau thành một chương trình có thể thực thi được (executable hay .exe) thống nhất.
-## B. Các thư viện cần học trong C
-## C Library - <time.h>
+### B. Các thư viện cần học trong C
+### C Library - <time.h>
 *The time.h header defines: four variable types + two macro + various functions -> for manipulating date and time.*
-### 1. Library Variables
+#### 1. Library Variables
 |  No |       Variable     |                                    Description                                     | 
 | :---| :------------------|------------------------------------------------------------------------------------| 
 |  1  |   **size_t**       |  *This is the unsigned integral type and is the **result of the sizeof keyword***  | 
@@ -63,12 +61,12 @@ The **struct tm** has the following definition
 	 int tm_yday;      // day in the year, range 0 to 365  
 	 int tm_isdst;     // daylight saving time             
       };
-### 2. Library Macros
+#### 2. Library Macros
 |  No |          Macro        |                             Description                                         | 
 | :---| :---------------------|---------------------------------------------------------------------------------| 
 |  1  |   **NULL**            |  *This macro is the value of a **null pointer constant***                       | 
 |  2  |   **CLOCKS_PER_SEC**  |  *This macro represents the **number of processor clocks per second***          | 
-### 3. Library Functions 
+#### 3. Library Functions 
 |  No |      Function      |                                   Description                                                       | 
 | :---| :------------------|-----------------------------------------------------------------------------------------------------| 
 |  1  | ```char *asctime(const struct tm *timeptr)```  |  *Returns a pointer to a string which represents the day and time of the structure timeptr*  | 
@@ -81,12 +79,12 @@ The **struct tm** has the following definition
 |  8  | ```size_t strftime(char *str, size_t maxsize, const char *format, const struct tm *timeptr)```  |  *Formats the time represented in the structure timeptr according to the formatting rules defined in format and stored into str*  |
 |  9  | ```time_t time(time_t *timer)``` |  *Calculates the current calender time and encodes it into time_t format*  | 
 
-# II. CẤU TRÚC CỦA MỘT CHƯƠNG TRÌNH C CHO VI ĐIỀU KHIỂN 
+## II. CẤU TRÚC CỦA MỘT CHƯƠNG TRÌNH C CHO VI ĐIỀU KHIỂN 
 <img width="700" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/9a676761-63a9-4fa3-9066-bd4ddaaba427">
 
 <img width="580" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/18b5990f-0c9f-4a68-b69c-a62e4189deb4">
 
-## 1. Quá trình thực hiện ngắt của vi điều khiển – MCU Interrupt processing
+### 1. Quá trình thực hiện ngắt của vi điều khiển – MCU Interrupt processing
 > https://tapit.vn/qua-trinh-thuc-hien-ngat-cua-vi-dieu-khien-mcu-interrupt-processing/?fbclid=IwAR2PXlKLeeP945BvFNK_58rtfPEntMePA2Nz42NHYgTHVPACBNR3fAmJtDA
 
 - Bình thường, vi điều khiển sẽ thực thi các lệnh do người dùng viết một cách tuần tự từ trên xuống. 
@@ -105,7 +103,7 @@ The **struct tm** has the following definition
 	+ Ngắt ADC: Thường sử dụng khi hoàn thành việc chuyển đổi ADC
 	+ Ngắt Timer: Thường sử dụng khi tràn thanh ghi đếm, hoặc khi giá trị đếm bằng với thanh ghi so sánh
 
-## 2. Các thiết bị vào ra tiêu biểu
+### 2. Các thiết bị vào ra tiêu biểu
 - Timer (Bộ định thời): Các timer có thể được lập trình cho khoảng thời gian định trước. Ví dụ: để đo khoảng thời gian giữa hai sự kiện, tạo sự kiện tại các khoảng thời gian xác định, hoặc tạo tín hiệu ở tần số xác định, ứng dụng cho bộ điều biến độ rộng xung (PWM) và nhiều sự kiện khác.
 - Watch-Dog-Timer (WDT - Đồng hồ bấm giờ): Đây là một loại timer đặc biệt, được sử dụng như một thiết bị an toàn. WDT sẽ reset hệ thống (chương trình) nếu không nhận được tín hiệu do chương trình tạo ra sau mỗi đơn vị thời gian X, một tính năng hữu ích trong một số ứng dụng đề phòng trường hợp chương trình bị treo. WDT cũng có thể được cấu hình để tự tạo tín hiệu ngắt trong khoảng thời gian đều đặn.
 - Communication Interfaces (Các giao diện truyền thông): bao gồm UART, SPI, USB, I2C, etc.
@@ -115,8 +113,8 @@ The **struct tm** has the following definition
 > Xem thêm: Tổng hợp các bài hướng dẫn Lập trình vi điều khiển STM32 
 > https://tapit.vn/tong-hop-cac-bai-huong-dan-lap-trinh-vi-dieu-khien-stm32/
 
-# III. TỔ CHỨC BỘ NHỚ CỦA VI ĐIỀU KHIỂN, CHƯƠNG TRÌNH VÀ DỮ LIỆU TRONG BỘ NHỚ 
-## Tổ chức bộ nhớ
+## III. TỔ CHỨC BỘ NHỚ CỦA VI ĐIỀU KHIỂN, CHƯƠNG TRÌNH VÀ DỮ LIỆU TRONG BỘ NHỚ 
+### Tổ chức bộ nhớ
 + Bộ nhớ chương trình - FLASH (ROM)
 + Bộ nhớ dữ liệu - SRAM
 + Các ngoại vi - Register
@@ -125,12 +123,12 @@ The **struct tm** has the following definition
 
 <img width="179" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/4e67c60b-b7b8-4a35-ac71-2fcee694ceaf">
 
-# IV. CÁC PHÉP TOÁN TRONG C
-## 1. Ép kiểu
-## 2. Phép tăng giảm giá trị
-### a. ++ là toán tử tăng
+## IV. CÁC PHÉP TOÁN TRONG C
+### 1. Ép kiểu
+### 2. Phép tăng giảm giá trị
+#### a. ++ là toán tử tăng
 ++i tương đương với i = i + 1
-### b. -- là toán tử giảm
+#### b. -- là toán tử giảm
 --i tương đương với i = i - 1
 
 + Có 2 cách viết ++i và i++ nhưng ý nghĩa của chúng khác nhau:
@@ -146,8 +144,8 @@ The **struct tm** has the following definition
 		Xem ví dụ sau: x = 10; y = x++;// y = 10 và x = 11.
 		Nếu dùng toán tử tăng ++ sau biến x thì giá trị của biến x sẽ được gán cho biến y, rồi sau đó biến x mới tăng lên 1.
 
-## 3. Phép toán số học
-## 4.  Phép toán quan hệ
+### 3. Phép toán số học
+### 4.  Phép toán quan hệ
 <img width="230" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/1cbfd42a-4b43-4f16-bcb0-cb8aeab336d9">
 
 `Note 1: Đừng quên dấu "=" trong phép so sánh Bằng nhé, nếu không nó sẽ trở thành phép gán. Đây là một lỗi sai rất cơ bản.`
@@ -158,9 +156,9 @@ The **struct tm** has the following definition
 
 <img width="450" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/ed37a163-3ee3-48a6-a3b1-97c79465e08a">
 
-## 5.  Phép gán
-## 6.  Phép toán điền kiện
-## 7.  Phép toán logic
+### 5.  Phép gán
+### 6.  Phép toán điền kiện
+### 7.  Phép toán logic
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/eff30b5e-02dc-4156-9a70-80dda4810576">
 
 - VD1: Giả sử biến A giữ giá trị 1 và biến B giữ giá trị 0, thì khi đó:
@@ -172,14 +170,14 @@ The **struct tm** has the following definition
 
 <img width="550" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/9125fdc2-78b1-47df-85fd-4e3425e81a87">
 
-## 8. Phép toán Bitwise
+### 8. Phép toán Bitwise
 > https://viblo.asia/p/toan-tu-bitwise-naQZR9qGKvx
 > https://openplanning.net/12281/cac-toan-tu-bitwise
 > https://byjus.com/gate/bitwise-operators-in-c/
 
 <img width="700" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/a7f26a16-ef26-4f01-8c6e-ee4ca44da596">
 
-### a. Bitwise AND operator & 
+#### a. Bitwise AND operator & 
 <img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/52bbce36-cae4-44d5-b864-d6c64254cd6e">
 
 + Khi một bitwise AND được thực hiện trên một cặp bit, nó trả về 1 nếu cả 2 bit là 1, ngược lại trả về 0.
@@ -193,7 +191,7 @@ The **struct tm** has the following definition
 
 <img width="530" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/9b842310-35c5-4c70-8f54-4a56ce11b3d5">
 
-### b. Bitwise OR operator |
+#### b. Bitwise OR operator |
 <img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/8a8646c4-8238-4164-bc47-72d0836a5649">
 
 + Khi một bitwise OR được thực hiện trên một cặp bit, nó trả về 1 nếu một trong các bit là 1, ngược lại trả về 0.
@@ -207,7 +205,7 @@ The **struct tm** has the following definition
 
 <img width="550" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/fef4f79d-1b04-40d8-a0c3-8fed15ab23ac">
 
-### c. Bitwise XOR (exclusive OR) operator ^
+#### c. Bitwise XOR (exclusive OR) operator ^
 <img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/edb7c512-c685-4396-a4f1-e57b5e4eb342">
 
 + Khi một bitwise XOR được thực hiện trên một cặp bit, nó trả về 1 nếu các bit khác nhau, ngược lại (cả 2 đều đúng hoặc không đúng) trả về 0.
@@ -225,7 +223,7 @@ The **struct tm** has the following definition
 		0 1 0 1
 		hay dễ hiểu hơn là: (0 0 0 1 XOR 0 0 1 1) XOR 0 1 1 1 = 0 0 1 0 ^ 0 1 1 1 = 0 1 0 1
 		
-### d. Bitwise NOT operator ~
+#### d. Bitwise NOT operator ~
 <img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/d8a580e8-c843-4b76-a649-1f92f4436e6b">
 
 + Khi một Bitwise NOT được sử dụng nó sẽ đảo ngược tất cả các bit. 1 thành 0, và 0 thành 1
@@ -235,7 +233,7 @@ The **struct tm** has the following definition
   
 <img width="500" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/ccda5143-6449-442b-8fc1-5a6374c1f1d2">
 
-### e. Toán tử dịch bit trái (<<) và toán tử dịch bit phải (>>)
+#### e. Toán tử dịch bit trái (<<) và toán tử dịch bit phải (>>)
 - Trong phép dịch trái, toán hạng bên trái là biểu thức để dịch chuyển các bit, còn toán hạng bên phải là con số bit cần dịch chuyển. vì vậy, khi chúng ta viết x<<1, nghĩa là chúng ta dịch chuyển x sang trái 1 bit. các bit mới được dịch chuyển bên phải sẽ là 0.
 - VD:
 	0011 << 1 == 0110
@@ -248,16 +246,16 @@ The **struct tm** has the following definition
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/c2ab7160-6a45-45b9-becf-417f44f9ab7d)
 
-### f. Phép gán toán tử bitwise
+#### f. Phép gán toán tử bitwise
 <img width="650" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/993470f6-5de5-4fe3-8e97-b23024d39c64">
 
 - VD:
 
 <img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/469aaf64-078f-473b-8ba2-b9085803b6ff">
 
-# V. Kỹ thuật mặt nạ bit - Bit Mask
+## V. Kỹ thuật mặt nạ bit - Bit Mask
 > https://www.laptrinhdientu.com/2021/08/bitwise-operator.html
-## 1. Giới thiệu
+### 1. Giới thiệu
 + Bitwise là toán tử xử lý với các bit trong một số, nó là một toán tử rất quan trọng trong C, đặc biệt là C nhúng. Các toán tử bitwise cho phép xử lý với từng bit riêng lẻ trên một số nguyên, một thanh ghi. 
     ➤ Người dùng có thể set, clear, toggle, read a bit, ... mà không làm ảnh hưởng đến các thành phần khác của thanh ghi bằng toán tử bitwise. 
     ➤ Ví dụ vi điều khiển 8051 cho phép tác động tới từng bit của thanh ghi port, muốn tác động đến chân P1.0 thì ta dùng bit P1_0.
@@ -271,10 +269,10 @@ The **struct tm** has the following definition
 + Xử lý với **bit (1 hoặc 1 vài bit) xem chừng khó khăn hơn**:
 	Nếu MCU chỉ cho phép tác động đến byte, ta nên sử dụng kỹ thuật mặt nạ: "Mask" - Đó là cách sử dụng các phép AND (&), OR (|), EXOR (^) các thanh ghi với các số đặc biệt để chỉ tác động tới các bit cần thiết.`
 
-## 2. Ứng dụng
+### 2. Ứng dụng
 <img width="300" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/e2520455-45e5-4e11-ad75-09b67b44011a">
 
-### a. SET BITS 
+#### a. SET BITS 
 `Set 1 (1 vài) bit lên mức 1 => dùng OR`
 
 - Ví dụ: set chân P1.4 lên mức 1
@@ -285,7 +283,7 @@ The **struct tm** has the following definition
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/03de2689-fa61-4306-9037-6a246cdca656">
 
-### b. CLEAR BITS
+#### b. CLEAR BITS
 `Clear 1 (1 vài) bit = 0 => dùng AND + NOT`
 
 - Ví dụ: Clear chân P1.4 về mức 0
@@ -297,7 +295,7 @@ The **struct tm** has the following definition
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/a8713f3e-9fdd-4d77-9127-a40c2a29d1e4">
 
-### c. TOGGLE BITS
+#### c. TOGGLE BITS
 `Đảo logic 1 (1 vài) bit => dùng EXOR`
 
 - Ví dụ: Đảo logic chân P1.4
@@ -309,7 +307,7 @@ The **struct tm** has the following definition
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/b3e1dad0-e7f2-40b4-8fee-688a63666deb">
 
-### d. CHECKING BITS
+#### d. CHECKING BITS
 `Kiểm tra giá trị 1 bit => dùng AND`
 
 - Ví dụ: Kiểm tra nút bấm tại chân P1.4
@@ -320,7 +318,7 @@ The **struct tm** has the following definition
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/b5214141-e849-44ba-bcdf-26a88e30ec2c">
 
-### Nhận xét
+#### Nhận xét
 Nhận xét 3 trường hợp trên:
 
 	+ Cách 1 (Cách thông thường): **không áp dụng cho MCU, chỉ cho phép tác động theo byte, trường hợp đảo bit phải dùng if** -> dài dòng.
