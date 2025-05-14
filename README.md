@@ -1,11 +1,17 @@
+# STM32
+## Table of contents
+- [I. SƠ LƯỢC VỀ CHƯƠNG TRÌNH C](#i-so-luoc-ve-chuong-trinh-c)
+
+- [I. SƠ LƯỢC VỀ CHƯƠNG TRÌNH C](#i-so-luoc-ve-chuong-trinh-c)
+
 <img width="470" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/fae6fe05-a314-4c64-9143-c84573a10ebc">
 
 --------------------------------------------------------------------------------------------------------------------------------
 
 <img width="450" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/a42e5da1-1f29-4edd-9c67-6f6c9432a246">
 
-# I. SƠ LƯỢC VỀ CHƯƠNG TRÌNH C
-## A, Quá trình biên dịch một chương trình C/C++
+## I. SƠ LƯỢC VỀ CHƯƠNG TRÌNH C
+### A, Quá trình biên dịch một chương trình C/C++
 > https://tapit.vn/qua-trinh-bien-dich-mot-chuong-trinh-cc/?fbclid=IwAR30Vb0QtPRumEMEmWeFqYsndk2tRrhgGLDh16K8cHTBoPU1J-A_XpFGl9o
 ### 1. ĐỊNH NGHĨA
 - Biên dịch là quá trình chuyển đổi từ ngôn ngữ bậc cao (C/C++, Pascal, Java, C#…) sang ngôn ngữ ngôn ngữ máy-> máy tính có thể hiểu và thực thi.
@@ -17,7 +23,7 @@
 	+ Giai đoạn liên kết (Linker)
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/bc85d275-e61e-4deb-a55a-7ab20df96215)
-### 2. HOẠT ĐỘNG
+## 2. HOẠT ĐỘNG
 #### a. Giai đoạn tiền xử lý – Preprocessor
 + Nhận mã nguồn
 + Xóa bỏ tất cả chú thích, comments của chương trình
