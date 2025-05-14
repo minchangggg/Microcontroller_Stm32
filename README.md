@@ -23,6 +23,17 @@
 
 - [M9 - Thư viện C](#m9)
 
+- [M10S1 - ADC SCSC Polling, Interrupt](#m10s1)
+- [M10S2 - Chuyển đổi tín hiệu tương tự - số ADC](#m10s2)
+
+- [M11 - Ngoại vi RTC](#m11)
+
+- [M12 - DMA, DMA ADC, DMA UART](#m12)
+
+- [M13 - WDG & Tổng kết](#m13)
+ 
+--------------------------------------------------------------------------------------------------------------------------------
+
 # M1S1 
 <img width="450" alt="image" src="https://github.com/user-attachments/assets/e3bc6c3f-fe9f-45f1-ac4d-02be285479a6">
 
@@ -1264,13 +1275,12 @@ chúng ở chế độ ngủ (sleep mode) và đợi bit địa chỉ.
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M9
-<img width="400" alt="image" src="https://github.com/user-attachments/assets/01a4cfa6-2d48-4d43-a62c-a053cc73c97f">
-
-
+<img width="370" alt="image" src="https://github.com/user-attachments/assets/01a4cfa6-2d48-4d43-a62c-a053cc73c97f">
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-<img width="500" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/949972d7-a29b-4992-8cc3-070222dfb177">
+# M10S1
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/2a834c59-12fa-459c-b4ce-55dac7d5f8ca">
 
 > https://www.studocu.com/vn/document/truong-dai-hoc-tra-vinh/vat-ly-dai-cuong/stm32-adc/82063383
 > 
@@ -1278,7 +1288,7 @@ chúng ở chế độ ngủ (sleep mode) và đợi bit địa chỉ.
 > 
 > STM32F103C8 có tích hợp sẵn các bộ chuyển đổi ADC với độ phân giải 12bit. Có 12 kênh cho phép đo tín hiệu từ 10 nguồn bên ngoài và 2 nguồn nội bên trong.
 
-# I. Tổng quan về cảm biến 
+## I. Tổng quan về cảm biến 
 Gồm có 2 loại cảm biến chính:
 
 - Cảm biến có ngõ ra tương tự Analog. Trong đó lại chia làm 2 loại là:
@@ -1289,17 +1299,17 @@ Gồm có 2 loại cảm biến chính:
  	+ Các chuẩn giao tiếp UART / I2C / SPI
 	+ Xung (Pulse)
 
-# II. Analog Digital Converter
-### Bộ chuyển đổi ADC là gì
+## II. Analog Digital Converter
+#### Bộ chuyển đổi ADC là gì
 - ADC là từ viết tắt của Analog to Digital Converter hay bộ chuyển đổi analog sang kỹ thuật số là một mạch chuyển đổi giá trị điện áp liên tục (analog) sang giá trị nhị phân (kỹ thuật số) mà thiết bị kỹ thuật số có thể hiểu được sau đó có thể được sử dụng để tính toán kỹ thuật số. Mạch ADC này có thể là vi mạch ADC hoặc được nhúng vào một bộ vi điều khiển.
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/98d2560b-9534-4d1e-9c50-3866b820800f">
 
-### Tại sao phải chuyển đổi analog sang kỹ thuật số
+#### Tại sao phải chuyển đổi analog sang kỹ thuật số
 - Thiết bị điện tử ngày nay hoàn toàn là kỹ thuật số, không còn là thời kỳ của máy tính analog. Thật không may cho các hệ thống kỹ thuật số, thế giới chúng ta đang sống vẫn là analog và đầy màu sắc, không chỉ đen và trắng.
 - Ví dụ, một cảm biến nhiệt độ như LM35 tạo ra điện áp phụ thuộc vào nhiệt độ, trong trường hợp của thiết bị cụ thể nó sẽ tăng 10mV khi nhiệt độ tăng lên mỗi độ. Nếu chúng ta kết nối trực tiếp thiết bị này với đầu vào kỹ thuật số, nó sẽ ghi là cao hoặc thấp tùy thuộc vào các ngưỡng đầu vào, điều này là hoàn toàn vô dụng.
 - Thay vào đó, chúng ta sử dụng một bộ ADC để chuyển đổi đầu vào điện áp analog thành một chuỗi các bit có thể được kết nối trực tiếp với bus dữ liệu của bộ vi xử lý và được sử dụng để tính toán.
-### ADC hoạt động như thế nào
+#### ADC hoạt động như thế nào
 - Một cách rất hay để xem xét hoạt động của ADC là tưởng tượng nó như một **bộ chia tỷ lệ toán học**. **Tỷ lệ về cơ bản là ánh xạ các giá trị từ dải này sang dải khác, vì vậy ADC ánh xạ một giá trị điện áp sang một số nhị phân.** 
 
 ---
@@ -1313,13 +1323,13 @@ Gồm có 2 loại cảm biến chính:
 	+ Kênh ngõ vào bên ngoài nối trực tiếp chân của vi điều khiển -> đo tín hiệu analog từ chân của vi điều khiển 
 	+ Kênh ngõ vào bên trong thường kết nối cảm biến nhiệt độ và điện áp nội -> đo được nhiệt độ và điện áp hiện tại của vi điều khiển là bao nhiêu 
 
-## 1. Các chế độ input ADC trong STM32
+### 1. Các chế độ input ADC trong STM32
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/97bd8812-b712-4580-9961-38b9972cb880)
 
 + Single-ended mode: Sensor sẽ được nối gnd chung với STM32 và chân output của sensor sẽ được nối vào channel ADC của STM32 từ đó giá trị đo được sẽ so với GND chung (đây là mode thường xuyên sài).
 + Differential mode: Sensor sẽ có 2 đầu ra và 2 đầu ra đó nối với 2 channel ADC trong STM32 và điện áp đo được là điện áp sai lệch giữa 2 ngõ ra 
 
-## 2. Độ phân giải ADC (resolution): dùng để chỉ số bit cần thiết để chứa hết các mức giá trị số (digital) sau quá trình chuyển đổi ở ngõ ra 
+### 2. Độ phân giải ADC (resolution): dùng để chỉ số bit cần thiết để chứa hết các mức giá trị số (digital) sau quá trình chuyển đổi ở ngõ ra 
 + Để giải thích rõ hơn, chúng ta cùng chuyển đổi điện áp thay đổi từ 0 – 3.3 V, nhưng chỉ có 1 bit để lưu giá trị của điện áp thay đổi này:
   
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/22f0659e-2423-46a1-ac7b-cc31588ebc6e">
@@ -1330,7 +1340,7 @@ Gồm có 2 loại cảm biến chính:
 
 + Màu xanh tương ứng thể hiện độ phân giải của bộ chuyển đổi này là 3 bit, tương ứng với 8 sự thay đổi ở đầu ra số (23=8). Khi đưa v­­­­­­ào điện áp tương tự, bộ chuyển đổi sẽ thực hiện một công đoạn lượng tử hóa để đưa các kết quả tương ứng từ điện áp tương tự về số ở ngõ ra. 
 + Màu tím tương ứng với độ phân giải của bộ chuyển đổi 16 bit. Dễ dàng nhận thấy với một bộ chuyển đổi có độ phân giải càng thấp, quá trình chuyển đổi sẽ cho ra kết quả là một điện áp càng biến dạng ở ngõ ra so với ngõ vào và ngược lại. Bộ chuyển đổi ADC của STM32F103 có độ phân giải mặc định là 12 bit, tức là có thể chuyển đổi ra 212 = 4096 giá trị ở ngõ ra số.
-## 3. Công thức chuyển đổi ADC
+### 3. Công thức chuyển đổi ADC
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/4806b487-4589-4d58-982f-be59d6160095)
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/c16fa7f7-8226-4087-9d70-7a6b938ce36f)
@@ -1339,7 +1349,7 @@ Gồm có 2 loại cảm biến chính:
 - Không có ADC nào là tuyệt đối, vì vậy điện áp được ánh xạ tới giá trị nhị phân lớn nhất được gọi là điện áp tham chiếu. Ví dụ: trong bộ chuyển đổi 10 bit với 5V làm điện áp tham chiếu, 1111111111 (tất cả các bit một, số nhị phân 10 bit cao nhất có thể ) tương ứng với 5V và 0000000000 (số thấp nhất tương ứng với 0V). Vì vậy, mỗi bước nhị phân lên đại diện cho khoảng 4,9mV, vì có thể có 1024 chữ số trong 10 bit. Số đo điện áp trên mỗi bit này được gọi là độ phân giải của ADC.
 - Điều gì sẽ xảy ra nếu điện áp thay đổi dưới 4,9mV mỗi bước? Nó sẽ đặt ADC vào vùng chết, do đó kết quả chuyển đổi luôn có một lỗi nhỏ. Có ngăn chặn lỗi này bằng cách sử dụng ADC có độ phân giải cao hơn ví dụ như bộ ADC lên đến 24 bit, mặc dù tần số chuyển đổi thấp.
   
-## 4. Tính toán giá trị chuyển đổi ADC
+### 4. Tính toán giá trị chuyển đổi ADC
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/babe80ce-4dc3-4033-934f-dd82dc30b105">
 
 - Bài 1:
@@ -1350,14 +1360,14 @@ Gồm có 2 loại cảm biến chính:
 		2^10 - 1 = 1023
 		Vin = (511*3.3)/1023 = 1.65V
 
-# III. Chạy chương trình
-## 1. Một số hàm liên quan đến ADC:
+## III. Chạy chương trình
+### 1. Một số hàm liên quan đến ADC:
 - HAL_ADC_Start(ADC_HandleTypeDef* hadc): cho phép ADC bắt đầu chuyển đổi
 - HAL_ADC_PollForConversion(ADC_HandleTypeDef* hadc, uint32_t Timeout): polling chờ cho chuyển đổi hoàn tất với thời gian timeout.
 - HAL_ADC_GetValue(ADC_HandleTypeDef* hadc): trả về giá trị adc của con trỏ hadc.
 - HAL_ADC_Stop(ADC_HandleTypeDef* hadc): stop chuyển đổi adc.
-## 2. Có 3 phương pháp cho việc đọc ADC và các hàm dùng cho từng phương pháp:
-### a. Polling 
+### 2. Có 3 phương pháp cho việc đọc ADC và các hàm dùng cho từng phương pháp:
+#### a. Polling 
 + HAL_StatusTypeDef HAL_ADC_Start(ADC_HandleTypeDef* hadc); 
 	➔ Dùng để bật ADC 
 + HAL_StatusTypeDef HAL_ADC_Stop(ADC_HandleTypeDef* hadc); 
@@ -1375,7 +1385,8 @@ Gồm có 2 loại cảm biến chính:
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-<img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/e47dace1-c142-42cc-936f-5019d0fd8aac">
+# M10S2
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/36c7af89-d2d0-44dc-bc27-406c95736a78">
 
 > https://tapit.vn/chuc-nang-adc-su-dung-vi-dieu-khien-stm32f103c8t6/
 >
@@ -1418,7 +1429,8 @@ Với các chế độ quét nhiều kênh, có thể thấy các kênh có th�
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-<img width="400" alt="image" src="https://github.com/user-attachments/assets/64a1dbdf-aa51-4467-ad50-607625a8517b">
+# M11
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/f3e7b22b-fa61-4798-b5cc-48ceddde949a">
 
 > https://tapit.vn/real-time-clock-rtc-tren-stm32f103c8t6/
 
@@ -1434,8 +1446,11 @@ Việc của chúng ta chỉ cần tìm hiểu và sử dụng chứ không cầ
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-<img width="450" alt="image" src="https://github.com/user-attachments/assets/b4d8ec62-da06-4422-b371-71e277f6e9ec">
+# M12
+<img width="450" alt="image" src="https://github.com/user-attachments/assets/7db6a6f4-b98b-4a7b-8b3a-45311a0a7226">
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-<img width="400" alt="image" src="https://github.com/user-attachments/assets/72211819-c174-4b75-8285-9367c3b1cd17">
+# M13
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/f8260688-eb58-4e4a-b5f0-04550a764e13">
+
