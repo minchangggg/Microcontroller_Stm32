@@ -1,6 +1,6 @@
 # STM32
 ## Table of contents
-- [M1S1 - Tổng quan chương trình học](#M1S1)
+- [M1S1 - Tổng quan chương trình học](#m1s1)
 - [M1S2 - Ôn tập ngôn ngữ lập trình C](#m1s2)
 - [M1S3 - Tổng quan vi điều khiển, kết nối phần cứng, phần mềm](#m1s3)
   
@@ -346,7 +346,9 @@ Nhận xét 3 trường hợp trên:
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-# M1S3 <img width="700" alt="image" src="https://github.com/user-attachments/assets/5b55facd-766b-482d-8fc9-7b6990154cbb">
+# M1S3 
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/5b55facd-766b-482d-8fc9-7b6990154cbb">
+
 ## I, Một số khái niệm cơ bản và Cấu trúc của 1 vi điều khiển
 ### 1. Một số khái niệm cơ bản
 - User manual board: Tổng quan và hướng dẫn sử dụng board mạch thực hành, các thành phần trên board mạch. (F103 BluePill: website)
@@ -505,7 +507,9 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
   
 --------------------------------------------------------------------------------------------------------------------------------
 
-# M2S1 <img width="450" alt="image" src="https://github.com/user-attachments/assets/2e5aeb91-615d-4d11-a2ba-953535236a73">
+# M2S1 
+<img width="450" alt="image" src="https://github.com/user-attachments/assets/2e5aeb91-615d-4d11-a2ba-953535236a73">
+
 ## I, TÌM HIỂU CHUNG CHỨC NĂNG CỦA CÁC CHÂN STM32F103C8T6
 ![Bản sao của Blue-Pink Cute Class Schedule (4)](https://github.com/minchangggg/Stm32/assets/125820144/ec67b5bb-7804-4734-b973-d52d16a4908e)
 ### 1, Các chân không phải GPIO
@@ -561,8 +565,10 @@ Là chân chọn vùng nhớ khởi động, chạy các chương trình khác n
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-# M2S2 <img width="400" alt="image" src="https://github.com/user-attachments/assets/7b9dd2b1-0509-444e-ac47-a80d3796cbca">
-### 4, Tính tối ưu của thanh ghi BSRR của vi xử lý 32 bit 
+# M2S2 
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/7b9dd2b1-0509-444e-ac47-a80d3796cbca">
+
+### 3, Tính tối ưu của thanh ghi BSRR của vi xử lý 32 bit 
 #### Muốn điều chỉnh trạng thái của 1 chân bất kì (VD PC13) t sẽ có 2 cách: tác động lên ODR và tác động lên BSRR
 #### Cách 1: Tác động trực tiếp lên ODR (thanh ghi dữ liệu) mà không thông qua BSRR
 - VD: ODR ban đầu = 0x0000 -> muốn ODR 13 bằng 1 thì làm cách nào?
@@ -638,7 +644,9 @@ VD:
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-# M2S3 <img width="450" alt="image" src="https://github.com/user-attachments/assets/06942956-10cc-42c7-b1f0-3afef582c3b9">
+# M2S3 
+<img width="450" alt="image" src="https://github.com/user-attachments/assets/06942956-10cc-42c7-b1f0-3afef582c3b9">
+
 ## I. Vấn đề 1
 ### 1. Bài toán đặt ra
 - Cấu hình và viết chương trình thực hiện: Ban đầu LED sáng, khi "nhấn thả" nút, LED đảo trạng thái.
