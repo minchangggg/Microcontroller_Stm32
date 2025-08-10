@@ -1,5 +1,5 @@
 ## [___________ MODULE CONTENT ❤ ___________]()
-<img width="170" alt="image" src="https://github.com/user-attachments/assets/ed1a4db6-e899-4f56-8111-9d7c1682ad00">
+<img width="170" alt="image" src="https://github.com/user-attachments/assets/136a1046-d4bc-40a2-879e-43ce9cd1eb34">
 
 ### [1. CLASS KNOWLEDGE]()
 > [M1S1 - Tổng quan chương trình học](#m1s1)
