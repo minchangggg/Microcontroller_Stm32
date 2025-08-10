@@ -345,11 +345,10 @@ The **struct tm** has the following definition
 `Clear 1 (1 vài) bit = 0 => dùng AND + NOT`
 
 - Ví dụ: Clear chân P1.4 về mức 0
-
-	+ Cách thông thường: P1_4 = 0;
-	+ Cách sử dụng phép AND: P1 &= ~0x10;
-	+ Cách sử dụng Bit - Mask: P1 &= ~(1 << 4);
-	+ Clear 2 bit (hoặc nhiều hơn) - Clear P1.4 và P1.5: P1 &= ~(0x03 << 4);
+  + Cách thông thường: P1_4 = 0;
+  + Cách sử dụng phép AND: P1 &= ~0x10;
+  + Cách sử dụng Bit - Mask: P1 &= ~(1 << 4);
+  + Clear 2 bit (hoặc nhiều hơn) - Clear P1.4 và P1.5: P1 &= ~(0x03 << 4);
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/a8713f3e-9fdd-4d77-9127-a40c2a29d1e4">
 
@@ -357,9 +356,11 @@ The **struct tm** has the following definition
 `Đảo logic 1 (1 vài) bit => dùng EXOR`
 
 - Ví dụ: Đảo logic chân P1.4
-
-	+ Cách thông thường: if (P1_4 == 0) P1_4 = 1;
-			     else P1_4 = 0;	
+	+ Cách thông thường:
+	```c
+	if (P1_4 == 0) P1_4 = 1;
+	else P1_4 = 0;
+	```
 	+ Cách sử dụng phép EXOR: P1 ^= 0x10;
 	+ Cách sử dụng Bit - Mask: P1 ^= (1 << 4);
 
@@ -683,8 +684,7 @@ VD:
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M2S3 
-<img width="450" alt="image" src="https://github.com/user-attachments/assets/06942956-10cc-42c7-b1f0-3afef582c3b9">
-
+# `| GPIO, BUTTON, DEBUG, POLLING`
 ## I. Vấn đề 1
 ### 1. Bài toán đặt ra
 - Cấu hình và viết chương trình thực hiện: Ban đầu LED sáng, khi "nhấn thả" nút, LED đảo trạng thái.
@@ -720,8 +720,7 @@ VD:
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M3S1
-<img width="440" alt="image" src="https://github.com/user-attachments/assets/b284774b-d716-40ef-8084-e248f66a2973">
-
+# `| EXCEPTION, EXTERNAL INTERRUPT`
 ### Kiến trúc cơ bản của Vi điều khiển
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/7370bc6c-e0a4-4253-9663-6ff45b38a659">
 
@@ -811,8 +810,7 @@ VD:
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M3S2
-<img width="450" alt="image" src="https://github.com/user-attachments/assets/500ebf49-1d02-4da7-8f29-029f6f94e186">
-
+# `| EXTERNAL INTERRUPT`
 > https://tapit.vn/hieu-va-lap-trinh-ngat-ngoai-stm32f411/
 
 EXTI (External Interupts) tạm dịch là ngắt ngoài hay ngắt sự kiện bên ngoài. Ngắt EXTI được kích hoạt khi có sự kiện từ bên ngoài tác động vào chân EXTI đó, tùy theo sự kiện đó có phù hợp với điều kiện ngắt không thì ngắt ngoài mới sảy ra.
@@ -871,8 +869,7 @@ Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M4S1
-<img width="400" alt="image" src="https://github.com/user-attachments/assets/23b68ec1-94ff-426b-b2a2-e37f62c13990">
-
+# `| ÔN TẬP EXTI & CLOCK TREE`
 > https://www.laptrinhdientu.com/2021/09/STM2.html
 
 ## 1. Khái niệm Xung clock là gì? Xung clock dùng để làm gì?
@@ -924,7 +921,7 @@ Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương
 
 - Clock tree sử dung nhiều bộ Phase-Locked Loops (PLL) và Prescalers để tăng / giảm tần số nguồn khi cần thiết.
 - Lý do chúng ta cần nhiều bộ chia tần số nguồn là để đảm bảo khả năng hoạt động cũng như giảm thiểu năng lượng tiêu thụ ở những chắc năng không cần thiết.
-- Cấu hình ClockTree sẽ được thực hiện qua một thiết bị ngoại vi có tên là Reset and Clock Control (RCC),  và nó sẽ đựợc thực hiện qua 3 bước :
+- Cấu hình ClockTree sẽ được thực hiện qua một thiết bị ngoại vi có tên là Reset and Clock Control (RCC), và nó sẽ đựợc thực hiện qua 3 bước :
   
 		1. Chọn sử dung HSI hay HSE.
 		2. Nếu nguồn cung cấp dao động không đủ so với nhu cầu tốc độ dao động của hệ thống, ta sẽ điều chỉnh thông số của PLL chính để khởi tạo xung PLL (PLLCLK).  Nếu không có thể bỏ qua bước này.
@@ -932,8 +929,7 @@ Lưu ý: Các bạn nên xem xét sử dụng hàm HAL_Delay trong các chương
 
 --------------------------------------------------------------------------------------------------------------------------------
 # M5S1
-<img width="370" alt="image" src="https://github.com/user-attachments/assets/f2f86f73-9b3f-4d79-829c-ecdabe5c18d0">
-
+# `| TIMER - TIME BASE`
 > https://www.st.com/resource/en/reference_manual/cd00171190-stm32f101xx-stm32f102xx-stm32f103xx-stm32f105xx-and-stm32f107xx-advanced-arm-based-32-bit-mcus-stmicroelectronics.pdf
 >
 > https://fr.scribd.com/upload-document?archive_doc=236018793
@@ -1006,14 +1002,16 @@ Ngoại trừ các Basic Timer chỉ có hoạt động cơ bản là đếm, c�
 => Thành phần chính của timer chính là bộ đếm – counter (CNT), với các ngưỡng trên được thiết lập bởi thanh ghi Auto Reload (ARR). Counter có thể đếm lên lên hoặc đếm xuống. Clock đưa vào bộ đếm có thể được chia bởi một bộ chia tần – Prescaler.
 
 ### 2. Các thanh ghi quan trọng:
-Người dùng có thể thực hiện các lệnh đọc, ghi vào các thanh ghi CNT, ARR và PSC để cấu hình cho khối cơ sở của mỗi bộ Timer.
-
-- Auto Reload(TIMx_ARR): Giá trị của ARR được người dùng xác định sẵn khi cài đặt bộ timer, làm cơ sở cho CNT thực hiện nạp lại giá trị đếm mỗi khi tràn (overflow khi đếm lên – CNT vượt giá trị ARR, underflow khi đếm xuống – CNT bé hơn 0).Tùy vào bộ timer mà counter này có thể là 16bit hoặc 32bit.
-- Counter Register(TIMx_CNT): Lưu giá trị đếm Counter (CNT), tăng hoặc giảm mỗi nhịp xung clock của Timer. Giá trị của Counter luôn nằm trong khoảng [0; ARR]. Nếu ngoài khoảng đó, Timer sẽ thực hiện nạp lại giá trị CNT như ban đầu và tiếp tục hoạt động. Tùy vào mỗi Timer mà CNT và ARR có cỡ 16 hoặc 32 bit.
-- Prescaler (TIMx_PSC): Giá trị của thanh ghi bộ chia tần (16bit) cho phép người dùng cấu hình chia tần số đầu vào (CK_PSC) cho bất kì giá trị nào từ [1- 65536]. Sử dụng kết hợp bộ chia tần của timer và của RCC giúp chúng ta có thể thay đổi được thời gian của mỗi lần CNT thực hiện đếm, giúp tạo ra được những khoảng thời gian, điều chế được độ rộng xung phù hợp với nhu cầu.
+- Người dùng có thể thực hiện các lệnh đọc, ghi vào các thanh ghi CNT, ARR và PSC để cấu hình cho khối cơ sở của mỗi bộ Timer.
+  + Auto Reload(TIMx_ARR): Giá trị của ARR được người dùng xác định sẵn khi cài đặt bộ timer, làm cơ sở cho CNT thực hiện nạp lại giá trị đếm mỗi khi tràn (overflow khi đếm lên – CNT vượt giá trị ARR, underflow khi đếm xuống – CNT bé hơn 0).Tùy vào bộ timer mà counter này có thể là 16bit hoặc 32bit.
+  + Counter Register(TIMx_CNT): Lưu giá trị đếm Counter (CNT), tăng hoặc giảm mỗi nhịp xung clock của Timer. Giá trị của Counter luôn nằm trong khoảng [0; ARR]. Nếu ngoài khoảng đó, Timer sẽ thực hiện nạp lại giá trị CNT như ban đầu và tiếp tục hoạt động. Tùy vào mỗi Timer mà CNT và ARR có cỡ 16 hoặc 32 bit.
+  + Prescaler (TIMx_PSC): Giá trị của thanh ghi bộ chia tần (16bit) cho phép người dùng cấu hình chia tần số đầu vào (CK_PSC) cho bất kì giá trị nào từ [1- 65536]. Sử dụng kết hợp bộ chia tần của timer và của RCC giúp chúng ta có thể thay đổi được thời gian của mỗi lần CNT thực hiện đếm, giúp tạo ra được những khoảng thời gian, điều chế được độ rộng xung phù hợp với nhu cầu.
 
 ### 3. Các chế độ hoạt động:
-Các chế độ đếm: Mỗi bộ timer đều hỗ trợ 3 chế chế độ đếm.
+- Các chế độ đếm: Mỗi bộ timer đều hỗ trợ 3 chế chế độ đếm.
+  + Upcounting mode
+  + Downcouting mode
+  + Center-Aligned mode
 
 #### 3.1. Upcounting mode (chế độ đếm lên)
 - Ở chế độ này, CNT đếm lên từ 0 (hoặc- một giá trị nào đó được người dùng ghi vào CNT trước) đến giá trị của thanh ghi ARR, sau đó CNT bắt đầu lại từ 0. Lúc này có sự kiện tràn counter – overflow, sự kiện này có thể tạo yêu cầu ngắt nếu người dùng cấu hình cho phép ngắt. 
@@ -1042,11 +1040,10 @@ Các chế độ đếm: Mỗi bộ timer đều hỗ trợ 3 chế chế độ 
 	- ARR: Thanh ghi do người dùng cấu hình, lựa chọn giá trị
 	- PSC: Thanh ghi do người dùng cấu hình, lựa chọn giá trị
   
-- Note: 
-
-	+ Thanh ghi PSC quyết định giá trị chia. Nếu PSC = 0 thì chia 1; **PSC = PSC thì chia (PSC + 1)**
-	+ Counter sẽ tràn khi gặp giá trị bằng 0. Nếu ARR = 10 thì đếm 11 lần; **ARR = ARR thì đếm (ARR + 1) lần**
-	+ Giá trị của thanh ghi PSC và ARR là có giới hạn. Có độ rộng là n bit thì giá trị tối đa là (2^n) - 1. VD thanh ghi ARR có độ rộng là 16 bit thì có giá trị tối đa là 65535
+- Note:
+  + Thanh ghi PSC quyết định giá trị chia. Nếu PSC = 0 thì chia 1; **PSC = PSC thì chia (PSC + 1)**
+  + Counter sẽ tràn khi gặp giá trị bằng 0. Nếu ARR = 10 thì đếm 11 lần; **ARR = ARR thì đếm (ARR + 1) lần**
+  + Giá trị của thanh ghi PSC và ARR là có giới hạn. Có độ rộng là n bit thì giá trị tối đa là (2^n) - 1. VD thanh ghi ARR có độ rộng là 16 bit thì có giá trị tối đa là 65535
 
 - VD: Cho tần số vào PSC là 8MHz. Tính toán PSC và ARR để thời gian tràn timer là 150ms
 	Theo đề, ta có F_PSC = 8MHz, t = 150ms
@@ -1078,8 +1075,7 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M5S2
-<img width="400" alt="image" src="https://github.com/user-attachments/assets/0c380080-11fd-4b68-bd17-11353cf065f1">
-
+# `| TIMER - PWM`
 > https://mecsu.vn/ho-tro-ky-thuat/moi-2022-pwm-la-gi-nguyen-ly-hoat-dong-pwm.rP0
 
 # I. Khái niệm PWM
@@ -1135,8 +1131,7 @@ Thay đổi trạng thái đèn LED mỗi 1 giây, sử dụng time-base unit.
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M6
-<img width="400" alt="image" src="https://github.com/user-attachments/assets/799a508f-c290-4e10-99d7-c7713416b78d">
-
+# `| UART TRANSMIT`
 > https://tapit.vn/truyen-thong-noi-tiep-trong-lap-trinh-vi-dieu-khien-giao-tiep-uart/
 
 ## I. Tổng quát 
@@ -1262,17 +1257,15 @@ Không có giao thức truyền thông nào là hoàn hảo, nhưng UART thực 
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M7
-<img width="400" alt="image" src="https://github.com/user-attachments/assets/822aef49-f79c-415e-93c1-9223732e2d08">
-
+# `| UART RECEIVE IT`
 ### Nhận dữ liệu ở chế độ Interrupt 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/9b90231c-d56a-4fa6-be6b-5987eb3eb196)
 
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M8
-<img width="400" alt="image" src="https://github.com/user-attachments/assets/ae705213-8ab4-4e76-b3c2-15e64d26ea5c">
-
-# 1. Giao thức I2C là gì
+# `| GIAO TIẾP I2C`
+## 1. Giao thức I2C là gì
 - I2C viết tắt của Inter- Integrated Circuit  là một phương thức giao tiếp được phát triển bởi hãng Philips Semiconductors. Dùng để truyền tín hiệu giữa vi xử lý và các IC trên các bus nối tiếp.
 - Đặc điểm:
 	+ Tốc độ không cao
@@ -1302,34 +1295,29 @@ Nhiều Master, nhiều Slave
 - Tại một thời điểm truyền nhận dữ liệu chỉ có một Master được hoạt động, điều khiển dây SCL và phát tín hiệu bắt đầu tới các Slave.
 - Tất cả các thiết bị đáp ứng sự điều hướng của Master gọi là Slave. Giữa các Slave với nhau, phân biệt bằng 7bit địa chỉ.
 
-# II. Cách truyền dữ liệu của giao thức I2C
+## II. Cách truyền dữ liệu của giao thức I2C
 - Giao thức (phương thức giao tiếp) là cách các thiết bị đã thống nhất với nhau khi sử dụng một chuẩn nào đó để truyền và nhận tín hiệu.
 - Dữ liệu được truyền đi trên dây SDA được thực hiện như sau:
-1. Master thực hiện điều kiện bắt đầu I2C (Start Condition)
-2. Gửi địa chỉ 7 bit + 1bit Đọc/Ghi (R/W) để giao tiếp muốn đọc hoặc ghi dữ liệu tại Slave có địa chỉ trên
-3. Nhận phải hồi từ Bus, nếu có một bit ACK (Kéo SDA xuống thấp) Master sẽ gửi dữ liệu
-4. Nếu là đọc dữ liệu R/W bit = 1, chân SDA của master sẽ là input, đọc dữ liệu từ Slave gửi về. Nếu là ghi dữ liệu R/W = 0, chân SDA sẽ là output ghi dữ liệu vào Slave
-5. Truyền điều khiện kết thúc (Stop Condition)
+  1. Master thực hiện điều kiện bắt đầu I2C (Start Condition)
+  2. Gửi địa chỉ 7 bit + 1bit Đọc/Ghi (R/W) để giao tiếp muốn đọc hoặc ghi dữ liệu tại Slave có địa chỉ trên
+  3. Nhận phải hồi từ Bus, nếu có một bit ACK (Kéo SDA xuống thấp) Master sẽ gửi dữ liệu
+  4. Nếu là đọc dữ liệu R/W bit = 1, chân SDA của master sẽ là input, đọc dữ liệu từ Slave gửi về. Nếu là ghi dữ liệu R/W = 0, chân SDA sẽ là output ghi dữ liệu vào Slave
+  5. Truyền điều khiện kết thúc (Stop Condition)
 
-Mỗi lần giao tiếp có cấu trúc như sau
-
-
-Start condition (Điều khiện bắt đầu)
-Bất cứ khi nào một thiết bị chủ / IC quyết định bắt đầu một giao dịch, nó sẽ chuyển mạch SDA từ mức điện áp cao xuống mức điện áp thấp trước khi đường SCL chuyển từ cao xuống thấp.
-Khi điều kiện bắt đầu được gửi bởi thiết bị Master, tất cả các thiết bị Slave đều hoạt động ngay cả khi
+- Mỗi lần giao tiếp có cấu trúc như sau:
+  + Start condition (Điều khiện bắt đầu)
+  + Bất cứ khi nào một thiết bị chủ / IC quyết định bắt đầu một giao dịch, nó sẽ chuyển mạch SDA từ mức điện áp cao xuống mức điện áp thấp trước khi đường SCL chuyển từ cao xuống thấp.
+  + Khi điều kiện bắt đầu được gửi bởi thiết bị Master, tất cả các thiết bị Slave đều hoạt động ngay cả khi
 chúng ở chế độ ngủ (sleep mode) và đợi bit địa chỉ.
-
 
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M9
-<img width="370" alt="image" src="https://github.com/user-attachments/assets/01a4cfa6-2d48-4d43-a62c-a053cc73c97f">
-
+# `| THƯ VIỆN C`
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M10S1
-<img width="400" alt="image" src="https://github.com/user-attachments/assets/2a834c59-12fa-459c-b4ce-55dac7d5f8ca">
-
+# `| ADC SCSC POLLING, INTERRUPT`
 > https://www.studocu.com/vn/document/truong-dai-hoc-tra-vinh/vat-ly-dai-cuong/stm32-adc/82063383
 > 
 > Trong các ứng dụng vi điều khiển – hệ thống nhúng, bộ chuyển đổi tương tự-số (Analog Digital Converter - ADC) là 1 thành phần rất quan trọng để có thể chuyển đổi các dữ liệu dạng analog từ môi trường (nhiệt độ, độ ẩm, độ sáng,…) sang dạng digital để vi điều khiển có thể xử lý được.
@@ -1337,7 +1325,7 @@ chúng ở chế độ ngủ (sleep mode) và đợi bit địa chỉ.
 > STM32F103C8 có tích hợp sẵn các bộ chuyển đổi ADC với độ phân giải 12bit. Có 12 kênh cho phép đo tín hiệu từ 10 nguồn bên ngoài và 2 nguồn nội bên trong.
 
 ## I. Tổng quan về cảm biến 
-Gồm có 2 loại cảm biến chính:
+> Gồm có 2 loại cảm biến chính.
 
 - Cảm biến có ngõ ra tương tự Analog. Trong đó lại chia làm 2 loại là:
 	+ Điện áp (0V - 3.3V ; 0V - 5V ; 0V - 10V). VD: cảm biến nhiệt độ 
@@ -1348,16 +1336,16 @@ Gồm có 2 loại cảm biến chính:
 	+ Xung (Pulse)
 
 ## II. Analog Digital Converter
-#### Bộ chuyển đổi ADC là gì
+### Bộ chuyển đổi ADC là gì
 - ADC là từ viết tắt của Analog to Digital Converter hay bộ chuyển đổi analog sang kỹ thuật số là một mạch chuyển đổi giá trị điện áp liên tục (analog) sang giá trị nhị phân (kỹ thuật số) mà thiết bị kỹ thuật số có thể hiểu được sau đó có thể được sử dụng để tính toán kỹ thuật số. Mạch ADC này có thể là vi mạch ADC hoặc được nhúng vào một bộ vi điều khiển.
 
 <img width="400" alt="image" src="https://github.com/minchangggg/Stm32/assets/125820144/98d2560b-9534-4d1e-9c50-3866b820800f">
 
-#### Tại sao phải chuyển đổi analog sang kỹ thuật số
+### Tại sao phải chuyển đổi analog sang kỹ thuật số
 - Thiết bị điện tử ngày nay hoàn toàn là kỹ thuật số, không còn là thời kỳ của máy tính analog. Thật không may cho các hệ thống kỹ thuật số, thế giới chúng ta đang sống vẫn là analog và đầy màu sắc, không chỉ đen và trắng.
 - Ví dụ, một cảm biến nhiệt độ như LM35 tạo ra điện áp phụ thuộc vào nhiệt độ, trong trường hợp của thiết bị cụ thể nó sẽ tăng 10mV khi nhiệt độ tăng lên mỗi độ. Nếu chúng ta kết nối trực tiếp thiết bị này với đầu vào kỹ thuật số, nó sẽ ghi là cao hoặc thấp tùy thuộc vào các ngưỡng đầu vào, điều này là hoàn toàn vô dụng.
 - Thay vào đó, chúng ta sử dụng một bộ ADC để chuyển đổi đầu vào điện áp analog thành một chuỗi các bit có thể được kết nối trực tiếp với bus dữ liệu của bộ vi xử lý và được sử dụng để tính toán.
-#### ADC hoạt động như thế nào
+### ADC hoạt động như thế nào
 - Một cách rất hay để xem xét hoạt động của ADC là tưởng tượng nó như một **bộ chia tỷ lệ toán học**. **Tỷ lệ về cơ bản là ánh xạ các giá trị từ dải này sang dải khác, vì vậy ADC ánh xạ một giá trị điện áp sang một số nhị phân.** 
 
 ---
@@ -1388,12 +1376,13 @@ Gồm có 2 loại cảm biến chính:
 
 + Màu xanh tương ứng thể hiện độ phân giải của bộ chuyển đổi này là 3 bit, tương ứng với 8 sự thay đổi ở đầu ra số (23=8). Khi đưa v­­­­­­ào điện áp tương tự, bộ chuyển đổi sẽ thực hiện một công đoạn lượng tử hóa để đưa các kết quả tương ứng từ điện áp tương tự về số ở ngõ ra. 
 + Màu tím tương ứng với độ phân giải của bộ chuyển đổi 16 bit. Dễ dàng nhận thấy với một bộ chuyển đổi có độ phân giải càng thấp, quá trình chuyển đổi sẽ cho ra kết quả là một điện áp càng biến dạng ở ngõ ra so với ngõ vào và ngược lại. Bộ chuyển đổi ADC của STM32F103 có độ phân giải mặc định là 12 bit, tức là có thể chuyển đổi ra 212 = 4096 giá trị ở ngõ ra số.
+
 ### 3. Công thức chuyển đổi ADC
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/4806b487-4589-4d58-982f-be59d6160095)
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/c16fa7f7-8226-4087-9d70-7a6b938ce36f)
 
-#### Điện áp tham chiếu:
+#### Điện áp tham chiếu
 - Không có ADC nào là tuyệt đối, vì vậy điện áp được ánh xạ tới giá trị nhị phân lớn nhất được gọi là điện áp tham chiếu. Ví dụ: trong bộ chuyển đổi 10 bit với 5V làm điện áp tham chiếu, 1111111111 (tất cả các bit một, số nhị phân 10 bit cao nhất có thể ) tương ứng với 5V và 0000000000 (số thấp nhất tương ứng với 0V). Vì vậy, mỗi bước nhị phân lên đại diện cho khoảng 4,9mV, vì có thể có 1024 chữ số trong 10 bit. Số đo điện áp trên mỗi bit này được gọi là độ phân giải của ADC.
 - Điều gì sẽ xảy ra nếu điện áp thay đổi dưới 4,9mV mỗi bước? Nó sẽ đặt ADC vào vùng chết, do đó kết quả chuyển đổi luôn có một lỗi nhỏ. Có ngăn chặn lỗi này bằng cách sử dụng ADC có độ phân giải cao hơn ví dụ như bộ ADC lên đến 24 bit, mặc dù tần số chuyển đổi thấp.
   
@@ -1434,18 +1423,18 @@ Gồm có 2 loại cảm biến chính:
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M10S2
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/36c7af89-d2d0-44dc-bc27-406c95736a78">
-
+# `| CHUYỂN ĐỔI TÍN HIỆU TƯƠNG TỰ - SỐ ADC`
 > https://tapit.vn/chuc-nang-adc-su-dung-vi-dieu-khien-stm32f103c8t6/
 >
 > https://www.laptrinhdientu.com/2022/01/STM19.html
 
-## Chế độ chuyển đổi dữ liệu:
+## Chế độ chuyển đổi dữ liệu
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/76332aec-cc26-4d7b-af34-5279d7dfd216)
 
 ![image](https://github.com/minchangggg/Stm32/assets/125820144/0a683061-7ef0-42e3-a819-6138650da355)
 
 Với các chế độ quét nhiều kênh, có thể thấy các kênh có thể được đọc lần lượt, và mỗi kênh sau khi chuyển đổi xong sẽ tạo ra một tín hiệu trigger báo chuyển đổi xong. Nếu như mọi thứ diễn ra bình thường và các kênh được đọc tuần tự, đó chính là Regular Conversion, các tín hiệu báo một kênh hoạt động là Regular Trigger.
+
 ## Thời gian lấy mẫu
 ### Khái niệm
 - Bên cạnh độ phân giải thì tốc độ chuyển đổi cũng rất quan trọng.
@@ -1478,8 +1467,7 @@ Với các chế độ quét nhiều kênh, có thể thấy các kênh có th�
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M11
-<img width="400" alt="image" src="https://github.com/user-attachments/assets/f3e7b22b-fa61-4798-b5cc-48ceddde949a">
-
+# `| NGOẠI VI RTC`
 > https://tapit.vn/real-time-clock-rtc-tren-stm32f103c8t6/
 
 ## A. Lý thuyết chung về RTC
@@ -1495,10 +1483,8 @@ Việc của chúng ta chỉ cần tìm hiểu và sử dụng chứ không cầ
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M12
-<img width="450" alt="image" src="https://github.com/user-attachments/assets/7db6a6f4-b98b-4a7b-8b3a-45311a0a7226">
-
+# `| DMA, DMA ADC, DMA UART`
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M13
-<img width="400" alt="image" src="https://github.com/user-attachments/assets/f8260688-eb58-4e4a-b5f0-04550a764e13">
-
+# `| WDG & TỔNG KẾT`
