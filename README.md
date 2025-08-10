@@ -52,12 +52,12 @@
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M1S1 
-# `TỔNG QUAN CHƯƠNG TRÌNH HỌC`
+# `| TỔNG QUAN CHƯƠNG TRÌNH HỌC`
 
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M1S2 
-# `ÔN TẬP NGÔN NGỮ LẬP TRÌNH C`
+# `| ÔN TẬP NGÔN NGỮ LẬP TRÌNH C`
 ## I. SƠ LƯỢC VỀ CHƯƠNG TRÌNH C
 ### A. Quá trình biên dịch một chương trình C/C++
 > https://tapit.vn/qua-trinh-bien-dich-mot-chuong-trinh-cc/?fbclid=IwAR30Vb0QtPRumEMEmWeFqYsndk2tRrhgGLDh16K8cHTBoPU1J-A_XpFGl9o
@@ -388,7 +388,7 @@ Nhận xét 3 trường hợp trên:
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M1S3 
-# `TỔNG QUAN VI ĐIỀU KHIỂN, KẾT NỐI PHẦN CỨNG, PHẦN MỀM`
+# `| TỔNG QUAN VI ĐIỀU KHIỂN, KẾT NỐI PHẦN CỨNG, PHẦN MỀM`
 ## I, Một số khái niệm cơ bản và Cấu trúc của 1 vi điều khiển
 ### 1. Một số khái niệm cơ bản
 - User manual board: Tổng quan và hướng dẫn sử dụng board mạch thực hành, các thành phần trên board mạch. (F103 BluePill: website)
@@ -548,8 +548,7 @@ Kit phát triển STM32F103C8T6 Blue Pill ARM Cortex-M3 là loại được sử
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M2S1 
-<img width="300" alt="image" src="https://github.com/user-attachments/assets/2a49b6b2-7570-4e1c-8c3f-4056c9ac4144">
-
+# `| GPIO, OUTPUT`
 ## I, TÌM HIỂU CHUNG CHỨC NĂNG CỦA CÁC CHÂN STM32F103C8T6
 ![Bản sao của Blue-Pink Cute Class Schedule (4)](https://github.com/minchangggg/Stm32/assets/125820144/ec67b5bb-7804-4734-b973-d52d16a4908e)
 ### 1, Các chân không phải GPIO
@@ -606,8 +605,7 @@ Là chân chọn vùng nhớ khởi động, chạy các chương trình khác n
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M2S2 
-<img width="275" alt="image" src="https://github.com/user-attachments/assets/7b9dd2b1-0509-444e-ac47-a80d3796cbca">
-
+# `| GPIO, INPUT`
 ### 3, Tính tối ưu của thanh ghi BSRR của vi xử lý 32 bit 
 #### Muốn điều chỉnh trạng thái của 1 chân bất kì (VD PC13) t sẽ có 2 cách: tác động lên ODR và tác động lên BSRR
 #### Cách 1: Tác động trực tiếp lên ODR (thanh ghi dữ liệu) mà không thông qua BSRR
