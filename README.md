@@ -51,15 +51,13 @@
 
 --------------------------------------------------------------------------------------------------------------------------------
 
-# M1S1 TỔNG QUAN CHƯƠNG TRÌNH HỌC
-
-<img width="450" alt="image" src="https://github.com/user-attachments/assets/e3bc6c3f-fe9f-45f1-ac4d-02be285479a6">
+# M1S1 
+# `TỔNG QUAN CHƯƠNG TRÌNH HỌC`
 
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M1S2 
-<img width="450" alt="image" src="https://github.com/user-attachments/assets/47073b04-b513-443f-8618-166f95a0eea8">
-
+# `ÔN TẬP NGÔN NGỮ LẬP TRÌNH C`
 ## I. SƠ LƯỢC VỀ CHƯƠNG TRÌNH C
 ### A. Quá trình biên dịch một chương trình C/C++
 > https://tapit.vn/qua-trinh-bien-dich-mot-chuong-trinh-cc/?fbclid=IwAR30Vb0QtPRumEMEmWeFqYsndk2tRrhgGLDh16K8cHTBoPU1J-A_XpFGl9o
@@ -390,8 +388,7 @@ Nhận xét 3 trường hợp trên:
 --------------------------------------------------------------------------------------------------------------------------------
 
 # M1S3 
-<img width="750" alt="image" src="https://github.com/user-attachments/assets/5b55facd-766b-482d-8fc9-7b6990154cbb">
-
+# `TỔNG QUAN VI ĐIỀU KHIỂN, KẾT NỐI PHẦN CỨNG, PHẦN MỀM`
 ## I, Một số khái niệm cơ bản và Cấu trúc của 1 vi điều khiển
 ### 1. Một số khái niệm cơ bản
 - User manual board: Tổng quan và hướng dẫn sử dụng board mạch thực hành, các thành phần trên board mạch. (F103 BluePill: website)
